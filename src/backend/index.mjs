@@ -1,18 +1,19 @@
-// gulp
+// required plugins
 import gulp from 'gulp'
 import handler from 'gulp-task-err-handler'
-
-// required plugins
-import * as compiler from './controllers/compiler.mjs'
+import Compiler from './controllers/compiler.mjs'
+import Server from './controllers/server.mjs'
 import Utils from './controllers/utils.mjs'
-import runBlockit from './controllers/server.mjs'
+
+const compiler = new Compiler(gulp)
+const blockit = new Server(compiler)
+const utils = new Utils(gulp)
 
 const { task, series } = gulp
-const utils = new Utils()
 
 // gulp task
-task('build', handler(series(utils.appInfo, compiler.buildClean, compiler.buildHtml, compiler.buildCss, compiler.buildJs, compiler.buildStatic, compiler.buildImg), msg => utils.errHandler(msg)))
-task('blockit', handler(series(utils.appInfo, runBlockit), msg => utils.errHandler(msg)))
+task('build', handler(series(utils.appInfo, compiler.buildClean, compiler.buildHtml, compiler.buildCss, compiler.buildJs, compiler.buildStatic, compiler.buildImg), msg => utils.errHandler(msg, compiler)))
+task('blockit', handler(series(utils.appInfo, blockit.serverInit), msg => utils.errHandler(msg, blockit.serverInit)))
 task('compileCss', compiler.buildCss)
 task('minifyCss', compiler.minifyCss)
 task('compileJs', compiler.buildJs)

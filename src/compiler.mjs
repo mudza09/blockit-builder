@@ -34,7 +34,7 @@ const frontendJs = () => {
             '.eot': 'file',
             '.svg': 'file',
         },
-        sourcemap: true,
+        sourcemap: false,
         plugins: [stylePlugin()],
         minify: true
     }))
@@ -90,6 +90,7 @@ const backendJs = () => {
     .pipe(esbuild({
         bundle: false,
         outExtension: { '.js': '.mjs' },
+        sourcemap: false,
         minify: true
     }))
     .pipe(dest('../dist'))

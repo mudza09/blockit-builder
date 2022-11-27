@@ -4,7 +4,7 @@ import { execSync } from 'child_process'
 import { JSDOM }  from 'jsdom'
 
 // blockit method library function
-export default class MethodLibrary {
+export default class Methods {
     constructor(socket) {
         this.socket = socket
     }

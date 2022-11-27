@@ -3,7 +3,7 @@ import fs from 'fs'
 import { JSDOM }  from 'jsdom'
 
 // read, dom manipulation and write component footer
-const configFooter = () => {
+const footer = () => {
     const footerData = JSON.parse(fs.readFileSync('../../src/data/component.json', 'utf8')).footer
     fs.readFile('../../src/partials/components/component-footer.hbs', 'utf8', (err, file) => {
         const headerComment = file.split('\n')[0]
@@ -33,4 +33,4 @@ const configFooter = () => {
     })
 }
 
-export default configFooter;
+export default footer;

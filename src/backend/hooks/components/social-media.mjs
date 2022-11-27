@@ -3,7 +3,7 @@ import fs from 'fs'
 import { JSDOM }  from 'jsdom'
 
 // read, dom manipulation and write setting social media
-const configSocialMedia = () => {
+const socialMedia = () => {
     const socialData = JSON.parse(fs.readFileSync('../../src/data/component.json', 'utf8')).socialMedia
     const socialEl = socialData.filter(each => Object.values(each)[0].length !== 0).map(each => {
         switch(Object.keys(each)[0]) {
@@ -36,4 +36,4 @@ const configSocialMedia = () => {
     })
 }
 
-export default configSocialMedia;
+export default socialMedia;

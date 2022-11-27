@@ -5,8 +5,8 @@
   "description": "Some description about this Theme",
   "private": true,
   "scripts": {
-    "build": "gulp -S --f node_modules/blockit-builder/index.mjs build",
-    "blockit": "gulp -S --f node_modules/blockit-builder/index.mjs blockit"
+    "build": "gulp --f node_modules/blockit-builder/index.mjs build",
+    "blockit": "gulp --f node_modules/blockit-builder/index.mjs blockit"
   },
   "browserslist": [
     "last 2 years"
