@@ -1,0 +1,21 @@
+// Breadcrumb
+@include media-breakpoint-down(sm) {
+    .breadcrumb {
+        li:nth-child(n+4) {
+            display: none;
+        }
+    }
+}
+
+.breadcrumb-item {
+    // styling
+    color: $breadcrumb-color;
+    padding: 1.28rem 0;
+    a {
+        color: inherit;
+        text-decoration: none;
+        &:hover {
+            color: $breadcrumb-hover-color;
+        }
+    }
+}

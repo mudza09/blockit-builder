@@ -1,0 +1,14 @@
+@import "../../base/base-variables.scss";
+
+// uikit sticky mixins
+// ========================================================================
+@mixin hook-sticky-misc(){
+    .uk-sticky {    
+        &.uk-active {
+            background: rgba(248, 248, 248, 0.65);
+            box-shadow: 0 2px 15px 0 rgba(0,0,0,0.13);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    }
+}

@@ -1,0 +1,79 @@
+{{!-- header block --}}
+{{#ifequal this.type "header"}}
+    {{#ifequal this.data.level 1}}<h1>{{this.data.text}}</h1>{{/ifequal}}
+    {{#ifequal this.data.level 2}}<h2>{{this.data.text}}</h2>{{/ifequal}}
+    {{#ifequal this.data.level 3}}<h3>{{this.data.text}}</h3>{{/ifequal}}
+    {{#ifequal this.data.level 4}}<h4>{{this.data.text}}</h4>{{/ifequal}}
+    {{#ifequal this.data.level 5}}<h5>{{this.data.text}}</h5>{{/ifequal}}
+{{/ifequal}}
+
+{{!-- paragpraph block --}}
+{{#ifequal this.type "paragraph"}}
+    <p>{{{this.data.text}}}</p>
+{{/ifequal}}
+
+{{!-- list block --}}
+{{#ifequal this.type "list"}}
+    {{#ifequal this.data.style "ordered"}}
+    <ol class="lh-lg">
+        {{#each this.data.items}}<li>{{this}}</li>{{/each}}
+    </ol>
+    {{/ifequal}}
+    {{#ifequal this.data.style "unordered"}}
+    <ul class="lh-lg">
+        {{#each this.data.items}}<li>{{this}}</li>{{/each}}
+    </ul>
+    {{/ifequal}}
+{{/ifequal}}
+
+{{!-- divider block --}}
+{{#ifequal this.type "delimiter"}}
+    <hr>
+{{/ifequal}}
+
+{{!-- HTML raw block --}}
+{{#ifequal this.type "raw"}}
+    {{{this.data.html}}}
+{{/ifequal}}
+
+{{!-- quote block --}}
+{{#ifequal this.type "quote"}}
+    <figure class="my-4 px-4{{#ifequal this.data.alignment "center"}} text-center{{/ifequal}}">
+        <blockquote class="blockquote">
+            <p>{{this.data.text}}</p>
+        </blockquote>
+        <figcaption class="blockquote-footer mt-1">
+            {{this.data.caption}}
+        </figcaption>
+    </figure>
+{{/ifequal}}
+
+{{!-- image block --}}
+{{#ifequal this.type "image"}}
+    <img src="{{root}}{{this.data.file.url}}" class="img-fluid" alt="{{this.data.caption}}">
+{{/ifequal}}
+
+{{!-- table block --}}
+{{#ifequal this.type "table"}}
+    <table class="table">
+        {{#each this.data.content}}
+            {{#if @first}}
+                <thead>
+                    <tr>
+                        {{#each this}}
+                        <th scope="col">{{this}}</th>
+                        {{/each}}
+                    </tr>
+                </thead>
+            {{else}}
+                <tbody>
+                    <tr>
+                        {{#each this}}
+                        <td>{{this}}</td>
+                        {{/each}}
+                    </tr>
+                </tbody>
+            {{/if}}
+        {{/each}}
+    </table>
+{{/ifequal}}

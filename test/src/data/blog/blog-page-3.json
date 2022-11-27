@@ -1,0 +1,228 @@
+{
+  "page": 3,
+  "per_page": "3",
+  "prev_page": 2,
+  "next_page": 4,
+  "total_post": 14,
+  "total_pages": 5,
+  "display_author": true,
+  "data": [
+    {
+      "title": "Biden Administration outlines how solar could be nearly half of electricity supply by 2050",
+      "link": "biden-administration-outlines-how-solar-could-be-nearly.html",
+      "author": {
+        "id": "bk1baa",
+        "name": "Peter Parker",
+        "avatar": "img/user/author-lybqnhew0wc.jpg"
+      },
+      "category": "Technology",
+      "tags": [
+        "technology",
+        "politics",
+        "usa"
+      ],
+      "image": "img/user/image-post-gzn1tktw0mm.jpg",
+      "blocks": [
+        {
+          "id": "7FrK66xW6V",
+          "type": "paragraph",
+          "data": {
+            "text": "The White House on Wednesday outlined a plan for solar energy to supply nearly half of the nation’s electricity by 2050. The ambitious outline would see solar rising from 3% of generation in 2020 to 40% by 2035 before ultimately hitting 45% by 2050.&nbsp; "
+          }
+        },
+        {
+          "id": "HpepI927YU",
+          "type": "paragraph",
+          "data": {
+            "text": "Heavy spending across industries will be required to meet that blueprint. U.S. solar installations&nbsp;hit a record&nbsp;high in 2020, but yearly solar capacity additions will need to double annually through 2025, before quadrupling from 2020′s level each year between 2025 and 2030. Falling costs and supportive policies including tax incentives have boosted solar’s robust growth over the last decade.&nbsp;&nbsp;"
+          }
+        },
+        {
+          "id": "ssF3I8oVEw",
+          "type": "paragraph",
+          "data": {
+            "text": "The report, issued by the U.S. Department of Energy Solar Energy Technologies Office and the National Renewable Energy Laboratory, said solar capacity will need to reach 1,600 gigawatts by 2050. This is more than the total electrical consumption from residential and commercial buildings today."
+          }
+        },
+        {
+          "id": "UqRuxE714O",
+          "type": "paragraph",
+          "data": {
+            "text": "The solar power study is based on the Biden administration’s larger plan to have an emissions-free grid by 2035, with the broader energy system decarbonizing by 2050. Other zero-carbon energy sources, most notably wind, would account for the generation not supplied by solar."
+          }
+        },
+        {
+          "id": "J6ZOtMJOj2",
+          "type": "paragraph",
+          "data": {
+            "text": "“The study illuminates the fact that solar, our cheapest and fastest-growing source of clean energy, could produce enough electricity to power all of the homes in the U.S. by 2035 and employ as many as 1.5 million people in the process,” Secretary of Energy Jennifer Granholm said in a statement."
+          }
+        },
+        {
+          "id": "8856J2gjJg",
+          "type": "paragraph",
+          "data": {
+            "text": "The report comes as extreme weather events fueled by climate change wreak havoc on the U.S. grid."
+          }
+        },
+        {
+          "id": "5aZ6mZCcT3",
+          "type": "paragraph",
+          "data": {
+            "text": "“This is code red,” President Joe Biden said&nbsp;Tuesday&nbsp;while visiting areas of New York and New Jersey hit by Hurricane Ida. “Climate change poses an existential threat to our lives, to our economy.&nbsp;And the threat is here; it’s not going to get any better,” he said. “The nation and the world are in peril.”&nbsp;&nbsp;"
+          }
+        }
+      ],
+      "dateCreated": "October 19, 2021",
+      "dateModified": "April 22, 2022",
+      "timeCreated": "09:17 PM",
+      "timeModified": "09:47 PM"
+    },
+    {
+      "title": "Coinbase shares fall after it reveals SEC plans to sue over interest-earning product",
+      "link": "coinbase-shares-fall-after-it-reveals-sec-plans-to.html",
+      "author": {
+        "id": "bk1baa",
+        "name": "Peter Parker",
+        "avatar": "img/user/author-lybqnhew0wc.jpg"
+      },
+      "category": "Crypto",
+      "tags": [
+        "economics",
+        "technology"
+      ],
+      "image": false,
+      "blocks": [
+        {
+          "id": "sTXXrf9PtB",
+          "type": "paragraph",
+          "data": {
+            "text": "Coinbase has received notice of a possible enforcement action from the Securities and Exchange Commission related to its interest-earning product, which the company had planned to launch in the coming weeks."
+          }
+        },
+        {
+          "id": "oWFKo1oW4X",
+          "type": "paragraph",
+          "data": {
+            "text": "The cryptocurrency exchange and services firm received a Wells notice from the SEC last Wednesday saying the regulator intends to sue&nbsp;Coinbase&nbsp;over the product, called Coinbase Lend, the company disclosed in a Tuesday night&nbsp;blog post. The SEC didn’t immediately return a call for comment.&nbsp;&nbsp;"
+          }
+        },
+        {
+          "id": "rRF9bXGCZ8",
+          "type": "paragraph",
+          "data": {
+            "text": "Shares of&nbsp;Coinbase&nbsp;fell 3.2% on Wednesday.&nbsp;&nbsp;"
+          }
+        },
+        {
+          "id": "uAMAo23TMU",
+          "type": "paragraph",
+          "data": {
+            "text": "The company’s chief legal officer, Paul Grewal, indicated in the post that the company was caught off guard by the threat considering its efforts to engage with the regulatory agency for the last six months. CEO Brian Armstrong said in a series of tweets that when he traveled to Washington, D.C. in May, the SEC “refused” to meet with him."
+          }
+        },
+        {
+          "id": "4j-Ws-5ViP",
+          "type": "paragraph",
+          "data": {
+            "text": "That visit took place shortly after Coinbase became the first publicly traded crypto exchange and about a month after Gary Gensler had been confirmed as chairman of the SEC."
+          }
+        },
+        {
+          "id": "4OrN12HGAv",
+          "type": "paragraph",
+          "data": {
+            "text": "“We’re committed to following the law. Sometimes the law is unclear. So if the SEC wants to publish guidance, we are also happy to follow that,”&nbsp;Armstrong said in the tweets."
+          }
+        },
+        {
+          "id": "1kc_fjcsie",
+          "type": "paragraph",
+          "data": {
+            "text": "The product in question is billed as allowing users to earn a 4% annual percentage yield on a so-called stablecoin (USD Coin) by allowing Coinbase to lend those funds to verified borrowers. Coinbase backs USD Coin and guarantees that it can always be redeemed for $1. High interest accounts have become popular among crypto users, with companies like BlockFi and Gemini similarly offering a high yield on stablecoin and other cryptocurrency balances."
+          }
+        }
+      ],
+      "dateCreated": "September 09, 2021",
+      "dateModified": "April 22, 2022",
+      "timeCreated": "09:16 PM",
+      "timeModified": "09:46 PM"
+    },
+    {
+      "title": "WHO says delta remains the ‘most concerning’ Covid variant despite emergence of mu",
+      "link": "who-says-delta-remains-the-most-concerning-covid.html",
+      "author": {
+        "id": "bk1baa",
+        "name": "Peter Parker",
+        "avatar": "img/user/author-lybqnhew0wc.jpg"
+      },
+      "category": "Health",
+      "tags": [
+        "health"
+      ],
+      "image": false,
+      "blocks": [
+        {
+          "id": "mXnTaOiq20",
+          "type": "paragraph",
+          "data": {
+            "text": "The fast-spreading delta variant remains the “most concerning” coronavirus strain despite the emergence of the mu variant, World Health Organization officials said Tuesday."
+          }
+        },
+        {
+          "id": "1oVTfn49Ct",
+          "type": "paragraph",
+          "data": {
+            "text": "The mu variant, which was added to the&nbsp;WHO’s list of variants “of interest”&nbsp;last week, has mutations that suggest it could evade the immune protection provided by natural infection or vaccination, Maria Van Kerkhove, the agency’s technical lead for Covid-19, said during a virtual press event. Still, the new variant — first detected in Colombia but now confirmed in at least 39 countries — hasn’t taken off like delta, she said.&nbsp;&nbsp;"
+          }
+        },
+        {
+          "id": "nTWG5cHl9c",
+          "type": "paragraph",
+          "data": {
+            "text": "“The delta variant for me is the one that’s most concerning because of the increased transmissibility,” Kerkhove said, adding it has at least double the transmissibility of the original ancestral virus that emerged in late 2019."
+          }
+        },
+        {
+          "id": "WqlQ9A5MuJ",
+          "type": "paragraph",
+          "data": {
+            "text": "Delta has rapidly spread to at least 170 countries, including the U.S., since it was first detected in India in October, quickly becoming the dominant variant in many of those regions, according to the international health agency."
+          }
+        },
+        {
+          "id": "FJf3qOQNjW",
+          "type": "paragraph",
+          "data": {
+            "text": "Mu, also known by scientists as B.1.621, is increasing its prevalence in some South American countries but is also decreasing in other regions of the world, especially where the delta variant is already circulating, she said."
+          }
+        },
+        {
+          "id": "fMTCgZGaxX",
+          "type": "paragraph",
+          "data": {
+            "text": "Any new virus that emerges has to be able to compete with the “best of class,” and right now that is delta, said Dr. Mike Ryan, head of the WHO’s health emergencies program. The delta variant tends to “outcompete” other variants, like mu, he said."
+          }
+        },
+        {
+          "id": "waBhBSZXXZ",
+          "type": "paragraph",
+          "data": {
+            "text": "It doesn’t matter if a new variant has genetic changes that allow it to evade the protection of vaccines if it can transmit efficiently, Ryan said."
+          }
+        },
+        {
+          "id": "Zj9sFtNNNx",
+          "type": "paragraph",
+          "data": {
+            "text": "“We will expect to see more” variants like delta, he said. “Not every variant means the sky is going to fall in. Each variant needs to be looked at for its characteristics in terms of its potential to cause more severe disease, its potential to transmit, its potential to escape vaccines.”"
+          }
+        }
+      ],
+      "dateCreated": "September 09, 2021",
+      "dateModified": "April 22, 2022",
+      "timeCreated": "09:15 PM",
+      "timeModified": "09:45 PM"
+    }
+  ]
+}

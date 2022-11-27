@@ -1,0 +1,16 @@
+// Pagination
+.page-item {
+    &:first-child .page-link {
+        border-top-left-radius: $border-radius-sm;
+        border-bottom-left-radius: $border-radius-sm;
+    }
+    &:last-child .page-link {
+        border-top-right-radius: $border-radius-sm;
+        border-bottom-right-radius: $border-radius-sm;
+    }
+}
+
+.page-link {
+    border-radius: $border-radius-sm;
+    margin: 0 .7rem;
+}

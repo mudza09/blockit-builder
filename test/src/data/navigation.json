@@ -1,0 +1,81 @@
+{
+  "nav": [
+    {
+      "title": "Home",
+      "link": "index.html"
+    },
+    {
+      "title": "Section lists",
+      "link": "#",
+      "dropdown": {
+        "child": [
+          {
+            "title": "Feature",
+            "link": "feature.html",
+            "parent": "Section lists"
+          },
+          {
+            "title": "Content",
+            "link": "content.html",
+            "parent": "Section lists"
+          },
+          {
+            "title": "Team",
+            "link": "team.html",
+            "parent": "Section lists"
+          },
+          {
+            "title": "Gallery",
+            "link": "gallery.html",
+            "parent": "Section lists"
+          },
+          {
+            "title": "Pricing",
+            "link": "pricing.html",
+            "parent": "Section lists"
+          },
+          {
+            "title": "Timeline",
+            "link": "timeline.html",
+            "parent": "Section lists"
+          },
+          {
+            "title": "Testimonial",
+            "link": "testimonial.html",
+            "parent": "Section lists"
+          },
+          {
+            "title": "Contact",
+            "link": "contact.html",
+            "parent": "Section lists"
+          },
+          {
+            "title": "Client logo",
+            "link": "client-logo.html",
+            "parent": "Section lists"
+          },
+          {
+            "title": "Card",
+            "link": "card.html",
+            "parent": "Section lists"
+          },
+          {
+            "title": "Counter",
+            "link": "counter.html",
+            "parent": "Section lists"
+          },
+          {
+            "title": "Faq",
+            "link": "faq.html",
+            "parent": "Section lists"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Blog",
+      "slug": "blog",
+      "link": "blog.html"
+    }
+  ]
+}

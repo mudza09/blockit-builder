@@ -1,0 +1,251 @@
+{
+  "page": 1,
+  "per_page": "3",
+  "prev_page": null,
+  "next_page": 2,
+  "total_post": 14,
+  "total_pages": 5,
+  "display_author": true,
+  "data": [
+    {
+      "title": "BlackRock responds to George Soros’ criticism over China investments",
+      "link": "blackrock-responds-to-george-soros-criticism-over.html",
+      "author": {
+        "id": "bk1baa",
+        "name": "Peter Parker",
+        "avatar": "img/user/author-lybqnhew0wc.jpg"
+      },
+      "category": "Markets",
+      "tags": [
+        "economics",
+        "investment"
+      ],
+      "image": "img/user/image-post-1js43jtw649.jpg",
+      "blocks": [
+        {
+          "id": "ZOp_J5Ma4_",
+          "type": "paragraph",
+          "data": {
+            "text": "LONDON - BlackRock, the world’s largest asset manager, has responded to sharp criticism from billionaire investor George Soros over the firm’s investments in China.&nbsp; "
+          }
+        },
+        {
+          "id": "KaECxRX8Uh",
+          "type": "paragraph",
+          "data": {
+            "text": "Writing in&nbsp;The Wall Street Journal&nbsp;on Tuesday, Soros described BlackRock’s initiative in China as a “tragic mistake” that would “damage the national security interests of the U.S. and other democracies.”&nbsp;&nbsp;"
+          }
+        },
+        {
+          "id": "5ugDc6cAr9",
+          "type": "paragraph",
+          "data": {
+            "text": "The op-ed, entitled “BlackRock’s China Blunder,” said the firm’s decision to pour billions into the country was a “bad investment” likely to lose money for its clients."
+          }
+        },
+        {
+          "id": "Vyt-HAejmD",
+          "type": "paragraph",
+          "data": {
+            "text": "It comes shortly after BlackRock launched a set of mutual funds and other investment products for Chinese consumers. The initiative saw BlackRock become the first foreign-owned company to operate a wholly owned business in China’s mutual fund industry."
+          }
+        },
+        {
+          "id": "68sajYpjdh",
+          "type": "paragraph",
+          "data": {
+            "text": "The asset manager told CNBC on Wednesday that its China mutual fund subsidiary set up its first fund in the country after raising 6.68 billion Chinese yuan ($1.03 billion) from more than 111,000 investors."
+          }
+        },
+        {
+          "id": "1C37_nLOEm",
+          "type": "paragraph",
+          "data": {
+            "text": "“The United States and China have a large and complex economic relationship,” a BlackRock spokesperson said in response to Soros’ comments."
+          }
+        },
+        {
+          "id": "BEX4o2Lc4C",
+          "type": "paragraph",
+          "data": {
+            "text": "“Total trade in goods and services between the two countries exceeded $600 billion in 2020. Through our investment activity, US-based asset managers and other financial institutions contribute to the economic interconnectedness of the world’s two largest economies.”"
+          }
+        },
+        {
+          "id": "mHQAcyyz2Y",
+          "type": "paragraph",
+          "data": {
+            "text": "BlackRock’s Investment Institute&nbsp;recommended&nbsp;in mid-August that investors boost their exposure to China by as much as three times in some cases. Earlier in the year, CEO Larry Fink&nbsp;in a letter to shareholders&nbsp;described China’s market as a “significant opportunity to help meet the long-term goals of investors in China and internationally.”&nbsp;&nbsp;"
+          }
+        }
+      ],
+      "dateCreated": "October 19, 2021",
+      "dateModified": "August 22, 2022",
+      "timeCreated": "09:23 PM",
+      "timeModified": "11:18 AM"
+    },
+    {
+      "title": "India is ‘better equipped’ to deal with a potential Covid third wave, WHO chief scientist says",
+      "link": "india-is-better-equipped-to-deal-with-a-potential.html",
+      "author": {
+        "id": "bk1baa",
+        "name": "Peter Parker",
+        "avatar": "img/user/author-lybqnhew0wc.jpg"
+      },
+      "category": "Health",
+      "tags": [
+        "health",
+        "asia"
+      ],
+      "image": false,
+      "blocks": [
+        {
+          "id": "zAG5m5SoCy",
+          "type": "paragraph",
+          "data": {
+            "text": "India is better prepared to stop new Covid-19 waves from wreaking havoc on the country, according to Dr. Soumya Swaminathan, chief scientist at the World Health Organization."
+          }
+        },
+        {
+          "id": "S-0NJAud_2",
+          "type": "paragraph",
+          "data": {
+            "text": "The South Asian nation suffered a devastating second wave between February and early May, during which daily infection cases and death rates rose at an alarming pace, pushing the health-care system to the brink."
+          }
+        },
+        {
+          "id": "oQ4vwPBRH4",
+          "type": "paragraph",
+          "data": {
+            "text": "Since then, cases have declined and are currently averaging to around 30,000 to 40,000 a day. The pace of vaccination has also climbed sharply."
+          }
+        },
+        {
+          "id": "tDoReUXraF",
+          "type": "paragraph",
+          "data": {
+            "text": "Appearing on CNBC’s “Street Signs Asia” on Wednesday, Swaminathan said that the world has learned enough about the coronavirus to understand which of the weaknesses in the human body it exploits, and which public health tools and measures are effective at tackling it.&nbsp;&nbsp;"
+          }
+        },
+        {
+          "id": "j8rfmdgBF6",
+          "type": "paragraph",
+          "data": {
+            "text": "“I think we are much better equipped now in India, but also in other countries, to prevent any catastrophic waves from happening,” she said."
+          }
+        },
+        {
+          "id": "k32_Qo49bR",
+          "type": "header",
+          "data": {
+            "text": "Expecting a third wave",
+            "level": 4
+          }
+        },
+        {
+          "id": "XNXktYEtjj",
+          "type": "paragraph",
+          "data": {
+            "text": "India is expecting a third wave of infections to hit sometime this year. But the consensus among many public health experts is that its impact is likely to be less severe than the first two waves."
+          }
+        },
+        {
+          "id": "Z6LsrPjhMG",
+          "type": "paragraph",
+          "data": {
+            "text": "“I think the preparations at health system level have really increased, particularly with respect to oxygen and critical care facilities,” Swaminathan said."
+          }
+        },
+        {
+          "id": "Wz22Et_EtQ",
+          "type": "paragraph",
+          "data": {
+            "text": "“What is needed also is to ramp up the health workforce because it’s not enough to just have the equipment and the materials and the drugs. We also need trained nurses, doctors, anesthesiologists, critical care technicians and others,” she added."
+          }
+        }
+      ],
+      "dateCreated": "October 19, 2021",
+      "dateModified": "April 22, 2022",
+      "timeCreated": "09:22 PM",
+      "timeModified": "09:52 PM"
+    },
+    {
+      "title": "China portrays the U.S. as ‘weak and unreliable’ to draw Taiwan closer, analyst says",
+      "link": "china-portrays-the-us-as-weak-and-unreliable-to.html",
+      "author": {
+        "id": "bk1baa",
+        "name": "Peter Parker",
+        "avatar": "img/user/author-lybqnhew0wc.jpg"
+      },
+      "category": "Politics",
+      "tags": [
+        "politics",
+        "asia"
+      ],
+      "image": false,
+      "blocks": [
+        {
+          "id": "zxy8E_R2iK",
+          "type": "paragraph",
+          "data": {
+            "text": "In an attempt to draw Taiwan closer, China is trying to portray the U.S. as a weak power that cannot be counted on — by highlighting the Taliban’s swift takeover of Afghanistan, a geopolitical expert told CNBC&nbsp;&nbsp;"
+          }
+        },
+        {
+          "id": "4ZZ0B_WPja",
+          "type": "paragraph",
+          "data": {
+            "text": "Rodger Baker, senior vice president of strategic analysis at Stratfor, noted that China’s latest military exercise near Taiwan came at the same time that Chinese state media attempted to paint the U.S. as a “weak and unreliable power” in Afghanistan."
+          }
+        },
+        {
+          "id": "sFwdgt2BrF",
+          "type": "paragraph",
+          "data": {
+            "text": "The ruling Chinese Communist Party in Beijing claims democratically governed Taiwan as a renegade&nbsp;province that&nbsp;must be returned to the mainland. The U.S. has no official diplomatic ties with Taiwan, but the U.S. is the island’s most important international supporter and arms supplier. Beijing opposes that.&nbsp;&nbsp;"
+          }
+        },
+        {
+          "id": "ZbuGBxUXaz",
+          "type": "paragraph",
+          "data": {
+            "text": "Chinese state-run media Global Times&nbsp;published an editorial Monday blaming the defeat of the Afghan government on the withdrawal of U.S. forces. The article suggested that the U.S. would not defend Taiwan should Beijing invade the island, and Taiwan could see the same “fate” as Afghanistan."
+          }
+        },
+        {
+          "id": "-on6Z1wpfZ",
+          "type": "header",
+          "data": {
+            "text": "U.S. has ‘enduring interest’ in Taiwan stability",
+            "level": 4
+          }
+        },
+        {
+          "id": "S5YjaB4fKU",
+          "type": "paragraph",
+          "data": {
+            "text": "A U.S. State Department spokesperson told CNBC that Taiwan and Afghanistan are two “very different” policy issues. The spokesperson said the U.S. went to Afghanistan “with a mission to deal with the terrorists who attacked us on 9/11,” while its policy on Taiwan focuses on maintaining “peace and stability” in the Taiwan Strait."
+          }
+        },
+        {
+          "id": "eANWjuxPDV",
+          "type": "paragraph",
+          "data": {
+            "text": "The Taiwan Strait — which is only about 100 miles wide (160 km) at its narrowest point — separates Taiwan and mainland China."
+          }
+        },
+        {
+          "id": "FUBRmqbmXV",
+          "type": "paragraph",
+          "data": {
+            "text": "“We have an abiding interest in peace and stability across the Taiwan Strait. We consider this central to the security and stability of the broader Indo-Pacific region. Events elsewhere in the world are not going to change this enduring interest,” said the spokesperson."
+          }
+        }
+      ],
+      "dateCreated": "October 19, 2021",
+      "dateModified": "April 22, 2022",
+      "timeCreated": "09:21 PM",
+      "timeModified": "09:51 PM"
+    }
+  ]
+}

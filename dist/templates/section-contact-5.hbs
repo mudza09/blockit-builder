@@ -1,0 +1,71 @@
+<!-- section content begin -->
+<section class="py-5">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 d-flex align-items-center justify-content-md-center gy-3 gy-md-3 gy-lg-0 gx-0 gx-md-5 gx-lg-5">
+            <div class="col-md-10 col">
+                <div class="card bg-light border-0">
+                    <div class="card-body p-2 p-md-4 p-lg-4">
+                        <div class="text-center">
+                            <h2 class="fw-bold mb-1 mt-2 mt-md-0 mt-lg-0">Send us a message</h2>
+                            <p class="text-muted">Feel free to reach us if you need any assistance.</p>
+                        </div>
+                        <form id="contact-form" class="row g-1 mt-2 mx-1" novalidate="">
+                            <div class="col-12">
+                                <input class="form-control" id="name" name="name" type="text" placeholder="Full name" aria-label="Full name" required="">
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" id="email" name="email" type="email" placeholder="Email address" aria-label="Email address" required="">
+                            </div>
+                            <div class="col-12">
+                                <input class="form-control" id="subject" name="subject" type="text" placeholder="Subject" aria-label="Subject" required="">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" id="message" name="message" placeholder="Message" rows="6" required=""></textarea>
+                            </div>
+                            <div class="d-grid mb-3">
+                                <button class="btn btn-primary" id="sendemail" type="submit" name="submit">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="ms-md-0 ms-lg-4">
+                    <h1 class="fw-bold mb-2">Contact us</h1>
+                    <iframe class="ratio bg-light rounded-1 gmap h-300 h-md-400" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10600.5248164368!2d144.95966577016594!3d-37.81707816290683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sid!4v1645280096951!5m2!1sen!2sid">
+                    </iframe>
+                    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3 mt-n2 mt-md-2 mt-lg-2 gy-2 gy-md-0 gy-lg-0">
+                        <div class="col">
+                            <h5 class="h6 fw-bold mb-1">Address</h5>
+                            <small>Satrio Tower 16th, Jl. Dr Satrio Kuningan, Jakarta</small>
+                        </div>
+                        <div class="col">
+                            <h5 class="h6 fw-bold  mb-1">Information</h5>
+                            <small>hello@company.com<br>(888)234-5686</small>
+                        </div>
+                        <div class="col">
+                            <h5 class="h6 fw-bold mb-1">Socials media</h5>
+                            <div class="mt-1">
+                                <a href="#" class="fab fa-facebook-square fa-lg color-facebook me-1"></a>
+                                <a href="#" class="fab fa-twitter fa-lg color-twitter me-1"></a>
+                                <a href="#" class="fab fa-linkedin-in fa-lg color-linkedin me-1"></a>
+                                <a href="#" class="fab fa-instagram fa-lg color-instagram me-1"></a>
+                                <a href="#" class="fab fa-pinterest fa-lg color-pinterest mt-2 me-1"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- success notification begin -->
+    <div class="position-fixed bottom-0 end-0 p-4" style="z-index: 1">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body text-primary">
+                <i class="fas fa-check-circle me-1"></i>Your message has been sent successfully. Thank you!
+            </div>
+        </div>
+    </div>
+    <!-- success notification end -->
+</section>
+<!-- section content end -->

@@ -1,0 +1,208 @@
+// Container
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1100px,
+    xxl: 1170px
+);
+
+// Spacing
+$spacer: 1.75rem ;
+$spacers: (
+    0: 0,
+    1: $spacer * .35,
+    2: $spacer * .68,
+    3: $spacer,
+    4: $spacer * 1.35,
+    5: $spacer * 2,
+);
+
+// Gutters
+$grid-gutter-width: 2.35rem;
+$gutters: (
+    0: 0,
+    1: $grid-gutter-width * .3,
+    2: $grid-gutter-width * .65,
+    3: $grid-gutter-width,
+    4: $grid-gutter-width * 1.35,
+    5: $grid-gutter-width * 1.7,
+);
+
+// Typography
+$font-family-sans-serif: "Nunito", sans-serif;
+$font-size-root: 17px;
+$font-size-base: 1rem;
+$font-size-sm: $font-size-base * .875;
+$font-size-lg: $font-size-base * 1.25;
+$font-weight-lighter: lighter;
+$font-weight-light: 400;
+$font-weight-normal: 500;
+$font-weight-bold: 700;
+$font-weight-bolder: bolder;
+$font-weight-base: $font-weight-normal;
+
+$small-font-size: .824rem;
+$text-muted: #999999;
+
+$headings-margin-bottom: $spacer * .6;
+
+$hr-color: #e8e8e8;
+$hr-height: $border-width;
+$hr-opacity: 1;
+
+// Breadcrumb
+$breadcrumb-font-size: .941rem;
+$breadcrumb-padding-y: 0;
+$breadcrumb-padding-x: 0;
+$breadcrumb-item-padding-x: 1.2rem;
+$breadcrumb-margin-bottom: 1rem;
+$breadcrumb-bg: none;
+$breadcrumb-divider-color: rgba($white, 0.5);
+$breadcrumb-color: rgba($white, 0.5);
+$breadcrumb-hover-color: rgba($white, 0.7);
+$breadcrumb-active-color: rgba($white, 0.7);
+$breadcrumb-border-radius: 0;
+
+
+// Brand colors
+$brand-colors: (
+    "email": #445761,
+    "google": #4687f2,
+    "facebook": #3b5998,
+    "twitter": #00acee,
+    "pinterest": #BD081C,
+    "youtube": #c4302b,
+    "instagram": #DD2A7B,
+    "telegram": #0088CC,
+    "whatsapp": #128c7e,
+    "linkedin": #0077b5,
+    "behance": #1769ff,
+    "dribbble": #ea4c89,
+    "html5": #e75c2e,
+    "css3": #2d9ed9,
+    "javascript": #efd835,
+    "sass": #c66396,
+    "gulp": #e3464c,
+    "bootstrap": #7953b1
+);
+
+// Toasts
+$toast-max-width: 390px;
+$toast-padding-x: .95rem;
+$toast-padding-y: .8rem;
+
+// Navs
+// $nav-link-padding-y: 2rem;
+$nav-link-font-size: 0.941rem;
+
+// Navbar
+$navbar-padding-y: 0;
+$navbar-padding-x: null;
+$navbar-nav-link-padding-x: .85rem;
+$nav-link-height: 2rem;
+
+$navbar-dark-color: rgba($white, .55);
+$navbar-dark-hover-color: rgba($white, .75);
+$navbar-dark-active-color: $white;
+$navbar-dark-disabled-color: rgba($white, .25);
+
+$navbar-light-color: rgba($black, .55);
+$navbar-light-hover-color: rgba($black, .7);
+$navbar-light-active-color: rgba($black, .9);
+$navbar-light-disabled-color: rgba($black, .3);
+
+// Dropdowns
+$dropdown-min-width: 12rem;
+$dropdown-padding-x: .3rem;
+$dropdown-padding-y: .75rem;
+$dropdown-spacer: .125rem;
+$dropdown-font-size: $nav-link-font-size;
+$dropdown-color: $body-color;
+$dropdown-bg: $white;
+$dropdown-border-color: rgba($black, .15);
+$dropdown-border-radius: 0;
+$dropdown-border-width: 0;
+$dropdown-inner-border-radius: subtract($dropdown-border-radius, $dropdown-border-width);
+$dropdown-divider-bg: $dropdown-border-color;
+$dropdown-divider-margin-y: $spacer * .5;
+$dropdown-box-shadow: 0;
+
+$dropdown-link-color: rgba($black, .55);
+$dropdown-link-hover-color: rgba($black, .7);
+$dropdown-link-hover-bg: none;
+$dropdown-link-active-color: rgba($black, .9);
+$dropdown-link-active-bg: none;
+
+// Border
+$border-radius: .7rem;
+$border-radius-sm: .35rem;
+$border-radius-lg: 1.4rem;
+
+// Box shadow
+$box-shadow: 0 .5rem 1rem rgba($black, .15);
+$box-shadow-sm: 0 .125rem .25rem rgba($black, .075);
+$box-shadow-lg: 0 1rem 3rem rgba($black, .175);
+$box-shadow-inset: inset 0 1px 2px rgba($black, .075);
+
+// Buttons
+$btn-padding-y: .4rem;
+$btn-padding-x: 1.4rem;
+
+$btn-padding-y-sm: $input-btn-padding-y-sm;
+$btn-padding-x-sm: $input-btn-padding-x-sm;
+
+$btn-padding-y-lg: $input-btn-padding-y-lg;
+$btn-padding-x-lg: $input-btn-padding-x-lg;
+
+$btn-font-size: 0.941rem;
+$btn-font-size-sm: $input-btn-font-size-sm;
+$btn-font-size-lg: $input-btn-font-size-lg;
+
+$btn-font-weight: $font-weight-normal;
+$btn-border-radius: $border-radius-sm;
+
+$btn-focus-box-shadow: null;
+$btn-focus-width: 0;
+
+// Cards
+$card-spacer-y: 1.75rem;
+$card-spacer-x: 1.75rem;
+$card-cap-padding-y: 1.75rem;
+$card-cap-padding-x: $card-spacer-x;
+$card-border-width: $border-width;
+$card-border-color: #e8e8e8;
+$card-border-radius: $border-radius-sm;
+$card-inner-border-radius: subtract($border-radius-sm, $card-border-width);
+
+// Badges
+$badge-font-size: .75em;
+$badge-font-weight: $font-weight-bold;
+$badge-color: $white;
+$badge-padding-y: .35em;
+$badge-padding-x: .65em;
+$badge-border-radius: $border-radius-sm;
+
+// Forms
+$input-padding-y: .475rem;
+$input-font-size: .941rem;
+$input-placeholder-color: #999999;
+$input-border-color: #E5E5E5;
+$input-border-radius: $border-radius-sm;
+$input-focus-width: 0;
+$input-focus-box-shadow: null;
+
+// Pagination
+$pagination-padding-y: .471rem;
+$pagination-padding-x: .824rem;
+
+$pagination-color: $text-muted;
+$pagination-hover-color: $dark;
+$pagination-hover-bg: #F8F8F8;
+$pagination-hover-border-color: #E8E8E8;
+
+$pagination-focus-box-shadow: null;
+
+// Accordion
+$accordion-button-active-bg: transparent;
+$accordion-button-focus-box-shadow: 0;

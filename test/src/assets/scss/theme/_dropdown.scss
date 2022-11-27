@@ -1,0 +1,38 @@
+// Dropdown
+.dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(5%);
+    transition: all 0.3s ease-in-out;
+    // styling
+    padding-bottom: .95rem;
+    box-shadow: 0 0 25px rgba(0, 0, 0, .1);
+    // icon
+    i {
+        margin-left: .5rem;
+    }
+    // show trigger
+    &.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0%);
+    }
+}
+
+.dropdown-toggle {
+    &::after {
+        background-image: none;
+        content: "\f107";
+        font-family: 'Font Awesome 6 Free';
+        font-size: .65rem;
+        border-top: 0;
+        vertical-align: 0;
+        transition: transform 0.2s ease-in-out
+    }
+    &.show {
+        &::after {
+            transform: rotate(-180deg);
+        }
+    }
+}

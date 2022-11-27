@@ -1,0 +1,20 @@
+// Navbar
+.navbar {
+    height: 92px;
+    > .container {
+        padding: 0 1.2rem;
+    }
+}
+
+.navbar-nav {
+    .nav-link {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    .dropdown-large-menu {
+        width: 420px;
+        .child-menu-text {
+            padding-top: .3rem;
+        }
+    }
+}

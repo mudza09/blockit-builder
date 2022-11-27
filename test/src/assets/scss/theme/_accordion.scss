@@ -1,0 +1,177 @@
+// Accordion
+.accordion-style-1 {
+    .accordion-button {
+        padding: 1.3rem .6rem;
+        &:not(.collapsed) {
+            box-shadow: none;
+            &::before {
+                content: "\f058";
+                transform: rotate(360deg);
+            }
+        }
+        // Accordion icon
+        &::before {
+            width: 1rem;
+            height: 1.1rem;
+            content: "\f059";
+            font-family: 'Font Awesome 6 Free';
+            font-size: 1rem;
+            margin-right: .6rem;
+            @include transition($accordion-icon-transition);
+        }
+        &::after {
+            display: none;
+        }
+    }
+    .accordion-item {
+        border-right: 0;
+        border-left: 0;
+        &:first-child {
+            border-top: 0;
+        }
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+    .accordion-body {
+        padding: 0 2.2rem 1rem 2.2rem;
+    }
+}
+
+.accordion-style-2 {
+    .accordion-button {
+        padding: 1.2rem $accordion-button-padding-x;
+        background-color: transparent;
+        &:not(.collapsed) {
+            color: $white;
+            background-color: $primary;
+            box-shadow: none;
+            @include border-top-radius($accordion-border-radius);
+            i {
+                transform: rotate(360deg);
+            }
+        }
+        // Accordion icon
+        &::after {
+            display: none;
+        }
+        i {
+            @include transition($accordion-icon-transition);
+        }
+    }
+    .accordion-item {
+        background-color: #f8f8f8;
+        border: 0;
+        border-radius: $accordion-border-radius;
+        margin: 1rem 0;
+        &:first-of-type {
+            margin-top: -.35rem;
+        }
+    }    
+}
+
+.accordion-style-3 {
+    .accordion-button {
+        padding: 1.2rem $accordion-button-padding-x;
+        background-color: transparent;
+        
+        &:not(.collapsed) {
+            color: $primary;
+            box-shadow: none;
+            @include border-top-radius($accordion-border-radius);
+            &::after {
+                content: "\f107";
+                transform: $accordion-icon-transform;
+            }
+        }
+        // Accordion icon
+        &::after {
+            width: .65rem;
+            height: .95rem;
+            background-image: none;
+            content: "\f107";
+            font-family: 'Font Awesome 6 Free';
+            font-size: .8rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            @include transition($accordion-icon-transition);
+        }
+    }
+    .accordion-item {
+        background-color: $white;
+        border: $accordion-border-width solid $accordion-border-color;
+        border-radius: $accordion-border-radius;
+        box-shadow: $box-shadow-sm;
+        margin: 1rem 0;
+        &:first-of-type {
+            margin-top: -.35rem;
+        }
+    }
+    .accordion-body {
+        padding: .2rem $accordion-body-padding-x $accordion-body-padding-y $accordion-body-padding-x;
+    }
+}
+
+.accordion-style-4 {
+    box-shadow: $box-shadow-sm;
+    .accordion-button {
+        padding: 1.2rem $accordion-button-padding-x;
+        background-color: transparent;
+        &:not(.collapsed) {
+            box-shadow: none;
+            &::before {
+                content: "\f058";
+                transform: rotate(360deg);
+            }
+        }
+        // Accordion icon
+        &::before {
+            width: 1rem;
+            height: 1.1rem;
+            content: "\f059";
+            font-family: 'Font Awesome 6 Free';
+            font-size: 1rem;
+            margin-right: .6rem;
+            @include transition($accordion-icon-transition);
+        }
+        &::after {
+            display: none;
+        }
+    }    
+    .accordion-body {
+        padding: .2rem $accordion-body-padding-x $accordion-body-padding-y $accordion-body-padding-x;
+    }
+}
+
+.accordion-style-5 {
+    .accordion-button {
+        padding: .8rem 0;
+        &:not(.collapsed) {
+            box-shadow: none;
+            &::after {
+                background-image: none;
+                color: $accordion-button-active-color;
+                content: "\f150";
+                transform: $accordion-icon-transform;
+            }
+        }
+        // Accordion icon
+        &::after {
+            width: .68rem;
+            height: .8rem;
+            background-image: none;
+            color: $text-muted;
+            content: "\f150";
+            font-family: 'Font Awesome 6 Free';
+            font-size: .75rem;
+            @include transition($accordion-icon-transition);
+        }
+    }
+    .accordion-item {
+        border: 0;
+    }
+    .accordion-body {
+        padding: .5rem 0 0 0;
+    }
+}

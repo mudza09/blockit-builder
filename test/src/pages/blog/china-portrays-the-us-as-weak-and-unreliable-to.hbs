@@ -1,0 +1,14 @@
+---
+layout: default
+title: Blog
+breadcrumb: true
+as_blog: false
+as_single: true
+---
+
+<main data-title="blog-single">
+    {{> post-title-china-portrays-the-us-as-weak-and-unreliable-to }}
+    {{#if setting.blog.disqussShortname}}
+    {{> component-disqus }}
+    {{/if}}
+</main>

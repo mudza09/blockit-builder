@@ -1,0 +1,77 @@
+{
+  "siteInfo": {
+    "pageTitle": "Blockit Starter HTML5 Template",
+    "metaDescription": "Premium HTML5 Template by Indonez",
+    "metaKeywords": [
+      "blockit",
+      "uikit3",
+      "indonez",
+      "handlebars",
+      "scss",
+      "javascript"
+    ],
+    "metaAuthor": "Indonez",
+    "metaThemeColor": "#2E89EA",
+    "favicon": "img/favicon.ico",
+    "touchIcon": "img/apple-touch-icon.png"
+  },
+  "colors": {
+    "primaryColor": "#2788ED",
+    "secondaryColor": "#6C757D",
+    "successColor": "#3BD297",
+    "infoColor": "#93C4F6",
+    "warningColor": "#F89F5F",
+    "dangerColor": "#EE4F6F",
+    "lightColor": "#F0F0F0",
+    "darkColor": "#323131",
+    "backgroundColor": "#FFFFFF",
+    "textColor": "#333333",
+    "linkColor": "#2788ED"
+  },
+  "authors": [
+    {
+      "id": "9jki2e",
+      "name": "Indonez",
+      "email": "templates@indonez.com",
+      "role": "FrontEnd Dev",
+      "avatar": "img/in-avatar.svg"
+    },
+    {
+      "id": "bk1baa",
+      "name": "Peter Parker",
+      "email": "maybe@parker.com",
+      "role": "Contributor",
+      "avatar": "img/user/author-lybqnhew0wc.jpg"
+    }
+  ],
+  "blog": {
+    "asBlog": "blog.hbs",
+    "categories": [
+      "Crypto",
+      "Health",
+      "Markets",
+      "Politics",
+      "Technology",
+      "World"
+    ],
+    "postPerPage": "3",
+    "showWidgets": {
+      "allHide": false,
+      "search": true,
+      "categories": true,
+      "latestPosts": true,
+      "tags": true
+    },
+    "displayAuthor": true,
+    "displayTag": true,
+    "displayShareButtons": true,
+    "disqussShortname": "html-demo"
+  },
+  "optimization": {
+    "minifyAssets": {
+      "html": false,
+      "css": false,
+      "js": false
+    }
+  }
+}

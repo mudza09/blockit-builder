@@ -1,0 +1,58 @@
+<!-- header begin -->
+<header class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container">
+        <a class="navbar-brand" href="{{root}}index.html">
+            <img src="{{root}}{{component.header.siteLogo.src}}" alt="logo" width="{{component.header.siteLogo.width}}" height="{{component.header.siteLogo.height}}" class="d-inline-block">
+            <span class="h4 fw-bold text-secondary ms-1 align-middle">Blockit</span>
+        </a>
+        <div class="collapse navbar-collapse d-flex justify-content-end d-none d-xl-block" id="navbarNav">
+            <ul class="navbar-nav">
+                {{#each navigation.nav}}
+                <li class="nav-item{{#if dropdown.child}} dropdown{{/if}}">
+                    <a class="nav-link{{#if dropdown.child}} dropdown-toggle{{/if}}" href="{{../root}}{{link}}"{{#if dropdown.child}} id="dropdown{{title}}" data-bs-toggle="dropdown" aria-expanded="false"{{/if}}>{{title}}</a>
+                    {{#if dropdown.child}}
+                    <ul class="dropdown-menu{{#if dropdown.child_text}} dropdown-large-menu{{/if}}">
+                        {{#unless dropdown.child_text}}
+                        {{#each dropdown.child}}
+                        <li>
+                            <a class="dropdown-item" href="{{../../root}}{{link}}">{{title}}{{#if icon}}<i class="fas {{icon}} fa-sm"></i>{{/if}}</a>
+                        </li>
+                        {{/each}}
+                        {{else}}
+                        <li>
+                            <div class="row">
+                                <div class="col-6">
+                                    <ul class="list-unstyled">
+                                        {{#each dropdown.child}}
+                                        <li><a class="dropdown-item" href="{{../../root}}{{link}}">{{title}}{{#if icon}}<i class="fas {{icon}} fa-sm"></i>{{/if}}</a></li>
+                                        {{/each}}
+                                    </ul>
+                                </div>
+                                <div class="col-6 border-start child-menu-text">
+                                    <p>{{dropdown.child_text}}</p>
+                                </div>
+                            </div>
+                        </li>
+                        {{/unless}}
+                    </ul>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ul>
+            {{#ifand component.header.signin.display component.header.signup.display}}
+            <div class="optional-link d-flex align-items-center ms-4 d-none d-xl-block">
+                {{#if component.header.signin.display}}
+                <a href="{{#if component.header.signin.external}}{{component.header.signin.url}}{{else}}{{root}}{{component.header.signin.url}}{{/if}}" class="btn btn-link link-secondary text-decoration-none"><i class="fas fa-circle-user fa-sm"></i> {{component.header.signin.title}}</a>
+                {{/if}}
+                {{#if component.header.signup.display}}
+                <a href="{{#if component.header.signup.external}}{{component.header.signup.url}}{{else}}{{root}}{{component.header.signup.url}}{{/if}}" class="btn btn-dark btn-sm rounded-pill px-2">{{component.header.signup.title}}</a>
+                {{/if}}
+            </div>
+            {{/ifand}}
+        </div>
+    </div>
+</header>
+{{#if breadcrumb}}
+{{> component-breadcrumb }}
+{{/if}}
+<!-- header end -->

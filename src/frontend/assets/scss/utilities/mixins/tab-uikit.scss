@@ -1,0 +1,13 @@
+@import "../../base/base-variables.scss";
+
+// uikit tab mixins
+// ========================================================================
+@mixin hook-tab-left(){
+    .uk-active {
+        background-color: $base-primary-color;
+        border-radius: $base-border-radius;
+        a {
+            color: $base-default-color;
+        }
+    }
+}

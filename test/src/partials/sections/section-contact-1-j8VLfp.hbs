@@ -1,0 +1,70 @@
+<!-- section content begin -->
+<section class="py-5">
+    <div class="container">
+        <div class="row d-md-flex justify-content-md-center gx-lg-5">
+            <div class="col-12 col-md-10 col-lg-6 pe-lg-5">
+                <h4 class="fw-bold text-muted mb-0">Have a questions?</h4>
+                <h1 class="fw-bold mb-0">Let's get in touch</h1>
+                <form id="contact-form" class="row g-1 mt-0" novalidate="">
+                    <div class="col-6">
+                        <input class="form-control" id="name" name="name" type="text" placeholder="Full name" aria-label="Full name" required="">
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control" id="email" name="email" type="email" placeholder="Email address" aria-label="Email address" required="">
+                    </div>
+                    <div class="col-12">
+                        <input class="form-control" id="subject" name="subject" type="text" placeholder="Subject" aria-label="Subject" required="">
+                    </div>
+                    <div class="col-12">
+                        <textarea class="form-control" id="message" name="message" placeholder="Message" rows="6" required=""></textarea>
+                    </div>
+                    <div class="d-grid">
+                        <button class="btn btn-primary" id="sendemail" type="submit" name="submit">Send Message</button>
+                    </div>
+                </form>
+                <div class="card bg-light border-0 mb-4 mb-md-4 mb-lg-0 mt-4">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="me-1 icon-wrap icon-wrap-small bg-primary rounded-circle flex-shrink-0">
+                                <i class="fas fa-map-marker-alt fa-sm text-white"></i>
+                            </div>                        
+                            <p class="mb-0">Satrio Tower 16th, Jl. Dr Satrio Kuningan, Jakarta</p>
+                        </div>
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 mt-1">
+                            <div class="col mb-2 mb-md-0 mb-lg-0">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-1 icon-wrap icon-wrap-small bg-primary rounded-circle flex-shrink-0">
+                                        <i class="fas fa-envelope fa-sm text-white"></i>
+                                    </div>                        
+                                    <p class="mb-0">hello@company.com</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-1 icon-wrap icon-wrap-small bg-primary rounded-circle flex-shrink-0">
+                                        <i class="fas fa-phone fa-sm text-white"></i>
+                                    </div>                        
+                                    <p class="mb-0">(888)234-5686</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-6 d-flex">
+                <iframe class="bg-light rounded-1 gmap w-100 h-300 h-md-400 h-lg-600" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10600.5248164368!2d144.95966577016594!3d-37.81707816290683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sid!4v1645280096951!5m2!1sen!2sid">
+                </iframe>
+            </div>
+        </div>
+    </div>
+    <!-- success notification begin -->
+    <div class="position-fixed bottom-0 end-0 p-4" style="z-index: 1">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body text-primary">
+                <i class="fas fa-check-circle me-1"></i>Your message has been sent successfully. Thank you!
+            </div>
+        </div>
+    </div>
+    <!-- success notification end -->
+</section>
+<!-- section content end -->

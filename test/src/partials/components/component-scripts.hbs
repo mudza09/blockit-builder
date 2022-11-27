@@ -1,0 +1,16 @@
+<!-- javascript -->
+<script src="{{root}}js/vendors/bootstrap.min.js"></script>
+{{#ifpage 'gallery' 'contact'}}
+<script src="{{root}}js/vendors/bigger-picture.min.js"></script>
+{{/ifpage}}
+{{#ifpage 'feature' 'counter' 'gallery'}}
+<script src="{{root}}js/vendors/isotope.min.js"></script>
+{{/ifpage}}
+{{#if as_single}}
+<script src="{{root}}js/vendors/share-buttons.min.js"></script>
+{{/if}}
+{{#ifpage 'counter'}}
+<script src="{{root}}js/config-counter.js"></script>
+{{/ifpage}}
+<script src="{{root}}js/utilities.min.js"></script>
+<script src="{{root}}js/config-theme.js"></script>

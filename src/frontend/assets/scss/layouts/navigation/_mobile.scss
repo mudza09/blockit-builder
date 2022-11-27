@@ -1,0 +1,37 @@
+.in-mobile-nav {
+    .uk-button {
+        font-size: 17px;
+        padding: 2px 16px;
+        color: $navigation-secondary-color;
+        background-color: transparent;
+        box-shadow: inset 0px 0px 0px 1px $navigation-border-color;
+        border-radius: $navigation-border-radius;
+    }
+}
+.uk-modal-close-full {
+    padding: 1px 17px;
+    background-color: $navigation-default-color;
+    border: $navigation-border-width solid $navigation-border-color;
+    border-radius: $navigation-border-radius;
+    top: 18px;
+    right: 18px;
+}
+.uk-nav-default {
+    margin-top: -40px;
+    li {
+        a {
+            font-size: 24px;
+        }
+    }
+}
+.uk-nav-sub {
+    li {
+        a {
+            font-size: 18px;
+            i {
+                margin-left: 8px;
+                font-size: 13px;
+            }
+        }
+    }    
+}
