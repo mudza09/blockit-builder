@@ -1,18 +1,18 @@
 // required plugins
-import Methods from './methods.mjs'
-import Sockets from './sockets.mjs'
-import browserSync from 'browser-sync'
-import historyApiFallback from 'connect-history-api-fallback'
+const Methods = require('./methods')
+const Sockets = require('./sockets')
+const browserSync = require('browser-sync')
+const historyApiFallback = require('connect-history-api-fallback')
 
-export default class Server {
+module.exports = class Server {
     constructor(compiler) {
-        this.frontEnd = browserSync.create()
-        this.backEnd = browserSync.create()
+        this.preview = browserSync.create()
+        this.builder = browserSync.create()
         this.compiler = compiler
     }
 
-    serverInit = () => {
-        this.frontEnd.init({
+    run = () => {
+        this.preview.init({
             port: 3000,
             ui: false,
             notify: false,
@@ -32,16 +32,15 @@ export default class Server {
             }
         })
 
-        this.backEnd.init({
+        this.builder.init({
             port: 3001,
             ui: false,
             notify: false,
             watch: true,
             startPath: 'dashboard',
-            server: 'views',
+            server: './app',
             middleware: [ historyApiFallback() ],
             snippetOptions: { async: false },
-            logPrefix: 'Blockit',
             logLevel: 'silent',
             callbacks: {
                 ready: (err, bs) => {

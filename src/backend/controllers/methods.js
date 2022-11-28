@@ -1,10 +1,10 @@
 // required plugins
-import fs from 'fs'
-import { execSync } from 'child_process'
-import { JSDOM }  from 'jsdom'
+const fs = require('fs')
+const { execSync } = require('child_process')
+const { JSDOM } = require('jsdom')
 
 // blockit method library function
-export default class Methods {
+module.exports = class Methods {
     constructor(socket) {
         this.socket = socket
     }
@@ -672,15 +672,15 @@ export default class Methods {
         const dataCompareJs = JSON.parse(oldData).optimization.minifyAssets.js !== assetsJs
 
         if(dataCompareCss && assetsCss) {
-            execSync("gulp -S --f index.mjs minifyCss")
+            execSync("gulp -S --f index.js minifyCss")
         } else if(dataCompareCss && !assetsCss) {
-            execSync("gulp -S --f index.mjs compileCss")
+            execSync("gulp -S --f index.js compileCss")
         }
 
         if(dataCompareJs && assetsJs) {
-            execSync("gulp -S --f index.mjs minifyJs")
+            execSync("gulp -S --f index.js minifyJs")
         } else if(dataCompareJs && !assetsJs) {
-            execSync("gulp -S --f index.mjs compileJs")
+            execSync("gulp -S --f index.js compileJs")
         }
     }
 
@@ -714,15 +714,15 @@ export default class Methods {
     }
 
     saveSocialMedia = () => {
-        fs.existsSync('../src/hooks/components/social-media.mjs')
-            ? import('../../src/hooks/components/social-media.mjs').then(module => module.default()) // custom hooks is available
-            : import('../hooks/components/social-media.mjs').then(module => module.default()) // custom hooks is not available
+        fs.existsSync('../src/hooks/components/social-media.js')
+            ? import('../../src/hooks/components/social-media.js').then(module => module.default()) // custom hooks is available
+            : import('../hooks/components/social-media.js').then(module => module.default()) // custom hooks is not available
     }
 
     saveFooter = () => {
-        fs.existsSync('../src/hooks/components/footer.mjs')
-            ? import('../../src/hooks/components/footer.mjs').then(module => module.default()) // custom hooks is available
-            : import('../hooks/components/footer.mjs').then(module => module.default()) // custom hooks is not available
+        fs.existsSync('../src/hooks/components/footer.js')
+            ? import('../../src/hooks/components/footer.js').then(module => module.default()) // custom hooks is available
+            : import('../hooks/components/footer.js').then(module => module.default()) // custom hooks is not available
     }
 
     saveSlideshow = data => {

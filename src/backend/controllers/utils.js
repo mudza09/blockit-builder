@@ -1,8 +1,8 @@
 // required plugins
-import fs from 'fs'
-import clc from 'cli-color'
+const fs = require('fs')
+const clc = require('cli-color')
 
-export default class Utils {
+module.exports = class Utils {
     constructor(gulpPlugin) {
         Object.assign(this, gulpPlugin)
     }
@@ -30,23 +30,23 @@ export default class Utils {
             case task.buildHtml.name:
                 const partialIntro = String(msg.error).split(' ').slice(5, -5).join(' ')
                 const partialMissing = String(msg.error).split(' ').slice(5)[2]
-                console.log(`${this.logTime(new Date())} - ${partialIntro == 'The partial' ? `HTML compile ${clc.red('an error occurred:')} The partial ${clc.yellow(`"${partialMissing}"`)} could not be found` : `HTML compile ${clc.red('an error occurred:')} ${msg.error}`}`)
+                console.log(`${this.logTime(new Date())} - ${partialIntro == 'The partial' ? `HTML compile ${clc.red('a problem occurred:')} The partial ${clc.yellow(`"${partialMissing}"`)} could not be found` : `HTML compile ${clc.red('a problem occurred:')} ${msg.error}`}`)
                 break
             case task.buildCss.name:
                 const cssErr = String(msg.error.formatted).split(' ').slice(1, -4).join(' ')
-                console.log(`${this.logTime(new Date())} - CSS compile ${clc.red('an error occurred:')} ${cssErr}`)
+                console.log(`${this.logTime(new Date())} - CSS compile ${clc.red('a problem occurred:')} ${cssErr}`)
                 break
             case task.buildJs.name:
-                console.log(`${this.logTime(new Date())} - JS compile ${clc.red('an error occurred:')} ${msg.error}`)
+                console.log(`${this.logTime(new Date())} - JS compile ${clc.red('a problem occurred:')} ${msg.error}`)
                 break
             case task.buildStatic.name:
-                console.log(`${this.logTime(new Date())} - Static assets deliver ${clc.red('an error occurred:')} ${msg.error}`)
+                console.log(`${this.logTime(new Date())} - Static assets deliver ${clc.red('a problem occurred:')} ${msg.error}`)
                 break
             case task.buildImg.name:
-                console.log(`${this.logTime(new Date())} - Image optimization ${clc.red('an error occurred:')} ${msg.error}`)
+                console.log(`${this.logTime(new Date())} - Image optimization ${clc.red('a problem occurred:')} ${msg.error}`)
                 break
             case task.name:
-                console.log(`${this.logTime(new Date())} - ${clc.red('An error occurred:')} ${msg.error}`)
+                console.log(`${this.logTime(new Date())} - ${clc.red('a problem occurred:')} ${msg.error}`)
                 break
         }
     }

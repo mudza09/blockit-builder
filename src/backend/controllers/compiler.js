@@ -1,25 +1,24 @@
 // required plugins
-import fs from 'fs'
-import clc from 'cli-color'
-import del from 'del'
-import panini from 'panini'
-import rename from 'gulp-rename'
-import beautify from 'gulp-jsbeautifier'
-import minify from 'gulp-minifier'
-import merge from 'merge-stream'
-import newer from 'gulp-newer'
-import concat from 'gulp-concat'
-import babel from 'gulp-babel'
-import postcss from 'gulp-postcss'
-import purgecss from '@fullhuman/postcss-purgecss'
-import autoprefixer from 'autoprefixer'
-import shorthand from 'postcss-merge-longhand'
-import gulpSass from 'gulp-sass'
-import dartSass from 'sass'
-import imagemin, { gifsicle, mozjpeg, optipng, svgo } from 'gulp-imagemin'
-import Utils from './utils.mjs'
+const fs = require('fs')
+const clc = require('cli-color')
+const del = require('del')
+const panini = require('panini')
+const rename = require('gulp-rename')
+const beautify = require('gulp-jsbeautifier')
+const minify = require('gulp-minifier')
+const merge = require('merge-stream')
+const newer = require('gulp-newer')
+const concat = require('gulp-concat')
+const babel = require('gulp-babel')
+const sass = require('gulp-sass')(require('sass'))
+const postcss = require('gulp-postcss')
+const autoprefixer = require('autoprefixer')
+const shorthand = require('postcss-merge-longhand')
+const imagemin = require('gulp-imagemin')
+const purgecss = require('@fullhuman/postcss-purgecss')
+const Utils = require('./utils')
 
-export default class Compiler {
+module.exports = class Compiler {
     constructor(gulpPlugin) {
         Object.assign(this, gulpPlugin)
         this.utils = new Utils()
@@ -68,8 +67,6 @@ export default class Compiler {
 
     // css compile task
     buildCss = () => {
-        const sass = gulpSass(dartSass)
-
         return this.src('../../src/assets/scss/main.scss')
         .pipe(sass())
         .pipe(rename('style.css'))
@@ -215,7 +212,7 @@ export default class Compiler {
         this.watch('../../src/assets/scss/**/*.scss', this.series(this.buildCss))
         this.watch('../../src/assets/js/**/*.js', this.series(this.buildJs))
         this.watch('../../src/assets/img/**/*', this.series(this.buildImg))
-        this. watch(['../../src/**/*.hbs', '../../src/data/**/*.json'], this.series(this.buildHtml))
+        this.watch(['../../src/**/*.hbs', '../../src/data/**/*.json'], this.series(this.buildHtml))
         this.watch(['../../src/hooks/blog/search-post.hbs', '../../src/hooks/blog/search-result.hbs'], this.series(this.utils.hookSearch))
         this.watch('../../src/hooks/sections/previews/*', this.series(this.utils.hookSectionsPreview))
     }

@@ -1,12 +1,12 @@
 {
-  "name": "cuplis",
-  "title": "Cuplis",
+  "name": "starter",
+  "title": "Starter",
   "version": "1.0.0",
-  "description": "Some description about this Theme",
+  "description": "Perfect start to create website with Blockit Builder",
   "private": true,
   "scripts": {
-    "build": "gulp --f node_modules/blockit-builder/index.mjs build",
-    "blockit": "gulp --f node_modules/blockit-builder/index.mjs blockit"
+    "build": "gulp -S --f node_modules/blockit-builder/index.js build",
+    "blockit": "gulp -S --f node_modules/blockit-builder/index.js blockit"
   },
   "browserslist": [
     "last 2 years"

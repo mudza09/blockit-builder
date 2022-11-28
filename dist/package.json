@@ -21,7 +21,7 @@
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
-    "gulp-imagemin": "^8.0.0",
+    "gulp-imagemin": "^7.1.0",
     "gulp-jsbeautifier": "^3.0.1",
     "gulp-minifier": "^3.5.0",
     "gulp-newer": "^1.4.0",
@@ -32,6 +32,7 @@
     "jsdom": "^19.0.0",
     "merge-stream": "^2.0.0",
     "panini": "^1.7.2",
+    "postcss": "^8.4.5",
     "postcss-merge-longhand": "^5.0.4",
     "sass": "^1.32.13"
   }

@@ -1,5 +1,5 @@
 // blockit socket library class
-export default class Sockets {
+module.exports = class Sockets {
     constructor(blockit) {
         this.blockit = blockit
     }

@@ -10,15 +10,21 @@ import esbuild from 'gulp-esbuild'
 import stylePlugin from 'esbuild-style-plugin'
 import imagemin, { gifsicle, mozjpeg, optipng, svgo } from 'gulp-imagemin'
 
+// clean blockit
+const clean = () => {
+    return del(
+        [
+            '../dist/**',
+            '!../dist/node_modules',
+            '!../dist/package.json',
+            '!../dist/package-lock.json'
+        ], {force: true})
+}
+
 /*
 Frontend compiler section
 using for compile blockit frontend app
 */
-
-// clean frontend blockit folder
-const frontendClean = () => {
-    return del(['../dist/views/**', '!../dist/views/index.html'], {force: true})
-}
 
 // js compile task
 const frontendJs = () => {
@@ -38,13 +44,13 @@ const frontendJs = () => {
         plugins: [stylePlugin()],
         minify: true
     }))
-    .pipe(dest('../dist/views/assets'))
+    .pipe(dest('../dist/app/assets'))
 }
 
 // image optimization task
 const frontendImg = () => {
     return src('./frontend/assets/img/**/*')
-    .pipe(newer('../dist/views/assets/img'))
+    .pipe(newer('../dist/app/assets/img'))
     .pipe(imagemin([
         gifsicle({interlaced: true}),
         mozjpeg({quality: 80, progressive: true}),
@@ -65,13 +71,20 @@ const frontendImg = () => {
         verbose: false,
         silent: true
     }))
-    .pipe(dest('../dist/views/assets/img'))
+    .pipe(dest('../dist/app/assets/img'))
 }
 
 // static assets task
 const frontendStatic = () => {
-    return src('./frontend/assets/static/favicon.ico')
-    .pipe(dest('../dist/views/assets'))
+    return merge(
+        // favicon
+        src('./frontend/assets/static/favicon.ico')
+        .pipe(dest('../dist/app/assets')),
+
+        // index.html
+        src('./frontend/assets/static/index.html')
+        .pipe(dest('../dist/app'))
+    )
 }
 
 /*
@@ -79,17 +92,37 @@ Backend compiler section
 using for compile blockit backend app
 */
 
-// clean backend blockit folder
-const backendClean = () => {
-    return del(['../dist/**', '!../dist/views', '!../dist/node_modules', '!../dist/package.json', '!../dist/package-lock.json'], {force: true})
-}
-
 // js compile task
 const backendJs = () => {
-    return src('./backend/**/**.mjs')
+    return src('./backend/index.js')
     .pipe(esbuild({
-        bundle: false,
-        outExtension: { '.js': '.mjs' },
+        outfile: 'index.js',
+        bundle: true,
+        platform: 'node',
+        external: [
+            'cli-color',
+            'gulp-rename',
+            'gulp-jsbeautifier',
+            'gulp-imagemin',
+            'gulp-minifier',
+            'gulp-postcss',
+            'gulp-newer',
+            'gulp-concat',
+            'gulp-babel',
+            'gulp-sass',
+            'gulp-task-err-handler',
+            '@fullhuman/postcss-purgecss',
+            'connect-history-api-fallback',
+            'postcss-merge-longhand',
+            'merge-stream',
+            'autoprefixer',
+            'browser-sync',
+            'panini',
+            'jsdom',
+            'sass',
+            '../../src/hooks/components/*',
+            './node_modules/*'
+        ],
         sourcemap: false,
         minify: true
     }))
@@ -123,9 +156,9 @@ const blockitWatch = () => {
     watch('./frontend/assets/scss/**/*.scss', series(frontendJs))
     watch('./frontend/**/*.js', series(frontendJs))
     watch('./frontend/assets/img/**/*', series(frontendImg))
-    watch('./backend/**/*.mjs', series(backendJs))
+    watch('./backend/**/*.js', series(backendJs))
 }
 
 // gulp task
-task('build', series(frontendClean, frontendJs, frontendStatic, frontendImg, backendClean, backendStatic, backendJs))  // gulp --f compiler.mjs build
+task('build', series(clean, frontendJs, frontendStatic, frontendImg, backendStatic, backendJs))  // gulp --f compiler.mjs build
 task('dev', blockitWatch) // gulp --f compiler.mjs dev
