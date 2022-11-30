@@ -1,0 +1,37 @@
+{
+  "name": "blockit-builder",
+  "title": "Blockit Builder",
+  "description": "A static HTML builder from Indonez",
+  "version": "1.0.0",  
+  "author": "mudza09",
+  "license": "ISC",
+  "scripts": {
+    "build": "gulp --f ./src/build.mjs build",
+    "dev": "gulp --f ./src/build.mjs dev",
+    "test-build": "gulp -S --f ./test/node_modules/blockit-builder/index.mjs build",
+    "test-blockit": "gulp -S --f ./test/node_modules/blockit-builder/index.mjs blockit"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "6.0.0",
+    "del": "6.0.0",
+    "esbuild-style-plugin": "1.1.2",
+    "gulp": "4.0.2",
+    "gulp-esbuild": "0.10.6",
+    "gulp-imagemin": "8.0.0",
+    "gulp-newer": "1.4.0",
+    "merge-stream": "2.0.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-router-dom": "6.2.1",
+    "sass": "1.32.13",
+    "short-unique-id": "4.4.2",
+    "uikit": "3.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mudza09/blockit-builder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mudza09/blockit-builder/issues"
+  }
+}

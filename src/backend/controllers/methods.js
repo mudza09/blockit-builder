@@ -1,10 +1,9 @@
 // required plugins
-const fs = require('fs')
-const { execSync } = require('child_process')
-const { JSDOM } = require('jsdom')
+import fs from 'fs'
+import { execSync } from 'child_process'
+import { JSDOM }  from 'jsdom'
 
-// blockit method library function
-module.exports = class Methods {
+export default class Methods {
     constructor(socket) {
         this.socket = socket
     }

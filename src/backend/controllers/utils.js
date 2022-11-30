@@ -1,8 +1,7 @@
 // required plugins
-const fs = require('fs')
-const clc = require('cli-color')
+import fs from 'fs'
 
-module.exports = class Utils {
+export default class Utils {
     constructor(gulpPlugin) {
         Object.assign(this, gulpPlugin)
     }
@@ -12,9 +11,9 @@ module.exports = class Utils {
         const packageInfo = JSON.parse(fs.readFileSync('package.json', 'utf-8'))
         console.log(`\n${packageInfo.title} v${packageInfo.version} running on Node.js ${process.version}\n`)
         if(process.argv.pop() == 'blockit') {
-            console.log(`  builder url:    ${clc.magenta('http://localhost:3001')}`)
-            console.log(`  preview url:    ${clc.magenta('http://localhost:3000')}\n`)
-            console.log(`${this.logTime(new Date())} - Waiting for ${clc.cyan('changes...')}`)
+            console.log('  builder url:    http://localhost:3001')
+            console.log('  preview url:    http://localhost:3000\n')
+            console.log(`${this.logTime(new Date())} - Waiting for changes...`)
         }
         done()
     }
@@ -30,23 +29,23 @@ module.exports = class Utils {
             case task.buildHtml.name:
                 const partialIntro = String(msg.error).split(' ').slice(5, -5).join(' ')
                 const partialMissing = String(msg.error).split(' ').slice(5)[2]
-                console.log(`${this.logTime(new Date())} - ${partialIntro == 'The partial' ? `HTML compile ${clc.red('a problem occurred:')} The partial ${clc.yellow(`"${partialMissing}"`)} could not be found` : `HTML compile ${clc.red('a problem occurred:')} ${msg.error}`}`)
+                console.log(`${this.logTime(new Date())} - ${partialIntro == 'The partial' ? `HTML compile a problem occurred: The partial ${partialMissing} could not be found` : `HTML compile a problem occurred: ${msg.error}`}`)
                 break
             case task.buildCss.name:
                 const cssErr = String(msg.error.formatted).split(' ').slice(1, -4).join(' ')
-                console.log(`${this.logTime(new Date())} - CSS compile ${clc.red('a problem occurred:')} ${cssErr}`)
+                console.log(`${this.logTime(new Date())} - CSS compile a problem occurred: ${cssErr}`)
                 break
             case task.buildJs.name:
-                console.log(`${this.logTime(new Date())} - JS compile ${clc.red('a problem occurred:')} ${msg.error}`)
+                console.log(`${this.logTime(new Date())} - JS compile a problem occurred: ${msg.error}`)
                 break
             case task.buildStatic.name:
-                console.log(`${this.logTime(new Date())} - Static assets deliver ${clc.red('a problem occurred:')} ${msg.error}`)
+                console.log(`${this.logTime(new Date())} - Static assets deliver a problem occurred: ${msg.error}`)
                 break
             case task.buildImg.name:
-                console.log(`${this.logTime(new Date())} - Image optimization ${clc.red('a problem occurred:')} ${msg.error}`)
+                console.log(`${this.logTime(new Date())} - Image optimization a problem occurred: ${msg.error}`)
                 break
             case task.name:
-                console.log(`${this.logTime(new Date())} - ${clc.red('a problem occurred:')} ${msg.error}`)
+                console.log(`${this.logTime(new Date())} - a problem occurred: ${msg.error}`)
                 break
         }
     }

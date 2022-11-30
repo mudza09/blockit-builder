@@ -148,6 +148,7 @@ body.loaded {
     // styling
     background: rgba($white, .75);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 0 25px rgba(0, 0, 0, .08);
     &.active {
         transform: translateY(0%);

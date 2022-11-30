@@ -1,10 +1,10 @@
 // required plugins
-const Methods = require('./methods')
-const Sockets = require('./sockets')
-const browserSync = require('browser-sync')
-const historyApiFallback = require('connect-history-api-fallback')
+import Methods from './methods.js'
+import Sockets from './sockets.js'
+import browserSync from 'browser-sync'
+import historyApiFallback from 'connect-history-api-fallback'
 
-module.exports = class Server {
+export default class Server {
     constructor(compiler) {
         this.preview = browserSync.create()
         this.builder = browserSync.create()
@@ -38,7 +38,7 @@ module.exports = class Server {
             notify: false,
             watch: true,
             startPath: 'dashboard',
-            server: './app',
+            server: true,
             middleware: [ historyApiFallback() ],
             snippetOptions: { async: false },
             logLevel: 'silent',

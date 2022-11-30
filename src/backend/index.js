@@ -1,11 +1,12 @@
 // required plugins
-const { src, dest, task, watch, series } = require('gulp')
-const handler = require('gulp-task-err-handler')
-const Compiler = require('./controllers/compiler')
-const Server = require('./controllers/server')
-const Utils = require('./controllers/utils')
+import gulp from 'gulp'
+import handler from 'gulp-task-err-handler'
+import Compiler from './controllers/compiler.js'
+import Server from './controllers/server.js'
+import Utils from './controllers/utils.js'
 
-// class init
+// class and gulp init
+const { src, dest, task, watch, series } = gulp
 const compiler = new Compiler({ src, dest, task, watch, series })
 const server = new Server(compiler)
 const utils = new Utils({ src, dest, task, watch, series })

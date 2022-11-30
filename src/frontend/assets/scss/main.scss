@@ -1,16 +1,16 @@
 // 1. custom variables
-@import "utilities/variables/accordion-uikit.scss";
+// @import "utilities/variables/accordion-uikit.scss";
 @import "utilities/variables/base-uikit.scss";
-@import "utilities/variables/breadcrumb-uikit.scss";
+// @import "utilities/variables/breadcrumb-uikit.scss";
 @import "utilities/variables/button-uikit.scss";
-@import "utilities/variables/comment-uikit.scss";
+// @import "utilities/variables/comment-uikit.scss";
 @import "utilities/variables/container-uikit.scss";
-@import "utilities/variables/dotnav-uikit.scss";
+// @import "utilities/variables/dotnav-uikit.scss";
 @import "utilities/variables/form-uikit.scss";
 @import "utilities/variables/heading-uikit.scss";
 @import "utilities/variables/modal-uikit.scss";
 @import "utilities/variables/navbar-uikit.scss";
-@import "utilities/variables/notification-uikit.scss";
+// @import "utilities/variables/notification-uikit.scss";
 @import "utilities/variables/offcanvas-uikit.scss";
 @import "utilities/variables/pagination-uikit.scss";
 @import "utilities/variables/section-uikit.scss";
@@ -20,19 +20,19 @@
 @import "utilities/variables/utility-uikit.scss";
 
 // 2. import default variables and available mixins
-@import "./../../../node_modules/uikit/src/scss/variables.scss";
-@import "./../../../node_modules/uikit/src/scss/mixins.scss";
+@import "../../../../node_modules/uikit/src/scss/variables.scss";
+@import "../../../../node_modules/uikit/src/scss/mixins.scss";
 
 // 3. custom mixins overwrites
 @import "utilities/mixins/base-uikit.scss";
-@import "utilities/mixins/breadcrumb-uikit.scss";
+// @import "utilities/mixins/breadcrumb-uikit.scss";
 @import "utilities/mixins/button-uikit.scss";
-@import "utilities/mixins/comment-uikit.scss";
-@import "utilities/mixins/dotnav-uikit.scss";
+// @import "utilities/mixins/comment-uikit.scss";
+// @import "utilities/mixins/dotnav-uikit.scss";
 @import "utilities/mixins/form-uikit.scss";
 @import "utilities/mixins/modal-uikit.scss";
 @import "utilities/mixins/navbar-uikit.scss";
-@import "utilities/mixins/notification-uikit.scss";
+// @import "utilities/mixins/notification-uikit.scss";
 @import "utilities/mixins/offcanvas-uikit.scss";
 @import "utilities/mixins/pagination-uikit.scss";
 @import "utilities/mixins/sticky-uikit.scss";
@@ -42,7 +42,7 @@
 @import "utilities/mixins/utility-uikit.scss";
 
 // 4. import UIkit
-@import "./../../../node_modules/uikit/src/scss/uikit.scss";
+@import "../../../../node_modules/uikit/src/scss/uikit.scss";
 
 // base variables
 @import "base/base-variables.scss";

@@ -1,24 +1,20 @@
 // required plugins
-const fs = require('fs')
-const clc = require('cli-color')
-const del = require('del')
-const panini = require('panini')
-const rename = require('gulp-rename')
-const beautify = require('gulp-jsbeautifier')
-const minify = require('gulp-minifier')
-const merge = require('merge-stream')
-const newer = require('gulp-newer')
-const concat = require('gulp-concat')
-const babel = require('gulp-babel')
-const sass = require('gulp-sass')(require('sass'))
-const postcss = require('gulp-postcss')
-const autoprefixer = require('autoprefixer')
-const shorthand = require('postcss-merge-longhand')
-const imagemin = require('gulp-imagemin')
-const purgecss = require('@fullhuman/postcss-purgecss')
-const Utils = require('./utils')
+import fs from 'fs'
+import del from 'del'
+import panini from 'panini'
+import rename from 'gulp-rename'
+import beautify from 'gulp-jsbeautifier'
+import minify from 'gulp-minifier'
+import merge from 'merge-stream'
+import concat from 'gulp-concat'
+import babel from 'gulp-babel'
+import gulpSass from 'gulp-sass'
+import dartSass from 'sass'
+import purgecss from 'gulp-purgecss'
+import imagemin, { gifsicle, mozjpeg, optipng, svgo } from 'gulp-imagemin'
+import Utils from './utils.js'
 
-module.exports = class Compiler {
+export default class Compiler {
     constructor(gulpPlugin) {
         Object.assign(this, gulpPlugin)
         this.utils = new Utils()
@@ -62,18 +58,19 @@ module.exports = class Compiler {
         }))
         .pipe(minifyHtml ? minify({minify: true, minifyHTML: {collapseWhitespace: true, removeComments: true}}) : minify({minify: false}))
         .pipe(this.dest('../../dist'))
-        .on('end', () => console.log(`${this.utils.logTime(new Date())} - HTML compiled ${clc.green('successfully.')}`))
+        .on('end', () => console.log(`${this.utils.logTime(new Date())} - HTML compiled successfully.`))
     }
 
     // css compile task
-    buildCss = () => {
+    buildCss = () => {  
+        const sass = gulpSass(dartSass)
+
         return this.src('../../src/assets/scss/main.scss')
         .pipe(sass())
         .pipe(rename('style.css'))
         .pipe(beautify({css: {file_types: ['.css']}}))
-        .pipe(postcss([autoprefixer(), shorthand()]))
         .pipe(this.dest('../../dist/css'))
-        .on('end', () => console.log(`${this.utils.logTime(new Date())} - CSS compiled ${clc.green('successfully.')}`))
+        .on('end', () => console.log(`${this.utils.logTime(new Date())} - CSS compiled successfully.`))
     }
 
     // js compile task
@@ -86,7 +83,6 @@ module.exports = class Compiler {
 
             // utilities.min.js
             this.src('../../src/assets/js/utilities/*.js')
-            .pipe(newer('../../dist/js/vendors/utilities.min.js'))
             .pipe(babel({
                 presets: [['@babel/preset-env', {
                     'targets': '> 0.25%, not dead',
@@ -101,14 +97,13 @@ module.exports = class Compiler {
             this.src('../../src/assets/js/vendors/*.js')
             .pipe(minify({minify: true, minifyJS: {sourceMap: false}}))
             .pipe(this.dest('../../dist/js/vendors'))
-            .on('end', () => console.log(`${this.utils.logTime(new Date())} - JS compiled ${clc.green('successfully.')}`))
+            .on('end', () => console.log(`${this.utils.logTime(new Date())} - JS compiled successfully.`))
         )
     }
 
     // image optimization task
     buildImg = () => {
         return this.src('../../src/assets/img/**/*')
-        .pipe(newer('../../dist/img'))
         .pipe(imagemin([
             gifsicle({interlaced: true}),
             mozjpeg({quality: 80, progressive: true}),
@@ -130,7 +125,7 @@ module.exports = class Compiler {
             silent: true
         }))
         .pipe(this.dest('../../dist/img'))
-        .on('end', () => console.log(`${this.utils.logTime(new Date())} - Images optimized ${clc.green('successfully.')}`))
+        .on('end', () => console.log(`${this.utils.logTime(new Date())} - Images optimized successfully.`))
     }
 
     // static assets task
@@ -175,7 +170,7 @@ module.exports = class Compiler {
             // bigger-picture.js
             this.src('../../node_modules/bigger-picture/dist/bigger-picture.min.js')
             .pipe(this.dest('../../dist/js/vendors'))
-            .on('end', () => console.log(`${this.utils.logTime(new Date())} - Static assets delivered ${clc.green('successfully.')}`))
+            .on('end', () => console.log(`${this.utils.logTime(new Date())} - Static assets delivered successfully.`))
         )
     }
 
@@ -187,12 +182,9 @@ module.exports = class Compiler {
     // Minify for CSS files
     minifyCss = () => {
         return this.src('../../dist/css/*.css')
-        .pipe(postcss([
-            purgecss({
-                content: ['../../dist/*.html', '../../dist/js/**/*.js'],
-                safelist: {standard: [/@s$/, /@m$/]}
-            })
-        ]))
+        .pipe(purgecss({
+            content: ['../../dist/*.html', '../../dist/js/**/*.js']
+        }))
         .pipe(minify({minify: true, minifyCSS: true}))
         .pipe(this.dest('../../dist/css'))
     }

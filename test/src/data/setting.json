@@ -70,7 +70,7 @@
   "optimization": {
     "minifyAssets": {
       "html": false,
-      "css": false,
+      "css": true,
       "js": false
     }
   }

@@ -44,13 +44,13 @@ const frontendJs = () => {
         plugins: [stylePlugin()],
         minify: true
     }))
-    .pipe(dest('../dist/app/assets'))
+    .pipe(dest('../dist/assets'))
 }
 
 // image optimization task
 const frontendImg = () => {
     return src('./frontend/assets/img/**/*')
-    .pipe(newer('../dist/app/assets/img'))
+    .pipe(newer('../dist/assets/img'))
     .pipe(imagemin([
         gifsicle({interlaced: true}),
         mozjpeg({quality: 80, progressive: true}),
@@ -71,7 +71,7 @@ const frontendImg = () => {
         verbose: false,
         silent: true
     }))
-    .pipe(dest('../dist/app/assets/img'))
+    .pipe(dest('../dist/assets/img'))
 }
 
 // static assets task
@@ -79,11 +79,11 @@ const frontendStatic = () => {
     return merge(
         // favicon
         src('./frontend/assets/static/favicon.ico')
-        .pipe(dest('../dist/app/assets')),
+        .pipe(dest('../dist/assets')),
 
         // index.html
         src('./frontend/assets/static/index.html')
-        .pipe(dest('../dist/app'))
+        .pipe(dest('../dist'))
     )
 }
 
@@ -96,30 +96,30 @@ using for compile blockit backend app
 const backendJs = () => {
     return src('./backend/index.js')
     .pipe(esbuild({
-        outfile: 'index.js',
+        outfile: 'index.mjs',
         bundle: true,
+        format: 'esm',
         platform: 'node',
         external: [
-            'cli-color',
-            'gulp-rename',
-            'gulp-jsbeautifier',
-            'gulp-imagemin',
-            'gulp-minifier',
-            'gulp-postcss',
-            'gulp-newer',
-            'gulp-concat',
-            'gulp-babel',
-            'gulp-sass',
-            'gulp-task-err-handler',
-            '@fullhuman/postcss-purgecss',
-            'connect-history-api-fallback',
-            'postcss-merge-longhand',
-            'merge-stream',
-            'autoprefixer',
+            '@babel/core',
+            '@babel/preset-env',
             'browser-sync',
+            'connect-history-api-fallback',
+            'merge-stream',
+            'del',
+            'gulp',
+            'gulp-babel',
+            'gulp-concat',
+            'gulp-imagemin',
+            'gulp-jsbeautifier',
+            'gulp-task-err-handler',
+            'gulp-minifier',
+            'gulp-purgecss',
+            'gulp-rename',
+            'gulp-sass',
+            'sass',
             'panini',
             'jsdom',
-            'sass',
             '../../src/hooks/components/*',
             './node_modules/*'
         ],
