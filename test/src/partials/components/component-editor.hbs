@@ -1,18 +1,25 @@
-{{!-- header block --}}
-{{#ifequal this.type "header"}}
-    {{#ifequal this.data.level 1}}<h1>{{this.data.text}}</h1>{{/ifequal}}
-    {{#ifequal this.data.level 2}}<h2>{{this.data.text}}</h2>{{/ifequal}}
-    {{#ifequal this.data.level 3}}<h3>{{this.data.text}}</h3>{{/ifequal}}
-    {{#ifequal this.data.level 4}}<h4>{{this.data.text}}</h4>{{/ifequal}}
-    {{#ifequal this.data.level 5}}<h5>{{this.data.text}}</h5>{{/ifequal}}
-{{/ifequal}}
-
-{{!-- paragpraph block --}}
+{{!-- Text block --}}
 {{#ifequal this.type "paragraph"}}
-    <p>{{{this.data.text}}}</p>
+<p>{{{this.data.text}}}</p>
 {{/ifequal}}
-
-{{!-- list block --}}
+{{!-- Heading block --}}
+{{#ifequal this.type "header"}}
+    {{~#ifequal this.data.level 1~}}<h1 class="fw-bold mb-1">{{this.data.text}}</h1>{{/ifequal}}
+    {{~#ifequal this.data.level 2~}}<h2 class="fw-bold mb-1">{{this.data.text}}</h2>{{/ifequal}}
+    {{~#ifequal this.data.level 3~}}<h3 class="fw-bold mb-1">{{this.data.text}}</h3>{{/ifequal}}
+    {{~#ifequal this.data.level 4~}}<h4 class="fw-bold mb-1">{{this.data.text}}</h4>{{/ifequal}}
+    {{~#ifequal this.data.level 5~}}<h5 class="fw-bold mb-1">{{this.data.text}}</h5>{{/ifequal}}
+{{/ifequal}}
+{{!-- Image block --}}
+{{#ifequal this.type "image"}}
+<figure class="figure my-3">
+    <img src="{{@root.root}}{{this.data.file.url}}" class="img-fluid{{#unless this.data.caption}} mb-2{{/unless}}"{{#if this.data.caption}} alt="{{this.data.caption}}"{{/if}}>
+    {{#if this.data.caption}}
+    <figcaption class="figure-caption text-center text-muted py-1">{{this.data.caption}}</figcaption>
+    {{/if}}
+</figure>
+{{/ifequal}}
+{{!-- List block --}}
 {{#ifequal this.type "list"}}
     {{#ifequal this.data.style "ordered"}}
     <ol class="lh-lg">
@@ -25,55 +32,34 @@
     </ul>
     {{/ifequal}}
 {{/ifequal}}
-
-{{!-- divider block --}}
-{{#ifequal this.type "delimiter"}}
-    <hr>
-{{/ifequal}}
-
-{{!-- HTML raw block --}}
-{{#ifequal this.type "raw"}}
-    {{{this.data.html}}}
-{{/ifequal}}
-
-{{!-- quote block --}}
+{{!-- Blockquote block --}}
 {{#ifequal this.type "quote"}}
-    <figure class="my-4 px-4{{#ifequal this.data.alignment "center"}} text-center{{/ifequal}}">
-        <blockquote class="blockquote">
-            <p>{{this.data.text}}</p>
-        </blockquote>
-        <figcaption class="blockquote-footer mt-1">
-            {{this.data.caption}}
-        </figcaption>
-    </figure>
+<figure class="my-4 px-5{{#ifequal this.data.alignment "center"}} text-center{{/ifequal}}">
+    <blockquote class="blockquote blockquote-border">
+        <p>{{this.data.text}}</p>
+    </blockquote>
+    <figcaption class="blockquote-footer">
+        {{this.data.caption}}
+    </figcaption>
+</figure>
 {{/ifequal}}
-
-{{!-- image block --}}
-{{#ifequal this.type "image"}}
-    <img src="{{root}}{{this.data.file.url}}" class="img-fluid" alt="{{this.data.caption}}">
-{{/ifequal}}
-
-{{!-- table block --}}
+{{!-- Table block --}}
 {{#ifequal this.type "table"}}
-    <table class="table">
-        {{#each this.data.content}}
-            {{#if @first}}
-                <thead>
-                    <tr>
-                        {{#each this}}
-                        <th scope="col">{{this}}</th>
-                        {{/each}}
-                    </tr>
-                </thead>
-            {{else}}
-                <tbody>
-                    <tr>
-                        {{#each this}}
-                        <td>{{this}}</td>
-                        {{/each}}
-                    </tr>
-                </tbody>
-            {{/if}}
-        {{/each}}
-    </table>
+<table class="table table-bordered my-3">
+    {{#each this.data.content}}
+        <tbody>
+            <tr>
+                {{#each this}}
+                <td>{{this}}</td>
+                {{/each}}
+            </tr>
+        </tbody>
+    {{/each}}
+</table>
+{{/ifequal}}
+{{!-- Youtube block --}}
+{{#ifequal this.type "youtubeEmbed"}}
+<div class="youtube-wrapper">
+    <iframe src="https://www.youtube.com/embed/{{this.data.id}}?controls=0" frameborder="0" allowfullscreen="true"></iframe>
+</div>
 {{/ifequal}}

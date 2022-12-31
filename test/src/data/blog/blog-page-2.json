@@ -1,265 +1,233 @@
 {
   "page": 2,
-  "per_page": "3",
-  "prev_page": 1,
-  "next_page": 3,
-  "total_post": 14,
-  "total_pages": 5,
-  "display_author": true,
+  "perPage": "3",
+  "prevPage": 1,
+  "nextPage": 3,
+  "totalPost": 10,
+  "totalPages": 4,
+  "displayAuthor": true,
   "data": [
     {
-      "title": "Ukraine is the latest country to legalize bitcoin as the cryptocurrency slowly goes global",
-      "link": "ukraine-is-the-latest-country-to-legalize-bitcoin-as.html",
+      "title": "Thinking of going vegan? What you need to know first",
+      "link": "thinking-of-going-vegan-what-you-need-to-know-first.html",
       "author": {
-        "id": "bk1baa",
-        "name": "Peter Parker",
-        "avatar": "img/user/author-lybqnhew0wc.jpg"
+        "id": "tXeY2N",
+        "name": "Warren Wong",
+        "avatar": "img/user/author-85z9UC.jpg"
       },
-      "category": "Crypto",
+      "category": "Health",
       "tags": [
-        "economics",
-        "crypto",
-        "europe"
-      ],
-      "image": "img/user/image-post-01v41bpa71t7.jpg",
-      "blocks": [
-        {
-          "id": "V3T4SQqo4T",
-          "type": "paragraph",
-          "data": {
-            "text": "Ukraine is the fifth country in as many weeks to lay down some ground rules for the cryptocurrency market, a sign that governments around the world are realizing that&nbsp;bitcoin&nbsp;is here to stay.&nbsp;&nbsp;"
-          }
-        },
-        {
-          "id": "zwkd7AERS4",
-          "type": "paragraph",
-          "data": {
-            "text": "In a nearly unanimous vote, the Ukrainian Parliament&nbsp;adopted a law&nbsp;that legalizes and regulates cryptocurrency. The bill was set in motion in 2020 – and it now heads to the desk of President Volodymyr Zelensky.&nbsp;&nbsp;"
-          }
-        },
-        {
-          "id": "egpBK8yfCd",
-          "type": "paragraph",
-          "data": {
-            "text": "Until today, crypto in Ukraine has existed in a legal gray area."
-          }
-        },
-        {
-          "id": "RCu6ofUp80",
-          "type": "paragraph",
-          "data": {
-            "text": "Locals were allowed to buy and exchange virtual currencies, but companies and exchanges dealing in crypto were often under close watch by law enforcement."
-          }
-        },
-        {
-          "id": "bIDdmpObnt",
-          "type": "paragraph",
-          "data": {
-            "text": "According to the Kyiv Post, authorities have trended toward taking a combative stance when it comes to virtual cash, regarding it as a “scam,” raiding crypto-related businesses, and “often confiscating expensive equipment without any grounds.”"
-          }
-        },
-        {
-          "id": "atwlVoGCZm",
-          "type": "paragraph",
-          "data": {
-            "text": "In August, for example, the Security Service of Ukraine (SBU) blocked a network of what it called “clandestine cryptocurrency exchanges” running in the capital city of Kyiv. The SBU claimed these exchanges were facilitating money laundering and providing anonymity of transactions."
-          }
-        },
-        {
-          "id": "O8qgK9YDD1",
-          "type": "paragraph",
-          "data": {
-            "text": "The new legislation also spells out certain protections against fraud for those who own bitcoin and other cryptocurrencies, and in a first for the Verkhovna Rada, lawmakers have taken a stab at defining core terminology in the world of crypto. If signed by the president, virtual assets, digital wallets, and private keys are terms that will be enshrined in Ukrainian law."
-          }
-        },
-        {
-          "id": "AG5BLZKH-H",
-          "type": "paragraph",
-          "data": {
-            "text": "Unlike El Salvador’s move this week to adopt bitcoin as legal tender, Ukraine’s crypto law does not facilitate the rollout of bitcoin as a form of payment, nor does it put it on an equal footing with the hryvnia, the country’s national currency."
-          }
-        }
-      ],
-      "dateCreated": "October 19, 2021",
-      "dateModified": "April 22, 2022",
-      "timeCreated": "09:20 PM",
-      "timeModified": "09:50 PM"
-    },
-    {
-      "title": "Bitcoin ‘whales’ jump back into market during cryptocurrency’s rebound to $50,000",
-      "link": "bitcoin-whales-jump-back-into-market-during-cryptocurrencys.html",
-      "author": {
-        "id": "bk1baa",
-        "name": "Peter Parker",
-        "avatar": "img/user/author-lybqnhew0wc.jpg"
-      },
-      "category": "Crypto",
-      "tags": [
-        "economics",
-        "crypto"
+        "diet"
       ],
       "image": false,
+      "hidden": false,
       "blocks": [
         {
-          "id": "jUwHAvyB7D",
+          "id": "2cpiSZnuUH",
           "type": "paragraph",
           "data": {
-            "text": "Bitcoin’s biggest investors appear to be upping their positions as the price recovers. Cryptocurrency accounts holding roughly $50 million or more worth of&nbsp;bitcoin&nbsp;have steadily increased their buying since the end of June, according to new data from blockchain firm Chainalysis. "
+            "text": "The consumer shift to plant-based alternatives has changed fast food and grocery options, as Impossible Burger and Beyond Meat have become massive companies capitalizing on the trend. According to a 2017 study, as many as 6% of US consumers say they are vegan, compared to just 1% in 2014."
           }
         },
         {
-          "id": "YWktJC1ouW",
-          "type": "paragraph",
+          "id": "BgDHpatDWE",
+          "type": "quote",
           "data": {
-            "text": "That bullishness continued into late August as prices rebounded above $50,000."
+            "text": "I chose to follow a vegan diet partly for environmental reasons and partly for health reasons",
+            "caption": "Rebecca Roitman, a nutritional sciences at Cornell University",
+            "alignment": "left"
           }
         },
         {
-          "id": "wINECkfqZs",
+          "id": "jndALky6hN",
           "type": "paragraph",
           "data": {
-            "text": "“The bitcoin accumulated by recent large investors is related to the medium-term change in bitcoin price,” Philip Gradwell, chief economist at Chainalysis, told CNBC."
+            "text": "Like Roitman, many choose to go vegan for its health benefits. In fact, studies have found that similar to vegetarian diets, vegan diets have a lower risk of many chronic diseases, such as heart disease, type 2 diabetes, obesity and cancer, according to Sharon Palmer, a registered dietitian nutritionist and plant-based food and sustainability expert. Another main motivation is the fact that vegans have the lowest impact on the environment, according to Palmer. And yet others simply wish to follow a vegan lifestyle for ethical reasons."
           }
         },
         {
-          "id": "NTynZ4J2Q8",
-          "type": "paragraph",
-          "data": {
-            "text": "Bitcoin “whale” activity has been linked to price action this year. Those larger investors were a “driving force” in the market until late February, Gradwell said. As big investors acquire more digital assets, prices typically rise over 28 days. When they sell, prices fall, Chainalysis found."
-          }
-        },
-        {
-          "id": "g-i_QZV_1k",
-          "type": "paragraph",
-          "data": {
-            "text": "Whale activity has fluctuated with the digital asset’s volatility. While they were strong buyers to start the year, whales began selling off as prices briefly dropped in March and sold at the peak around April, according to the data."
-          }
-        },
-        {
-          "id": "EbDss-ZQcl",
-          "type": "paragraph",
-          "data": {
-            "text": "From late June through Aug. 22, those large investors acquired the equivalent of nearly $10 billion at Tuesday’s prices. Whale holdings are now back at February levels, according to the data firm."
-          }
-        },
-        {
-          "id": "uAXZXwwVdn",
-          "type": "paragraph",
-          "data": {
-            "text": "Those larger investors also tend to be long-term holders. Whales measured by Chainalysis tend to retain at least 75% of the bitcoin they buy, on average."
-          }
-        },
-        {
-          "id": "la8OeoK8RA",
-          "type": "paragraph",
-          "data": {
-            "text": "Bitcoin hit a three-month high&nbsp;this week, continuing a steady climb since mid-July. The value of the entire cryptocurrency market also crossed $2.2 trillion, after&nbsp;once again passing the $2 trillion mark&nbsp;earlier this month, according to data from Coinmarketcap.&nbsp;&nbsp;"
-          }
-        }
-      ],
-      "dateCreated": "October 19, 2021",
-      "dateModified": "April 22, 2022",
-      "timeCreated": "09:19 PM",
-      "timeModified": "09:49 PM"
-    },
-    {
-      "title": "Gold holds near 2-1/2-month high on prospects of Fed taper delay",
-      "link": "gold-holds-near-2-12-month-high-on-prospects-of-fed.html",
-      "author": {
-        "id": "bk1baa",
-        "name": "Peter Parker",
-        "avatar": "img/user/author-lybqnhew0wc.jpg"
-      },
-      "category": "Markets",
-      "tags": [
-        "economics",
-        "usa"
-      ],
-      "image": false,
-      "blocks": [
-        {
-          "id": "kMRci389Hb",
-          "type": "paragraph",
-          "data": {
-            "text": "Gold prices hovered on Monday below a 2-1/2-month peak after a disappointing U.S. jobs data signaled that the Federal Reserve could push back the timeline for tapering stimulus measures, bolstering bullion’s appeal as an inflation hedge.&nbsp;&nbsp;"
-          }
-        },
-        {
-          "id": "Zo5pDZfQAq",
+          "id": "Va5Fjzwunu",
           "type": "header",
           "data": {
-            "text": "Fundamentals",
+            "text": "A vegan diet is more than simply a “plant-based” diet",
             "level": 4
           }
         },
         {
-          "id": "4ULhJY9sCA",
+          "id": "bSVCxV4PPL",
           "type": "paragraph",
           "data": {
-            "text": "Spot gold&nbsp;was steady at $1,826.65 per ounce, as of 0048 GMT. In the previous session, prices hit a peak since June 16 at $1,833.80."
+            "text": "A vegan diet is much more stringent than flexitarian eating, or even vegetarianism. In fact, a vegan diet is 100% plant-based, meaning it’s devoid of all animal foods, including dairy (cheese, yogurt, milk, cream, butter); eggs; meat, poultry or seafood; and for many, honey, explained Palmer."
           }
         },
         {
-          "id": "S-TLkbIibe",
+          "id": "lCkJZTmp8f",
           "type": "paragraph",
           "data": {
-            "text": "U.S. gold futures&nbsp;eased 0.3% to $1,828.60."
+            "text": "A vegetarian diet excludes all animal flesh (meat, poultry, seafood) but allows for dairy, eggs and honey. Flexitarian eaters focus on plant-based foods but may still include animal-based foods in limited amounts, including meat, poultry and fish, as well as dairy and eggs."
           }
         },
         {
-          "id": "dXliXOLyUh",
+          "id": "Tz3KHmPEro",
           "type": "paragraph",
           "data": {
-            "text": "Labor Department data showed on Friday U.S. nonfarm payrolls increased by 235,000 jobs last month, below economists’ expectations of 728,000, as hiring in the leisure and hospitality sector stalled amid a resurgence in Covid-19 infections."
-          }
-        },
-        {
-          "id": "bgLt-hcLSf",
-          "type": "paragraph",
-          "data": {
-            "text": "The data on Friday pushed the dollar index to its lowest level since Aug. 4."
-          }
-        },
-        {
-          "id": "LF3QiT3Vuv",
-          "type": "paragraph",
-          "data": {
-            "text": "Fed Chair Jerome Powell had hinted last month that reaching full employment was a pre-requisite for the central bank to start paring back its asset purchases."
-          }
-        },
-        {
-          "id": "uEf5YjMxfg",
-          "type": "paragraph",
-          "data": {
-            "text": "Gold is considered a hedge against inflation and currency debasement, caused by massive amounts of stimulus measures."
-          }
-        },
-        {
-          "id": "SbLJIOWvqg",
-          "type": "paragraph",
-          "data": {
-            "text": "Euro zone business activity remained strong last month, despite fears about the delta variant of the coronavirus and widespread supply chain issues, IHS Markit’s survey showed, suggesting the bloc’s economy could be back to pre-Covid levels by the year-end."
-          }
-        },
-        {
-          "id": "QlvLWDQKON",
-          "type": "paragraph",
-          "data": {
-            "text": "Physical gold demand across top Asian hubs was largely muted last week as a rebound in domestic prices kept buyers at bay, while dealers in India pinned their hopes on an upcoming festival season to bring in more customers."
-          }
-        },
-        {
-          "id": "11Wumyj6Is",
-          "type": "paragraph",
-          "data": {
-            "text": "Speculators raised their net long positions in COMEX gold and silver in the week ended Aug. 31, data from the U.S. Commodity Futures Trading Commission showed."
+            "text": "Though some people, including food bloggers, may use the terms “plant-based” and “vegan” interchangeably, plant-based is an “umbrella term” and does not equate to being vegan, added Kimberlain, who is also a national spokesperson for the Academy of Nutrition and Dietetics. For example, while all vegans are plant-based, not all plant-based eaters are necessarily vegan. “Plant-based eaters may have a small portion of cheese or other animal protein,” Kimberlain said."
           }
         }
       ],
-      "dateCreated": "October 19, 2021",
-      "dateModified": "April 22, 2022",
-      "timeCreated": "09:18 PM",
-      "timeModified": "09:48 PM"
+      "dateCreated": "December 29, 2022",
+      "timeCreated": "04:08 PM"
+    },
+    {
+      "title": "A defiant move to the Norwegian Arctic",
+      "link": "a-defiant-move-to-the-norwegian-arctic.html",
+      "author": {
+        "id": "tXeY2N",
+        "name": "Warren Wong",
+        "avatar": "img/user/author-85z9UC.jpg"
+      },
+      "category": "Travel",
+      "tags": [
+        "europe"
+      ],
+      "image": false,
+      "hidden": false,
+      "blocks": [
+        {
+          "id": "pmNKQecOWo",
+          "type": "paragraph",
+          "data": {
+            "text": "Two female polar explorers have been living in a tiny trappers’ cabin on Svalbard in an effort to rouse a global dialogue on climate change and inspire action."
+          }
+        },
+        {
+          "id": "sFyYAuHFS1",
+          "type": "paragraph",
+          "data": {
+            "text": "It was late July 2020 and I was in sunny Los Angeles while Sunniva Sorby and Hilde Fålun Strøm were in icy Longyearbyen, a town on the remote Norwegian archipelago of Svalbard. At 7,164km apart, this is a distance that normally entails at least a 30-hour odyssey by plane and boat, with a stopover in Oslo or Tromsø."
+          }
+        },
+        {
+          "id": "RGhUA8lE5D",
+          "type": "paragraph",
+          "data": {
+            "text": "At this time of year, the Arctic harbour is usually clogged with cruise ships, tourists flocking like kittiwakes. But the coronavirus pandemic changed all that. Save for a few Danish and Norwegians, it was shockingly empty, the women told me."
+          }
+        },
+        {
+          "id": "6dat2NF3IB",
+          "type": "quote",
+          "data": {
+            "text": "Because being so isolated as we are here in the Arctic at Bamsebu heightens our connection to all things. It elevates our ability to feel, listen and to understand our place in this world. Our energy is channelled into aligning our unique and powerful role in this web of life and answering the question: what can I do to give back?",
+            "caption": "Sunniva Sorby, polar explorer",
+            "alignment": "left"
+          }
+        },
+        {
+          "id": "teCplRH-pi",
+          "type": "image",
+          "data": {
+            "file": {
+              "url": "img/user/image-post-FK69DQ.webp"
+            },
+            "caption": "Image credit: Hearts in the Ice"
+          }
+        },
+        {
+          "id": "_iMTq1HcI0",
+          "type": "paragraph",
+          "data": {
+            "text": "“I've been living here for 25 years,” Strøm told me over Zoom. “It’s supposed to be high season and we have two ships up here.”"
+          }
+        },
+        {
+          "id": "Uw-1Ky2tl7",
+          "type": "paragraph",
+          "data": {
+            "text": "Sorby and Strøm were in Longyearbyen for a brief visit during a daunting adventure. For the previous 10 months, the two had been stuck in place, isolated like many of the rest of us. Only they’d done so with purpose and in extreme conditions – holed up in a tiny trappers’ cabin on the edge of the Arctic Ocean, 140km from Longyearbyen."
+          }
+        }
+      ],
+      "dateCreated": "December 29, 2022",
+      "timeCreated": "04:03 PM"
+    },
+    {
+      "title": "The Bidens make an island escape ahead of consequential 2024 announcement",
+      "link": "the-bidens-make-an-island-escape-ahead-of-consequential.html",
+      "author": {
+        "id": "tXeY2N",
+        "name": "Warren Wong",
+        "avatar": "img/user/author-85z9UC.jpg"
+      },
+      "category": "Politics",
+      "tags": [
+        "biden",
+        "usa"
+      ],
+      "image": false,
+      "hidden": false,
+      "blocks": [
+        {
+          "id": "dblUd0TQp8",
+          "type": "paragraph",
+          "data": {
+            "text": "President Joe Biden this week returns to St. Croix, one of his and first lady Jill Biden’s beloved vacation spots, seeking a final opportunity for rest before what is expected to be a contentious 2023 and reelection run."
+          }
+        },
+        {
+          "id": "Mxf-xaZQmc",
+          "type": "paragraph",
+          "data": {
+            "text": "As Biden unwinds in a familiar spot – the first couple have visited the US Virgin Islands for more than a dozen years, vacationing there approximately ten times since the mid-2000s – the work on his path forward intensifies back in a frigid Washington, DC. Advisers are already preparing the president’s annual State of the Union address, typically delivered in late January or early February, viewing the speech as an opportunity to lay down the stakes and themes that Biden could adopt on the campaign trail."
+          }
+        },
+        {
+          "id": "m2IAFBXfIJ",
+          "type": "paragraph",
+          "data": {
+            "text": "The first couple arrived in St. Croix on Tuesday, along with family members, a gathering of the tight-knit clan who, according to several people with knowledge of recent conversations who have spoken to CNN, have now pledged support for another White House run by Biden. Senior administration officials once viewed this week’s tropical escape as a crucial juncture that would play a major part in deciding his political future, and – while the president does still plan to mull with his family the pros and cons of mounting a reelection bid – people who have discussed the matter with him lately say the decision is essentially made."
+          }
+        },
+        {
+          "id": "cqO75iyf9I",
+          "type": "youtubeEmbed",
+          "data": {
+            "url": "https://www.youtube.com/watch?v=n1V1GPndCMU",
+            "id": "n1V1GPndCMU"
+          }
+        },
+        {
+          "id": "Lct5C4saBK",
+          "type": "header",
+          "data": {
+            "text": "Privacy, please",
+            "level": 4
+          }
+        },
+        {
+          "id": "R2CSXs1ybo",
+          "type": "paragraph",
+          "data": {
+            "text": "In 2014, Joe and Jill Biden enjoyed their time on the island so much, they visited St. Croix twice – once to ring in the new year and again for a weekend in March, a quick getaway trip not on the then-vice president’s official schedule."
+          }
+        },
+        {
+          "id": "ubHBWjBO-7",
+          "type": "paragraph",
+          "data": {
+            "text": "In 2015, the couple again passed the week after Christmas there, after deciding he would not run for the White House."
+          }
+        },
+        {
+          "id": "ZkL88L0c6-",
+          "type": "paragraph",
+          "data": {
+            "text": "In 2016, Bidens spent the waning days of his vice presidency relaxing on St. Croix, ahead of Donald Trump’s ascension to the White House."
+          }
+        }
+      ],
+      "dateCreated": "December 29, 2022",
+      "timeCreated": "03:56 PM"
     }
   ]
 }

@@ -5,17 +5,14 @@
   "description": "This is starter template for using Blockit Builder",
   "private": true,
   "scripts": {
-    "build": "gulp -S --f ./node_modules/blockit-builder/index.mjs build",
-    "blockit": "gulp -S --f ./node_modules/blockit-builder/index.mjs blockit"
+    "build": "node ./node_modules/blockit-builder/blockit.js --build",
+    "blockit": "node ./node_modules/blockit-builder/blockit.js"
   },
   "browserslist": [
     "last 2 years"
   ],
   "author": "mudza09",
   "license": "ISC",
-  "devDependencies": {
-    "gulp": "4.0.2"
-  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.0.0",
     "bigger-picture": "0.2.1",

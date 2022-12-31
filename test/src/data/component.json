@@ -3,16 +3,12 @@
     {
       "slides": [
         {
-          "id": "ZvnTGB",
-          "text": "<div class=\"carousel-item bg-primary\">\n    <div class=\"carousel-caption d-flex align-items-center\">\n        <div class=\"container text-light\">\n            <div class=\"row row-cols-1 row-cols-md-2 gx-md-5 align-items-md-center\">\n                <div class=\"order-first\">\n                    <h2 class=\"fw-bold\">First slide label</h2>\n                    <p>Nostrum exercitationem ullam corporis suscipit labor samnisi ute aliquid ea commodi fugiat consequatur reprehenderit.</p>\n                    <a href=\"#\" class=\"btn btn-light\">Learn more<i class=\"fas fa-angle-right fa-xs ms-1\"></i></a>\n                </div>\n                <div class=\"order-last d-none d-md-block\">\n                    <img src=\"img/blockit/in-blob-1.svg\" class=\"d-block w-100\" alt=\"slide\">\n                </div>\n            </div>\n        </div>\n    </div>\n</div>"
+          "id": "mhngpx",
+          "text": "<div class=\"carousel-item bg-secondary\">\n    <div class=\"carousel-caption d-flex align-items-center\">\n        <div class=\"container text-light\">\n            <div class=\"row row-cols-1 row-cols-md-2 gx-md-5 align-items-md-center\">\n                <div class=\"order-first\">\n                    <h2 class=\"fw-bold\">First slide label</h2>\n                    <p>Nostrum exercitationem ullam corporis suscipit labor samnisi ute aliquid ea commodi fugiat consequatur reprehenderit.</p>\n                    <a href=\"#\" class=\"btn btn-light\">Learn more<i class=\"fas fa-angle-right fa-xs ms-1\"></i></a>\n                </div>\n                <div class=\"order-last d-none d-md-block\">\n                    <img src=\"img/blockit/in-blob-2.svg\" class=\"d-block w-100\" alt=\"slide\">\n                </div>\n            </div>\n        </div>\n    </div>\n</div>"
         },
         {
-          "id": "nOscPP",
-          "text": "<div class=\"carousel-item bg-secondary\">\n    <div class=\"carousel-caption d-flex align-items-center\">\n        <div class=\"container text-light\">\n            <div class=\"row row-cols-1 row-cols-md-2 gx-md-5 align-items-md-center\">\n                <div class=\"order-first\">\n                    <h2 class=\"fw-bold\">Second slide label</h2>\n                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n                    <a href=\"#\" class=\"btn btn-light\">Learn more<i class=\"fas fa-angle-right fa-xs ms-1\"></i></a>\n                </div>\n                <div class=\"order-last d-none d-md-block\">\n                    <img src=\"img/blockit/in-blob-2.svg\" class=\"d-block w-100\" alt=\"slide\">\n                </div>\n            </div>\n        </div>\n    </div>\n</div>"
-        },
-        {
-          "id": "8wlmUO",
-          "text": "<div class=\"carousel-item bg-danger\">\n    <div class=\"carousel-caption d-flex align-items-center\">\n        <div class=\"container text-light\">\n            <div class=\"row row-cols-1 row-cols-md-2 gx-md-5 align-items-md-center\">\n                <div class=\"order-first\">\n                    <h2 class=\"fw-bold\">Third slide label</h2>\n                    <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur vel illum qui dolorem.</p>\n                    <a href=\"#\" class=\"btn btn-light\">Learn more<i class=\"fas fa-angle-right fa-xs ms-1\"></i></a>\n                </div>\n                <div class=\"order-last d-none d-md-block\">\n                    <img src=\"img/blockit/in-blob-3.svg\" class=\"d-block w-100\" alt=\"slide\">\n                </div>\n            </div>\n        </div>\n    </div>\n</div>"
+          "id": "2LrCM3",
+          "text": "<div class=\"carousel-item bg-danger\">\n    <div class=\"carousel-caption d-flex align-items-center\">\n        <div class=\"container text-light\">\n            <div class=\"row row-cols-1 row-cols-md-2 gx-md-5 align-items-md-center\">\n                <div class=\"order-first\">\n                    <h2 class=\"fw-bold\">Second slide label</h2>\n                    <p>Nostrum exercitationem ullam corporis suscipit labor samnisi ute aliquid ea commodi fugiat consequatur reprehenderit.</p>\n                    <a href=\"#\" class=\"btn btn-light\">Learn more<i class=\"fas fa-angle-right fa-xs ms-1\"></i></a>\n                </div>\n                <div class=\"order-last d-none d-md-block\">\n                    <img src=\"img/blockit/in-blob-2.svg\" class=\"d-block w-100\" alt=\"slide\">\n                </div>\n            </div>\n        </div>\n    </div>\n</div>"
         }
       ]
     },
@@ -50,6 +46,7 @@
     "siteLogo": {
       "exist": true,
       "enabled": true,
+      "index": "0",
       "logo": {
         "src": "img/user/footer-logo-5vqlhba3vbl.svg",
         "width": "34",
@@ -58,7 +55,7 @@
     }
   },
   "contactMap": {
-    "email": "halo@company.com",
+    "email": "hello@company.com",
     "mapIframe": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10600.5248164368!2d144.95966577016594!3d-37.81707816290683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sid!4v1645280096951!5m2!1sen!2sid\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>",
     "mapSrc": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10600.5248164368!2d144.95966577016594!3d-37.81707816290683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sid!4v1645280096951!5m2!1sen!2sid"
   },

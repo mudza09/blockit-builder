@@ -1,87 +1,212 @@
-// required plugins
-import fs from 'fs'
+// Required plugins
+import fs from 'fs';
+import yaml from 'js-yaml';
+import path from 'path';
+import sharp from 'sharp';
+import svgo from 'svgo';
 
 export default class Utils {
-    constructor(gulpPlugin) {
-        Object.assign(this, gulpPlugin)
-    }
+	// Create directory if not exist function
+	createDirectory = dir => !fs.existsSync(dir) && fs.mkdirSync(dir);
 
-    //app info
-    appInfo = (done) => {
-        const packageInfo = JSON.parse(fs.readFileSync('package.json', 'utf-8'))
-        console.log(`\n${packageInfo.title} v${packageInfo.version} running on Node.js ${process.version}\n`)
-        if(process.argv.pop() == 'blockit') {
-            console.log('  builder url:    http://localhost:3001')
-            console.log('  preview url:    http://localhost:3000\n')
-            console.log(`${this.logTime(new Date())} - Waiting for changes...`)
-        }
-        done()
-    }
+	// General load files function
+	loadFiles = (dir, ignore, response) => {
+		if (!response) {
+			response = [];
+		}
 
-    // log time function
-    logTime = (time) => {
-        return `[${new Intl.DateTimeFormat('en', { hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24' }).format(time)}]`
-    }
+		if (!ignore) {
+			ignore = [];
+		}
 
-    // error handler
-    errHandler = (msg, task) => {
-        switch(msg.name) {
-            case task.buildHtml.name:
-                const partialIntro = String(msg.error).split(' ').slice(5, -5).join(' ')
-                const partialMissing = String(msg.error).split(' ').slice(5)[2]
-                console.log(`${this.logTime(new Date())} - ${partialIntro == 'The partial' ? `HTML compile a problem occurred: The partial ${partialMissing} could not be found` : `HTML compile a problem occurred: ${msg.error}`}`)
-                break
-            case task.buildCss.name:
-                const cssErr = String(msg.error.formatted).split(' ').slice(1, -4).join(' ')
-                console.log(`${this.logTime(new Date())} - CSS compile a problem occurred: ${cssErr}`)
-                break
-            case task.buildJs.name:
-                console.log(`${this.logTime(new Date())} - JS compile a problem occurred: ${msg.error}`)
-                break
-            case task.buildStatic.name:
-                console.log(`${this.logTime(new Date())} - Static assets deliver a problem occurred: ${msg.error}`)
-                break
-            case task.buildImg.name:
-                console.log(`${this.logTime(new Date())} - Image optimization a problem occurred: ${msg.error}`)
-                break
-            case task.name:
-                console.log(`${this.logTime(new Date())} - a problem occurred: ${msg.error}`)
-                break
-        }
-    }
+		fs.readdirSync(dir).forEach(file => {
+			if (fs.statSync(`${dir}/${file}`).isDirectory()) {
+				let ign = false;
+				ignore.forEach(ignoreList => {
+					if (ignoreList === file) {
+						ign = true;
+					}
+				});
+				if (!ign) {
+					response.concat(this.loadFiles(`${dir}/${file}`, ignore, response));
+				}
+			} else {
+				response.push(`${dir}/${file}`);
+			}
+		});
+		return response;
+	};
 
-    // hook search condition
-    hookSearch = (done) => {
-        if(fs.existsSync('../../src/hooks/blog/search-post.hbs') && fs.existsSync('../../src/hooks/blog/search-result.hbs')) {
-            // if custom hooks is available
-            hookSearchWrite('../../src/hooks/blog/search-post.hbs', '../../src/hooks/blog/search-result.hbs')
-            done()
-        } else {
-            // if custom hooks is not available
-            hookSearchWrite('hooks/blog/search-post.hbs', 'hooks/blog/search-result.hbs')
-            done()
-        }
-    }
+	// Optimize image condition
+	optimizeImg = (file, destFolder) => {
+		const svg = svgo.optimize;
 
-    // hook search process
-    hookSearchWrite = (pathPost, pathResult) => {
-        const postFormat = fs.readFileSync(pathPost, 'utf8')
-        const resultFormat = fs.readFileSync(pathResult, 'utf8')
-        
-        fs.readFile('../../src/assets/js/utilities/blog.js', 'utf8', (err, file) => {
-            const rawResultFormat = /(?<=notFoundDiv.innerHTML\s=\s\`)([^`]*)(?=\`)/
-            const rawPostFormat = /(?<=return\s\`)([^`]*)(?=\`)/g
+		switch (path.extname(file)) {
+			case '.jpg':
+			case '.jpeg': {
+				sharp(file)
+					.jpeg({mozjpeg: true})
+					.toFile(`${destFolder}/${path.basename(file)}`);
+				break;
+			}
 
-            const processedResultFormat = file.replace(rawResultFormat, resultFormat)
-            const processedPostFormat = processedResultFormat.replace(rawPostFormat, postFormat)
+			case '.png': {
+				sharp(file)
+					.png({quality: 80})
+					.toFile(`${destFolder}/${path.basename(file)}`);
+				break;
+			}
 
-            fs.writeFileSync('../../src/assets/js/utilities/blog.js', processedPostFormat)
-        })
-    }
+			case '.gif': {
+				sharp(file)
+					.gif({reoptimize: true})
+					.toFile(`${destFolder}/${path.basename(file)}`);
+				break;
+			}
 
-    // hook preview process for add on sections preview
-    hookSectionsPreview = () => {
-        return this.src('../../src/hooks/sections/previews/*')
-        .pipe(this.dest('./views/assets/img/sections'))
-    }
+			case '.webp': {
+				sharp(file)
+					.webp({lossless: true})
+					.toFile(`${destFolder}/${path.basename(file)}`);
+				break;
+			}
+
+			case '.svg': {
+				const svgString = fs.readFileSync(file, 'utf8');
+				fs.writeFileSync(`${destFolder}/${path.basename(file)}`, svg(svgString).data);
+				break;
+			}
+			// No Default
+		}
+	};
+
+	// Log title function
+	logHeading = () => {
+		const packageInfo = JSON.parse(fs.readFileSync('./node_modules/blockit-builder/package.json', 'utf-8'));
+		console.log(`\n${packageInfo.title} v${packageInfo.version} running on Node.js ${process.version}\n`);
+		if (process.argv.pop() !== '--build') {
+			console.log('    builder url:    \x1b[35mhttp://localhost:3001   \x1b[0m');
+			console.log('    preview url:    \x1b[35mhttp://localhost:3000\n \x1b[0m');
+			console.log(`${this.logTime(new Date())} - Waiting for changes...`);
+		}
+	};
+
+	// Log message function
+	logMessage = (status, text) => {
+		const packageInfo = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+
+		if (status === 'begin') {
+			console.log('\x1b[33mProcessing...\x1b[0m');
+		}
+
+		if (status === 'end') {
+			process.stdout.moveCursor(0, -1);
+			console.log(`${this.logTime(new Date())} - ${text}`);
+		}
+
+		if (status === 'completed') {
+			console.log(`\n\x1b[7m\x1b[32m DONE \x1b[0m\x1b[32m Project "${packageInfo.title}" ready.\x1b[0m\n`);
+		}
+	};
+
+	// Log time function
+	logTime = time => `\x1b[36m[${new Intl.DateTimeFormat('en', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'}).format(time)}]\x1b[0m`;
+
+	// Frontmatter parse function
+	frontmatter = (string, opts) => {
+		const pattern = /(^-{3}(?:\r\n|\r|\n)([\w\W]*?)-{3}(?:\r\n|\r|\n))?([\w\W]*)*/;
+
+		opts = opts || {};
+
+		const parsed = {
+			data: null,
+			content: '',
+		};
+
+		const matches = string.match(pattern);
+
+		if (matches[2] !== undefined) {
+			const parse = opts.safeLoad ? yaml.safeLoad : yaml.load;
+			parsed.data = parse(matches[2]) || {};
+		}
+
+		if (matches[3] !== undefined) {
+			parsed.content = matches[3];
+		}
+
+		return parsed;
+	};
+
+	// Makes sure build process is only triggered once
+	debounce = (func, timeout = 800) => {
+		let timer;
+		return (...args) => {
+			clearTimeout(timer);
+			timer = setTimeout(() => {
+				func.apply(this, args);
+			}, timeout);
+		};
+	};
+
+	// Trim string function
+	trimString(string) {
+		const cut = string.indexOf(' ', 150);
+		if (cut === -1) {
+			return string;
+		}
+
+		return string.substring(0, cut) + ' ...';
+	}
+
+	// Compare object function
+	compareObj = otherArray => function (current) {
+		return otherArray.filter(other => other.name === current.name
+                    && other.email === current.email
+                    && other.role === current.role
+                    && other.avatar === current.avatar).length === 0;
+	};
+
+	// Check hooks folder is exist
+	checkHook() {
+		const isExist = fs.readdirSync('./src/hooks', 'utf-8').length !== 0;
+		return isExist;
+	}
+
+	// Hook search condition
+	hookSearch = () => {
+		if (fs.existsSync('./src/hooks/blog/search-post.hbs') && fs.existsSync('./src/hooks/blog/search-result.hbs')) {
+			// If custom hooks is available
+			this.hookSearchWrite('./src/hooks/blog/search-post.hbs', './src/hooks/blog/search-result.hbs');
+		} else {
+			// If custom hooks is not available
+			this.hookSearchWrite('./node_modules/blockit-builder/hooks/blog/search-post.hbs', './node_modules/blockit-builder/hooks/blog/search-result.hbs');
+		}
+	};
+
+	// Hook search process
+	hookSearchWrite = (pathPost, pathResult) => {
+		const postFormat = fs.readFileSync(pathPost, 'utf8');
+		const resultFormat = fs.readFileSync(pathResult, 'utf8');
+
+		fs.readFile('./src/assets/js/utilities/blog.js', 'utf8', (err, file) => {
+			const rawResultFormat = /(?<=notFoundDiv.innerHTML\s=\s`)([^`]*)(?=`)/;
+			const rawPostFormat = /(?<=return\s`)([^`]*)(?=`)/g;
+
+			const processedResultFormat = file.replace(rawResultFormat, resultFormat);
+			const processedPostFormat = processedResultFormat.replace(rawPostFormat, postFormat);
+
+			fs.writeFileSync('./src/assets/js/utilities/blog.js', processedPostFormat);
+		});
+	};
+
+	// Hook preview process for add on sections preview
+	hookSectionsPreview = (event, fileName) => {
+		if (event === 'add') {
+			fs.copyFileSync(fileName, `./node_modules/blockit-builder/assets/img/sections/${path.basename(fileName)}`);
+		}
+
+		if (event === 'unlink') {
+			fs.unlinkSync(`./node_modules/blockit-builder/assets/img/sections/${path.basename(fileName)}`);
+		}
+	};
 }

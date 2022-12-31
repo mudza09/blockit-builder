@@ -1,3 +1,3 @@
-const bs = ___browserSync___
+const bs = window.___browserSync___;
 
-export { bs as default }
+export {bs as default};

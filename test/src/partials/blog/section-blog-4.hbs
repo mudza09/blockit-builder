@@ -1,15 +1,15 @@
-{{#each blog-page-4.data}}
+{{#each blogPage4.data}}
 <article class="card mb-4">
     {{#if image}}
     <img src="{{root}}{{image}}" class="card-img-top" alt="{{title}}">
     {{/if}}
     <div class="card-body blog-card p-3 p-md-4">
         <h3 class="fw-bold">
-            <a href="{{root}}/blog/{{link}}" class="link-dark text-decoration-none">{{title}}</a>
+            <a href="{{root}}blog/{{link}}" class="link-dark text-decoration-none">{{title}}</a>
         </h3>
-        <p>{{blocks.[0].data.text}}</p>
+        <p>{{{blocks.[0].data.text}}}</p>
         <div class="blog-author d-flex align-items-center">
-            {{#if @root.blog-page-4.display_author}}
+            {{#if @root.blogPage4.displayAuthor}}
             <img class="rounded-circle me-1" src="{{root}}{{author.avatar}}" alt="author" width="32" height="32">
             <small class="text-muted">
                 {{author.name}}<span class="mx-1">•</span>
@@ -22,7 +22,7 @@
     </div>
     <div class="card-footer blog-footer d-flex justify-content-between align-items-center px-3 px-md-4 py-2">
         <span class="badge bg-primary">{{category}}</span>
-        <a href="{{root}}/blog/{{link}}" class="btn btn-link text-decoration-none p-0">Read more<i class="fas fa-angle-right fa-xs ms-1"></i></a>
+        <a href="{{root}}blog/{{link}}" class="btn btn-link text-decoration-none p-0">Read more<i class="fas fa-angle-right fa-xs ms-1"></i></a>
     </div>
 </article>
 {{/each}}

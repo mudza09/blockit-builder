@@ -1,0 +1,44 @@
+// blokit base variable
+$base-container-width:                     1280px;
+$base-container-color:                     #fff;
+
+$base-default-color:                       #fff;
+$base-muted-color:                         #f8f8f8;
+$base-primary-color:                       #1e87f0;
+$base-secondary-color:                     #909090;
+
+$base-section-default-color:               $base-default-color;
+$base-section-muted-color:                 $base-muted-color;
+$base-section-primary-color:               $base-primary-color;
+$base-section-secondary-color:             $base-secondary-color;
+
+$base-border-color:                        #e8e8e8;
+$base-border-color-2:                      rgba(30, 135, 240, .09);
+$base-border-width:                        1px;
+$base-border-width-2:                      2px;
+$base-border-radius:                       5px;
+$base-border-radius-2:                     12px;
+
+$base-link:                                #1e87f0;
+$base-link-hover:                          #0f6ecd;
+
+$base-font-family:                         'Nunito', sans-serif;
+$base-font-weight:                         normal;
+$base-font-size:                           17px;
+$base-font-color:                          #666;
+$base-font-small:                          0.824rem;
+
+$base-text-lead-font-weight:               normal;
+$base-text-lead-size:                      1.294rem;
+$base-text-lead-line-height:               1.5;
+$base-text-lead-color:                     #727272;
+
+$base-text-primary-color:                  $base-primary-color;
+$base-text-secondary-color:                #222;
+$base-text-success-color:                  #32d296;
+$base-text-warning-color:                  #faa05a;
+$base-text-danger-color:                   #f0506e;
+
+$base-heading-font:                        $base-font-family;
+$base-heading-weight:                      700;
+$base-heading-color:                       #333;

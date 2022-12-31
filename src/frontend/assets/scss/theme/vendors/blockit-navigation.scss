@@ -1,0 +1,135 @@
+.blockit-nav {
+    .nav-arrange {
+        padding: 30px 30px 10px 30px;
+        border-radius: $base-border-radius;
+        background-color: #f8f8f8;
+    }
+    .nav-placeholder {
+        text-align: center;
+        img {
+            margin-top: 46px;
+        }
+    }
+    .wrap-nav {
+        color: #666;
+        background: $base-default-color;
+        border-radius: $base-border-radius;
+        border-left: 1px solid lighten($base-heading-color, 74%);
+        border-bottom: 1px solid lighten($base-heading-color, 74%);
+        font-size: 14px;
+        font-weight: bold;
+        padding: 14px;
+        position: relative;
+        cursor: move;
+        .uk-button-text {
+            line-height: 1;
+            color: lighten($base-primary-color, 25%);
+            &:nth-child(3) {
+                content: "";
+                border-left: 1px solid lighten($base-heading-color, 65%);
+                margin-left: 10px;
+                padding-left: 12px;
+            }
+            &:hover {
+                color: darken($base-muted-color, 40%);
+            }
+        }
+        i {
+            font-weight: normal;
+            position: relative;
+            top: 2px;
+        }
+        .btn-delete {
+            color: lighten($base-primary-color, 30%);
+            font-weight: normal;
+            position: relative;
+            top: 2px;
+            &:hover {
+                color: $base-text-danger-color;
+                text-decoration: none;
+            }
+        }
+        i {
+            color: lighten($base-primary-color, 30%);
+        }
+    }
+    .as-parent {
+        &.uk-list>li:nth-child(n+2) {
+            margin-top: 8px;
+        }
+    }
+    .as-child {
+        margin-top: 8px;
+        &.uk-list>li:nth-child(n+2) {
+            margin-top: 8px;
+        }
+    }
+    .parent-nav {
+        border-color: lighten($base-primary-color, 41%);
+        clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+        &::after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 10px;
+            height: 10px;
+            background-color: lighten($base-primary-color, 39%);
+            top: 0;
+            right: 0;
+            border-bottom-left-radius: 4px;
+        }
+        
+    }
+    .text-nav {
+        cursor: default;
+        margin-top: 6px;
+    }
+    .uk-position-top-right {
+        margin-top: 13px;
+        margin-right: 14px;
+    }
+}
+
+.drag-nav {
+    .wrap-nav {
+        color: $base-primary-color;
+        background: lighten($base-primary-color, 45%);
+        border: 2px dashed lighten($base-primary-color, 30%);
+        border-radius: $base-border-radius;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 12px;
+        .uk-button-text {
+            display: none;
+        }
+        .btn-delete {
+            display: none;
+        }
+    }
+    .as-child {
+        margin-top: 8px;
+        &.uk-list>li:nth-child(n+2) {
+            margin-top: 8px;
+        }
+    }
+    .parent-nav {
+        clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+        &::after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 10px;
+            height: 10px;
+            background-color: lighten($base-primary-color, 30%);
+            top: 0;
+            right: 0;
+            border-bottom-left-radius: 4px;
+        }
+        i {
+            color: $base-primary-color;
+        }
+    }
+    .text-nav {
+        margin-top: 6px;
+    }
+}

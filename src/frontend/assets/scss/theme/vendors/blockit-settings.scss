@@ -1,0 +1,118 @@
+.blockit-settings {
+    .setting-favicon img {
+        height: 42px;
+        padding: 8px;
+        border: 2px dashed #e6e6e6;
+        border-radius: 8px;
+    }
+    .setting-touch-icon img {
+        height: 92px;
+        padding: 10px;
+        border: 2px dashed #e6e6e6;
+        border-radius: 8px;
+    }
+    .setting-colors {
+        .clr-field button {
+            width: 18px;
+            height: 18px;
+            left: 12px;
+            right: auto;
+        }
+        .clr-field input {
+            cursor: pointer;
+            padding-left: 40px;
+        }
+        .clr-field button {
+            background-image: none;
+            border-radius: 50px;
+        }
+        .clr-picker {
+            border-radius: $base-border-radius;
+        }
+    }
+    .setting-profile {
+        img {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            padding: 0px;
+        }
+        &.spinner {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            padding: 0px;
+            background-color: $base-default-color;
+            img {
+                width: 24px;
+                height: 24px;
+                position: relative;
+                top: 19px;
+                left: 20px;
+            }
+        }
+        .uk-button {
+            background: $base-secondary-color;
+            width: 34px;
+            height: 34px;
+            &.ri-camera-fill::before,
+            &.ri-error-warning-fill::before {
+                position: relative;
+                left: -1px;
+            }
+        }
+    }
+    .upload-author-btn {
+        width: 108%;
+    }
+    .delete-slide-btn {
+        background: $base-secondary-color;
+        width: 30px;
+        font-size: 10px;
+        padding: 4px 12px 5px 12px;
+        &.fas::before {
+            position: relative;
+        }
+        &.fa-trash-alt::before {
+            right: 1px;
+        }
+        &:hover {
+            background: $base-text-danger-color;
+        }
+    }
+    .uk-form-custom input[type="file"] {
+        font-size: 0;
+    }
+    .setting-label-category {
+        font-size: 14px;
+        background-color: lighten($base-primary-color, 42%);
+        color: $base-primary-color;
+        margin: 4px 6px 4px 0;
+        padding: 8px 13px 8px 16px;
+        .uk-button-text {
+            color: lighten($base-primary-color, 25%);
+            margin-left: 12px;
+        }
+    }
+    .blog {
+        .small-label {
+            font-size: 0.875rem;
+        }
+    }
+    .authors-form-wrap {
+        .uk-form-stacked {
+            width: 920px;
+            border: 2px dashed #e6e6e6;
+            border-radius: 8px;
+            padding: 20px 20px 20px 0;
+            position: relative;
+            right: -15px;
+            &.uk-margin {
+                margin-bottom: 30px;
+            }
+        }
+    }
+    .author-pic-width {
+        width: 90px;
+    }
+}

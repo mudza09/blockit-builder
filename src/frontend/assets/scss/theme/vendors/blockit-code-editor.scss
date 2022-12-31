@@ -1,0 +1,34 @@
+.blockit-code-editor {
+    background-color: #1f2430;
+    .ce-toolbar {
+        display: none;
+    }
+    .ce-block__content {
+        margin-left: -11px;
+        max-width: 105%;
+    }
+    .codex-editor--narrow .codex-editor__redactor {
+        margin-right: 0;
+    }    
+    .cdx-block {
+        margin-bottom: 25px;
+        padding: 0;
+    }
+    .CodeMirror-hscrollbar::-webkit-scrollbar {
+        height: 6px;
+    } 
+    .CodeMirror-vscrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .CodeMirror-hscrollbar::-webkit-scrollbar-thumb {
+        background-color: lighten(#1f2430, 30%);
+        border-radius: 6px;
+    }
+    .CodeMirror-vscrollbar::-webkit-scrollbar-thumb {
+        background-color: lighten(#1f2430, 30%);
+        border-radius: 6px;
+    }
+    .CodeMirror-scrollbar-filler {
+        background: transparent;
+    }
+}

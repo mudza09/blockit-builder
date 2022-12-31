@@ -1,331 +1,111 @@
 {
   "page": 4,
-  "per_page": "3",
-  "prev_page": 3,
-  "next_page": 5,
-  "total_post": 14,
-  "total_pages": 5,
-  "display_author": true,
+  "perPage": "3",
+  "prevPage": 3,
+  "nextPage": null,
+  "totalPost": 10,
+  "totalPages": 4,
+  "displayAuthor": true,
   "data": [
     {
-      "title": "Tech giants are rushing to develop their own chips — here’s why",
-      "link": "tech-giants-are-rushing-to-develop-their-own-chips.html",
+      "title": "Shortfalls of some cold and flu meds continue amid shifting respiratory virus season",
+      "link": "shortfalls-of-some-cold-and-flu-meds-continue-amid.html",
       "author": {
-        "id": "bk1baa",
-        "name": "Peter Parker",
-        "avatar": "img/user/author-lybqnhew0wc.jpg"
+        "id": "tXeY2N",
+        "name": "Warren Wong",
+        "avatar": "img/user/author-85z9UC.jpg"
       },
-      "category": "Technology",
+      "category": "Health",
       "tags": [
-        "technology",
-        "economics"
+        "virus"
       ],
       "image": false,
+      "hidden": false,
       "blocks": [
         {
-          "id": "XZFZ-9zZUf",
+          "id": "NXR2ifeUKt",
           "type": "paragraph",
           "data": {
-            "text": "Not content with relying on standard chips that are in high demand, some of the world’s biggest tech firms are developing their own semiconductors."
+            "text": "Experts say there will likely be a post-holiday bump in respiratory virus numbers, and that could put an even greater strain on supplies of some medications that have been hard to find amid a severe illness season."
           }
         },
         {
-          "id": "-vqlHMDZNl",
+          "id": "aLPRlvcCBo",
           "type": "paragraph",
           "data": {
-            "text": "Apple,&nbsp;Amazon,&nbsp;Facebook,&nbsp;Tesla&nbsp;and&nbsp;Baidu&nbsp;are all shunning established chip firms and bringing certain aspects of chip development in-house, according to company announcements and media reports."
+            "text": "Children’s pain and fever medications might be the toughest products to find. Pharmacies say high flu activity has also led to sporadic shortfalls of Tamiflu and some over-the-counter cold and flu medicine for adults. But supplies of Covid-19 home tests are plentiful, as those case numbers begin to rise again."
           }
         },
         {
-          "id": "pjuVrkLqNt",
-          "type": "paragraph",
-          "data": {
-            "text": "“Increasingly, these companies want custom-made chips fitting their applications’ specific requirements rather than use the same generic chips as their competitors,” Syed Alam, global semiconductor lead at&nbsp;Accenture.&nbsp;&nbsp;"
-          }
-        },
-        {
-          "id": "2FoKNGrqvW",
-          "type": "paragraph",
-          "data": {
-            "text": "“This gives them more control over the integration of software and hardware while differentiating them from their competition,” Alam added."
-          }
-        },
-        {
-          "id": "iQTITk4_M8",
-          "type": "paragraph",
-          "data": {
-            "text": "Russ Shaw, a former non-executive director at U.K.-based&nbsp;Dialog Semiconductor, told CNBC that custom-designed chips can perform better and work out cheaper.&nbsp;"
-          }
-        },
-        {
-          "id": "GREk0UN1m0",
+          "id": "yiZp2YJHIh",
           "type": "header",
           "data": {
-            "text": "A.I. chips and more",
+            "text": "Stores limit purchases",
             "level": 4
           }
         },
         {
-          "id": "ACT9naDqIa",
+          "id": "hOUyRnWOXe",
           "type": "paragraph",
           "data": {
-            "text": "At present, barely a month goes by without a Big Tech company announcing a new chip project."
+            "text": "The RSV season arrived early this year, and cases have dropped dramatically over the past month. But with the virus still making the rounds – along with the flu and Covid-19 – and children’s fever reducers and pain medicines are harder to come by in some places."
           }
         },
         {
-          "id": "BClDqFxXhj",
+          "id": "iuRRrdT7MG",
           "type": "paragraph",
           "data": {
-            "text": "Perhaps the most notable example came in November 2020 when&nbsp;Apple announced&nbsp;it was moving away from Intel’s x86 architecture to make its own M1 processor, which now sits in its new iMacs and iPads.&nbsp;&nbsp;"
+            "text": "Pharmacies say they have seen greater demand, and some big chains are limiting purchases in order to make the most of the existing supply."
           }
         },
         {
-          "id": "mqNPlkRvXa",
-          "type": "paragraph",
+          "id": "8_K9l9noBd",
+          "type": "quote",
           "data": {
-            "text": "More recently, Tesla&nbsp;announced&nbsp;that it is building a “Dojo” chip to train artificial intelligence networks in data centers. The automaker in 2019 started producing cars with its custom AI chips that help on-board software make decisions in response to what’s happening on the road."
+            "text": "Retailers nationwide are experiencing supplier fulfillment challenges due to increased demand of over-the-counter pediatric fever reducing products",
+            "caption": "Walgreens spokesperson Fraser Engerman",
+            "alignment": "left"
           }
         },
         {
-          "id": "pg9_NPcW5B",
+          "id": "PZ0ZMQhXIL",
+          "type": "paragraph",
+          "data": {
+            "text": "Walgreens instituted limits on children’s pain and fever medications last week and continues to limit customers to six packages per online transaction to “prevent excess purchasing behavior.” It doesn’t have a limit on store purchases."
+          }
+        },
+        {
+          "id": "1mHJdM3Oor",
           "type": "header",
           "data": {
-            "text": "Designing but not manufacturing",
+            "text": "High flu activity means high demand",
             "level": 4
           }
         },
         {
-          "id": "ioI3biluRB",
+          "id": "_4VRny_0oe",
           "type": "paragraph",
           "data": {
-            "text": "At this stage, none of the tech giants are looking to do all the chip development themselves."
+            "text": "Flu activity remains high across the US. There have been an estimated 18 million flu cases, 90,000 hospitalizations and 23,000 deaths this season, according to the US Centers for Disease Control and Prevention. By some metrics, it’s the worst flu season in a decade."
           }
         },
         {
-          "id": "iUrKnhnq1F",
+          "id": "dExu4yIqnx",
           "type": "paragraph",
           "data": {
-            "text": "“It is all about the design and performance of the chip,” Shaw said. “At this stage, it is not about the manufacturing and foundries, which is very costly.”"
+            "text": "That’s led to greater demand for the medication oseltamivir, also known as Tamiflu, which can help ease and shorten flu symptoms."
           }
         },
         {
-          "id": "eJIEBamUEm",
+          "id": "pgKhfyJg3W",
           "type": "paragraph",
           "data": {
-            "text": "Setting up an advanced chip factory, or foundry, like&nbsp;TSMC’s in Taiwan, costs around $10 billion and takes several years.&nbsp;&nbsp;"
+            "text": "Walgreens has seen isolated temporary shortages of Tamiflu, and suggests that people who have a prescription for the drug call their local pharmacy to make sure it’s available there before coming in to pick it up."
           }
         }
       ],
-      "dateCreated": "September 09, 2021",
-      "dateModified": "April 22, 2022",
-      "timeCreated": "09:14 PM",
-      "timeModified": "09:44 PM"
-    },
-    {
-      "title": "The six reasons why Jim Cramer is concerned about the stock market in September",
-      "link": "the-six-reasons-why-jim-cramer-is-concerned-about-the.html",
-      "author": {
-        "id": "bk1baa",
-        "name": "Peter Parker",
-        "avatar": "img/user/author-lybqnhew0wc.jpg"
-      },
-      "category": "Markets",
-      "tags": [
-        "economics"
-      ],
-      "image": false,
-      "blocks": [
-        {
-          "id": "NK5J3KaFaf",
-          "type": "paragraph",
-          "data": {
-            "text": "Jim Cramer said Wednesday he sees a number of worrisome factors that are likely to contribute to market volatility in September, beyond just the fact it is a historically&nbsp;tough month for stocks.&nbsp; "
-          }
-        },
-        {
-          "id": "z5D_Z9ZZ0_",
-          "type": "paragraph",
-          "data": {
-            "text": "Here’s what the&nbsp;“Mad Money”&nbsp;host is concerned about:&nbsp;&nbsp;"
-          }
-        },
-        {
-          "id": "2rku4z1GjQ",
-          "type": "header",
-          "data": {
-            "text": "1. Negative pre-announcements",
-            "level": 4
-          }
-        },
-        {
-          "id": "xC09ROP_vr",
-          "type": "paragraph",
-          "data": {
-            "text": "This week, three companies — paint makers&nbsp;PPG Industries&nbsp;and&nbsp;Sherwin-Williams, as well as homebuilder&nbsp;PulteGroup&nbsp;— issued pre-announcements to lower guidance about their current quarters, warning that supply chain problems and materials costs are causing challenges that could lead to worse-than-expected results.&nbsp;&nbsp;"
-          }
-        },
-        {
-          "id": "vEmrXKvwDj",
-          "type": "paragraph",
-          "data": {
-            "text": "“The good news? None of their stocks got crushed because demand’s still in good shape. ... They’re still getting business,” Cramer said. “The bad news? These supply problems, they’re not going away—seems like they’ve become ingrained.”"
-          }
-        },
-        {
-          "id": "k2lZxYP-U_",
-          "type": "header",
-          "data": {
-            "text": "2. The Fed",
-            "level": 4
-          }
-        },
-        {
-          "id": "6ebrVM3LCE",
-          "type": "paragraph",
-          "data": {
-            "text": "Pressure on Federal Reserve Chairman Jerome Powell to change his stance that inflationary pressures are transitory could intensify throughout September, Cramer said."
-          }
-        },
-        {
-          "id": "cJR74tPSer",
-          "type": "paragraph",
-          "data": {
-            "text": "While that viewpoint is why the Fed’s highly accommodative monetary policy remains in place, Cramer said that “after these preannouncements where we keep hearing about rising raw costs, don’t you have to wonder if inflation is more intractable than they thought?”"
-          }
-        },
-        {
-          "id": "8C9GZGokAV",
-          "type": "paragraph",
-          "data": {
-            "text": "Raising interest rates would be the “magic elixir” to tamping down inflation, Cramer said. “But they do that by destroying demand and that crushes earnings, which in turn crushes stocks.”"
-          }
-        },
-        {
-          "id": "racgCctrV6",
-          "type": "header",
-          "data": {
-            "text": "3. Higher rates",
-            "level": 4
-          }
-        },
-        {
-          "id": "eyybcOQ-ki",
-          "type": "paragraph",
-          "data": {
-            "text": "“If rates are headed higher, that creates more competition for high-yielding dividend stocks. These days, not many stocks are supported by their yields, but there will be even fewer if rates go up,” Cramer said."
-          }
-        },
-        {
-          "id": "Ch5RqK19Qh",
-          "type": "header",
-          "data": {
-            "text": "4. Congress",
-            "level": 4
-          }
-        },
-        {
-          "id": "bN24Vv5TNs",
-          "type": "paragraph",
-          "data": {
-            "text": "The “Mad Money” host said there’s a bit of a double-edged sword involving the Democrats’ desire to pass their $3.5 trillion budget reconciliation package."
-          }
-        },
-        {
-          "id": "y6TZA4T3jr",
-          "type": "paragraph",
-          "data": {
-            "text": "That level of spending would surely create jobs and “supercharge the economy,” Cramer said, but it comes at a time when there’s already&nbsp;more than 10 million job openings in the U.S.&nbsp;As a result, wages would likely go up as companies fight for workers, he said, “which is good if you work for a living but bad if you own stocks.”&nbsp;&nbsp;"
-          }
-        }
-      ],
-      "dateCreated": "September 09, 2021",
-      "dateModified": "April 22, 2022",
-      "timeCreated": "09:13 PM",
-      "timeModified": "09:43 PM"
-    },
-    {
-      "title": "Kamala Harris says Asia won’t have to choose between the U.S. and China",
-      "link": "kamala-harris-says-asia-wont-have-to-choose-between.html",
-      "author": {
-        "id": "bk1baa",
-        "name": "Peter Parker",
-        "avatar": "img/user/author-lybqnhew0wc.jpg"
-      },
-      "category": "Politics",
-      "tags": [
-        "politics"
-      ],
-      "image": false,
-      "blocks": [
-        {
-          "id": "T9uVXuR92_",
-          "type": "paragraph",
-          "data": {
-            "text": "SINGAPORE - Vice President Kamala Harris on Tuesday called out Beijing’s actions in the South China Sea, and sought to assure countries in Asia that they won’t have to choose between the U.S. and China.&nbsp;&nbsp;"
-          }
-        },
-        {
-          "id": "yMtG-5DXmD",
-          "type": "paragraph",
-          "data": {
-            "text": "“We know that Beijing continues to coerce, to intimidate and to make claims to the vast majority of South China Sea,” Harris said in a speech in Singapore during her&nbsp;first official visit to Southeast Asia.&nbsp;&nbsp;"
-          }
-        },
-        {
-          "id": "MRYhcSuIxQ",
-          "type": "paragraph",
-          "data": {
-            "text": "“These unlawful claims have been rejected by the 2016 arbitral tribunal decision, and Beijing’s actions continue to undermine the rules based order and threaten the sovereignty of nations,” she added. “The United States stands with our allies and partners in the face of these threats.”"
-          }
-        },
-        {
-          "id": "HHTs5hrH1G",
-          "type": "paragraph",
-          "data": {
-            "text": "China claims nearly the entire South China Sea — but a&nbsp;tribunal at the Permanent Court of Arbitration&nbsp;dismissed that claim as legally baseless in 2016.&nbsp;&nbsp;"
-          }
-        },
-        {
-          "id": "Jp8M1u-div",
-          "type": "paragraph",
-          "data": {
-            "text": "The South China Sea is resource-rich waterway that’s a vital commercial shipping route where trillions of dollars of world trade pass through each year. In addition to China, other territorial claimants in the sea include Taiwan, Vietnam, Malaysia and the Philippines."
-          }
-        },
-        {
-          "id": "abJu_dJLwv",
-          "type": "header",
-          "data": {
-            "text": "U.S.-China competition",
-            "level": 4
-          }
-        },
-        {
-          "id": "_IfYCcajk0",
-          "type": "paragraph",
-          "data": {
-            "text": "Southeast Asia, which lies in the heart of Indo-Pacific, was in the last few years caught in the middle as the rivalry between the U.S. and China intensifies."
-          }
-        },
-        {
-          "id": "vE_vW-s-vN",
-          "type": "paragraph",
-          "data": {
-            "text": "The U.S. has for decades been an important presence in Southeast Asia through its security and economic engagements, but China’s aggressive push through programs such as its Belt and Road Initiative has increased Beijing’s influence in the region."
-          }
-        },
-        {
-          "id": "H6M_cXpXoC",
-          "type": "paragraph",
-          "data": {
-            "text": "The vice president also stressed that the U.S. remains committed to the region, even as President&nbsp;Joe Biden&nbsp;faced criticism over how he handled the withdrawal of American forces from Afghanistan. She reiterated her comment on Monday that the U.S. is&nbsp;“laser focused” on evacuation efforts.&nbsp;&nbsp;"
-          }
-        }
-      ],
-      "dateCreated": "September 09, 2021",
-      "dateModified": "April 22, 2022",
-      "timeCreated": "09:12 PM",
-      "timeModified": "09:42 PM"
+      "dateCreated": "December 29, 2022",
+      "timeCreated": "03:04 PM"
     }
   ]
 }

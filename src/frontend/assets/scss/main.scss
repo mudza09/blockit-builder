@@ -1,78 +1,58 @@
-// 1. custom variables
-// @import "utilities/variables/accordion-uikit.scss";
-@import "utilities/variables/base-uikit.scss";
-// @import "utilities/variables/breadcrumb-uikit.scss";
-@import "utilities/variables/button-uikit.scss";
-// @import "utilities/variables/comment-uikit.scss";
-@import "utilities/variables/container-uikit.scss";
-// @import "utilities/variables/dotnav-uikit.scss";
-@import "utilities/variables/form-uikit.scss";
-@import "utilities/variables/heading-uikit.scss";
-@import "utilities/variables/modal-uikit.scss";
-@import "utilities/variables/navbar-uikit.scss";
-// @import "utilities/variables/notification-uikit.scss";
-@import "utilities/variables/offcanvas-uikit.scss";
-@import "utilities/variables/pagination-uikit.scss";
-@import "utilities/variables/section-uikit.scss";
-@import "utilities/variables/tab-uikit.scss";
-@import "utilities/variables/table-uikit.scss";
-@import "utilities/variables/text-uikit.scss";
-@import "utilities/variables/utility-uikit.scss";
+// 1. theme variables
+@import "theme/variables.scss";
 
-// 2. import default variables and available mixins
+// 2. UIkit custom variables
+@import "variables/base-uikit.scss";
+@import "variables/button-uikit.scss";
+@import "variables/container-uikit.scss";
+@import "variables/form-uikit.scss";
+@import "variables/heading-uikit.scss";
+@import "variables/modal-uikit.scss";
+@import "variables/offcanvas-uikit.scss";
+@import "variables/pagination-uikit.scss";
+@import "variables/section-uikit.scss";
+@import "variables/tab-uikit.scss";
+@import "variables/table-uikit.scss";
+@import "variables/text-uikit.scss";
+@import "variables/utility-uikit.scss";
+
+// 3. import default UIkit variables and available UIkit mixins
 @import "../../../../node_modules/uikit/src/scss/variables.scss";
 @import "../../../../node_modules/uikit/src/scss/mixins.scss";
 
-// 3. custom mixins overwrites
-@import "utilities/mixins/base-uikit.scss";
-// @import "utilities/mixins/breadcrumb-uikit.scss";
-@import "utilities/mixins/button-uikit.scss";
-// @import "utilities/mixins/comment-uikit.scss";
-// @import "utilities/mixins/dotnav-uikit.scss";
-@import "utilities/mixins/form-uikit.scss";
-@import "utilities/mixins/modal-uikit.scss";
-@import "utilities/mixins/navbar-uikit.scss";
-// @import "utilities/mixins/notification-uikit.scss";
-@import "utilities/mixins/offcanvas-uikit.scss";
-@import "utilities/mixins/pagination-uikit.scss";
-@import "utilities/mixins/sticky-uikit.scss";
-@import "utilities/mixins/tab-uikit.scss";
-@import "utilities/mixins/table-uikit.scss";
-@import "utilities/mixins/text-uikit.scss";
-@import "utilities/mixins/utility-uikit.scss";
+// 4.  UIkit custom mixins overwrites
+@import "mixins/base-uikit.scss";
+@import "mixins/button-uikit.scss";
+@import "mixins/form-uikit.scss";
+@import "mixins/modal-uikit.scss";
+@import "mixins/offcanvas-uikit.scss";
+@import "mixins/pagination-uikit.scss";
+@import "mixins/sticky-uikit.scss";
+@import "mixins/tab-uikit.scss";
+@import "mixins/table-uikit.scss";
+@import "mixins/text-uikit.scss";
+@import "mixins/utility-uikit.scss";
 
-// 4. import UIkit
+// 5. import UIkit
 @import "../../../../node_modules/uikit/src/scss/uikit.scss";
 
-// base variables
-@import "base/base-variables.scss";
+// 6. theme fonts
+@import "theme/fonts.scss";
 
-/* ------------------------------------------------------------------
- * File         : style.css
- * Author       : indonez
- * Author URI   : http://www.indonez.com
- *
- * Indonez Copyright 2020 All Rights Reserved.
- * ------------------------------------------------------------------
-[Table of contents]
-    1. global
-    2. navigation
-    3. utility
-    4. vendors
-    5. custom
------------------------------------------------------------------- */
+// 7. theme utilities
+@import "theme/utilities/margin-padding.scss";
+@import "theme/utilities/remix-icons.scss";
+@import "theme/utilities/z-index.scss";
 
-/* [ 1. global ] */
-@import "base/global.scss";
+// 8. theme vendors
+@import "theme/vendors/coloris.scss";
+@import "theme/vendors/blockit-code-editor.scss";
+@import "theme/vendors/blockit-components.scss";
+@import "theme/vendors/blockit-dashboard.scss";
+@import "theme/vendors/blockit-general.scss";
+@import "theme/vendors/blockit-navigation.scss";
+@import "theme/vendors/blockit-pages.scss";
+@import "theme/vendors/blockit-settings.scss";
 
-/* [ 2. navigation ] */
-@import "layouts/navigation.scss";
-
-/* [ 3. utility ] */
-@import "utilities/blockit-utility.scss";
-
-/* [ 4. vendors ] */
-@import "vendors/blockit-vendors.scss";
-
-/* [ 5. custom ] */
-@import "layouts/custom.scss";
+// 9. theme custom
+@import "theme/custom.scss";

@@ -1,0 +1,9 @@
+@mixin hook-modal-dialog(){
+    border-radius: $base-border-radius;
+}
+@mixin hook-modal-footer(){
+    border-radius: $base-border-radius;
+    .uk-button {
+        border-radius: $base-border-radius;
+    }
+}

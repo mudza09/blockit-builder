@@ -51,6 +51,11 @@ $hr-color: #e8e8e8;
 $hr-height: $border-width;
 $hr-opacity: 1;
 
+$blockquote-margin-y:         $spacer;
+$blockquote-font-size:        $font-size-base * 1.15;
+$blockquote-footer-color:     $text-muted;
+$blockquote-footer-font-size: 0.882rem;
+
 // Breadcrumb
 $breadcrumb-font-size: .941rem;
 $breadcrumb-padding-y: 0;

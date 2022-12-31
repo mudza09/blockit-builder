@@ -1,0 +1,86 @@
+html,
+body {
+    overflow-x: hidden;
+    scrollbar-width: none;  /* Firefox */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.tm-sidebar-left {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    width: 320px !important;
+    padding: 30px 36px;
+    border-right: 1px $global-border solid;
+    overflow: auto;
+    .uk-logo {
+        font-size: 1.5rem;
+        font-family: 'Nunito';
+        font-weight: 700;
+    }
+    .uk-nav-default {
+        margin-top: 30px !important;
+        li {
+            font-size: 0.941rem;
+            line-height: 2;
+            a {
+                color: $base-heading-color;
+            }
+            a:hover {
+                color: $global-primary-background;
+            }
+            padding-left: 16px;
+        }
+        .ri {
+            width: 25px;
+            &.fa-sm {
+                line-height: 0;
+            }
+        }
+        .uk-active {
+            a {
+                color: $global-primary-background;
+            }
+            background: lighten($global-primary-background, 42%);
+            border-radius: $border-rounded-border-radius;
+            padding-left: 16px;
+        }
+    }
+    .uk-nav-divider {
+        margin: 30px 0;
+    }
+}
+
+.tm-main {
+    .uk-container {
+        margin-left: 320px;
+        padding-left: 7%;
+        padding-right: 9%;
+    }
+}
+
+.uk-section {
+    display: flow-root;
+    box-sizing: border-box;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.uk-section>:last-child {
+    margin-bottom: 0;
+}
+
+.uk-position-relative {
+    position: relative !important;
+}
+
+.uk-container {
+    display: flow-root;
+    box-sizing: content-box;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,211 +1,222 @@
-// required plugins
-import fs from 'fs'
-import del from 'del'
-import panini from 'panini'
-import rename from 'gulp-rename'
-import beautify from 'gulp-jsbeautifier'
-import minify from 'gulp-minifier'
-import merge from 'merge-stream'
-import concat from 'gulp-concat'
-import babel from 'gulp-babel'
-import gulpSass from 'gulp-sass'
-import dartSass from 'sass'
-import purgecss from 'gulp-purgecss'
-import imagemin, { gifsicle, mozjpeg, optipng, svgo } from 'gulp-imagemin'
-import Utils from './utils.js'
+// Required plugins
+import fs from 'fs';
+import path from 'path';
+import sass from 'sass';
+import babel from '@babel/core';
+import chokidar from 'chokidar';
+import {PurgeCSS} from 'purgecss';
+import Engine from './engine.js';
+import Utils from './utils.js';
 
 export default class Compiler {
-    constructor(gulpPlugin) {
-        Object.assign(this, gulpPlugin)
-        this.utils = new Utils()
-    }
+	constructor(env) {
+		this.utils = new Utils();
+		this.env = env;
+	}
 
-    /*
+	/*
     Theme compiler section
     using for compile HTML template using panini
     */
 
-    // panini reload cache
-    reloadPanini = async () => {
-        await panini.refresh()
-    }
+	// Clean dist folder
+	buildClean = () => {
+		const filesRm = [
+			...this.utils.loadFiles('./dist', ['blog', 'img']),
+			...this.utils.loadFiles('./dist/blog', ['data']),
+			...this.utils.loadFiles('./dist/img', ['user']),
+		];
+		filesRm.forEach(each => fs.unlinkSync(each));
+	};
 
-    // clean dist folder
-    buildClean = () => {
-        return del(['../../dist/**', '../../dist/img/*', '!../../dist/blog', '!../../dist/blog/data', '!../../dist/img', '!../../dist/img/user'], {force: true})
-    }
+	// Html compile task
+	buildHtml = () => {
+		this.utils.logMessage('begin');
 
-    // html compile task
-    buildHtml = () => {
-        const minifyHtml = JSON.parse(fs.readFileSync('../../src/data/setting.json', 'utf-8')).optimization.minifyAssets.html
-        this.reloadPanini()
+		const minifyHtml = JSON.parse(fs.readFileSync('./src/data/setting.json', 'utf-8')).optimization.minifyAssets.html;
 
-        return this.src('../../src/pages/**/*.hbs')
-        .pipe(panini({
-            root: '../../src/pages',
-            layouts: '../../src/layouts',
-            partials: '../../src/partials',
-            data: '../../src/data',
-            helpers: './helpers'
-        }))
-        .pipe(rename(path => path.extname = '.html'))
-        .pipe(beautify({
-            html: {
-                file_types: ['.html'],
-                max_preserve_newlines: 0,
-                preserve_newlines: true,
-            }
-        }))
-        .pipe(minifyHtml ? minify({minify: true, minifyHTML: {collapseWhitespace: true, removeComments: true}}) : minify({minify: false}))
-        .pipe(this.dest('../../dist'))
-        .on('end', () => console.log(`${this.utils.logTime(new Date())} - HTML compiled successfully.`))
-    }
+		new Engine({
+			pages: './src/pages',
+			layout: './src/layout',
+			partials: './src/partials',
+			data: './src/data',
+			minify: minifyHtml,
+		}).render();
 
-    // css compile task
-    buildCss = () => {  
-        const sass = gulpSass(dartSass)
+		this.utils.logMessage('end', 'Html compiled successfully.');
+	};
 
-        return this.src('../../src/assets/scss/main.scss')
-        .pipe(sass())
-        .pipe(rename('style.css'))
-        .pipe(beautify({css: {file_types: ['.css']}}))
-        .pipe(this.dest('../../dist/css'))
-        .on('end', () => console.log(`${this.utils.logTime(new Date())} - CSS compiled successfully.`))
-    }
+	// Css compile task
+	buildCss = () => {
+		this.utils.logMessage('begin');
 
-    // js compile task
-    buildJs = () => {
-        return merge(
-            // config-theme.js
-            this.src('../../src/assets/js/*.js')
-            .pipe(beautify({js: {file_types: ['.js']}}))
-            .pipe(this.dest('../../dist/js')),
+		// If "css" folder not exist then create it
+		this.utils.createDirectory('./dist/css');
 
-            // utilities.min.js
-            this.src('../../src/assets/js/utilities/*.js')
-            .pipe(babel({
-                presets: [['@babel/preset-env', {
-                    'targets': '> 0.25%, not dead',
-                    'exclude': ['babel-plugin-transform-async-to-generator', 'babel-plugin-transform-regenerator']
-                }]]
-            }))
-            .pipe(concat('utilities.min.js', {newLine: '\r\n\r\n'}))
-            .pipe(minify({minify: true, minifyJS: {sourceMap: false}}))
-            .pipe(this.dest('../../dist/js')),
+		const style = sass.compile('./src/assets/scss/main.scss', {
+			logger: sass.Logger.silent,
+			style: 'expanded',
+		});
 
-            // js vendors
-            this.src('../../src/assets/js/vendors/*.js')
-            .pipe(minify({minify: true, minifyJS: {sourceMap: false}}))
-            .pipe(this.dest('../../dist/js/vendors'))
-            .on('end', () => console.log(`${this.utils.logTime(new Date())} - JS compiled successfully.`))
-        )
-    }
+		fs.writeFileSync('./dist/css/style.css', style.css);
 
-    // image optimization task
-    buildImg = () => {
-        return this.src('../../src/assets/img/**/*')
-        .pipe(imagemin([
-            gifsicle({interlaced: true}),
-            mozjpeg({quality: 80, progressive: true}),
-            optipng({optimizationLevel: 5}),
-            svgo({
-                plugins: [
-                    {
-                        name: 'removeViewBox',
-                        active: true
-                    },
-                    {
-                        name: 'cleanupIDs',
-                        active: false
-                    }
-                ]
-            })
-        ], {
-            verbose: false,
-            silent: true
-        }))
-        .pipe(this.dest('../../dist/img'))
-        .on('end', () => console.log(`${this.utils.logTime(new Date())} - Images optimized successfully.`))
-    }
+		this.utils.logMessage('end', 'Css compiled successfully.');
+	};
 
-    // static assets task
-    buildStatic = () => {
-        return merge(
-            // webfonts
-            this.src('../../src/assets/fonts/*')
-            .pipe(this.dest('../../dist/fonts')),
+	// Js compile task
+	buildJs = () => {
+		this.utils.logMessage('begin');
 
-            // fontAwesome icons
-            this.src([
-                '../../node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf',
-                '../../node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2',
-                '../../node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf',
-                '../../node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2'
-            ])
-            .pipe(this.dest('../../dist/fonts')),
+		// If "js" and "vendors" folder not exist then create it
+		this.utils.createDirectory('./dist/js');
+		this.utils.createDirectory('./dist/js/vendors');
 
-            // favicon
-            this.src('../../src/assets/favicon/favicon.ico')
-            .pipe(this.dest('../../dist/img')),
+		// Config-theme.js
+		const configThemeJs = this.utils.loadFiles('./src/assets/js', ['utilities', 'vendors']);
+		configThemeJs.forEach(each => fs.copyFileSync(each, `./dist/js/${path.basename(each)}`));
 
-            // apple touch icon
-            this.src('../../src/assets/favicon/apple-touch-icon.png')
-            .pipe(this.dest('../../dist/img')),
+		// Utilities.min.js
+		const utilitiesJs = this.utils.loadFiles('./src/assets/js/utilities').map(each => fs.readFileSync(each, 'utf-8'));
+		babel.transform(utilitiesJs.join(''), {root: './node_modules/blockit-builder', minified: true, comments: false}, (err, result) => {
+			fs.writeFileSync('./dist/js/utilities.min.js', result.code);
+		});
 
-            // sendmail.php
-            this.src('../../src/assets/php/sendmail.php')
-            .pipe(this.dest('../../dist')),
+		// Js vendors
+		const vendorJs = this.utils.loadFiles('./src/assets/js/vendors');
+		vendorJs.forEach(each => fs.copyFileSync(each, `./dist/js/vendors/${path.basename(each)}`));
 
-            // bootstrap.bundle.min.js
-            this.src('../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js')
-            .pipe(minify({minify: true, minifyJS: {sourceMap: false}}))
-            .pipe(rename('bootstrap.min.js'))
-            .pipe(this.dest('../../dist/js/vendors')),
+		this.utils.logMessage('end', 'Js compiled successfully.');
+	};
 
-            // isotope.js
-            this.src('../../node_modules/isotope-layout/dist/isotope.pkgd.min.js')
-            .pipe(rename('isotope.min.js'))
-            .pipe(this.dest('../../dist/js/vendors')),
+	// Image optimization task
+	buildImg = async () => {
+		this.utils.logMessage('begin');
 
-            // bigger-picture.js
-            this.src('../../node_modules/bigger-picture/dist/bigger-picture.min.js')
-            .pipe(this.dest('../../dist/js/vendors'))
-            .on('end', () => console.log(`${this.utils.logTime(new Date())} - Static assets delivered successfully.`))
-        )
-    }
+		this.utils.loadFiles('./src/assets/img', ['blockit']).forEach(each => {
+			this.utils.optimizeImg(each, './dist/img');
+		});
 
-    /*
+		this.utils.loadFiles('./src/assets/img/blockit').forEach(each => {
+			this.utils.optimizeImg(each, './dist/img/blockit');
+		});
+
+		this.utils.logMessage('end', 'Images optimized successfully.');
+	};
+
+	// Static assets task
+	buildStatic = () => {
+		this.utils.logMessage('begin');
+
+		// If "fonts" folder not exist then create it
+		this.utils.createDirectory('./dist/fonts');
+
+		// Webfonts
+		const webFonts = this.utils.loadFiles('./src/assets/fonts');
+		webFonts.forEach(each => fs.copyFileSync(each, `./dist/fonts/${path.basename(each)}`));
+
+		// FontAwesome icons
+		const fontAwesome = this.utils.loadFiles('./node_modules/@fortawesome/fontawesome-free/webfonts');
+		fontAwesome.filter(each => each.includes('fa-brands-400')).forEach(each => fs.copyFileSync(each, `./dist/fonts/${path.basename(each)}`));
+		fontAwesome.filter(each => each.includes('fa-solid-900')).forEach(each => fs.copyFileSync(each, `./dist/fonts/${path.basename(each)}`));
+
+		// Favicon and touch icon
+		fs.copyFileSync('./src/assets/favicon/favicon.ico', './dist/img/favicon.ico');
+		fs.copyFileSync('./src/assets/favicon/apple-touch-icon.png', './dist/img/apple-touch-icon.png');
+
+		// Sendmail.php
+		fs.copyFileSync('./src/assets/php/sendmail.php', './dist/sendmail.php');
+
+		if (process.env.npm_package_dependencies_bootstrap !== undefined) {
+			// Bootstrap.bundle.min.js
+			fs.readFile('./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js', 'utf-8', (err, file) => {
+				fs.writeFileSync('./dist/js/vendors/bootstrap.bundle.min.js', file.replace('//# sourceMappingURL=bootstrap.bundle.min.js.map', ''));
+			});
+
+			// Isotope.js
+			fs.copyFileSync('./node_modules/isotope-layout/dist/isotope.pkgd.min.js', './dist/js/vendors/isotope.min.js');
+
+			// Bigger-picture.js
+			fs.copyFileSync('./node_modules/bigger-picture/dist/bigger-picture.min.js', './dist/js/vendors/bigger-picture.min.js');
+		}
+
+		if (process.env.npm_package_dependencies_uikit !== undefined) {
+			// Uikit.min.js
+			fs.copyFileSync('./node_modules/uikit/dist/js/uikit.min.js', './dist/js/vendors/uikit.min.js');
+		}
+
+		this.utils.logMessage('end', 'Static assets delivered successfully.');
+	};
+
+	/*
     Minifying compiler section
     using for minifying output file in "dist" folder
     */
 
-    // Minify for CSS files
-    minifyCss = () => {
-        return this.src('../../dist/css/*.css')
-        .pipe(purgecss({
-            content: ['../../dist/*.html', '../../dist/js/**/*.js']
-        }))
-        .pipe(minify({minify: true, minifyCSS: true}))
-        .pipe(this.dest('../../dist/css'))
-    }
+	// Minify for CSS files
+	minifyCss = async () => {
+		this.utils.logMessage('begin');
 
-    // Minify for Js files
-    minifyJs = () => {
-        return this.src('../../src/assets/js/*.js')
-        .pipe(minify({minify: true, minifyJS: {sourceMap: false}}))
-        .pipe(this.dest('../../dist/js'))
-    }
+		const style = sass.compile('./src/assets/scss/main.scss', {
+			logger: sass.Logger.silent,
+			style: 'compressed',
+		}).css;
 
-    /*
+		const purgeStyle = await new PurgeCSS().purge({
+			content: ['./dist/*.html', './dist/js/**/*.js'],
+			css: [{raw: style}],
+		});
+
+		fs.writeFileSync('./dist/css/style.css', purgeStyle[0].css);
+
+		this.utils.logMessage('end', 'Css minifying successfully.');
+	};
+
+	// Minify for Js files
+	minifyJs = () => {
+		this.utils.logMessage('begin');
+
+		const configThemeJs = this.utils.loadFiles('./src/assets/js', ['utilities', 'vendors']);
+		const minifyData = configThemeJs.map(each => ({
+			name: each,
+			code: babel.transformFileSync(each, {root: './node_modules/blockit-builder', minified: true, comments: false}).code,
+		}));
+		minifyData.forEach(each => fs.writeFileSync(`./dist/js/${path.basename(each.name)}`, each.code));
+
+		this.utils.logMessage('end', 'Js minifying successfully.');
+	};
+
+	/*
     Wacth section
     using for development mode to check if there any changes
     */
-    blockitWatch = () => {
-        this.watch('../../src/assets/scss/**/*.scss', this.series(this.buildCss))
-        this.watch('../../src/assets/js/**/*.js', this.series(this.buildJs))
-        this.watch('../../src/assets/img/**/*', this.series(this.buildImg))
-        this.watch(['../../src/**/*.hbs', '../../src/data/**/*.json'], this.series(this.buildHtml))
-        this.watch(['../../src/hooks/blog/search-post.hbs', '../../src/hooks/blog/search-result.hbs'], this.series(this.utils.hookSearch))
-        this.watch('../../src/hooks/sections/previews/*', this.series(this.utils.hookSectionsPreview))
-    }
+	previewWatch = instance => {
+		const options = {
+			ignoreInitial: true,
+		};
+
+		chokidar.watch('./src/assets/scss/**/*.scss').on('change', this.utils.debounce(() => {
+			this.buildCss();
+			instance.reload();
+		}));
+		chokidar.watch('./src/assets/js/**/*.js').on('change', this.utils.debounce(() => {
+			this.buildJs();
+			instance.reload();
+		}));
+		chokidar.watch('./src/assets/img/**/*', options).on('all', this.utils.debounce(() => {
+			this.buildImg();
+			instance.reload();
+		}));
+		chokidar.watch(['./src/**/*.hbs', './src/data/**/*.json'], options).on('all', this.utils.debounce(() => {
+			this.buildHtml();
+			instance.reload();
+		}));
+		chokidar.watch(['./src/hooks/blog/search-post.hbs', './src/hooks/blog/search-result.hbs']).on('change', () => this.utils.hookSearch());
+		chokidar.watch('./src/hooks/sections/previews/*', options).on('all', (event, path) => this.utils.hookSectionsPreview(event, path));
+	};
+
+	builderWatch = (instance, env) => {
+		if (env === 'DEV') {
+			chokidar.watch(['./node_modules/blockit-builder/assets/app.js', './node_modules/blockit-builder/assets/app.css']).on('change', this.utils.debounce(() => instance.reload()));
+		}
+	};
 }

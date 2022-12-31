@@ -30,29 +30,28 @@
   },
   "authors": [
     {
-      "id": "9jki2e",
+      "id": "2LKIG3",
       "name": "Indonez",
       "email": "templates@indonez.com",
-      "role": "FrontEnd Dev",
-      "avatar": "img/in-avatar.svg"
+      "avatar": "img/in-avatar.svg",
+      "bio": "Freelancer SEO copywriter who’s \"extremely good at one thing\" helping companies rank for their target keywords."
     },
     {
-      "id": "bk1baa",
-      "name": "Peter Parker",
-      "email": "maybe@parker.com",
-      "role": "Contributor",
-      "avatar": "img/user/author-lybqnhew0wc.jpg"
+      "id": "tXeY2N",
+      "name": "Warren Wong",
+      "email": "warren@email.com",
+      "avatar": "img/user/author-85z9UC.jpg",
+      "bio": "Political anthropologist whose work is focused on contextualizing the force and consequences of governance through time."
     }
   ],
   "blog": {
     "asBlog": "blog.hbs",
     "categories": [
-      "Crypto",
       "Health",
-      "Markets",
       "Politics",
       "Technology",
-      "World"
+      "Travel",
+      "Investing"
     ],
     "postPerPage": "3",
     "showWidgets": {
@@ -70,7 +69,7 @@
   "optimization": {
     "minifyAssets": {
       "html": false,
-      "css": true,
+      "css": false,
       "js": false
     }
   }

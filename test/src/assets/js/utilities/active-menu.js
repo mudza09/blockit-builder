@@ -43,7 +43,7 @@ class ActiveMenu {
 
         if(urlParams[urlParams.length - 2] == 'blog') {
             navbarPath.forEach(e => {
-                if(e.pathname.substring(1) == blogPath) {
+                if(e.pathname.split('/').at(-1) == blogPath) {
                     e.classList.add(this.activeClass)
                     if(e.closest('.dropdown-menu') !== null) {
                         e.closest('.dropdown-menu').previousElementSibling.classList.add(this.activeClass)

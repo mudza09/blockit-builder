@@ -1,228 +1,247 @@
 {
   "page": 3,
-  "per_page": "3",
-  "prev_page": 2,
-  "next_page": 4,
-  "total_post": 14,
-  "total_pages": 5,
-  "display_author": true,
+  "perPage": "3",
+  "prevPage": 2,
+  "nextPage": 4,
+  "totalPost": 10,
+  "totalPages": 4,
+  "displayAuthor": true,
   "data": [
     {
-      "title": "Biden Administration outlines how solar could be nearly half of electricity supply by 2050",
-      "link": "biden-administration-outlines-how-solar-could-be-nearly.html",
+      "title": "Here are 3 year-end strategies for high-net-worth families to consider",
+      "link": "here-are-3-year-end-strategies-for-high-net-worth-families.html",
       "author": {
-        "id": "bk1baa",
-        "name": "Peter Parker",
-        "avatar": "img/user/author-lybqnhew0wc.jpg"
+        "id": "tXeY2N",
+        "name": "Warren Wong",
+        "avatar": "img/user/author-85z9UC.jpg"
+      },
+      "category": "Investing",
+      "tags": [
+        "finance",
+        "wealth"
+      ],
+      "image": false,
+      "hidden": false,
+      "blocks": [
+        {
+          "id": "3z5WlMGES1",
+          "type": "paragraph",
+          "data": {
+            "text": "This has been a year of opportunity for investors who took to heart the old Wall Street adage that “the time to buy is when there’s blood in the streets.”"
+          }
+        },
+        {
+          "id": "6f_0SrLrFx",
+          "type": "paragraph",
+          "data": {
+            "text": "Indeed, a market drop can prove to best the best time to take advantage of various financial planning opportunities. Some of the most popular strategies this year among investors attempting to make the most of a challenging environment have included tax-loss harvesting, Roth individual retirement account conversions and buying the dip as stocks continue to plunge."
+          }
+        },
+        {
+          "id": "Z4junw4ou3",
+          "type": "header",
+          "data": {
+            "text": "1. Use a donor-advised fund to ‘bunch’ donations",
+            "level": 4
+          }
+        },
+        {
+          "id": "XsK8PS4jzO",
+          "type": "paragraph",
+          "data": {
+            "text": "A donor-advised fund is an investment account whose purpose is supporting charitable organizations. A donor is eligible for an immediate tax deduction when contributing cash, securities, or other assets to a DAF. Those funds can then be invested for tax-free growth until the donor decides to distribute them."
+          }
+        },
+        {
+          "id": "RpxfqytXZV",
+          "type": "paragraph",
+          "data": {
+            "text": "Grants can be made to any qualified public charity, right away or over time. A DAF is particularly useful when an investor owns a security with no cost basis, a highly appreciated stock or a long-time held concentrated position. In all these scenarios, a capital gains tax liability can be avoided by moving the position to a DAF."
+          }
+        },
+        {
+          "id": "ECte21pzn4",
+          "type": "header",
+          "data": {
+            "text": "2. ‘Freeze’ lower value of assets for gifting purposes",
+            "level": 4
+          }
+        },
+        {
+          "id": "vXJGy8I8QU",
+          "type": "paragraph",
+          "data": {
+            "text": "For ultra-high-net-worth families, making gifts today at the depressed market prices is an opportunity to more tax efficiently shift funds out of a family’s estate. Since the gifted assets are “frozen” at today’s lower values, they use up less of the federal lifetime gift tax exemption."
+          }
+        },
+        {
+          "id": "oCSUAMw7k4",
+          "type": "paragraph",
+          "data": {
+            "text": "The exemption is $12.06 million per person for 2022, but is set to revert to $5.49 million after 2025. At current levels, a married couple with an estate above $24.12 million, or $10.98 million after 2025, may be hit with federal estate tax."
+          }
+        },
+        {
+          "id": "E_KaO1JwLv",
+          "type": "header",
+          "data": {
+            "text": "3. ‘Superfund’ a 529 for estate, legacy planning goals",
+            "level": 4
+          }
+        },
+        {
+          "id": "xfjuF0F9AO",
+          "type": "paragraph",
+          "data": {
+            "text": "A 529 is a tax-advantaged college savings account that may provide immediate tax savings, tax-free growth and tax-free distributions if the funds are used for qualified educational expenses. Most states require you to invest in their in-state plan to receive the deduction for contributions. However, there are several states that are considered tax parity where you can use any state’s 529 plan to receive the deduction."
+          }
+        },
+        {
+          "id": "jVHne6WxJl",
+          "type": "paragraph",
+          "data": {
+            "text": "This is a smart way for someone to utilize tax efficiency to get money out of their estate while helping to fund a loved one’s higher education."
+          }
+        }
+      ],
+      "dateCreated": "December 29, 2022",
+      "timeCreated": "03:37 PM"
+    },
+    {
+      "title": "The LastPass disclosure of leaked password vaults is being torn apart by security experts",
+      "link": "the-lastpass-disclosure-of-leaked-password-vaults-is.html",
+      "author": {
+        "id": "tXeY2N",
+        "name": "Warren Wong",
+        "avatar": "img/user/author-85z9UC.jpg"
       },
       "category": "Technology",
       "tags": [
-        "technology",
-        "politics",
-        "usa"
-      ],
-      "image": "img/user/image-post-gzn1tktw0mm.jpg",
-      "blocks": [
-        {
-          "id": "7FrK66xW6V",
-          "type": "paragraph",
-          "data": {
-            "text": "The White House on Wednesday outlined a plan for solar energy to supply nearly half of the nation’s electricity by 2050. The ambitious outline would see solar rising from 3% of generation in 2020 to 40% by 2035 before ultimately hitting 45% by 2050.&nbsp; "
-          }
-        },
-        {
-          "id": "HpepI927YU",
-          "type": "paragraph",
-          "data": {
-            "text": "Heavy spending across industries will be required to meet that blueprint. U.S. solar installations&nbsp;hit a record&nbsp;high in 2020, but yearly solar capacity additions will need to double annually through 2025, before quadrupling from 2020′s level each year between 2025 and 2030. Falling costs and supportive policies including tax incentives have boosted solar’s robust growth over the last decade.&nbsp;&nbsp;"
-          }
-        },
-        {
-          "id": "ssF3I8oVEw",
-          "type": "paragraph",
-          "data": {
-            "text": "The report, issued by the U.S. Department of Energy Solar Energy Technologies Office and the National Renewable Energy Laboratory, said solar capacity will need to reach 1,600 gigawatts by 2050. This is more than the total electrical consumption from residential and commercial buildings today."
-          }
-        },
-        {
-          "id": "UqRuxE714O",
-          "type": "paragraph",
-          "data": {
-            "text": "The solar power study is based on the Biden administration’s larger plan to have an emissions-free grid by 2035, with the broader energy system decarbonizing by 2050. Other zero-carbon energy sources, most notably wind, would account for the generation not supplied by solar."
-          }
-        },
-        {
-          "id": "J6ZOtMJOj2",
-          "type": "paragraph",
-          "data": {
-            "text": "“The study illuminates the fact that solar, our cheapest and fastest-growing source of clean energy, could produce enough electricity to power all of the homes in the U.S. by 2035 and employ as many as 1.5 million people in the process,” Secretary of Energy Jennifer Granholm said in a statement."
-          }
-        },
-        {
-          "id": "8856J2gjJg",
-          "type": "paragraph",
-          "data": {
-            "text": "The report comes as extreme weather events fueled by climate change wreak havoc on the U.S. grid."
-          }
-        },
-        {
-          "id": "5aZ6mZCcT3",
-          "type": "paragraph",
-          "data": {
-            "text": "“This is code red,” President Joe Biden said&nbsp;Tuesday&nbsp;while visiting areas of New York and New Jersey hit by Hurricane Ida. “Climate change poses an existential threat to our lives, to our economy.&nbsp;And the threat is here; it’s not going to get any better,” he said. “The nation and the world are in peril.”&nbsp;&nbsp;"
-          }
-        }
-      ],
-      "dateCreated": "October 19, 2021",
-      "dateModified": "April 22, 2022",
-      "timeCreated": "09:17 PM",
-      "timeModified": "09:47 PM"
-    },
-    {
-      "title": "Coinbase shares fall after it reveals SEC plans to sue over interest-earning product",
-      "link": "coinbase-shares-fall-after-it-reveals-sec-plans-to.html",
-      "author": {
-        "id": "bk1baa",
-        "name": "Peter Parker",
-        "avatar": "img/user/author-lybqnhew0wc.jpg"
-      },
-      "category": "Crypto",
-      "tags": [
-        "economics",
-        "technology"
+        "security"
       ],
       "image": false,
+      "hidden": false,
       "blocks": [
         {
-          "id": "sTXXrf9PtB",
+          "id": "t3Vi-FL1Nt",
           "type": "paragraph",
           "data": {
-            "text": "Coinbase has received notice of a possible enforcement action from the Securities and Exchange Commission related to its interest-earning product, which the company had planned to launch in the coming weeks."
+            "text": "Last week, just before Christmas, LastPass dropped a bombshell announcement: as the result of a breach in August, which lead to another breach in November, hackers had gotten their hands on users’ password vaults. While the company insists that your login information is still secure, some cybersecurity experts are heavily criticizing its post, saying that it could make people feel more secure than they actually are and pointing out that this is just the latest in a series of incidents that make it hard to trust the password manager."
           }
         },
         {
-          "id": "oWFKo1oW4X",
+          "id": "XaTcPPQ7w3",
           "type": "paragraph",
           "data": {
-            "text": "The cryptocurrency exchange and services firm received a Wells notice from the SEC last Wednesday saying the regulator intends to sue&nbsp;Coinbase&nbsp;over the product, called Coinbase Lend, the company disclosed in a Tuesday night&nbsp;blog post. The SEC didn’t immediately return a call for comment.&nbsp;&nbsp;"
+            "text": "LastPass’ December 22nd statement was “full of omissions, half-truths and outright lies,” reads a blog post from Wladimir Palant, a security researcher known for helping originally develop AdBlock Pro, among other things. Some of his criticisms deal with how the company has framed the incident and how transparent it’s being; he accuses the company of trying to portray the August incident where LastPass says “some source code and technical information were stolen” as a separate breach when he says that in reality the company “failed to contain” the breach."
           }
         },
         {
-          "id": "rRF9bXGCZ8",
-          "type": "paragraph",
+          "id": "z2_TknzxvZ",
+          "type": "quote",
           "data": {
-            "text": "Shares of&nbsp;Coinbase&nbsp;fell 3.2% on Wednesday.&nbsp;&nbsp;"
+            "text": "LastPass’s claim of ‘zero knowledge’ is a bald-faced lie.",
+            "caption": "",
+            "alignment": "left"
           }
         },
         {
-          "id": "uAMAo23TMU",
+          "id": "Sb9kyRyec9",
           "type": "paragraph",
           "data": {
-            "text": "The company’s chief legal officer, Paul Grewal, indicated in the post that the company was caught off guard by the threat considering its efforts to engage with the regulatory agency for the last six months. CEO Brian Armstrong said in a series of tweets that when he traveled to Washington, D.C. in May, the SEC “refused” to meet with him."
+            "text": "He also highlights LastPass’ admission that the leaked data included “the IP addresses from which customers were accessing the LastPass service,” saying that could let the threat actor “create a complete movement profile” of customers if LastPass was logging every IP address you used with its service."
           }
         },
         {
-          "id": "4j-Ws-5ViP",
+          "id": "uArY1mcVLB",
           "type": "paragraph",
           "data": {
-            "text": "That visit took place shortly after Coinbase became the first publicly traded crypto exchange and about a month after Gary Gensler had been confirmed as chairman of the SEC."
+            "text": "Another security researcher, Jeremi Gosney, wrote a long post on Mastodon explaining his recommendation to move to another password manager. “LastPass’s claim of ‘zero knowledge’ is a bald-faced lie,” he says, alleging that the company has “about as much knowledge as a password manager can possibly get away with.”"
           }
         },
         {
-          "id": "4OrN12HGAv",
+          "id": "_A842ge9zK",
           "type": "paragraph",
           "data": {
-            "text": "“We’re committed to following the law. Sometimes the law is unclear. So if the SEC wants to publish guidance, we are also happy to follow that,”&nbsp;Armstrong said in the tweets."
-          }
-        },
-        {
-          "id": "1kc_fjcsie",
-          "type": "paragraph",
-          "data": {
-            "text": "The product in question is billed as allowing users to earn a 4% annual percentage yield on a so-called stablecoin (USD Coin) by allowing Coinbase to lend those funds to verified borrowers. Coinbase backs USD Coin and guarantees that it can always be redeemed for $1. High interest accounts have become popular among crypto users, with companies like BlockFi and Gemini similarly offering a high yield on stablecoin and other cryptocurrency balances."
+            "text": "LastPass claims its “zero knowledge” architecture keeps users safe because the company never has access to your master password, which is the thing that hackers would need to unlock the stolen vaults."
           }
         }
       ],
-      "dateCreated": "September 09, 2021",
-      "dateModified": "April 22, 2022",
-      "timeCreated": "09:16 PM",
-      "timeModified": "09:46 PM"
+      "dateCreated": "December 29, 2022",
+      "timeCreated": "03:29 PM"
     },
     {
-      "title": "WHO says delta remains the ‘most concerning’ Covid variant despite emergence of mu",
-      "link": "who-says-delta-remains-the-most-concerning-covid.html",
+      "title": "Turf houses: Iceland's original 'green' buildings",
+      "link": "turf-houses-icelands-original-green-buildings.html",
       "author": {
-        "id": "bk1baa",
-        "name": "Peter Parker",
-        "avatar": "img/user/author-lybqnhew0wc.jpg"
+        "id": "tXeY2N",
+        "name": "Warren Wong",
+        "avatar": "img/user/author-85z9UC.jpg"
       },
-      "category": "Health",
+      "category": "Travel",
       "tags": [
-        "health"
+        "europe"
       ],
       "image": false,
+      "hidden": false,
       "blocks": [
         {
-          "id": "mXnTaOiq20",
+          "id": "Ll6d3NuYNg",
           "type": "paragraph",
           "data": {
-            "text": "The fast-spreading delta variant remains the “most concerning” coronavirus strain despite the emergence of the mu variant, World Health Organization officials said Tuesday."
+            "text": "Known as \"torfbæir\", these ingeniously designed homes helped settle one of Europe's least-hospitable environments."
           }
         },
         {
-          "id": "1oVTfn49Ct",
+          "id": "U5NW1Ez-A0",
           "type": "paragraph",
           "data": {
-            "text": "The mu variant, which was added to the&nbsp;WHO’s list of variants “of interest”&nbsp;last week, has mutations that suggest it could evade the immune protection provided by natural infection or vaccination, Maria Van Kerkhove, the agency’s technical lead for Covid-19, said during a virtual press event. Still, the new variant — first detected in Colombia but now confirmed in at least 39 countries — hasn’t taken off like delta, she said.&nbsp;&nbsp;"
+            "text": "With its lonely lava fields, sheer bluffs and stark boulder-strewn plains, Iceland is one of Europe's most barren countries. Across much of the island, the utter remoteness is striking, and that's especially true in the far-flung Northwestern Region, where I had come to learn about how Icelanders were able to settle one of the least hospitable and most volcanically active places on Earth."
           }
         },
         {
-          "id": "nTWG5cHl9c",
+          "id": "uBxLJZ9YwL",
           "type": "paragraph",
           "data": {
-            "text": "“The delta variant for me is the one that’s most concerning because of the increased transmissibility,” Kerkhove said, adding it has at least double the transmissibility of the original ancestral virus that emerged in late 2019."
+            "text": "Settling Iceland, even for the hardened Norse, was tough back in the 9th Century CE. There were sub-zero temperatures and thick snow cover even on lower-lying ground throughout much of the year. The predominantly rocky nation never yielded the fecund land other European nations did: just one-fifth of it, mostly in the Northwestern Region, is cultivatable to this day. When Norse sailors first spotted the island, Iceland was roughly 30% forested, a low coverage compared to elsewhere in Scandinavia at the time. With limited timber, materials for building houses were hard to come by, especially since the island's basalt rocks were difficult to hew.&nbsp;"
           }
         },
         {
-          "id": "WqlQ9A5MuJ",
-          "type": "paragraph",
+          "id": "io5Nj4oyXk",
+          "type": "image",
           "data": {
-            "text": "Delta has rapidly spread to at least 170 countries, including the U.S., since it was first detected in India in October, quickly becoming the dominant variant in many of those regions, according to the international health agency."
+            "file": {
+              "url": "img/user/image-post-JFq8ur.webp"
+            },
+            "caption": "The ingenious design of turf houses helped Nordic settlers survive in Iceland"
           }
         },
         {
-          "id": "FJf3qOQNjW",
+          "id": "zmsSdGb3kW",
           "type": "paragraph",
           "data": {
-            "text": "Mu, also known by scientists as B.1.621, is increasing its prevalence in some South American countries but is also decreasing in other regions of the world, especially where the delta variant is already circulating, she said."
+            "text": "All things considered, it's surprising Iceland's settlers even survived. That they did can be attributed to one factor above others: torfbæir (turf houses), which were used for shelter since the days of the first Nordic settlers until the late 20th Century. These dwellings were built around basic timber frames, with blocks cut out of turf (grass and the soil up to 1m thick) arranged over a base layer of rock and packed in to form the structure's walls and roofs. Today, they can still be found across the country, sticking out of the landscape grass-side up like tussocky tents. There are especially good examples open to the public at Glaumbær in the north-west, Laufás in the north and Keldur in the south."
           }
         },
         {
-          "id": "fMTCgZGaxX",
-          "type": "paragraph",
+          "id": "uMD4K8vKCJ",
+          "type": "quote",
           "data": {
-            "text": "Any new virus that emerges has to be able to compete with the “best of class,” and right now that is delta, said Dr. Mike Ryan, head of the WHO’s health emergencies program. The delta variant tends to “outcompete” other variants, like mu, he said."
+            "text": "The importance of Icelandic turf houses goes beyond turf – it is also aesthetics, as part of the national heritage",
+            "caption": "Hjörleifur Stefánsson, an Icelandic architect",
+            "alignment": "left"
           }
         },
         {
-          "id": "waBhBSZXXZ",
+          "id": "QDWsbOGc4k",
           "type": "paragraph",
           "data": {
-            "text": "It doesn’t matter if a new variant has genetic changes that allow it to evade the protection of vaccines if it can transmit efficiently, Ryan said."
-          }
-        },
-        {
-          "id": "Zj9sFtNNNx",
-          "type": "paragraph",
-          "data": {
-            "text": "“We will expect to see more” variants like delta, he said. “Not every variant means the sky is going to fall in. Each variant needs to be looked at for its characteristics in terms of its potential to cause more severe disease, its potential to transmit, its potential to escape vaccines.”"
+            "text": "Around the beginning of the 20th Century, philanthropists intervened, bemoaning the impracticality and unsavoury living conditions of turf houses. Timber, stone and then concrete, which were more readily available from the mid-19th Century onwards as overseas trade increased, became more commonly used for construction.&nbsp;"
           }
         }
       ],
-      "dateCreated": "September 09, 2021",
-      "dateModified": "April 22, 2022",
-      "timeCreated": "09:15 PM",
-      "timeModified": "09:45 PM"
+      "dateCreated": "December 29, 2022",
+      "timeCreated": "03:21 PM"
     }
   ]
 }

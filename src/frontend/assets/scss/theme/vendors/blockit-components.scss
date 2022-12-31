@@ -1,0 +1,105 @@
+.blockit-components {
+    .component-slide-new {
+        width: 99.4%;
+        height: 90px;
+        border: 2px dashed #e6e6e6;
+        border-radius: 8px;
+        text-align: center;
+        img {
+            border-radius: 3px;
+            height: 100%;
+        }
+        &.uk-background-center-left {
+            background-position: 10% 50%
+        }
+    }
+    .component-slide-count {
+        position: relative;
+        top: -22px;
+        left: 12px;
+    }
+    .delete-slide-btn {
+        background: $base-secondary-color;
+        width: 30px;
+        font-size: 10px;
+        padding: 4px 12px 5px 12px;
+        &.fas::before {
+            position: relative;
+        }
+        &.fa-trash-alt::before {
+            right: 1px;
+        }
+        &:hover {
+            background: $base-text-danger-color;
+        }
+    }
+    .uk-subnav.slide-group-nav {
+        font-size: 16px;
+        margin-bottom: 40px;
+    }
+    .uk-subnav-pill {
+        a {
+            padding: 9px 20px 8px 20px;
+            color: #999;
+            background: transparent;
+            border-radius: $base-border-radius;
+            box-shadow: inset 0 0 0 1px #ccc;
+        }
+        .uk-active > a {
+            color: #FFF;
+            background: #909090;
+            box-shadow: none;
+        }
+    }    
+    .setting-site-logo img {
+        height: 84px;
+        padding: 20px;
+        border: 2px dashed #e6e6e6;
+        border-radius: 8px;
+    }
+    .setting-footer-logo {
+        border: 2px dashed #e6e6e6;
+        border-radius: 8px;
+        img {
+            height: 84px;
+            padding: 20px;
+        }
+        &.spinner {
+            img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+        .uk-button {
+            background: $base-secondary-color;
+            width: 34px;
+            height: 34px;
+            &.ri-camera-fill::before {
+                position: relative;
+                left: -1px;
+            }
+        }
+    }
+    .setting-info {
+        background-color: $base-muted-color;
+        top: 38px;
+        right: 40px;
+        position: absolute;
+        padding-left: 13px;
+        .ri-sm {
+            position: relative;
+            top: 3px;
+        }
+    }
+    .footer {
+        .small-label {
+            font-size: 0.875rem;
+        }
+    }
+    .social-media {
+        .ri-lg {
+            position: relative;
+            top: 5px;
+        }
+    }
+}

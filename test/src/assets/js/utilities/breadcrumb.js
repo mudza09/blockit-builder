@@ -29,12 +29,13 @@ class Breadcrumb {
 
         this.breadcrumb.innerHTML = `<li class="breadcrumb-item"><a href="${this.breadcrumbHome.slice(location.pathname.lastIndexOf('/') + 1)}">${this.homeTitle}</a></li>`
         this.breadcrumbTitle.forEach(e => {
-            createLiElement = document.createElement('li')
-            createLiElement.classList.add('breadcrumb-item')
-            createLiElement.innerHTML =`<a href="${e.getAttribute('href')}">${e.textContent}</a>`
-            element.appendChild(createLiElement)
+            if(this.breadcrumbHome !== e.pathname) {
+                createLiElement = document.createElement('li')
+                createLiElement.classList.add('breadcrumb-item')
+                createLiElement.innerHTML =`<a href="${e.getAttribute('href')}">${e.textContent}</a>`
+                element.appendChild(createLiElement)
+            }
         })
-        
     }
 
     createBreadcrumbLast() {
@@ -61,7 +62,7 @@ class Breadcrumb {
             this.breadcrumb.innerHTML = `<li class="breadcrumb-item"><a href="${pathParam}">${this.homeTitle}</a></li>`
 
             breadcrumbCurrent.forEach(e => {
-                if(e.pathname.substring(1) == blogPath) {
+                if(e.pathname.split('/').at(-1) == blogPath) {
                     const urlParams = window.location.href.split( '/' )
                     const currentPage = urlParams.pop()
                     const levelOne = document.createElement('li')

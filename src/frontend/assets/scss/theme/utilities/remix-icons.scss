@@ -1,0 +1,49 @@
+.ri-lg { 
+    font-size: 1.529rem !important;
+}
+
+.ri-sm { 
+    font-size: .882rem !important
+}
+
+.ri-1x { 
+    font-size: 1rem !important; 
+}
+
+.ri-spin {
+    display: inline-block;
+    animation-name: spin;
+    animation-delay:0;
+    animation-direction: normal;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+.uk-button {
+    .ri-1x,
+    .ri-sm {
+        line-height: 0;
+        font-weight: normal;
+        position: relative;
+        top: 2px;
+    }
+}
+
+.uk-button-small {
+    .ri-sm {
+        line-height: 0;
+        font-weight: normal;
+        position: relative;
+        top: 3px;
+    }
+}

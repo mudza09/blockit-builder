@@ -57,17 +57,20 @@ class Blog {
             })
             const categoryFilter = data[1].filter(item => item.category !== 'Uncategorized')
             categoryFilter.forEach(eachData => {
-                this.categoryWrap.innerHTML += `<li><a href="blog-find.html?category=${eachData.category.toLowerCase()}" class="link-dark text-decoration-none">${eachData.category}<span class="badge rounded-1 float-end">${eachData.totalPost}</span></a></li>`
+                this.categoryWrap.innerHTML += `<li><a href="blog-find.html?category=${eachData.category.toLowerCase()}" class="link-dark text-decoration-none d-flex justify-content-between align-items-center">${eachData.category}<span class="badge rounded-1">${eachData.totalPost}</span></a></li>`
             })
         }
     }
 
     createLatestWidget(data) {
+        const path = location.pathname.split('/')
+        path[path.length-1] = 'blog'
+
         if(document.querySelector('.widget-latest') !== null) {
             data[0].latestPost.forEach(each => {
                 this.latestWrap.innerHTML += `
                 <li class="list-group-item bg-transparent px-0">
-                    <a href="/blog/${each.link}" class="link-dark text-decoration-none">${this.trimLongTitle(each.title, 55)}</a><br>
+                    <a href="${path.join('/')}/${each.link}" class="link-dark text-decoration-none">${this.trimLongTitle(each.title, 55)}</a><br>
                     <small class="text-muted"><i class="fas fa-clock fa-sm me-1"></i>${each.date}</small>
                 </li>
                 `
@@ -176,7 +179,7 @@ class Blog {
                 })
             }
             if(params.has('tag')) {
-                const tagName = this.capitalizeText(params.get('tag'))
+                const tagName = params.get('tag')
 
                 textEl.textContent = 'Post with tag :'
                 headingEl.innerHTML = `<i class="fas fa-tag fa-xs me-1 position-relative" style="top: 3px;"></i>${tagName}`
@@ -242,7 +245,7 @@ class Blog {
                 const body = post.content.toLowerCase()
 
                 textEl.textContent = 'Search result for :'
-                headingEl.innerHTML = `<i class="fas fa-search fa-xs me-1 position-relative" style="top: 3px;"></i>${this.capitalizeText(params.get('result'))}`
+                headingEl.innerHTML = `<i class="fas fa-search fa-xs me-1 position-relative" style="top: 3px;"></i>${params.get('result')}`
 
                 notFoundArr.push(title.indexOf(params.get('result')))
                 notFoundArr.push(body.indexOf(params.get('result')))
@@ -275,7 +278,7 @@ class Blog {
         </h3>
         <p>${content}</p>
         <div class="blog-author d-flex align-items-center">
-            <img class="rounded-circle me-1" src="../${author.avatar}" alt="author" width="32" height="32">
+            <img class="rounded-circle me-1" src="${author.avatar}" alt="author" width="32" height="32">
             <small class="text-muted">
                 ${author.name}<span class="mx-1">•</span>${date}
             </small>
