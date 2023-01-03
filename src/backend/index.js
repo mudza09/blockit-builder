@@ -24,6 +24,7 @@ const startBuild = async () => {
 
 const startBlockit = () => {
 	utils.logHeading();
+	utils.hookSections();
 	server.run();
 };
 

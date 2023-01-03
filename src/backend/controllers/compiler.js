@@ -211,7 +211,7 @@ export default class Compiler {
 			instance.reload();
 		}));
 		chokidar.watch(['./src/hooks/blog/search-post.hbs', './src/hooks/blog/search-result.hbs']).on('change', () => this.utils.hookSearch());
-		chokidar.watch('./src/hooks/sections/previews/*', options).on('all', (event, path) => this.utils.hookSectionsPreview(event, path));
+		chokidar.watch(['./src/hooks/sections/*.hbs', './src/hooks/sections/previews/*.webp'], options).on('unlink', path => this.utils.hookSectionsRemove(path));
 	};
 
 	builderWatch = (instance, env) => {

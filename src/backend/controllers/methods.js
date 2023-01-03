@@ -48,97 +48,94 @@ export default class Methods {
 
 	// Pages action data
 	createPagesActionData = () => {
-		fs.readdir('./node_modules/blockit-builder/templates', (err, files) => {
-			const sections = files.filter(eachFile => eachFile.match(/.(hbs)$/i));
-			const exclusiveSectionsCheck = fs.readdirSync('./src/hooks/sections', 'utf-8').filter(eachFile => !eachFile.includes('blog')).filter(eachFile => eachFile.match(/.(hbs)$/i));
-			const exclusiveSections = this.utils.checkHook() && exclusiveSectionsCheck.length !== 0 ? exclusiveSectionsCheck : false;
-			const themeName = exclusiveSections === false ? 'empty' : exclusiveSections[0].split('-')[1].charAt(0).toUpperCase() + exclusiveSections[0].split('-')[1].slice(1);
+		const exclusiveSectionsCheck = fs.readdirSync('./src/hooks/sections', 'utf-8').filter(eachFile => eachFile.match(/.(hbs)$/i));
+		const exclusiveSections = this.utils.checkHook() && exclusiveSectionsCheck.length !== 0 ? exclusiveSectionsCheck : false;
+		const themeName = exclusiveSections === false ? 'empty' : exclusiveSections[0].split('-')[1];
 
-			const exclusiveData = {
-				name: `Exclusive - ${themeName}`,
-				sections: exclusiveSections,
-				icon: 'ri-award-line',
-			};
+		const exclusiveData = {
+			name: `Exclusive - ${themeName.charAt(0).toUpperCase() + themeName.slice(1)}`,
+			sections: exclusiveSections,
+			icon: 'ri-award-line',
+		};
 
-			const data = [
-				{
-					name: 'Card',
-					sections: sections.filter(str => str.includes('card')),
-					icon: 'ri-sticky-note-line',
-				},
-				{
-					name: 'Client logo',
-					sections: sections.filter(str => str.includes('client-logo')),
-					icon: 'ri-bubble-chart-line',
-				},
-				{
-					name: 'Contact',
-					sections: sections.filter(str => str.includes('contact')),
-					icon: 'ri-road-map-line',
-				},
-				{
-					name: 'Content',
-					sections: sections.filter(str => str.includes('content')),
-					icon: 'ri-file-text-line',
-				},
-				{
-					name: 'Counter',
-					sections: sections.filter(str => str.includes('counter')),
-					icon: 'ri-timer-line',
-				},
-				{
-					name: 'Faq',
-					sections: sections.filter(str => str.includes('faq')),
-					icon: 'ri-questionnaire-line',
-				},
-				{
-					name: 'Feature',
-					sections: sections.filter(str => str.includes('feature')),
-					icon: 'ri-stack-line',
-				},
-				{
-					name: 'Gallery',
-					sections: sections.filter(str => str.includes('gallery')),
-					icon: 'ri-gallery-line',
-				},
-				{
-					name: 'Pricing',
-					sections: sections.filter(str => str.includes('pricing')),
-					icon: 'ri-price-tag-3-line',
-				},
-				{
-					name: 'Slideshow',
-					sections: sections.filter(str => str.includes('slideshow')),
-					icon: 'ri-slideshow-2-line',
-				},
-				{
-					name: 'Team',
-					sections: sections.filter(str => str.includes('team')),
-					icon: 'ri-user-line',
-				},
-				{
-					name: 'Testimonial',
-					sections: sections.filter(str => str.includes('testimonial')),
-					icon: 'ri-chat-quote-line',
-				},
-				{
-					name: 'Timeline',
-					sections: sections.filter(str => str.includes('timeline')),
-					icon: 'ri-history-line',
-				},
-				{
-					name: 'Utility',
-					sections: sections.filter(str => str.includes('utility')),
-					icon: 'ri-tools-line',
-				},
-			];
+		const data = [
+			{
+				name: 'Card',
+				sections: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/templates/section-card.json', 'utf-8')).map(each => each.sectionName),
+				icon: 'ri-sticky-note-line',
+			},
+			{
+				name: 'Client logo',
+				sections: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/templates/section-client-logo.json', 'utf-8')).map(each => each.sectionName),
+				icon: 'ri-bubble-chart-line',
+			},
+			{
+				name: 'Contact',
+				sections: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/templates/section-contact.json', 'utf-8')).map(each => each.sectionName),
+				icon: 'ri-road-map-line',
+			},
+			{
+				name: 'Content',
+				sections: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/templates/section-content.json', 'utf-8')).map(each => each.sectionName),
+				icon: 'ri-file-text-line',
+			},
+			{
+				name: 'Counter',
+				sections: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/templates/section-counter.json', 'utf-8')).map(each => each.sectionName),
+				icon: 'ri-timer-line',
+			},
+			{
+				name: 'Faq',
+				sections: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/templates/section-faq.json', 'utf-8')).map(each => each.sectionName),
+				icon: 'ri-questionnaire-line',
+			},
+			{
+				name: 'Feature',
+				sections: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/templates/section-feature.json', 'utf-8')).map(each => each.sectionName),
+				icon: 'ri-stack-line',
+			},
+			{
+				name: 'Gallery',
+				sections: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/templates/section-gallery.json', 'utf-8')).map(each => each.sectionName),
+				icon: 'ri-gallery-line',
+			},
+			{
+				name: 'Pricing',
+				sections: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/templates/section-pricing.json', 'utf-8')).map(each => each.sectionName),
+				icon: 'ri-price-tag-3-line',
+			},
+			{
+				name: 'Slideshow',
+				sections: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/templates/component-slideshow.json', 'utf-8')).map(each => each.sectionName),
+				icon: 'ri-slideshow-2-line',
+			},
+			{
+				name: 'Team',
+				sections: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/templates/section-team.json', 'utf-8')).map(each => each.sectionName),
+				icon: 'ri-user-line',
+			},
+			{
+				name: 'Testimonial',
+				sections: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/templates/section-testimonial.json', 'utf-8')).map(each => each.sectionName),
+				icon: 'ri-chat-quote-line',
+			},
+			{
+				name: 'Timeline',
+				sections: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/templates/section-timeline.json', 'utf-8')).map(each => each.sectionName),
+				icon: 'ri-history-line',
+			},
+			{
+				name: 'Utility',
+				sections: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/templates/section-utility.json', 'utf-8')).map(each => each.sectionName),
+				icon: 'ri-tools-line',
+			},
+		];
 
-			if (exclusiveSections !== false) {
-				data.splice(5, 0, exclusiveData);
-			}
+		if (exclusiveSections !== false) {
+			data.splice(5, 0, exclusiveData);
+		}
 
-			this.socket.emit('pagesActionData', data);
-		});
+		this.socket.emit('pagesActionData', data);
 	};
 
 	pagesDeletePage = (nameFile, sections) => {
@@ -148,7 +145,7 @@ export default class Methods {
 				fs.unlinkSync(`./dist/${nameFile}.html`);
 				fs.unlinkSync(`./src/pages/${nameFile}.hbs`);
 				if (sections !== undefined) {
-					sections.forEach(item => !item.includes('section-slideshow') && fs.unlinkSync(`./src/partials/sections/${item}.hbs`));
+					sections.forEach(item => !item.includes('component-slideshow') && fs.unlinkSync(`./src/partials/sections/${item}.hbs`));
 				}
 			} else {
 				fs.unlinkSync(`./dist/${nameFile}.html`);
@@ -204,9 +201,9 @@ export default class Methods {
 				});
 
 				// Change frontmatter in blog.hbs, blog-single.hbs, and blog-find.hbs
-				this.changeBlogFrontmatter(objects.data, './src/hooks/pages/blog.hbs', './node_modules/blockit-builder/hooks/pages/blog.hbs');
-				this.changeBlogFrontmatter(objects.data, './src/hooks/pages/blog-single.hbs', './node_modules/blockit-builder/hooks/pages/blog-single.hbs');
-				this.changeBlogFrontmatter(objects.data, './src/hooks/pages/blog-find.hbs', './node_modules/blockit-builder/hooks/pages/blog-find.hbs');
+				this.changeBlogFrontmatter(objects.data, './src/hooks/blog/pages/blog.hbs', './node_modules/blockit-builder/hooks/blog/pages/blog.hbs');
+				this.changeBlogFrontmatter(objects.data, './src/hooks/blog/pages/blog-single.hbs', './node_modules/blockit-builder/hooks/blog/pages/blog-single.hbs');
+				this.changeBlogFrontmatter(objects.data, './src/hooks/blog/pages/blog-find.hbs', './node_modules/blockit-builder/hooks/blog/pages/blog-find.hbs');
 
 				// Change frontmatter in each blog post
 				fs.readdir('./src/pages/blog', (err, files) => {
@@ -217,17 +214,17 @@ export default class Methods {
 				fs.readFile('./src/data/blog/blog.json', 'utf8', (err, file) => {
 					const postObj = JSON.parse(file);
 					const dataTag = {
-						defaultPage: fs.existsSync('./src/hooks/pages/blog.hbs') ? fs.readFileSync('./src/hooks/pages/blog.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/pages/blog.hbs', 'utf8'),
-						singlePage: fs.existsSync('./src/hooks/pages/blog-single.hbs') ? fs.readFileSync('./src/hooks/pages/blog-single.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/pages/blog-single.hbs', 'utf8'),
-						defaultSection: fs.existsSync('./src/hooks/sections/section-blog.hbs') ? fs.readFileSync('./src/hooks/sections/section-blog.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/sections/section-blog.hbs', 'utf8'),
-						singleSection: fs.existsSync('./src/hooks/sections/section-blog-single.hbs') ? fs.readFileSync('./src/hooks/sections/section-blog-single.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/sections/section-blog-single.hbs', 'utf8'),
+						defaultPage: fs.existsSync('./src/hooks/blog/pages/blog.hbs') ? fs.readFileSync('./src/hooks/blog/pages/blog.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/pages/blog.hbs', 'utf8'),
+						singlePage: fs.existsSync('./src/hooks/blog/pages/blog-single.hbs') ? fs.readFileSync('./src/hooks/blog/pages/blog-single.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/pages/blog-single.hbs', 'utf8'),
+						defaultSection: fs.existsSync('./src/hooks/blog/sections/section-blog.hbs') ? fs.readFileSync('./src/hooks/blog/sections/section-blog.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/sections/section-blog.hbs', 'utf8'),
+						singleSection: fs.existsSync('./src/hooks/blog/sections/section-blog-single.hbs') ? fs.readFileSync('./src/hooks/blog/sections/section-blog-single.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/sections/section-blog-single.hbs', 'utf8'),
 					};
 
 					this.postPaginatorPage(postObj, dataTag);
 				});
 
 				// Write blog-find.hbs page
-				const pathBlogFind = fs.existsSync('./src/hooks/pages/blog-find.hbs') ? './src/hooks/pages/blog-find.hbs' : './node_modules/blockit-builder/hooks/pages/blog-find.hbs';
+				const pathBlogFind = fs.existsSync('./src/hooks/blog/pages/blog-find.hbs') ? './src/hooks/blog/pages/blog-find.hbs' : './node_modules/blockit-builder/hooks/blog/pages/blog-find.hbs';
 				fs.readFile(pathBlogFind, 'utf8', (err, file) => {
 					const layoutChange = file.replace(/(?<=layout:\s).*/g, objects.data.layout);
 					const titleChange = layoutChange.replace(/(?<=title:\s).*/g, objects.data.title);
@@ -251,32 +248,54 @@ export default class Methods {
 	};
 
 	readSectionData = nameFile => {
-		const path = nameFile.split('-').length >= 4 ? `./src/partials/sections/${nameFile}.hbs` : `./node_modules/blockit-builder/templates/${nameFile}.hbs`;
-		fs.readFile(path, 'utf8', (err, file) => {
-			const data = {
-				blocks: [
-					{
-						id: nameFile,
-						type: 'code',
-						data: {
-							language: 'HTML',
-							text: file,
+		const pathData = nameFile.split('-').length >= 4 ? `./src/partials/sections/${nameFile}.hbs` : `./node_modules/blockit-builder/templates/${nameFile.split('-').slice(0, -1).join('-')}.json`;
+
+		fs.readFile(pathData, 'utf8', (err, file) => {
+			if (nameFile.split('-').length >= 4) {
+				const data = {
+					blocks: [
+						{
+							id: nameFile,
+							type: 'code',
+							data: {
+								language: 'HTML',
+								text: file,
+							},
 						},
-					},
-				],
-			};
-			this.socket.emit('resultSectionData', data);
+					],
+				};
+				this.socket.emit('resultSectionData', data);
+			} else {
+				const index = JSON.parse(file).findIndex(e => e.sectionName === nameFile);
+				const data = {
+					blocks: [
+						{
+							id: nameFile.split('-').length >= 4 ? nameFile : JSON.parse(file)[index].sectionName,
+							type: 'code',
+							data: {
+								language: 'HTML',
+								text: nameFile.split('-').length >= 4 ? file : JSON.parse(file)[index].sectionTag,
+							},
+						},
+					],
+				};
+				this.socket.emit('resultSectionData', data);
+			}
 		});
 	};
 
 	createSectionData = (sections, deletedSections) => {
 		sections.forEach(item => {
-			fs.readFile(`./node_modules/blockit-builder/templates/${item.reference}.hbs`, 'utf8', (err, file) => {
-				if (file.includes('<!-- slideshow content begin -->')) {
-					fs.writeFileSync(`./src/partials/sections/${item.reference}.hbs`, item.updateData === false ? file : item.updateData);
-				} else {
-					fs.writeFileSync(`./src/partials/sections/${item.reference}-${item.id}.hbs`, item.updateData === false ? file : item.updateData);
-				}
+			fs.readFile(`./node_modules/blockit-builder/templates/${item.reference.split('-').slice(0, -1).join('-')}.json`, 'utf8', (err, file) => {
+				JSON.parse(file).forEach(each => {
+					if (each.sectionName === item.reference && !each.sectionName.includes('component-slideshow')) {
+						if (item.updateData === 'new') {
+							fs.writeFileSync(`./src/partials/sections/${item.reference}-${item.id}.hbs`, each.sectionTag);
+						} else if (item.updateData !== false && item.updateData !== 'new') {
+							fs.writeFileSync(`./src/partials/sections/${item.reference}-${item.id}.hbs`, item.updateData);
+						}
+					}
+				});
 			});
 		});
 		if (deletedSections.length !== 0 || deletedSections[0] !== false) {
@@ -591,10 +610,10 @@ export default class Methods {
 
 	postsTagSources = () => {
 		const tagData = {
-			defaultPage: fs.existsSync('./src/hooks/pages/blog.hbs') ? fs.readFileSync('./src/hooks/pages/blog.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/pages/blog.hbs', 'utf8'),
-			singlePage: fs.existsSync('./src/hooks/pages/blog-single.hbs') ? fs.readFileSync('./src/hooks/pages/blog-single.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/pages/blog-single.hbs', 'utf8'),
-			defaultSection: fs.existsSync('./src/hooks/sections/section-blog.hbs') ? fs.readFileSync('./src/hooks/sections/section-blog.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/sections/section-blog.hbs', 'utf8'),
-			singleSection: fs.existsSync('./src/hooks/sections/section-blog-single.hbs') ? fs.readFileSync('./src/hooks/sections/section-blog-single.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/sections/section-blog-single.hbs', 'utf8'),
+			defaultPage: fs.existsSync('./src/hooks/blog/pages/blog.hbs') ? fs.readFileSync('./src/hooks/blog/pages/blog.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/pages/blog.hbs', 'utf8'),
+			singlePage: fs.existsSync('./src/hooks/blog/pages/blog-single.hbs') ? fs.readFileSync('./src/hooks/blog/pages/blog-single.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/pages/blog-single.hbs', 'utf8'),
+			defaultSection: fs.existsSync('./src/hooks/blog/sections/section-blog.hbs') ? fs.readFileSync('./src/hooks/blog/sections/section-blog.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/sections/section-blog.hbs', 'utf8'),
+			singleSection: fs.existsSync('./src/hooks/blog/sections/section-blog-single.hbs') ? fs.readFileSync('./src/hooks/blog/sections/section-blog-single.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/sections/section-blog-single.hbs', 'utf8'),
 		};
 		this.socket.emit('tagSourcesData', tagData);
 	};
@@ -853,25 +872,43 @@ export default class Methods {
 			slideshowTag = fs.readFileSync('./src/hooks/slideshow/slideshow-wrapper.hbs', 'utf8');
 		}
 
-		const slideshowAll = ['section-slideshow-1.hbs', 'section-slideshow-2.hbs', 'section-slideshow-3.hbs', 'section-slideshow-4.hbs'];
-		const slideshowExist = data.map((each, index) => each.slides.length === 0 ? false : index).filter(each => each !== false).map(each => `section-slideshow-${each + 1}.hbs`);
-		const slideshowDelete = slideshowAll.filter(x => !slideshowExist.includes(x));
+		const slideshowAll = [
+			{
+				sectionName: 'component-slideshow-1',
+				slides: data[0].slides,
+			},
+			{
+				sectionName: 'component-slideshow-2',
+				slides: data[1].slides,
+			},
+			{
+				sectionName: 'component-slideshow-3',
+				slides: data[2].slides,
+			},
+			{
+				sectionName: 'component-slideshow-4',
+				slides: data[3].slides,
+			},
+		];
+
+		const slideshowExist = slideshowAll.filter(each => each.slides.length !== 0);
+		const slideshowDelete = slideshowAll.filter(item => !slideshowExist.includes(item)).map(each => each.sectionName);
 
 		data.forEach((each, index) => {
 			if (each.slides.length !== 0) {
 				const slideData = each.slides.map(item => item.text);
 				const modifiedTag = slideshowTag.replace(/\{{(.*slide-id)\}}/g, slideData.join(' '));
-				fs.writeFileSync(`./node_modules/blockit-builder/templates/section-slideshow-${index + 1}.hbs`, modifiedTag);
-				fs.writeFileSync(`./src/partials/sections/section-slideshow-${index + 1}.hbs`, modifiedTag);
+
+				fs.writeFileSync('./node_modules/blockit-builder/templates/component-slideshow.json', JSON.stringify(slideshowExist, null, 4));
+				fs.writeFileSync(`./src/partials/components/component-slideshow-${index + 1}.hbs`, modifiedTag);
 			}
 		});
 
 		// Delete unused slideshow file
-		fs.readdir('./node_modules/blockit-builder/templates', (err, files) => {
-			files.filter(item => slideshowDelete.includes(item)).forEach(each => {
-				fs.unlinkSync(`./node_modules/blockit-builder/templates/${each}`);
-				fs.unlinkSync(`./src/partials/sections/${each}`);
-			});
+		slideshowDelete.forEach(each => {
+			if (fs.existsSync(`./src/partials/components/${each}.hbs`)) {
+				fs.unlinkSync(`./src/partials/components/${each}.hbs`);
+			}
 		});
 	};
 

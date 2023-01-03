@@ -21,6 +21,8 @@ export default function PagesAction() {
 	const [libraryData, setLibraryData] = useState([]);
 	const [sectionData, setSectionData] = useState('');
 	const [blogStatus, setBlogStatus] = useState(false);
+	const [modeChange, setModeChange] = useState(false);
+	const [canvasId, setCanvasId] = useState([]);
 	const canvasWrap = useRef(null);
 	const placeholdWrap = useRef(null);
 	const breadcrumbCheck = useRef(null);
@@ -76,6 +78,7 @@ export default function PagesAction() {
 						breadcrumb: params.get('breadcrumb'),
 						asBlog: false,
 						sections: '',
+						revertFromBlog: true,
 					})}`,
 				});
 				setBlogStatus(false);
@@ -103,51 +106,59 @@ export default function PagesAction() {
 
 		if (handleValidateForm(pageForm)) {
 			let sections;
+			let deletedSections;
 
 			if (mode === 'add') {
 				sections = Array.from(canvasWrap.current.children).map(item => (
 					{
 						id: uid(),
 						reference: item.classList[1],
-						updateData: JSON.parse(sessionStorage.getItem(`${item.classList[1]}`)) === null ? false : JSON.parse(sessionStorage.getItem(`${item.classList[1]}`)).blocks[0].data.text,
+						updateData: JSON.parse(sessionStorage.getItem(`${item.classList[1]}`)) === null ? 'new' : JSON.parse(sessionStorage.getItem(`${item.classList[1]}`)).blocks[0].data.text,
 					}
 				));
+				deletedSections = [false];
+				setModeChange(true);
+				setCanvasId(sections);
 			} else if (mode === 'edit') {
 				const paramSection = params.get('sections').split(',');
 				const canvasSection = Array.from(canvasWrap.current.children).map(item => item.classList[1]);
 
-				if (paramSection.toString() !== canvasSection.toString()) {
-					sections = Array.from(canvasWrap.current.children).map(item => (
-						{
-							id: item.classList[1].split('-').pop().length === 6 ? item.classList[1].split('-').pop() : uid(),
-							reference: item.classList[1].split('-').pop().length === 6 ? item.classList[1].split('-').slice(0, -1).join('-') : item.classList[1],
-							updateData: JSON.parse(sessionStorage.getItem(`${item}`)) === null ? false : JSON.parse(sessionStorage.getItem(`${item}`)).blocks[0].data.text,
-						}
-					));
-				} else if (paramSection[0] === '') {
+				if (params.get('revertFromBlog') === 'true' && blogCheck.current.checked === false) {
 					// If revert from blog to regular page
 					sections = Array.from(canvasWrap.current.children).map(item => (
 						{
 							id: uid(),
 							reference: item.classList[1],
-							updateData: JSON.parse(sessionStorage.getItem(`${item.classList[1]}`)) === null ? false : JSON.parse(sessionStorage.getItem(`${item.classList[1]}`)).blocks[0].data.text,
+							updateData: JSON.parse(sessionStorage.getItem(`${item.classList[1]}`)) === null ? 'new' : JSON.parse(sessionStorage.getItem(`${item.classList[1]}`)).blocks[0].data.text,
 						}
 					));
+					deletedSections = [false];
+				} else if (params.get('revertFromBlog') === null && paramSection.toString() !== canvasSection.toString()) {
+					// If there any change in canvas, or param sections and canvas sections is different
+					sections = Array.from(canvasWrap.current.children).map(item => (
+						{
+							id: item.classList[1].split('-').pop().length === 6 ? item.classList[1].split('-').pop() : uid(),
+							reference: item.classList[1].split('-').pop().length === 6 ? item.classList[1].split('-').slice(0, -1).join('-') : item.classList[1],
+							updateData: item.classList.contains('uk-first-column') ? 'new' : false,
+						}
+					));
+					deletedSections = params.get('sections') === null ? [false] : params.get('sections').split(',').filter(deleted => !sections.map(item => `${item.reference}-${item.id}`).includes(deleted));
 				} else {
+					// If there any slideshow component in canvas and regular change in section tag content
 					const processedSection = canvasSection[0].split('-').pop().length === 6 ? canvasSection.map(each => each) : canvasSection.map(each => paramSection.filter(word => word.includes(each))[0]);
 					sections = processedSection.map(item => (
 						{
-							id: item.includes('section-slideshow') ? item : item.split('-').pop(),
-							reference: item.includes('section-slideshow') ? item : item.substring(0, item.lastIndexOf('-')),
+							id: item.includes('component-slideshow') ? item : item.split('-').pop(),
+							reference: item.includes('component-slideshow') ? item : item.substring(0, item.lastIndexOf('-')),
 							updateData: JSON.parse(sessionStorage.getItem(`${item}`)) === null ? false : JSON.parse(sessionStorage.getItem(`${item}`)).blocks[0].data.text,
 						}
 					));
+					deletedSections = params.get('sections') === null ? [false] : params.get('sections').split(',').filter(deleted => !sections.map(item => `${item.reference}-${item.id}`).includes(deleted));
 				}
 			}
 
 			const {name, title, layout, breadcrumb} = pageForm;
 			const blog = blogCheck.current.checked;
-			const deletedSections = params.get('sections') === null ? [false] : params.get('sections').split(',').filter(deleted => !sections.map(item => `${item.reference}-${item.id}`).includes(deleted));
 
 			// Send data page to host and delete old name if name changed
 			bs.socket.emit('savePageActionData', {
@@ -159,7 +170,7 @@ export default function PagesAction() {
 					pageTitle: title,
 					breadcrumb,
 					blog,
-					listSections: sections.map(each => each.reference.includes('section-slideshow') ? `${each.reference}` : `${each.reference}-${each.id}`),
+					listSections: sections.map(each => each.reference.includes('component-slideshow') ? `${each.reference}` : `${each.reference}-${each.id}`),
 				}),
 			});
 			if (mode === 'edit') {
@@ -181,7 +192,7 @@ export default function PagesAction() {
 					layout,
 					breadcrumb,
 					asBlog: params.get('asBlog'),
-					sections: [sections.map(each => each.reference.includes('section-slideshow') ? `${each.reference}` : `${each.reference}-${each.id}`)],
+					sections: [sections.map(each => each.reference.includes('component-slideshow') ? `${each.reference}` : `${each.reference}-${each.id}`)],
 				})}`,
 			});
 
@@ -377,6 +388,8 @@ export default function PagesAction() {
 										placeholderRef={placeholdWrap}
 										handleEditor={handleEditorSection}
 										dirtyCallback={setIsDirty}
+										modeChange={modeChange}
+										canvasId={canvasId}
 									/>
 								</div>
 								<div className='uk-position-center' ref={placeholdWrap}>

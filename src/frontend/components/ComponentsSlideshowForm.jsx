@@ -48,13 +48,13 @@ export default function ComponentsSlideshowForm(props) {
 						const modalWrap = editor.configuration.holder.closest('.uk-modal-container');
 						const editorWrap = modalWrap.querySelector('.codex-editor');
 
-						editor.save().then(data => {
-							data.blocks[0].id = slideName.slice(6);
-							delete data.time;
-							delete data.version;
+						editor.save().then(dataEditor => {
+							dataEditor.blocks[0].id = slideName.slice(6);
+							delete dataEditor.time;
+							delete dataEditor.version;
 
 							// Store update data into sessionStorage, and send update data itu parent props data
-							sessionStorage.setItem(slideName, JSON.stringify(data));
+							sessionStorage.setItem(slideName, JSON.stringify(dataEditor));
 							data.text = JSON.parse(sessionStorage.getItem(slideName)).blocks[0].data.text;
 
 							UIkit.modal(modalWrap).hide();

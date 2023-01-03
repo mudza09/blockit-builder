@@ -199,13 +199,37 @@ export default class Utils {
 		});
 	};
 
-	// Hook preview process for add on sections preview
-	hookSectionsPreview = (event, fileName) => {
-		if (event === 'add') {
-			fs.copyFileSync(fileName, `./node_modules/blockit-builder/assets/img/sections/${path.basename(fileName)}`);
+	// Register hook sections and previews hook
+	hookSections = () => {
+		const sectionsCheck = fs.readdirSync('./src/hooks/sections', 'utf-8').filter(eachFile => eachFile.match(/.(hbs)$/i));
+		const previewsCheck = fs.readdirSync('./src/hooks/sections/previews', 'utf-8');
+		const themeName = sectionsCheck.length === 0 ? false : sectionsCheck[0].split('-')[1];
+
+		if (sectionsCheck.length !== 0) {
+			const sectionData = sectionsCheck.filter(item => item.includes(themeName)).sort((a, b) => a.length - b.length).map(each => ({
+				sectionName: each.split('.')[0],
+				sectionTag: fs.readFileSync(`./src/hooks/sections/${each}`, 'utf8'),
+			}));
+			fs.writeFileSync(`./node_modules/blockit-builder/templates/section-${themeName}.json`, JSON.stringify(sectionData, null, 4));
 		}
 
-		if (event === 'unlink') {
+		if (previewsCheck.length !== 0) {
+			previewsCheck.forEach(each => {
+				fs.copyFileSync(`./src/hooks/sections/previews/${each}`, `./node_modules/blockit-builder/assets/img/sections/${each}`);
+			});
+		}
+	};
+
+	// Remove hook sections and previews hook
+	hookSectionsRemove = fileName => {
+		if (path.extname(fileName) === '.hbs' && fs.readdirSync('./src/hooks/sections', 'utf8').length === 1) {
+			const themeName = path.basename(fileName, '.hbs').split('-').slice(0, -1).join('-');
+			if (fs.existsSync(`./node_modules/blockit-builder/templates/${themeName}.json`)) {
+				fs.unlinkSync(`./node_modules/blockit-builder/templates/${themeName}.json`);
+			}
+		}
+
+		if (path.extname(fileName) === '.webp') {
 			fs.unlinkSync(`./node_modules/blockit-builder/assets/img/sections/${path.basename(fileName)}`);
 		}
 	};

@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
+import ShortUniqueId from 'short-unique-id';
 import PropTypes from 'prop-types';
 import UIkit from 'uikit';
 
@@ -19,11 +20,19 @@ export default function PagesCanvas(props) {
 	const sections = params.get('sections');
 	const {canvasAreaRef, handleEditor, placeholderRef, dirtyCallback, modeChange, canvasId} = props;
 
+	// Id generator
+	const uid = new ShortUniqueId({length: 6});
+
 	// Handle drag and drop event
 	const handleDragDrop = () => {
+		const sectionId = uid();
+
 		UIkit.util.on(canvasAreaRef.current, 'added', () => {
 			dirtyCallback(true);
 			Array.from(canvasAreaRef.current.children).forEach(item => {
+				item.querySelector('img').setAttribute('alt', `${item.classList[1]}-${sectionId}`);
+				item.querySelector('span').textContent = `${item.classList[1]}-${sectionId}`;
+
 				item.querySelector('.uk-transition-fade').classList.remove('uk-flex-bottom');
 				item.querySelector('.uk-transition-fade').classList.add('uk-flex-middle');
 				item.querySelector('.uk-text-small').setAttribute('hidden', '');
