@@ -2,7 +2,7 @@
   "name": "blockit-builder",
   "title": "Blockit Builder",
   "description": "A static HTML builder from Indonez",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "type": "module",
   "author": "mudza09",
   "license": "MIT",
@@ -14,9 +14,9 @@
     "url": "https://github.com/mudza09/blockit-builder/issues"
   },
   "dependencies": {
-    "@babel/core": "7.16.5",
-    "@babel/preset-env": "7.16.5",
-    "browser-sync": "2.27.10",
+    "@babel/core": "7.20.12",
+    "@babel/preset-env": "7.20.2",
+    "browser-sync": "2.27.11",
     "chokidar": "3.5.3",
     "handlebars": "4.7.7",
     "js-yaml": "4.1.0",
