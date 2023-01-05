@@ -43,8 +43,6 @@ export default class Engine {
 	loadHelpers = () => {
 		this.Handlebars.registerHelper('ifand', ifAnd);
 		this.Handlebars.registerHelper('ifequal', ifEqual);
-		this.Handlebars.registerHelper('ifpage', ifPage);
-		this.Handlebars.registerHelper('unlessPage', unlessPage);
 	};
 
 	// Load hbs pages function
@@ -80,6 +78,10 @@ export default class Engine {
 			body: this.utils.frontmatter(current).content,
 		};
 		const generalData = {...currentData, ...globalData};
+
+		// Special ad-hoc partials for #ifpage and #unlesspage
+		this.Handlebars.registerHelper('ifpage', ifPage(generalData.page));
+		this.Handlebars.registerHelper('unlessPage', unlessPage(generalData.page));
 
 		// Choose wich layout to use
 		const layout = fs.readFileSync(`./src/layouts/${generalData.layout}.hbs`, 'utf-8');

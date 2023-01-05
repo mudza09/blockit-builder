@@ -838,22 +838,22 @@ export default class Methods {
 		fs.readFile('./src/partials/components/component-footer.hbs', 'utf8', (err, file) => {
 			const headerComment = file.split('\n')[0];
 			const htmlBody = new JSDOM(file);
-			const logoIndex = footerData.siteLogo.index;
+			const {logoIndex, showClass, hideClass, logoClass, copyrightClass} = footerData.hooks;
 
-			const copyrightEl = htmlBody.window.document.querySelector('.copyright-text');
-			const footerLogoEl = htmlBody.window.document.querySelector('.footer-logo') === null ? false : htmlBody.window.document.querySelector('.footer-logo');
+			const copyrightEl = htmlBody.window.document.querySelector(`.${copyrightClass}`);
+			const footerLogoEl = htmlBody.window.document.querySelector(`.${logoClass}`) === null ? false : htmlBody.window.document.querySelector(`.${logoClass}`);
 
 			// Footer logo jsdom
 			if (footerData.siteLogo.exist) {
 				if (footerData.siteLogo.enabled) {
-					footerLogoEl.children[logoIndex].classList.add('d-lg-inline-block');
-					footerLogoEl.children[logoIndex].classList.remove('d-none');
+					footerLogoEl.children[logoIndex].classList.add(showClass);
+					footerLogoEl.children[logoIndex].classList.remove(hideClass);
 					footerLogoEl.children[logoIndex].setAttribute('src', `{{root}}${footerData.siteLogo.logo.src}`);
 					footerLogoEl.children[logoIndex].setAttribute('width', footerData.siteLogo.logo.width);
 					footerLogoEl.children[logoIndex].setAttribute('height', footerData.siteLogo.logo.height);
 				} else {
-					footerLogoEl.children[logoIndex].classList.add('d-none');
-					footerLogoEl.children[logoIndex].classList.remove('d-lg-inline-block');
+					footerLogoEl.children[logoIndex].classList.add(hideClass);
+					footerLogoEl.children[logoIndex].classList.remove(showClass);
 				}
 			}
 

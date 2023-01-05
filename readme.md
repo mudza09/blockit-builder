@@ -4,7 +4,7 @@ A static HTML builder from Indonez, which will help you create the website you d
 
 The Blockit builder is optimized for HTML templates created by Indonez and sold on Themeforest, but this does not preclude you from using them. You can customize it by studying the "Starter" template provided.
 
-Because the template relies on "Handlebars," learning the ["Handlebars"](https://handlebarsjs.com/) template engine will be more beneficial.
+Because the template relies on ["Handlebars"](https://handlebarsjs.com/), learning the ["Handlebars"](https://handlebarsjs.com/) template engine will be more beneficial.
 
 ## Quick start
 
@@ -12,8 +12,8 @@ Several quick start options are available:
 
 - Download the "starter" project from here: https://github.com/Mudza09/blockit-starter
 - Open terminal inside "starter" folder and run : `npm install`.
-- Build the project with : `npm run build`.
 - Run the builder with: `npm run blockit`.
+- Build the project with : `npm run build`.
 
 ## Bugs and feature requests
 

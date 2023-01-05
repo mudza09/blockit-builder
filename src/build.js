@@ -50,6 +50,7 @@ const frontendApp = async filename => {
 				copy: [
 					{from: 'src/frontend/assets/static/favicon.ico', to: 'dist/assets/favicon.ico'},
 					{from: 'src/frontend/assets/static/index.html', to: 'dist/index.html'},
+					{from: 'src/frontend/assets/static/license.md', to: 'dist/license.md'},
 					{from: 'src/frontend/assets/static/readme.md', to: 'dist/readme.md'},
 				],
 				verbose: false,
@@ -59,7 +60,7 @@ const frontendApp = async filename => {
 		define: {'process.env.NODE_ENV': '"production"'},
 		treeShaking: true,
 		sourcemap: false,
-		minify: true,
+		minify: !process.argv.includes('--dev'),
 	}).catch(() => process.exit(1));
 
 	const purgeStyle = await new PurgeCSS().purge({
@@ -151,7 +152,7 @@ const backendApp = async filename => {
 			}),
 		],
 		sourcemap: false,
-		minify: true,
+		minify: !process.argv.includes('--dev'),
 	}).catch(() => process.exit(1));
 
 	console.log(`${logTime()} - Finished build backend app.`);
