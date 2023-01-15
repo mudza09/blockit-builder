@@ -211,6 +211,7 @@ export default class Utils {
 			sectionName: each.split('.')[0],
 			sectionTag: fs.readFileSync(`./src/hooks/sections/${each}`, 'utf8'),
 		}));
+		this.createDirectory('./node_modules/blockit-builder/templates');
 		fs.writeFileSync(`./node_modules/blockit-builder/templates/section-${themeName}.json`, JSON.stringify(exclusiveData, null, 4));
 
 		sections.forEach(each => {

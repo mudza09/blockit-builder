@@ -19,8 +19,7 @@ const logTime = time => `\x1b[36m[${new Intl.DateTimeFormat('en', {hour: '2-digi
 
 // Clean blockit
 const cleanApp = async () => {
-	await deleteAsync(['dist/**', '!dist/node_modules', '!dist/templates', '!dist/package.json', '!dist/package-lock.json'], {force: true});
-	await deleteAsync(['dist/templates/*'], {force: true});
+	await deleteAsync(['dist/**', '!dist/node_modules', '!dist/package.json', '!dist/package-lock.json'], {force: true});
 };
 
 // Frontend compile function
