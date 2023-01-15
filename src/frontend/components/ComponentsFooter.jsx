@@ -121,7 +121,7 @@ export default function ComponentsFooter(props) {
 	useEffect(() => {
 		if (data !== undefined) {
 			setImageLogo(`http://localhost:3000/${data.siteLogo.logo.src}`);
-			if (data.siteLogo.exist === false) {
+			if (data.useLogo === false) {
 				setFooterLogoStatus(false);
 			}
 

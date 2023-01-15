@@ -19,7 +19,7 @@ export default function SettingsAuthors(props) {
 	const uid = new ShortUniqueId({length: 6});
 
 	// Upload image author state
-	const [imageAuthor, setImageAuthor] = useState(['http://localhost:3000/img/in-avatar.svg']);
+	const [imageAuthor, setImageAuthor] = useState(['http://localhost:3000/img/blockit/in-avatar.svg']);
 
 	// Handle footer form
 	const handleAuthorsForm = () => {
@@ -69,7 +69,7 @@ export default function SettingsAuthors(props) {
 			name: '',
 			email: '',
 			bio: '',
-			avatar: 'img/in-avatar.svg',
+			avatar: 'img/blockit/in-avatar.svg',
 		};
 		callback(newAuthor, 'add');
 		getAuthorImage(data);

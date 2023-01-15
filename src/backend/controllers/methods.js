@@ -48,9 +48,8 @@ export default class Methods {
 
 	// Pages action data
 	createPagesActionData = () => {
-		const exclusiveSectionsCheck = fs.readdirSync('./src/hooks/sections', 'utf-8').filter(eachFile => eachFile.match(/.(hbs)$/i));
-		const exclusiveSections = this.utils.checkHook() && exclusiveSectionsCheck.length !== 0 ? exclusiveSectionsCheck : false;
-		const themeName = exclusiveSections === false ? 'empty' : exclusiveSections[0].split('-')[1];
+		const themeName = process.env.npm_package_title.toLowerCase();
+		const exclusiveSections = fs.readdirSync('./src/hooks/sections', 'utf-8').filter(eachFile => eachFile.includes(themeName)).sort((a, b) => a.length - b.length);
 
 		const exclusiveData = {
 			name: `Exclusive - ${themeName.charAt(0).toUpperCase() + themeName.slice(1)}`,
@@ -131,7 +130,7 @@ export default class Methods {
 			},
 		];
 
-		if (exclusiveSections !== false) {
+		if (exclusiveSections.length !== 0) {
 			data.splice(5, 0, exclusiveData);
 		}
 
@@ -722,7 +721,7 @@ export default class Methods {
 	// Settings editor
 	saveSettingsData = (data, dataTag) => {
 		// Colors setting
-		fs.readFile('./src/assets/scss/_colors.scss', 'utf8', (err, file) => {
+		fs.readFile('./src/assets/scss/theme/colors.scss', 'utf8', (err, file) => {
 			const temp = file;
 			const primaryColorChange = temp.replace(/(?<=primary:\s)([^;]*)/g, data.colors.primaryColor);
 			const secondaryColorChange = primaryColorChange.replace(/(?<=secondary:\s)([^;]*)/g, data.colors.secondaryColor);
@@ -732,12 +731,12 @@ export default class Methods {
 			const dangerColorChange = warningColorChange.replace(/(?<=danger:\s)([^;]*)/g, data.colors.dangerColor);
 			const lightColorChange = dangerColorChange.replace(/(?<=light:\s)([^;]*)/g, data.colors.lightColor);
 			const darkColorChange = lightColorChange.replace(/(?<=dark:\s)([^;]*)/g, data.colors.darkColor);
-			const backgroundColorChange = darkColorChange.replace(/(?<=body-bg:\s)([^;]*)/g, data.colors.backgroundColor);
-			const textColorChange = backgroundColorChange.replace(/(?<=body-color:\s)([^;]*)/g, data.colors.textColor);
-			const linkColorChange = textColorChange.replace(/(?<=link-color:\s)([^;]*)/g, data.colors.linkColor);
+			const backgroundColorChange = darkColorChange.replace(/(?<=background:\s)([^;]*)/g, data.colors.backgroundColor);
+			const bodyColorChange = backgroundColorChange.replace(/(?<=body:\s)([^;]*)/g, data.colors.bodyColor);
+			const linkColorChange = bodyColorChange.replace(/(?<=link:\s)([^;]*)/g, data.colors.linkColor);
 
 			if (temp !== linkColorChange) {
-				fs.writeFileSync('./src/assets/scss/_colors.scss', linkColorChange);
+				fs.writeFileSync('./src/assets/scss/theme/colors.scss', linkColorChange);
 			}
 		});
 
@@ -835,16 +834,18 @@ export default class Methods {
 
 	saveFooter = () => {
 		const footerData = JSON.parse(fs.readFileSync('./src/data/component.json', 'utf8')).footer;
+		const hookData = JSON.parse(fs.readFileSync('./blockit-config.json', 'utf8')).footerHook;
+		const {useLogo, logoIndex, showClass, hideClass, logoClass, copyrightClass} = hookData;
+
 		fs.readFile('./src/partials/components/component-footer.hbs', 'utf8', (err, file) => {
 			const headerComment = file.split('\n')[0];
 			const htmlBody = new JSDOM(file);
-			const {logoIndex, showClass, hideClass, logoClass, copyrightClass} = footerData.hooks;
 
 			const copyrightEl = htmlBody.window.document.querySelector(`.${copyrightClass}`);
 			const footerLogoEl = htmlBody.window.document.querySelector(`.${logoClass}`) === null ? false : htmlBody.window.document.querySelector(`.${logoClass}`);
 
 			// Footer logo jsdom
-			if (footerData.siteLogo.exist) {
+			if (useLogo) {
 				if (footerData.siteLogo.enabled) {
 					footerLogoEl.children[logoIndex].classList.add(showClass);
 					footerLogoEl.children[logoIndex].classList.remove(hideClass);
@@ -897,7 +898,7 @@ export default class Methods {
 		data.forEach((each, index) => {
 			if (each.slides.length !== 0) {
 				const slideData = each.slides.map(item => item.text);
-				const modifiedTag = slideshowTag.replace(/\{{(.*slide-id)\}}/g, slideData.join(' '));
+				const modifiedTag = slideshowTag.replace(/\{\{slide-id\}\}/g, slideData.join(' '));
 
 				fs.writeFileSync('./node_modules/blockit-builder/templates/component-slideshow.json', JSON.stringify(slideshowExist, null, 4));
 				fs.writeFileSync(`./src/partials/components/component-slideshow-${index + 1}.hbs`, modifiedTag);
@@ -969,7 +970,13 @@ export default class Methods {
 	};
 
 	createComponentsData = () => {
-		fs.readFile('./src/data/component.json', 'utf8', (err, data) => this.socket.emit('componentsData', JSON.parse(data)));
+		fs.readFile('./src/data/component.json', 'utf8', (err, data) => {
+			const {useLogo} = JSON.parse(fs.readFileSync('./blockit-config.json', 'utf-8')).footerHook;
+			const dataComponent = JSON.parse(data);
+			dataComponent.footer.useLogo = useLogo;
+
+			this.socket.emit('componentsData', dataComponent);
+		});
 	};
 
 	updateAuthorData = (oldData, newData, dataTag) => {

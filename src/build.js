@@ -20,7 +20,7 @@ const logTime = time => `\x1b[36m[${new Intl.DateTimeFormat('en', {hour: '2-digi
 // Clean blockit
 const cleanApp = async () => {
 	await deleteAsync(['dist/**', '!dist/node_modules', '!dist/templates', '!dist/package.json', '!dist/package-lock.json'], {force: true});
-	await deleteAsync(['dist/templates/*', '!dist/templates/component-slideshow.json'], {force: true});
+	await deleteAsync(['dist/templates/*'], {force: true});
 };
 
 // Frontend compile function
@@ -158,37 +158,6 @@ const backendApp = async filename => {
 	console.log(`${logTime()} - Finished build backend app.`);
 };
 
-// Handlebars template function
-const hbsTemplate = () => {
-	const sections = [
-		'section-card',
-		'section-client-logo',
-		'section-contact',
-		'section-content',
-		'section-counter',
-		'section-faq',
-		'section-feature',
-		'section-gallery',
-		'section-pricing',
-		'section-team',
-		'section-testimonial',
-		'section-timeline',
-		'section-utility',
-	];
-
-	if (!fs.existsSync('./dist/templates/')) {
-		fs.mkdirSync('./dist/templates/');
-	}
-
-	sections.forEach(each => {
-		const sectionData = fs.readdirSync('./src/backend/templates', 'utf8').filter(item => item.includes(each)).sort((a, b) => a.length - b.length).map(each => ({
-			sectionName: each.split('.')[0],
-			sectionTag: fs.readFileSync(`./src/backend/templates/${each}`, 'utf8'),
-		}));
-		fs.writeFileSync(`./dist/templates/${each.split('.')[0]}.json`, JSON.stringify(sectionData, null, 4));
-	});
-};
-
 // Build task
 const startBuild = async () => {
 	const start = performance.now() / 1000;
@@ -196,7 +165,6 @@ const startBuild = async () => {
 	await cleanApp();
 	await frontendApp();
 	await backendApp();
-	await hbsTemplate();
 	await frontendImg();
 
 	const end = performance.now() / 1000;

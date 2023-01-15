@@ -95,9 +95,9 @@ export default function SettingsColors(props) {
 					</div>
 				</div>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-text-color'>Text color</label>
+					<label className='uk-form-label' htmlFor='setting-body-color'>Body color</label>
 					<div className='uk-form-controls'>
-						<input className='uk-input uk-border-rounded' id='setting-text-color' type='text' defaultValue={data === undefined ? '' : data.textColor} />
+						<input className='uk-input uk-border-rounded' id='setting-body-color' type='text' defaultValue={data === undefined ? '' : data.bodyColor} />
 					</div>
 				</div>
 				<div className='uk-margin'>

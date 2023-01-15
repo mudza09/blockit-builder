@@ -126,22 +126,22 @@ export default class Compiler {
 		// Sendmail.php
 		fs.copyFileSync('./src/assets/php/sendmail.php', './dist/sendmail.php');
 
-		if (process.env.npm_package_dependencies_bootstrap !== undefined) {
-			// Bootstrap.bundle.min.js
-			fs.readFile('./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js', 'utf-8', (err, file) => {
-				fs.writeFileSync('./dist/js/vendors/bootstrap.bundle.min.js', file.replace('//# sourceMappingURL=bootstrap.bundle.min.js.map', ''));
+		// Js vendors
+		const {jsVendors} = JSON.parse(fs.readFileSync('./blockit-config.json', 'utf-8'));
+		if (jsVendors !== undefined) {
+			jsVendors.forEach(each => {
+				const name = path.basename(each).split('.');
+
+				if (name.includes('min')) {
+					fs.readFile(each, 'utf-8', (err, file) => {
+						fs.writeFileSync(`./dist/js/vendors/${path.basename(each)}`, file.replace(/\/\/[#@]\s(source(?:Mapping)?URL)=\s*(\S+)/, '').replace(/[^\S\n\r]*\n$/, ''));
+					});
+				} else {
+					babel.transformFile(each, {minified: true, comments: false}, (err, result) => {
+						fs.writeFileSync(`./dist/js/vendors/${path.basename(each, '.js')}.min.js`, result.code);
+					});
+				}
 			});
-
-			// Isotope.js
-			fs.copyFileSync('./node_modules/isotope-layout/dist/isotope.pkgd.min.js', './dist/js/vendors/isotope.min.js');
-
-			// Bigger-picture.js
-			fs.copyFileSync('./node_modules/bigger-picture/dist/bigger-picture.min.js', './dist/js/vendors/bigger-picture.min.js');
-		}
-
-		if (process.env.npm_package_dependencies_uikit !== undefined) {
-			// Uikit.min.js
-			fs.copyFileSync('./node_modules/uikit/dist/js/uikit.min.js', './dist/js/vendors/uikit.min.js');
 		}
 
 		this.utils.logMessage('end', 'Static assets delivered successfully.');

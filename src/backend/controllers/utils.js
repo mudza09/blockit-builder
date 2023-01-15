@@ -4,6 +4,7 @@ import yaml from 'js-yaml';
 import path from 'path';
 import sharp from 'sharp';
 import svgo from 'svgo';
+import Methods from './methods.js';
 
 export default class Utils {
 	// Create directory if not exist function
@@ -201,23 +202,30 @@ export default class Utils {
 
 	// Register hook sections and previews hook
 	hookSections = () => {
-		const sectionsCheck = fs.readdirSync('./src/hooks/sections', 'utf-8').filter(eachFile => eachFile.match(/.(hbs)$/i));
-		const previewsCheck = fs.readdirSync('./src/hooks/sections/previews', 'utf-8');
-		const themeName = sectionsCheck.length === 0 ? false : sectionsCheck[0].split('-')[1];
+		const themeName = process.env.npm_package_title.toLowerCase();
+		const sections = ['section-card', 'section-client-logo', 'section-contact', 'section-content',	'section-counter', 'section-faq', 'section-feature', 'section-gallery', 'section-pricing', 'section-team', 'section-testimonial', 'section-timeline', 'section-utility'];
+		const previews = fs.readdirSync('./src/hooks/sections/previews', 'utf-8');
+		const slideshowData = JSON.parse(fs.readFileSync('./src/data/component.json', 'utf-8')).slideshow;
 
-		if (sectionsCheck.length !== 0) {
-			const sectionData = sectionsCheck.filter(item => item.includes(themeName)).sort((a, b) => a.length - b.length).map(each => ({
+		const exclusiveData = fs.readdirSync('./src/hooks/sections', 'utf-8').filter(eachFile => eachFile.includes(themeName)).sort((a, b) => a.length - b.length).map(each => ({
+			sectionName: each.split('.')[0],
+			sectionTag: fs.readFileSync(`./src/hooks/sections/${each}`, 'utf8'),
+		}));
+		fs.writeFileSync(`./node_modules/blockit-builder/templates/section-${themeName}.json`, JSON.stringify(exclusiveData, null, 4));
+
+		sections.forEach(each => {
+			const sectionData = fs.readdirSync('./src/hooks/sections', 'utf8').filter(item => item.includes(each)).sort((a, b) => a.length - b.length).map(each => ({
 				sectionName: each.split('.')[0],
 				sectionTag: fs.readFileSync(`./src/hooks/sections/${each}`, 'utf8'),
 			}));
-			fs.writeFileSync(`./node_modules/blockit-builder/templates/section-${themeName}.json`, JSON.stringify(sectionData, null, 4));
-		}
+			fs.writeFileSync(`./node_modules/blockit-builder/templates/${each.split('.')[0]}.json`, JSON.stringify(sectionData, null, 4));
+		});
 
-		if (previewsCheck.length !== 0) {
-			previewsCheck.forEach(each => {
-				fs.copyFileSync(`./src/hooks/sections/previews/${each}`, `./node_modules/blockit-builder/assets/img/sections/${each}`);
-			});
-		}
+		previews.forEach(each => {
+			fs.copyFileSync(`./src/hooks/sections/previews/${each}`, `./node_modules/blockit-builder/assets/img/sections/${each}`);
+		});
+
+		new Methods().saveSlideshow(slideshowData);
 	};
 
 	// Remove hook sections and previews hook

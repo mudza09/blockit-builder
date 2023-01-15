@@ -81,7 +81,7 @@ export default class Engine {
 
 		// Special ad-hoc partials for #ifpage and #unlesspage
 		this.Handlebars.registerHelper('ifpage', ifPage(generalData.page));
-		this.Handlebars.registerHelper('unlessPage', unlessPage(generalData.page));
+		this.Handlebars.registerHelper('unlesspage', unlessPage(generalData.page));
 
 		// Choose wich layout to use
 		const layout = fs.readFileSync(`./src/layouts/${generalData.layout}.hbs`, 'utf-8');
