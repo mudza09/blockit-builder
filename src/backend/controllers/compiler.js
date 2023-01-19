@@ -82,8 +82,8 @@ export default class Compiler {
 		});
 
 		// Js vendors
-		const vendorJs = this.utils.loadFiles('./src/assets/js/vendors');
-		vendorJs.forEach(each => fs.copyFileSync(each, `./dist/js/vendors/${path.basename(each)}`));
+		const jsVendors = this.utils.loadFiles('./src/assets/js/vendors').filter(each => path.extname(each) === '.js');
+		jsVendors.forEach(each => fs.copyFileSync(each, `./dist/js/vendors/${path.basename(each)}`));
 
 		this.utils.logMessage('end', 'Js compiled successfully.');
 	};
