@@ -26,6 +26,8 @@ export default function Components() {
 	const handleSaveComponents = () => {
 		sessionStorage.clear();
 		setIsDirty(false);
+
+		delete data.footer.useLogo; // Clean unused footer hooks parameter
 		bs.socket.emit('saveComponents', data);
 	};
 

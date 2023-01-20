@@ -805,8 +805,7 @@ export default class Methods {
 		});
 	};
 
-	saveSocialMedia = () => {
-		const socialData = JSON.parse(fs.readFileSync('src/data/component.json', 'utf8')).socialMedia;
+	saveSocialMedia = socialData => {
 		const socialLists = socialData.filter(each => Object.values(each)[0].length !== 0).map(each => {
 			const social = Object.keys(each)[0];
 			const link = Object.values(each)[0];
@@ -832,8 +831,7 @@ export default class Methods {
 		});
 	};
 
-	saveFooter = () => {
-		const footerData = JSON.parse(fs.readFileSync('./src/data/component.json', 'utf8')).footer;
+	saveFooter = footerData => {
 		const hookData = JSON.parse(fs.readFileSync('./blockit-config.json', 'utf8')).footerHook;
 		const {useLogo, logoIndex, showClass, hideClass, logoClass, copyrightClass} = hookData;
 
@@ -1024,7 +1022,7 @@ export default class Methods {
 		this.saveEmail(data.contactMap.email);
 		this.saveMap(data.contactMap.mapSrc);
 		this.saveSlideshow(data.slideshow);
-		this.saveFooter();
-		this.saveSocialMedia();
+		this.saveFooter(data.footer);
+		this.saveSocialMedia(data.socialMedia);
 	};
 }

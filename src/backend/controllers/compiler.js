@@ -4,7 +4,6 @@ import path from 'path';
 import sass from 'sass';
 import babel from '@babel/core';
 import chokidar from 'chokidar';
-import {PurgeCSS} from 'purgecss';
 import Engine from './engine.js';
 import Utils from './utils.js';
 
@@ -153,7 +152,7 @@ export default class Compiler {
     */
 
 	// Minify for CSS files
-	minifyCss = async () => {
+	minifyCss = () => {
 		this.utils.logMessage('begin');
 
 		const style = sass.compile('./src/assets/scss/main.scss', {
@@ -161,12 +160,7 @@ export default class Compiler {
 			style: 'compressed',
 		}).css;
 
-		const purgeStyle = await new PurgeCSS().purge({
-			content: ['./dist/*.html', './dist/js/**/*.js'],
-			css: [{raw: style}],
-		});
-
-		fs.writeFileSync('./dist/css/style.css', purgeStyle[0].css);
+		fs.writeFileSync('./dist/css/style.css', style);
 
 		this.utils.logMessage('end', 'Css minifying successfully.');
 	};
