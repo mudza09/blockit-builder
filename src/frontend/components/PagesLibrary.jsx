@@ -22,6 +22,16 @@ export default function PagesLibrary(props) {
 
 		UIkit.util.on(libraryWrap.current, 'added', () => {
 			libraryWrap.current.querySelectorAll('.sections-name').forEach(item => {
+				const hasChanged = item.querySelector('img').getAttribute('alt').split('-').at(-1).match(/^(?=.*?[A-Z])(?=.*?[a-z]).{6,}$/gm);
+
+				if (hasChanged) {
+					item.querySelector('img').setAttribute('alt', item.classList[1]);
+					item.querySelector('span').textContent = item.classList[1];
+					item.querySelector('.uk-modal-container').setAttribute('id', `modal-${item.classList[1]}`);
+					item.querySelector('.uk-modal-dialog').children[0].setAttribute('id', `editor-${item.classList[1]}`);
+					item.querySelector('.uk-button').setAttribute('data-uk-toggle', `target: #modal-${item.classList[1]}`);
+				}
+
 				item.querySelector('.uk-transition-fade').classList.remove('uk-flex-middle');
 				item.querySelector('.uk-transition-fade').classList.add('uk-flex-bottom');
 				item.querySelector('.uk-text-small').removeAttribute('hidden', '');
@@ -37,10 +47,10 @@ export default function PagesLibrary(props) {
 
 	// Slideshow html edit condition
 	const htmlCodeCondition = (item, index) => {
-		if (item.includes('slideshow')) {
+		if (item.target.previousElementSibling.textContent.includes('slideshow')) {
 			navigate('/components');
 		} else {
-			handleEditor(item, index);
+			handleEditor(item.target.previousElementSibling.textContent, index);
 		}
 	};
 
@@ -61,7 +71,7 @@ export default function PagesLibrary(props) {
 											<img className='uk-border-rounded' src={'../assets/img/sections/' + item + '.webp'} alt={item}/>
 											<div className='uk-transition-fade uk-position-cover uk-flex uk-flex-center uk-flex-bottom'>
 												<span className='uk-text-small'>{item}</span>
-												<button className='uk-button uk-button-secondary uk-border-rounded section-button' type='button' data-uk-toggle={item.includes('slideshow') ? 'disable' : `target: #modal-${item}`} onClick={() => htmlCodeCondition(item, index)} hidden>
+												<button className='uk-button uk-button-secondary uk-border-rounded section-button' type='button' data-uk-toggle={item.includes('slideshow') ? 'disable' : `target: #modal-${item}`} onClick={e => htmlCodeCondition(e, index)} hidden>
 													<i className='ri-code-s-slash-line ri-1x uk-margin-small-right'></i>Edit HTML code
 												</button>
 												<div id={'modal-' + item} className='uk-modal-container uk-flex-top uk-modal' data-uk-modal hidden>

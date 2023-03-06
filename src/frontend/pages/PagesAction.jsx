@@ -2,7 +2,6 @@ import {useState, useEffect, useRef} from 'react';
 import {useParams, useNavigate, createSearchParams} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import {useNavigatingAway} from '../hooks/useNavigatingAway';
-import ShortUniqueId from 'short-unique-id';
 import bs from '../utils/bs';
 import UIkit from 'uikit';
 import EditorJS from '../assets/js/editorjs/editorjs-disable-key-events';
@@ -18,6 +17,7 @@ export default function PagesAction() {
 	const params = new URLSearchParams(location.search);
 	const [isLoading, setIsLoading] = useState(false);
 	const [btnSuccess, setBtnSuccess] = useState(false);
+	const [previewUrl, setPreviewUrl] = useState(false);
 	const [libraryData, setLibraryData] = useState([]);
 	const [sectionData, setSectionData] = useState('');
 	const [blogStatus, setBlogStatus] = useState(false);
@@ -32,9 +32,6 @@ export default function PagesAction() {
 	// Leave page prompt
 	const [isDirty, setIsDirty] = useState(false);
 	const [showPrompt, confirmleave, cancelLeave] = useNavigatingAway(isDirty);
-
-	// Id generator
-	const uid = new ShortUniqueId({length: 6});
 
 	// Page form variables
 	const [pageForm, setPageForm] = useState({name: '', title: '', layout: 'default', breadcrumb: true});
@@ -111,50 +108,21 @@ export default function PagesAction() {
 			if (mode === 'add') {
 				sections = Array.from(canvasWrap.current.children).map(item => (
 					{
-						id: uid(),
-						reference: item.classList[1],
-						updateData: JSON.parse(sessionStorage.getItem(`${item.classList[1]}`)) === null ? 'new' : JSON.parse(sessionStorage.getItem(`${item.classList[1]}`)).blocks[0].data.text,
+						name: item.querySelector('img').getAttribute('alt'),
+						data: JSON.parse(sessionStorage.getItem(`${item.querySelector('img').getAttribute('alt')}`)).blocks[0].data.text,
 					}
 				));
 				deletedSections = [false];
 				setModeChange(true);
 				setCanvasId(sections);
 			} else if (mode === 'edit') {
-				const paramSection = params.get('sections').split(',');
-				const canvasSection = Array.from(canvasWrap.current.children).map(item => item.classList[1]);
-
-				if (params.get('revertFromBlog') === 'true' && blogCheck.current.checked === false) {
-					// If revert from blog to regular page
-					sections = Array.from(canvasWrap.current.children).map(item => (
-						{
-							id: uid(),
-							reference: item.classList[1],
-							updateData: JSON.parse(sessionStorage.getItem(`${item.classList[1]}`)) === null ? 'new' : JSON.parse(sessionStorage.getItem(`${item.classList[1]}`)).blocks[0].data.text,
-						}
-					));
-					deletedSections = [false];
-				} else if (params.get('revertFromBlog') === null && paramSection.toString() !== canvasSection.toString()) {
-					// If there any change in canvas, or param sections and canvas sections is different
-					sections = Array.from(canvasWrap.current.children).map(item => (
-						{
-							id: item.classList[1].split('-').pop().length === 6 ? item.classList[1].split('-').pop() : uid(),
-							reference: item.classList[1].split('-').pop().length === 6 ? item.classList[1].split('-').slice(0, -1).join('-') : item.classList[1],
-							updateData: item.classList.contains('uk-first-column') ? 'new' : false,
-						}
-					));
-					deletedSections = params.get('sections') === null ? [false] : params.get('sections').split(',').filter(deleted => !sections.map(item => `${item.reference}-${item.id}`).includes(deleted));
-				} else {
-					// If there any slideshow component in canvas and regular change in section tag content
-					const processedSection = canvasSection[0].split('-').pop().length === 6 ? canvasSection.map(each => each) : canvasSection.map(each => paramSection.filter(word => word.includes(each))[0]);
-					sections = processedSection.map(item => (
-						{
-							id: item.includes('component-slideshow') ? item : item.split('-').pop(),
-							reference: item.includes('component-slideshow') ? item : item.substring(0, item.lastIndexOf('-')),
-							updateData: JSON.parse(sessionStorage.getItem(`${item}`)) === null ? false : JSON.parse(sessionStorage.getItem(`${item}`)).blocks[0].data.text,
-						}
-					));
-					deletedSections = params.get('sections') === null ? [false] : params.get('sections').split(',').filter(deleted => !sections.map(item => `${item.reference}-${item.id}`).includes(deleted));
-				}
+				sections = Array.from(canvasWrap.current.children).map(item => (
+					{
+						name: item.querySelector('img').getAttribute('alt'),
+						data: JSON.parse(sessionStorage.getItem(`${item.querySelector('img').getAttribute('alt')}`)).blocks[0].data.text,
+					}
+				));
+				deletedSections = params.get('sections') === null ? [false] : params.get('sections').split(',').filter(deleted => !sections.map(item => `${item.name}`).includes(deleted));
 			}
 
 			const {name, title, layout, breadcrumb} = pageForm;
@@ -170,9 +138,11 @@ export default function PagesAction() {
 					pageTitle: title,
 					breadcrumb,
 					blog,
-					listSections: sections.map(each => each.reference.includes('component-slideshow') ? `${each.reference}` : `${each.reference}-${each.id}`),
+					listSections: sections.map(each => each.name),
 				}),
 			});
+
+			// When edit mode, if page name changed delete the old name
 			if (mode === 'edit') {
 				const oldName = params.get('page');
 				if (oldName !== name) {
@@ -180,9 +150,8 @@ export default function PagesAction() {
 				}
 			}
 
-			// Send data editor to host and clear session storage
+			// Send data editor to host
 			bs.socket.emit('saveSectionData', sections, deletedSections);
-			sessionStorage.clear();
 
 			navigate({
 				pathname: '/pages/edit',
@@ -192,7 +161,7 @@ export default function PagesAction() {
 					layout,
 					breadcrumb,
 					asBlog: params.get('asBlog'),
-					sections: [sections.map(each => each.reference.includes('component-slideshow') ? `${each.reference}` : `${each.reference}-${each.id}`)],
+					sections: [sections.map(each => each.name)],
 				})}`,
 			});
 
@@ -203,6 +172,7 @@ export default function PagesAction() {
 			}, 1500);
 			setTimeout(() => {
 				setBtnSuccess(false);
+				setPreviewUrl(true);
 			}, 3000);
 		}
 	};
@@ -283,15 +253,12 @@ export default function PagesAction() {
 
 	// Handle editor section code
 	const handleEditorSection = async section => {
-		bs.socket.emit('readSectionData', section);
 		const dataStorage = JSON.parse(sessionStorage.getItem(section));
-		const dataSocket = await new Promise(resolve => {
-			bs.socket.once('resultSectionData', data => resolve(data));
-		});
+
 		const editor = new EditorJS({
 			holder: document.querySelector(`#editor-${section}`),
 			minHeight: 0,
-			data: dataStorage === null ? dataSocket : dataStorage,
+			data: dataStorage,
 			tools: {code: CodeMirror},
 			defaultBlock: 'code',
 			logLevel: 'ERROR',
@@ -307,7 +274,8 @@ export default function PagesAction() {
 						const editorWrap = modalWrap.querySelector('.codex-editor');
 
 						editor.save().then(data => {
-							data.blocks[0].id = sectionName;
+							data.blocks[0].data.language = 'HTML';
+							delete data.blocks[0].id;
 							delete data.time;
 							delete data.version;
 							sessionStorage.setItem(sectionName, JSON.stringify(data));
@@ -351,6 +319,9 @@ export default function PagesAction() {
 		socketPagesAction();
 		getParams();
 		breadcrumbForm(params.get('breadcrumb'));
+		if (params.get('page') !== null) {
+			setPreviewUrl(true);
+		}
 	}, []);
 	useEffect(() => activatePlacehold(), [sectionData]);
 	useEffect(() => handleBlogStatus(), [canvasWrap.current]);
@@ -375,9 +346,10 @@ export default function PagesAction() {
 							</Link>
 						</h5>
 					</div>
-					<div className='uk-width-3-4 uk-flex uk-flex-right blockit-notif'></div>
+					<div className='uk-width-3-4 uk-flex uk-flex-right blockit-notif'>
+						{previewUrl && <a href={`http://localhost:3000/${params.get('page')}.html`} target='_blank' rel='noreferrer'><code className='uk-flex uk-flex-middle'><i className='ri ri-link ri-sm uk-margin-small-right'></i>{`http://localhost:3000/${params.get('page')}.html`}</code></a>}
+					</div>
 				</div>
-
 				<div className='uk-grid uk-margin-top'>
 					<div className='uk-width-2-3'>
 						<div className='post-wrap'>
@@ -414,7 +386,6 @@ export default function PagesAction() {
 							<div className='uk-card uk-card-default uk-card-body uk-border-rounded'>
 								<form id='page-form' className='uk-grid-small uk-margin-small-bottom' onSubmit={handleSaveForm} data-uk-grid>
 									<div className='uk-width-1-1'>
-
 										<button id='save-page' className='uk-button uk-button-primary uk-border-rounded uk-width-1-1 uk-margin-small-bottom' type='submit' onClick={() => setIsDirty(false)}>
 											{isLoading
 												? <><i className='ri-loader-2-fill ri-1x ri-spin uk-margin-small-right'></i>Loading...</>

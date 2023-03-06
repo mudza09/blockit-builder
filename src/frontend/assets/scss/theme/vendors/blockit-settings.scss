@@ -116,3 +116,14 @@
         width: 90px;
     }
 }
+
+@media (max-width: 1536px) {
+    .authors-form-wrap {
+        .uk-form-stacked {
+            width: 97.3% !important;
+        }
+        .uk-width-2-3 {
+            width: calc(95% * 2 / 3.001);
+        }
+    }
+}

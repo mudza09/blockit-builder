@@ -166,6 +166,14 @@ export default function Navigation() {
 	// Handle save navigation button
 	const handleSaveNavigation = () => {
 		setIsDirty(false);
+
+		// Clean empty dropdown child
+		data.forEach(item => {
+			if (item.dropdown !== undefined && item.dropdown.child.length === 0) {
+				delete item.dropdown;
+			}
+		});
+
 		bs.socket.emit('saveNavigation', data);
 	};
 

@@ -19,6 +19,7 @@ export default class Sockets {
 		socket.on('savePageActionData', options => this.blockit.pagesSavePage(options));
 		// Pages action read content section json
 		socket.on('readSectionData', nameFile => this.blockit.readSectionData(nameFile));
+		socket.on('readSectionsEdit', sections => this.blockit.readSectionsEdit(sections));
 		// Pages action write content section json
 		socket.on('saveSectionData', (sections, deletedSections) => this.blockit.createSectionData(sections, deletedSections));
 	};

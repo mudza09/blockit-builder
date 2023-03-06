@@ -23,15 +23,15 @@ export default function NavigationCanvas(props) {
 			const newIndex = item.detail[0].items.map(el => el.querySelector('.label-name').textContent).indexOf(navName);
 
 			// Parent condition
-			if (data[0] !== undefined && item.path[1].tagName !== 'LI') {
+			if (data[0] !== undefined && item.detail[1].children[0].classList.contains('parent-nav')) {
 				handleArrayMenu(data, prevIndex, newIndex);
 			}
 
 			// Child condition
-			if (data[0] !== undefined && item.path[1].tagName === 'LI') {
-				const parentName = item.path[1].querySelector('.label-name').textContent;
+			if (data[0] !== undefined && item.detail[1].children[0].classList.contains('child-nav')) {
+				const parentName = item.detail[1].parentElement.previousElementSibling.querySelector('.label-name').textContent;
 				const parentActive = data.find(item => item.title === parentName);
-				handleArrayMenu(Object.values(parentActive.dropdown)[0], prevIndex, newIndex);
+				handleArrayMenu(parentActive.dropdown.child, prevIndex, newIndex);
 			}
 		});
 	};

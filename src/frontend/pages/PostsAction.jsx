@@ -27,6 +27,7 @@ export default function PostsAction() {
 	const navigate = useNavigate();
 	let {mode} = useParams();
 	const [data, setData] = useState({});
+	const [previewUrl, setPreviewUrl] = useState(false);
 	const params = new URLSearchParams(location.search);
 
 	// Leave page prompt
@@ -253,6 +254,11 @@ export default function PostsAction() {
 
 							// Send post content data
 							bs.socket.emit('savePostContent', nameFile, postData, layoutTag);
+
+							// Show preview url
+							setTimeout(() => {
+								setPreviewUrl(true);
+							}, 3000);
 						}
 					});
 				};
@@ -316,6 +322,9 @@ export default function PostsAction() {
 	useEffect(() => {
 		socketPostsAction();
 		setLayoutTag(hbsTemplate);
+		if (params.get('title') !== null) {
+			setPreviewUrl(true);
+		}
 	}, []);
 	useEffect(() => {
 		if (Object.keys(data).length !== 0) {
@@ -342,9 +351,10 @@ export default function PostsAction() {
 							</Link>
 						</h5>
 					</div>
-					<div className='uk-width-3-4 uk-flex uk-flex-right blockit-notif'></div>
+					<div className='uk-width-3-4 uk-flex uk-flex-right blockit-notif'>
+						{previewUrl && <a href={`http://localhost:3000/blog/${postLink(params.get('title'))}.html`} target='_blank' rel='noreferrer'><code className='uk-flex uk-flex-middle'><i className='ri ri-link ri-sm uk-margin-small-right'></i>{`http://localhost:3000/blog/${postLink(params.get('title'))}.html`}</code></a>}
+					</div>
 				</div>
-
 				<div className='uk-grid uk-margin-top'>
 					<div className='uk-width-2-3'>
 						<div className='post-wrap'>

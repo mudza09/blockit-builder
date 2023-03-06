@@ -1,4 +1,5 @@
-import {Routes, Route, Navigate} from 'react-router-dom';
+import {useEffect} from 'react';
+import {Routes, Route, Navigate, useLocation} from 'react-router-dom';
 
 import './assets/scss/main.scss';
 import './node_modules/remixicon/fonts/remixicon.css';
@@ -17,6 +18,14 @@ import Components from './pages/Components';
 import Settings from './pages/Settings';
 
 export default function App() {
+	const location = useLocation();
+
+	useEffect(() => {
+		if (location.pathname !== '/pages/edit') {
+			sessionStorage.clear();
+		}
+	}, [location]);
+
 	return (
 		<>
 			<Sidebar />

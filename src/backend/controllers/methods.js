@@ -247,55 +247,47 @@ export default class Methods {
 	};
 
 	readSectionData = nameFile => {
-		const pathData = nameFile.split('-').length >= 4 ? `./src/partials/sections/${nameFile}.hbs` : `./node_modules/blockit-builder/templates/${nameFile.split('-').slice(0, -1).join('-')}.json`;
+		const pathData = `./node_modules/blockit-builder/templates/${nameFile.split('-').slice(0, -1).join('-')}.json`;
 
 		fs.readFile(pathData, 'utf8', (err, file) => {
-			if (nameFile.split('-').length >= 4) {
-				const data = {
-					blocks: [
-						{
-							id: nameFile,
-							type: 'code',
-							data: {
-								language: 'HTML',
-								text: file,
-							},
+			const index = JSON.parse(file).findIndex(e => e.sectionName === nameFile);
+			const data = {
+				blocks: [
+					{
+						type: 'code',
+						data: {
+							language: 'HTML',
+							text: JSON.parse(file)[index].sectionTag,
 						},
-					],
-				};
-				this.socket.emit('resultSectionData', data);
-			} else {
-				const index = JSON.parse(file).findIndex(e => e.sectionName === nameFile);
-				const data = {
-					blocks: [
-						{
-							id: nameFile.split('-').length >= 4 ? nameFile : JSON.parse(file)[index].sectionName,
-							type: 'code',
-							data: {
-								language: 'HTML',
-								text: nameFile.split('-').length >= 4 ? file : JSON.parse(file)[index].sectionTag,
-							},
-						},
-					],
-				};
-				this.socket.emit('resultSectionData', data);
-			}
+					},
+				],
+			};
+			this.socket.emit('resultSectionData', data);
 		});
+	};
+
+	readSectionsEdit = sections => {
+		const filterSections = sections.filter(each => !each.includes('component') && !each.includes('section-blog'));
+		const data = filterSections.map(item => ({
+			name: item,
+			data: {
+				blocks: [
+					{
+						type: 'code',
+						data: {
+							language: 'HTML',
+							text: fs.readFileSync(`./src/partials/sections/${item}.hbs`, 'utf-8'),
+						},
+					},
+				],
+			},
+		}));
+		this.socket.emit('resultSectionsEdit', data);
 	};
 
 	createSectionData = (sections, deletedSections) => {
 		sections.forEach(item => {
-			fs.readFile(`./node_modules/blockit-builder/templates/${item.reference.split('-').slice(0, -1).join('-')}.json`, 'utf8', (err, file) => {
-				JSON.parse(file).forEach(each => {
-					if (each.sectionName === item.reference && !each.sectionName.includes('component-slideshow')) {
-						if (item.updateData === 'new') {
-							fs.writeFileSync(`./src/partials/sections/${item.reference}-${item.id}.hbs`, each.sectionTag);
-						} else if (item.updateData !== false && item.updateData !== 'new') {
-							fs.writeFileSync(`./src/partials/sections/${item.reference}-${item.id}.hbs`, item.updateData);
-						}
-					}
-				});
-			});
+			fs.writeFileSync(`./src/partials/sections/${item.name}.hbs`, item.data);
 		});
 		if (deletedSections.length !== 0 || deletedSections[0] !== false) {
 			deletedSections.forEach(item => {

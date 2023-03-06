@@ -17,6 +17,9 @@ $base-h4-line-height:                            1.2 !default;
 $base-h5-line-height:                            1.2 !default;
 $base-h6-line-height:                            1.2 !default;
 
+$base-code-font-size:                            $base-font-small;
+$base-code-color:                                lighten(#999, 5%);
+
 $base-small-font-size:                           $base-font-small !default;
 
 $base-blockquote-font-size:                      1.059rem !default;

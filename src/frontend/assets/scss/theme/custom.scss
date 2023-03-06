@@ -54,11 +54,27 @@ body {
     }
 }
 
+@media (max-width: 1536px) {
+    .tm-sidebar-left {
+        width: 260px !important;
+    }
+}
+
 .tm-main {
     .uk-container {
         margin-left: 320px;
         padding-left: 7%;
         padding-right: 9%;
+    }
+}
+
+@media (max-width: 1536px) {
+    .tm-main {
+        .uk-container {
+            margin-left: 260px;
+            padding-left: 3%;
+            padding-right: 3%;
+        }
     }
 }
 
