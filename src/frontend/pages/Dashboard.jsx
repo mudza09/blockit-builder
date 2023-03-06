@@ -61,7 +61,7 @@ export default function Dashboard() {
 								<h4 className='uk-margin-remove uk-text-primary'>Create HTML pages</h4>
 							</div>
 							<p className='uk-margin-small-top'>Add an HTML page dynamically and easily. just named, drag and drop every sections do you like.</p>
-							<Link to='/pages/add?asBlog=blog' className='uk-flex uk-flex-middle'>Go to pages<i className='ri-arrow-right-line ri-sm uk-margin-small-left'></i></Link>
+							<Link to='/pages/add?asBlog=blog' className='uk-flex uk-flex-middle'>Create a new page<i className='ri-arrow-right-line ri-sm uk-margin-small-left'></i></Link>
 						</div>
 					</div>
 					<div>
@@ -81,7 +81,7 @@ export default function Dashboard() {
 								<h4 className='uk-margin-remove uk-text-primary'>Start write post</h4>
 							</div>
 							<p className='uk-margin-small-top'>Starting to become a blog writer is as easy as typing whatever you like, let us create the code for you.</p>
-							<Link to='/posts/add' className='uk-flex uk-flex-middle'>Go to posts<i className='ri-arrow-right-line ri-sm uk-margin-small-left'></i></Link>
+							<Link to='/posts/add' className='uk-flex uk-flex-middle'>Create a new post<i className='ri-arrow-right-line ri-sm uk-margin-small-left'></i></Link>
 						</div>
 					</div>
 					<div>
