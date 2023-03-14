@@ -13,7 +13,7 @@ export default function PostsActionTagInput(props) {
 
 	useEffect(() => {
 		if (mode === 'edit' && data !== undefined) {
-			setTagPost(data === 'untagged' ? null : data.join(', '));
+			setTagPost(data[0] === 'untagged' ? null : data.join(', '));
 		}
 	}, [data]);
 

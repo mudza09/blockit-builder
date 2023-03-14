@@ -15,11 +15,15 @@ export default class Methods {
 
 	// Dashboard data
 	createDashboardData = () => {
+		const blogPage = JSON.parse(fs.readFileSync('./src/data/setting.json', 'utf8')).blog.asBlog[0] === false ? JSON.parse(fs.readFileSync('./src/data/setting.json', 'utf8')).blog.asBlog[1] : JSON.parse(fs.readFileSync('./src/data/setting.json', 'utf8')).blog.asBlog[0];
+		const blogPageRegex = new RegExp(`${blogPage}-page`);
+		const blogFindRegex = new RegExp(`${blogPage}-find`);
+
 		const data = {
 			name: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/package.json', 'utf-8')).title,
 			theme: process.env.npm_package_title,
 			version: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/package.json', 'utf-8')).version,
-			pages: fs.readdirSync('./src/pages', 'utf8').filter(file => file.match(/.(hbs)$/i)).filter(each => !each.match(/blog-page/g) && !each.match(/blog-find/g)).length,
+			pages: fs.readdirSync('./src/pages', 'utf8').filter(file => file.match(/.(hbs)$/i)).filter(each => !each.match(blogPageRegex) && !each.match(blogFindRegex)).length,
 			posts: fs.readdirSync('./src/data/blog/posts', 'utf8').length,
 			authors: JSON.parse(fs.readFileSync('./src/data/setting.json', 'utf8')).authors.length,
 		};
@@ -28,8 +32,12 @@ export default class Methods {
 
 	// Pages data
 	createPagesData = () => {
+		const blogPage = JSON.parse(fs.readFileSync('./src/data/setting.json', 'utf8')).blog.asBlog[0] === false ? JSON.parse(fs.readFileSync('./src/data/setting.json', 'utf8')).blog.asBlog[1] : JSON.parse(fs.readFileSync('./src/data/setting.json', 'utf8')).blog.asBlog[0];
+		const blogPageRegex = new RegExp(`${blogPage}-page`);
+		const blogFindRegex = new RegExp(`${blogPage}-find`);
+
 		fs.readdir('./src/pages', (err, files) => {
-			const data = files.filter(eachFile => eachFile.match(/.(hbs)$/i)).filter(each => !each.match(/blog-page/g) && !each.match(/blog-find/g)).map(file => ({
+			const data = files.filter(eachFile => eachFile.match(/.(hbs)$/i)).filter(each => !each.match(blogPageRegex) && !each.match(blogFindRegex)).map(file => ({
 				page: file.split('.').slice(0, -1).join('.'),
 				title: fs.readFileSync(`./src/pages/${file}`, 'utf8').match(/(?<=title:\s).*/g)[0],
 				date: fs.statSync(`./src/pages/${file}`).mtime,
@@ -40,7 +48,7 @@ export default class Methods {
 			this.socket.emit('pagesData', data);
 		});
 		fs.readFile('./src/data/setting.json', 'utf8', (err, file) => {
-			const data = JSON.parse(file).blog.asBlog === false ? false : JSON.parse(file).blog.asBlog.split('.')[0];
+			const data = JSON.parse(file).blog.asBlog[0] === false ? false : JSON.parse(file).blog.asBlog[0];
 
 			this.socket.emit('pagesCurrentBlog', data);
 		});
@@ -147,25 +155,22 @@ export default class Methods {
 					sections.forEach(item => !item.includes('component-slideshow') && fs.unlinkSync(`./src/partials/sections/${item}.hbs`));
 				}
 			} else {
+				const blogPage = JSON.parse(fs.readFileSync('./src/data/setting.json', 'utf-8')).blog.asBlog[0];
+				const blogPageRegex = new RegExp(`${blogPage}-page`);
+
 				fs.unlinkSync(`./dist/${nameFile}.html`);
 				fs.unlinkSync(`./src/pages/${nameFile}.hbs`);
-				fs.unlinkSync('./dist/blog-find.html');
-				fs.unlinkSync('./src/pages/blog-find.hbs');
+				fs.unlinkSync(`./dist/${blogPage}-find.html`);
+				fs.unlinkSync(`./src/pages/${blogPage}-find.hbs`);
 				fs.readdir('./src/pages', (err, files) => {
-					files.filter(eachFile => eachFile.match(/.(hbs)$/i)).filter(each => each.match(/blog-page/g)).forEach(each => {
+					files.filter(eachFile => eachFile.match(/.(hbs)$/i)).filter(each => each.match(blogPageRegex)).forEach(each => {
 						fs.unlinkSync(`./dist/${each.split('.').slice(0, -1)[0]}.html`);
 						fs.unlinkSync(`./src/pages/${each}`);
 					});
 				});
 
 				// Set back "false" at asBlog setting.json
-				fs.readFile('./src/data/setting.json', 'utf8', (err, file) => {
-					const settingData = JSON.parse(file);
-					settingData.blog.asBlog = false;
-					fs.writeFileSync('./src/data/setting.json', JSON.stringify(settingData, null, 2));
-
-					this.socket.emit('pagesCurrentBlog', settingData.blog.asBlog);
-				});
+				this.unsetBlogPage();
 
 				// Set back "false" blogPath value in some utilities js
 				fs.readFile('./src/assets/js/utilities/breadcrumb.js', 'utf8', (err, file) => {
@@ -186,8 +191,24 @@ export default class Methods {
 				const settingData = JSON.parse(file);
 
 				// Write asBlog file name in setting.json
-				settingData.blog.asBlog = `${objects.nameFile}.hbs`;
+				settingData.blog.asBlog[0] = `${objects.nameFile}`;
 				fs.writeFileSync('./src/data/setting.json', JSON.stringify(settingData, null, 2));
+
+				// Change blog folder with current as register in settings
+				if (settingData.blog.asBlog[0] !== false) {
+					this.utils.createDirectory(`./src/pages/${settingData.blog.asBlog[0]}`);
+					this.utils.createDirectory(`./dist/${settingData.blog.asBlog[0]}`);
+					this.utils.createDirectory(`./dist/${settingData.blog.asBlog[0]}/data`);
+
+					fs.readdir('./src/data/blog/posts', (err, files) => {
+						const tagSingle = fs.existsSync('./src/hooks/blog/pages/blog-single.hbs') ? fs.readFileSync('./src/hooks/blog/pages/blog-single.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/pages/blog-single.hbs', 'utf8');
+						files.forEach(item => {
+							const postName = item.split('.')[0];
+							const sectionPageChange = tagSingle.replace(/(?<={{> post-title)(.*?)(?= }})/g, `-${postName}`);
+							fs.writeFileSync(`./src/pages/${settingData.blog.asBlog[0]}/${postName}.hbs`, sectionPageChange);
+						});
+					});
+				}
 
 				// Write blogPath value in some utilities js
 				fs.readFile('./src/assets/js/utilities/breadcrumb.js', 'utf8', (err, file) => {
@@ -205,8 +226,8 @@ export default class Methods {
 				this.changeBlogFrontmatter(objects.data, './src/hooks/blog/pages/blog-find.hbs', './node_modules/blockit-builder/hooks/blog/pages/blog-find.hbs');
 
 				// Change frontmatter in each blog post
-				fs.readdir('./src/pages/blog', (err, files) => {
-					files.forEach(post => this.changeBlogFrontmatter(objects.data, `./src/pages/blog/${post}`));
+				fs.readdir(`./src/pages/${objects.nameFile}`, (err, files) => {
+					files.forEach(post => this.changeBlogFrontmatter(objects.data, `./src/pages/${objects.nameFile}/${post}`));
 				});
 
 				// Read all post file, data tag and process for create blog page
@@ -229,7 +250,7 @@ export default class Methods {
 					const titleChange = layoutChange.replace(/(?<=title:\s).*/g, objects.data.title);
 					const breadcrumbChange = titleChange.replace(/(?<=breadcrumb:\s).*/g, objects.data.breadcrumb);
 
-					fs.writeFileSync('./src/pages/blog-find.hbs', breadcrumbChange);
+					fs.writeFileSync(`./src/pages/${objects.nameFile}-find.hbs`, breadcrumbChange);
 				});
 			});
 		} else {
@@ -237,13 +258,36 @@ export default class Methods {
 
 			// Set back "false" at asBlog setting.json
 			if (objects.currentBlog === 'false') {
-				fs.readFile('./src/data/setting.json', 'utf8', (err, file) => {
-					const settingData = JSON.parse(file);
-					settingData.blog.asBlog = false;
-					fs.writeFileSync('./src/data/setting.json', JSON.stringify(settingData, null, 2));
-				});
+				this.unsetBlogPage();
 			}
 		}
+	};
+
+	unsetBlogPage = () => {
+		fs.readFile('./src/data/setting.json', 'utf8', (err, file) => {
+			const settingData = JSON.parse(file);
+			settingData.blog.asBlog.unshift(false);
+			settingData.blog.asBlog.pop();
+			fs.writeFileSync('./src/data/setting.json', JSON.stringify(settingData, null, 2));
+
+			if (fs.existsSync(`./src/pages/${settingData.blog.asBlog[1]}-find.hbs`)) {
+				fs.unlinkSync(`./src/pages/${settingData.blog.asBlog[1]}-find.hbs`);
+				fs.unlinkSync(`./dist/${settingData.blog.asBlog[1]}-find.html`);
+			}
+
+			if (settingData.blog.asBlog[0] === false) {
+				fs.rmdirSync(`./src/pages/${settingData.blog.asBlog[1]}`, {recursive: true});
+				fs.rmdirSync(`./dist/${settingData.blog.asBlog[1]}`, {recursive: true});
+			}
+
+			const blogPageRegex = new RegExp(`${settingData.blog.asBlog[1]}-page`);
+			fs.readdirSync('./src/pages', 'utf8').filter(file => file.match(/.(hbs)$/i)).filter(each => each.match(blogPageRegex)).forEach(item => {
+				fs.unlinkSync(`./src/pages/${item}`);
+				fs.unlinkSync(`./dist/${item.split('.')[0]}.html`);
+			});
+
+			this.socket.emit('pagesCurrentBlog', settingData.blog.asBlog[0]);
+		});
 	};
 
 	readSectionData = nameFile => {
@@ -286,7 +330,7 @@ export default class Methods {
 	};
 
 	createSectionData = (sections, deletedSections) => {
-		sections.forEach(item => {
+		sections.filter(item => item.data !== false).forEach(item => {
 			fs.writeFileSync(`./src/partials/sections/${item.name}.hbs`, item.data);
 		});
 		if (deletedSections.length !== 0 || deletedSections[0] !== false) {
@@ -327,6 +371,7 @@ export default class Methods {
 		const settingData = JSON.parse(fs.readFileSync('./src/data/setting.json', 'utf8'));
 		const postData = nameFile === 'empty' ? null : JSON.parse(fs.readFileSync(`./src/data/blog/posts/${nameFile}.json`, 'utf8'));
 		const data = {
+			asBlog: settingData.blog.asBlog[0],
 			authors: {
 				current: postData === null ? '' : postData.author.name,
 				select: settingData.authors,
@@ -355,6 +400,7 @@ export default class Methods {
 		const totalPages = Math.ceil(items.length / perPage);
 
 		return {
+			asBlog: settingData.blog.asBlog[0],
 			page,
 			perPage,
 			prevPage: page - 1 ? page - 1 : null,
@@ -363,7 +409,6 @@ export default class Methods {
 			totalPages,
 			displayAuthor: settingData.blog.displayAuthor,
 			data: paginatedItems,
-
 		};
 	};
 
@@ -378,7 +423,7 @@ export default class Methods {
 			const {totalPages} = dataSend;
 
 			// Create blog-page data and hbs
-			if (settingData.blog.asBlog !== false) {
+			if (settingData.blog.asBlog[0] !== false) {
 				let count = 1;
 				while (count <= totalPages) {
 					// Blog page data json
@@ -389,14 +434,15 @@ export default class Methods {
 					// Blog page and section hbs
 					const pageChange = dataTag.defaultPage.replace(/(?<={{> section-blog-)(.*?)(?= }})/g, count);
 					if (count === 1) {
-						fs.writeFileSync(`./src/pages/${settingData.blog.asBlog}`, pageChange);
+						fs.writeFileSync(`./src/pages/${settingData.blog.asBlog[0]}.hbs`, pageChange);
 					} else {
-						fs.writeFileSync(`./src/pages/blog-page-${count}.hbs`, pageChange);
+						fs.writeFileSync(`./src/pages/${settingData.blog.asBlog[0]}-page-${count}.hbs`, pageChange);
 					}
 
 					const sectionFirstChange = dataTag.defaultSection.replace(/{{#each(.*?).data}}/g, `{{#each blogPage${count}.data}}`);
 					const sectionSecondChange = sectionFirstChange.replace(/{{#if(.*?).displayAuthor}}/g, `{{#if @root.blogPage${count}.displayAuthor}}`);
-					fs.writeFileSync(`./src/partials/blog/section-blog-${count}.hbs`, sectionSecondChange);
+					const sectionThirdChange = sectionSecondChange.replace(/{{@root(.*?).asBlog}}/g, `{{@root.blogPage${count}.asBlog}}`);
+					fs.writeFileSync(`./src/partials/blog/section-blog-${count}.hbs`, sectionThirdChange);
 
 					count++;
 				}
@@ -413,12 +459,12 @@ export default class Methods {
 						fs.unlinkSync(`./src/data/blog/blog-page-${startFiles}.json`);
 					}
 
-					if (fs.existsSync(`./src/pages/blog-page-${startFiles}.hbs`)) {
-						fs.unlinkSync(`./src/pages/blog-page-${startFiles}.hbs`);
+					if (fs.existsSync(`./src/pages/${settingData.blog.asBlog[0]}-page-${startFiles}.hbs`)) {
+						fs.unlinkSync(`./src/pages/${settingData.blog.asBlog[0]}-page-${startFiles}.hbs`);
 					}
 
-					if (fs.existsSync(`./dist/blog-page-${startFiles}.html`)) {
-						fs.unlinkSync(`./dist/blog-page-${startFiles}.html`);
+					if (fs.existsSync(`./dist/${settingData.blog.asBlog[0]}-page-${startFiles}.html`)) {
+						fs.unlinkSync(`./dist/${settingData.blog.asBlog[0]}-page-${startFiles}.html`);
 					}
 
 					startFiles++;
@@ -437,43 +483,46 @@ export default class Methods {
 				});
 			});
 
-			// Create data-blog.json`
-			const latestPost = postObj.post.filter(each => !each.hidden).slice(0, 3).map(each => (
-				{
-					title: each.title, link: each.link, date: each.dateCreated,
-				}
-			));
+			if (settingData.blog.asBlog[0] !== false) {
+				// Create data-blog.json`
+				this.utils.createDirectory(`./dist/${settingData.blog.asBlog[0]}/data`); // If "css" folder not exist then create it
+				const latestPost = postObj.post.filter(each => !each.hidden).slice(0, 3).map(each => (
+					{
+						title: each.title, link: each.link, date: each.dateCreated,
+					}
+				));
 
-			const firstRawTag = postObj.post.map(e => e.tags);
-			const secondRawTag = firstRawTag.filter(tag => tag).reduce((acc, tag) => acc.concat(tag), []).map(tag => tag);
-			const tagLists = secondRawTag.filter((item, pos) => secondRawTag.indexOf(item) === pos);
+				const firstRawTag = postObj.post.map(e => e.tags);
+				const secondRawTag = firstRawTag.filter(tag => tag).reduce((acc, tag) => acc.concat(tag), []).map(tag => tag);
+				const tagLists = secondRawTag.filter((item, pos) => secondRawTag.indexOf(item) === pos);
 
-			const firstRawCategory = postObj.post.map(e => e.category);
-			const categoryLists = firstRawCategory.filter((item, pos) => firstRawCategory.indexOf(item) === pos);
+				const firstRawCategory = postObj.post.map(e => e.category);
+				const categoryLists = firstRawCategory.filter((item, pos) => firstRawCategory.indexOf(item) === pos);
 
-			const asBlogValue = settingData.blog.asBlog === false ? false : `${settingData.blog.asBlog.split('.').slice(0, -1)}.html`;
-			const blogJsObj = {asBlog: asBlogValue, totalPages, tagLists, latestPost};
-			fs.writeFileSync('./dist/blog/data/data-blog.json', JSON.stringify(blogJsObj));
+				const asBlogValue = settingData.blog.asBlog[0] === false ? false : `${settingData.blog.asBlog[0]}.html`;
+				const blogJsObj = {asBlog: asBlogValue, totalPages, tagLists, latestPost};
+				fs.writeFileSync(`./dist/${settingData.blog.asBlog[0]}/data/data-blog.json`, JSON.stringify(blogJsObj));
 
-			// Create data-category.json
-			fs.readFile('./src/data/blog/blog.json', 'utf8', (err, buffer) => {
-				const data = JSON.parse(buffer);
-				const categoryData = categoryLists.map(item => this.createCategoryPost(data.post, item));
-				fs.writeFileSync('./dist/blog/data/data-category.json', JSON.stringify(categoryData));
-			});
-
-			// Create data-category.json & data-tag.json
-			fs.readFile('./src/data/blog/blog.json', 'utf8', (err, buffer) => {
-				const data = JSON.parse(buffer);
-				const tagData = tagLists.map(item => this.createTagPost(data.post, item));
-				tagData.forEach(item => {
-					item.posts.forEach(e => {
-						delete e.tags;
-						delete e.blocks;
-					});
+				// Create data-category.json
+				fs.readFile('./src/data/blog/blog.json', 'utf8', (err, buffer) => {
+					const data = JSON.parse(buffer);
+					const categoryData = categoryLists.map(item => this.createCategoryPost(data.post, item));
+					fs.writeFileSync(`./dist/${settingData.blog.asBlog[0]}/data/data-category.json`, JSON.stringify(categoryData));
 				});
-				fs.writeFileSync('./dist/blog/data/data-tag.json', JSON.stringify(tagData));
-			});
+
+				// Create data-category.json & data-tag.json
+				fs.readFile('./src/data/blog/blog.json', 'utf8', (err, buffer) => {
+					const data = JSON.parse(buffer);
+					const tagData = tagLists.map(item => this.createTagPost(data.post, item));
+					tagData.forEach(item => {
+						item.posts.forEach(e => {
+							delete e.tags;
+							delete e.blocks;
+						});
+					});
+					fs.writeFileSync(`./dist/${settingData.blog.asBlog[0]}/data/data-tag.json`, JSON.stringify(tagData));
+				});
+			}
 		}, 600);
 	};
 
@@ -562,18 +611,22 @@ export default class Methods {
 		});
 	};
 
-	postsSaveContent = async (nameFile, dataPost, dataTag) => {
-		fs.unlink('./dist/blog/*.html', () => {
+	postsSaveContent = (nameFile, dataPost, dataTag) => {
+		const blogPage = JSON.parse(fs.readFileSync('./src/data/setting.json', 'utf8')).blog.asBlog[0];
+
+		fs.unlink(`./dist/${blogPage}/*.html`, () => {
 			const sectionPageChange = dataTag.singlePage.replace(/(?<={{> post-title)(.*?)(?= }})/g, `-${nameFile}`);
 			fs.writeFileSync(`./src/data/blog/posts/${nameFile}.json`, JSON.stringify(dataPost, null, 2));
 
-			if (dataPost.hidden && fs.existsSync(`./dist/blog/${dataPost.link}`)) {
-				fs.unlinkSync(`./dist/blog/${dataPost.link}`);
+			if (dataPost.hidden && fs.existsSync(`./dist/${blogPage}/${dataPost.link}`)) {
+				fs.unlinkSync(`./dist/${blogPage}/${dataPost.link}`);
 			}
 
 			if (dataPost.hidden === false) {
 				fs.writeFileSync(`./src/partials/blog/post-title-${nameFile}.hbs`, dataTag.singleSection);
-				fs.writeFileSync(`./src/pages/blog/${nameFile}.hbs`, sectionPageChange);
+				if (blogPage !== false) {
+					fs.writeFileSync(`./src/pages/${blogPage}/${nameFile}.hbs`, sectionPageChange);
+				}
 			}
 
 			this.postCreatePage(dataTag);
@@ -581,14 +634,15 @@ export default class Methods {
 	};
 
 	postsDeletePost = (nameFile, dataTag) => {
+		const blogPage = JSON.parse(fs.readFileSync('./src/data/setting.json', 'utf8')).blog.asBlog[0];
 		const files = [
 			`./src/data/blog/posts/${nameFile}.json`,
-			`./src/pages/blog/${nameFile}.hbs`,
+			`./src/pages/${blogPage}/${nameFile}.hbs`,
 			`./src/partials/blog/post-title-${nameFile}.hbs`,
-			`./dist/blog/${nameFile}.html`,
+			`./dist/${blogPage}/${nameFile}.html`,
 		];
 
-		return Promise.all(files.map(each => fs.unlinkSync(each)))
+		return Promise.all(files.map(each => !each.includes('false') && fs.unlinkSync(each)))
 			.then(
 				this.socket.emit('deleteDone', 'success'),
 				this.postCreatePage(dataTag),
@@ -628,14 +682,15 @@ export default class Methods {
 
 	createBlogTitle = data => {
 		if (this.findBlogTitle(data, 'link', 'blog/page-1.html') !== null) {
+			const blogPage = JSON.parse(fs.readFileSync('./src/data/setting.json', 'utf8')).blog.asBlog[0];
 			const blogTitle = this.findBlogTitle(data, 'link', 'blog/page-1.html').title;
 
 			fs.readdir('./src/pages/blog', (err, files) => {
 				files.forEach(each => {
-					fs.readFile(`./src/pages/blog/${each}`, 'utf8', (err, data) => {
+					fs.readFile(`./src/pages/${blogPage}/${each}`, 'utf8', (err, data) => {
 						const newAttribute = data.replace(/(?<=data-title=")([^"]*)/g, blogTitle.toLowerCase());
 						const newTitle = newAttribute.replace(/(?<=title:\s).*/g, blogTitle);
-						fs.writeFileSync(`./src/pages/blog/${each}`, newTitle);
+						fs.writeFileSync(`./src/pages/${blogPage}/${each}`, newTitle);
 					});
 				});
 			});
@@ -657,9 +712,12 @@ export default class Methods {
 
 	// Navigation editor
 	createNavigationData = () => {
+		const blogPage = JSON.parse(fs.readFileSync('./src/data/setting.json', 'utf-8')).blog.asBlog[0];
+		const blogPageRegex = new RegExp(`${blogPage}-page`);
+		const blogFindRegex = new RegExp(`${blogPage}-find`);
 		const data = {
 			nav: JSON.parse(fs.readFileSync('./src/data/navigation.json', 'utf8')),
-			select: fs.readdirSync('./src/pages', 'utf8').filter(each => !each.match(/blog-page/g) && !each.match(/blog-find/g)).filter(file => file.match(/.(hbs)$/i)),
+			select: fs.readdirSync('./src/pages', 'utf8').filter(each => !each.match(blogPageRegex) && !each.match(blogFindRegex)).filter(file => file.match(/.(hbs)$/i)),
 		};
 		this.socket.emit('navigationData', data);
 	};

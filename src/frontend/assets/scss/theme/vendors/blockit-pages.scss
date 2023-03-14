@@ -455,6 +455,14 @@
         .uk-offcanvas-bar {
             width: 500px;
         }
+        .post-image {
+            width: 99%;
+            height: 108px;
+            padding: 14px 0px;
+            img {
+                width: 90%;
+            }
+        }
     }
 }
 

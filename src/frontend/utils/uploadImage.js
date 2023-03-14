@@ -27,7 +27,6 @@ export default function uploadImage(options) {
 			// No Default
 		}
 	} else if (buffer.size < 1000000) {
-		console.log(buffer.type);
 		switch (buffer.type) {
 			case 'image/jpeg':
 				typeFile = 'jpg';

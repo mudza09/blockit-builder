@@ -61,15 +61,17 @@ export default function PostsAction() {
 	// Handle editor post
 	const handleEditorPost = postData => {
 		if (mode === 'add') {
-			handleEditorJs('', postData.authors.select);
+			handleEditorJs('', postData);
 		} else if (mode === 'edit') {
 			setTitlePost(postData.title);
-			handleEditorJs(postData, postData.authors.select);
+			handleEditorJs(postData, postData);
 		}
 	};
 
 	// Editor js init
-	const handleEditorJs = (data, authorsData) => {
+	const handleEditorJs = (data, rawPostData) => {
+		const authorsData = rawPostData.authors.select;
+		const blogData = rawPostData.asBlog;
 		const editor = new EditorJS({
 			holder: document.querySelector('#editor-post'),
 			minHeight: 60,
@@ -229,8 +231,6 @@ export default function PostsAction() {
 											time: postData.timeCreated,
 										})}`,
 									});
-									sessionStorage.removeItem('dateCreated');
-									sessionStorage.removeItem('timeCreated');
 								}, 2000);
 
 								oldTitle.shift();
@@ -257,7 +257,9 @@ export default function PostsAction() {
 
 							// Show preview url
 							setTimeout(() => {
-								setPreviewUrl(true);
+								if (blogData !== false) {
+									setPreviewUrl(true);
+								}
 							}, 3000);
 						}
 					});
@@ -322,13 +324,13 @@ export default function PostsAction() {
 	useEffect(() => {
 		socketPostsAction();
 		setLayoutTag(hbsTemplate);
-		if (params.get('title') !== null) {
-			setPreviewUrl(true);
-		}
 	}, []);
 	useEffect(() => {
 		if (Object.keys(data).length !== 0) {
 			handleEditorPost(data);
+			if (data.asBlog !== false && params.get('title') !== null) {
+				setPreviewUrl(true);
+			}
 		}
 	}, [data]);
 	useEffect(() => {
@@ -352,7 +354,7 @@ export default function PostsAction() {
 						</h5>
 					</div>
 					<div className='uk-width-3-4 uk-flex uk-flex-right blockit-notif'>
-						{previewUrl && <a href={`http://localhost:3000/blog/${postLink(params.get('title'))}.html`} target='_blank' rel='noreferrer'><code className='uk-flex uk-flex-middle'><i className='ri ri-link ri-sm uk-margin-small-right'></i>{`http://localhost:3000/blog/${postLink(params.get('title'))}.html`}</code></a>}
+						{previewUrl && <a href={`http://localhost:3000/${data.asBlog}/${postLink(params.get('title'))}.html`} target='_blank' rel='noreferrer'><code className='uk-flex uk-flex-middle'><i className='ri ri-link ri-sm uk-margin-small-right'></i>{`http://localhost:3000/${data.asBlog}/${postLink(params.get('title'))}.html`}</code></a>}
 					</div>
 				</div>
 				<div className='uk-grid uk-margin-top'>
