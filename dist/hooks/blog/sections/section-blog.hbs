@@ -5,7 +5,7 @@
     {{/if}}
     <div class="card-body blog-card p-3 p-md-4">
         <h3 class="fw-bold">
-            <a href="{{root}}blog/{{link}}" class="link-dark text-decoration-none">{{title}}</a>
+            <a href="{{root}}{{@root.blog-page-number.asBlog}}/{{link}}" class="link-dark text-decoration-none">{{title}}</a>
         </h3>
         <p>{{{blocks.[0].data.text}}}</p>
         <div class="blog-author d-flex align-items-center">
@@ -22,7 +22,7 @@
     </div>
     <div class="card-footer blog-footer d-flex justify-content-between align-items-center px-3 px-md-4 py-2">
         <span class="badge bg-primary">{{category}}</span>
-        <a href="{{root}}blog/{{link}}" class="btn btn-link text-decoration-none p-0">Read more<i class="fas fa-angle-right fa-xs ms-1"></i></a>
+        <a href="{{root}}{{@root.blog-page-number.asBlog}}/{{link}}" class="btn btn-link text-decoration-none p-0">Read more<i class="fas fa-angle-right fa-xs ms-1"></i></a>
     </div>
 </article>
 {{/each}}
