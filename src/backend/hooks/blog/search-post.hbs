@@ -1,18 +1,18 @@
-<article class="card mb-4">
-    <div class="card-body blog-card p-3 p-md-4">
-        <h3 class="fw-bold">
-            <a href="${this.sanitizePath}/${link}" class="link-dark text-decoration-none">${title}</a>
+<article>
+    <div>
+        <h3>
+            <a href="${this.sanitizePath}/${link}">${title}</a>
         </h3>
         <p>${content}</p>
-        <div class="blog-author d-flex align-items-center">
-            <img class="rounded-circle me-1" src="${author.avatar}" alt="author" width="32" height="32">
-            <small class="text-muted">
+        <div>
+            <img src="${author.avatar}" alt="author" width="32" height="32">
+            <small>
                 ${author.name}<span class="mx-1">•</span>${date}
             </small>
         </div>
     </div>
-    <div class="card-footer blog-footer d-flex justify-content-between align-items-center px-3 px-md-4 py-2">
-        <span class="badge bg-primary">${category}</span>
-        <a href="${this.sanitizePath}/${link}" class="btn btn-link text-decoration-none p-0">Read more<i class="fas fa-angle-right fa-xs ms-1"></i></a>
+    <div>
+        <spa>${category}</span>
+        <a href="${this.sanitizePath}/${link}">Read more</a>
     </div>
 </article>

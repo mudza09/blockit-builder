@@ -60,14 +60,14 @@ export default class Utils {
 
 			case '.gif': {
 				sharp(file)
-					.gif({reoptimize: true})
+					.gif({progressive: true})
 					.toFile(`${destFolder}/${path.basename(file)}`);
 				break;
 			}
 
 			case '.webp': {
 				sharp(file)
-					.webp({lossless: true})
+					.webp({quality: 75})
 					.toFile(`${destFolder}/${path.basename(file)}`);
 				break;
 			}

@@ -70,8 +70,6 @@
         display: inline-block;
         font-size: 15px;
         font-weight: bold;
-        // position: relative;
-        // top: 9px;
         transition: all ease .2s;
     }
     .page-status {
@@ -144,18 +142,28 @@
     .sortable-canvas {
         min-height: 664px;
         padding: 0px 15px 25px 15px;
-        img {
-            width: 776px;
-            height: auto;
-            &.missing-preview {
-                width: 84px;
-                margin-right: -35px;
-                position: relative;
-                z-index: 1;
-            }
-        }
         .uk-grid-margin {
             margin: 0;
+        }
+        .sections-name {
+            position: relative;
+            &:hover {
+                transition: all ease-in-out .2s;
+                border-radius: $base-border-radius;
+                box-shadow: 0px 0px 10px 1px lighten($base-primary-color, 38%);
+                z-index: 1;
+            }
+            .uk-button-small.uk-button-danger {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        }
+        .section-button {
+            margin-top: 15px;
+            &.uk-button-danger {
+                margin-right: 15px;
+                margin-left: 10px;
+            }
         }
     }
     .sortable-box {
@@ -166,7 +174,7 @@
                 padding: 16px 10px;
                 background: $base-default-color;
                 border-radius: $base-border-radius;
-                box-shadow: 0px 0px 20px -1px lighten($base-primary-color, 42%);
+                box-shadow: 0px 0px 10px -1px lighten($base-primary-color, 42%);
             }
             img {
                 width: 100%;
@@ -467,23 +475,18 @@
 }
 
 .drag-canvas {
-    img {
-        &.missing-preview {
-            width: 84px;
-            margin-right: -35px;
-            position: relative;
-            z-index: 1;
-        }
+    transition: transform linear 80ms;
+    transform: scale(0.85);
+    div {
+        box-shadow: 0px 0px 10px -1px lighten($base-primary-color, 32%);
     }
 }
 
-.sections-name {
-    &.uk-sortable-drag {
-        div {
-            padding: 16px 10px;
-            background: $base-default-color;
-            border-radius: $base-border-radius;
-            box-shadow: 0px 0px 20px -1px lighten($base-primary-color, 32%);
-        }
+.drag-library {
+    div {
+        padding: 16px 10px;
+        background: $base-default-color;
+        border-radius: $base-border-radius;
+        box-shadow: 0px 0px 10px -1px lighten($base-primary-color, 32%);
     }
 }

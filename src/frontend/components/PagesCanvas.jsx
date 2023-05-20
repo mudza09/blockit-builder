@@ -8,6 +8,7 @@ import UIkit from 'uikit';
 PagesCanvas.propTypes = {
 	canvasAreaRef: PropTypes.object,
 	handleEditor: PropTypes.func,
+	handleDelete: PropTypes.func,
 	placeholderRef: PropTypes.object,
 	dirtyCallback: PropTypes.bool,
 	modeChange: PropTypes.bool,
@@ -19,44 +20,42 @@ export default function PagesCanvas(props) {
 	const [data, setData] = useState([]);
 	const params = new URLSearchParams(location.search);
 	const sections = params.get('sections');
-	const {canvasAreaRef, handleEditor, placeholderRef, dirtyCallback, modeChange, canvasId} = props;
+	const {canvasAreaRef, handleEditor, handleDelete, placeholderRef, dirtyCallback, modeChange, canvasId} = props;
 
 	// Id generator
 	const uid = new ShortUniqueId({length: 6});
 
 	// Handle drag and drop event
 	const handleDragDrop = () => {
-		UIkit.util.on(canvasAreaRef.current, 'added', () => {
+		UIkit.util.on(canvasAreaRef.current, 'added', async item => {
 			dirtyCallback(true);
-			Array.from(canvasAreaRef.current.children).forEach(async item => {
-				const sectionId = uid();
-				const hasSaved = item.querySelector('img').getAttribute('alt').split('-').at(-1).match(/^(?=.*?[A-Z])(?=.*?[a-z]).{6,}$/gm);
-				const isComponent = item.querySelector('img').getAttribute('alt').includes('component');
 
-				if (!hasSaved && !isComponent) {
-					item.querySelector('img').setAttribute('alt', `${item.classList[1]}-${sectionId}`);
-					item.querySelector('span').textContent = `${item.classList[1]}-${sectionId}`;
-					item.querySelector(`#modal-${item.classList[1]}`).setAttribute('id', `modal-${item.classList[1]}-${sectionId}`);
-					item.querySelector(`#editor-${item.classList[1]}`).setAttribute('id', `editor-${item.classList[1]}-${sectionId}`);
-					item.querySelector('.uk-button').setAttribute('data-uk-toggle', `target: #modal-${item.classList[1]}-${sectionId}`);
+			const sectionId = uid();
+			const sectionName = item.detail[1].classList[1];
+			const sectionEl = item.detail[1];
 
-					bs.socket.emit('readSectionData', item.classList[1]);
-					const dataSocket = await new Promise(resolve => {
-						bs.socket.once('resultSectionData', data => resolve(data));
-					});
-					sessionStorage.setItem(`${item.classList[1]}-${sectionId}`, JSON.stringify(dataSocket));
-				}
+			sectionEl.querySelector('img').setAttribute('alt', `${sectionName}-${sectionId}`);
+			sectionEl.querySelector('span').textContent = `${sectionName}-${sectionId}`;
+			sectionEl.querySelector(`#modal-${sectionName}`).setAttribute('id', `modal-${sectionName}-${sectionId}`);
+			sectionEl.querySelector(`#editor-${sectionName}`).setAttribute('id', `editor-${sectionName}-${sectionId}`);
+			sectionEl.querySelector('.uk-button').setAttribute('data-uk-toggle', `target: #modal-${sectionName}-${sectionId}`);
 
-				item.querySelector('.uk-transition-fade').classList.remove('uk-flex-bottom');
-				item.querySelector('.uk-transition-fade').classList.add('uk-flex-middle');
-				item.querySelector('.uk-text-small').setAttribute('hidden', '');
-				item.querySelector('.uk-button').removeAttribute('hidden');
-
-				const modalEl = item.querySelector('.uk-modal-container');
-				if (modalEl !== null && modalEl.hasAttribute('hidden')) {
-					modalEl.removeAttribute('hidden');
-				}
+			bs.socket.emit('readSectionData', sectionName);
+			const dataSocket = await new Promise(resolve => {
+				bs.socket.once('resultSectionData', data => resolve(data));
 			});
+			sessionStorage.setItem(`${sectionName}-${sectionId}`, JSON.stringify(dataSocket));
+
+			sectionEl.querySelector('.uk-transition-fade').classList.remove('uk-flex-center', 'uk-flex-bottom');
+			sectionEl.querySelector('.uk-transition-fade').classList.add('uk-flex-top', 'uk-flex-right');
+			sectionEl.querySelector('.uk-text-small').setAttribute('hidden', '');
+			sectionEl.querySelector('.uk-button').removeAttribute('hidden');
+			sectionEl.querySelector('.uk-button-danger').removeAttribute('hidden');
+
+			const modalEl = sectionEl.querySelector('.uk-modal-container');
+			if (modalEl !== null && modalEl.hasAttribute('hidden')) {
+				modalEl.removeAttribute('hidden');
+			}
 		});
 
 		UIkit.util.on(canvasAreaRef.current, 'removed', () => {
@@ -123,10 +122,13 @@ export default function PagesCanvas(props) {
 			<div key={item} className={'sections-name ' + item}>
 				<div className='uk-inline-clip uk-transition-toggle'>
 					{!item.includes('section-blog') && <img className='uk-border-rounded' src={'../assets/img/sections/' + checkPath + '.webp'} alt={item} />}
-					<div className='uk-transition-fade uk-position-cover uk-flex uk-flex-center uk-flex-middle'>
+					<div className='uk-transition-fade uk-position-cover uk-flex uk-flex-top uk-flex-right'>
 						<span className='uk-text-small' hidden>{item}</span>
-						<button className='uk-button uk-button-secondary uk-border-rounded section-button' type='button' onClick={() => handleModal(item)}>
-							<i className='ri-code-s-slash-line ri-1x uk-margin-small-right'></i>Edit HTML code
+						<button className='uk-button uk-button-small uk-button-secondary uk-border-rounded section-button' type='button' onClick={() => handleModal(item)}>
+							<i className='ri-code-s-slash-line ri-sm uk-margin-small-right'></i>Edit code
+						</button>
+						<button className='uk-button uk-button-small uk-button-danger uk-border-rounded section-button' type='button' onClick={e => handleDelete(e)}>
+							<i className='ri-delete-bin-line ri-sm uk-margin-remove-right'></i>
 						</button>
 						<div id={'modal-' + item} className='uk-modal-container uk-flex-top uk-modal' data-uk-modal>
 							<div className='uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-border-rounded blockit-code-editor'>

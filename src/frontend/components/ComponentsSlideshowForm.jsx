@@ -93,7 +93,7 @@ export default function ComponentsSlideshowForm(props) {
 					<span className='uk-label uk-label-warning uk-text-small uk-border-rounded component-slide-count'>id: {data.id}</span>
 					<div className='uk-position-cover uk-flex uk-flex-right uk-flex-middle'>
 						<button className='uk-button uk-button-secondary uk-border-rounded uk-margin-small-right' type='button' onClick={() => handleModal(data.id)}>
-							<i className='ri-code-s-slash-line ri-1x uk-margin-small-right'></i>Edit HTML code
+							<i className='ri-code-s-slash-line ri-1x uk-margin-small-right'></i>Edit code
 						</button>
 						<button className='uk-button uk-button-default uk-border-rounded uk-margin-right' onClick={e => callback(e, data.id, parentData)}>
 							<i className='ri-delete-bin-line ri-sm uk-margin-small-right'></i>Delete slide

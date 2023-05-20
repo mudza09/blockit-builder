@@ -6,16 +6,16 @@ asBlog: false
 ---
 <main data-title="blog-find">
     <!-- section content begin -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row{{#if setting.blog.showWidgets.allHide}} justify-content-center{{/if}}">
-                <div {{#unless setting.blog.showWidgets.allHide}}class="col-md-12 col-lg-8"{{/unless}}{{#if setting.blog.showWidgets.allHide}}class="col-lg-9"{{/if}}>
-                    <p class="text-muted mb-0 blog-find-text">Posts with tag/category</p>
-                    <h2 class="fw-bold blog-find-heading mb-3"><i class="fas fa-tags fa-xs me-1 position-relative" style="top: 4px;"></i>Tag name/Category name</h2>
+    <section>
+        <div>
+            <div>
+                <div>
+                    <p>Posts with tag/category</p>
+                    <h2>Tag name/Category name</h2>
                     {{> component-blog-find }}
                 </div>
                 {{#unless setting.blog.showWidgets.allHide}}
-                <div class="col-md-12 col-lg-4">
+                <div>
                     {{#if setting.blog.showWidgets.search}}
                     {{> component-widget-search }}
                     {{/if}}

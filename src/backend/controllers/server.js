@@ -35,7 +35,15 @@ export default class Server {
 			notify: false,
 			server: './node_modules/blockit-builder',
 			single: true,
-			snippetOptions: {async: false},
+			snippetOptions: {
+				rule: {
+					match: /<\/head>/i,
+					fn(snippet, match) {
+						const {src} = /script.src = '(?<src>[^']+)'/u.exec(snippet).groups;
+						return `<script id="__bs_script__">//<![CDATA[ \n document.write("<script src='\\${src}'><\\/script>".replace("HOST", location.hostname)); \n //]]></script>${match}`;
+					},
+				},
+			},
 			logLevel: 'silent',
 			callbacks: {
 				ready: (err, bs) => {

@@ -21,7 +21,6 @@ export default function SettingsBlog(props) {
 	// Display radio
 	const displayRadio = condition => {
 		const form = blogForm.current;
-
 		if (condition.displayAuthor) {
 			form.querySelector('#display-author-enable').checked = true;
 		} else {

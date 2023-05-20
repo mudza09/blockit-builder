@@ -128,6 +128,9 @@ export default function PagesAction() {
 			const {name, title, layout, breadcrumb} = pageForm;
 			const blog = blogCheck.current.checked;
 
+			// Send data section to host
+			bs.socket.emit('saveSectionData', sections, deletedSections);
+
 			// Send data page to host and delete old name if name changed
 			bs.socket.emit('savePageActionData', {
 				nameFile: name,
@@ -149,9 +152,6 @@ export default function PagesAction() {
 					bs.socket.emit('deletePageData', oldName);
 				}
 			}
-
-			// Send data editor to host
-			bs.socket.emit('saveSectionData', sections, deletedSections);
 
 			navigate({
 				pathname: '/pages/edit',
@@ -298,6 +298,17 @@ export default function PagesAction() {
 			});
 	};
 
+	// Handle delete section
+	const handleDeleteSection = event => {
+		const sectionElement = event.target.closest('.sections-name');
+		const sectionName = sectionElement.classList[1];
+
+		setIsDirty(true);
+		sectionElement.classList.add('uk-animation-fast', 'uk-animation-scale-up', 'uk-animation-reverse');
+		setTimeout(() => sectionElement.remove(), 400);
+		sessionStorage.removeItem(sectionName);
+	};
+
 	// Filter used sections in canvas
 	const filterSections = async data => {
 		const canvas = await canvasWrap.current.children;
@@ -354,11 +365,12 @@ export default function PagesAction() {
 					<div className='uk-width-2-3'>
 						<div className='post-wrap'>
 							<div className='uk-width-1-1 uk-position-relative'>
-								<div className='sortable-canvas uk-margin-top' data-uk-sortable='group: sortable-group; cls-custom: drag-canvas' ref={canvasWrap}>
+								<div className='sortable-canvas uk-margin-top' data-uk-sortable='group: sortable-group; cls-custom: drag-canvas; threshold: 1; duration: 400' ref={canvasWrap}>
 									<PagesCanvas
 										canvasAreaRef={canvasWrap}
 										placeholderRef={placeholdWrap}
 										handleEditor={handleEditorSection}
+										handleDelete={handleDeleteSection}
 										dirtyCallback={setIsDirty}
 										modeChange={modeChange}
 										canvasId={canvasId}
@@ -376,6 +388,7 @@ export default function PagesAction() {
 								<PagesLibrary
 									data={libraryData}
 									handleEditor={handleEditorSection}
+									handleDelete={handleDeleteSection}
 									placeholderRef={placeholdWrap}
 								/>
 							</div>

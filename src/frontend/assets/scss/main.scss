@@ -34,7 +34,8 @@
 @import "mixins/utility-uikit.scss";
 
 // 5. import UIkit
-@import "../../../../node_modules/uikit/src/scss/uikit.scss";
+// @import "../../../../node_modules/uikit/src/scss/uikit.scss";
+@import "uikit.scss";
 
 // 6. theme fonts
 @import "theme/fonts.scss";

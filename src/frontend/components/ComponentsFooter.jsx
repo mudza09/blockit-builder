@@ -137,7 +137,7 @@ export default function ComponentsFooter(props) {
 					<label className='uk-form-label' htmlFor='setting-copyright'>Footer Content</label>
 					<div className='uk-form-controls'>
 						<button id='footer-editor-btn' className='uk-button uk-button-secondary uk-border-rounded' type='button' onClick={handleModal}>
-							<i className='ri-code-s-slash-line ri-1x uk-margin-small-right'></i>Edit HTML code
+							<i className='ri-code-s-slash-line ri-1x uk-margin-small-right'></i>Edit code
 						</button>
 						<div id='setting-footer-html-wrap' className='uk-modal-container uk-flex-top' data-uk-modal>
 							<div className='uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-border-rounded blockit-code-editor'>

@@ -48,7 +48,6 @@ const frontendApp = async filename => {
 			copyPlugin({
 				copy: [
 					{from: 'src/frontend/assets/static/favicon.ico', to: 'dist/assets/favicon.ico'},
-					{from: 'src/frontend/assets/static/index.html', to: 'dist/index.html'},
 					{from: 'src/frontend/assets/static/license.md', to: 'dist/license.md'},
 					{from: 'src/frontend/assets/static/readme.md', to: 'dist/readme.md'},
 				],
@@ -88,6 +87,10 @@ const frontendApp = async filename => {
 	});
 
 	fs.writeFileSync('./dist/assets/app.css', purgeStyle[0].css);
+
+	fs.readFile('src/frontend/assets/static/index.html', 'utf8', (err, data) => {
+		fs.writeFileSync('./dist/index.html', data.replace((/ {2}|\r\n|\n|\r/gm), ''));
+	});
 
 	console.log(`${logTime()} - Finished build frontend app.`);
 };
