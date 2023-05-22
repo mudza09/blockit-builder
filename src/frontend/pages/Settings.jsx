@@ -9,6 +9,7 @@ import SettingsAuthors from '../components/SettingsAuthors';
 import SettingsBlog from '../components/SettingsBlog';
 import SettingsOptimization from '../components/SettingsOptimization';
 import hbsTemplate from '../utils/hbsTemplate';
+import '../assets/js/coloris';
 
 export default function Settings() {
 	const [data, setData] = useState({});

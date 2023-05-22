@@ -78,6 +78,13 @@ body {
     }
 }
 
+@media (max-width: 960px) {
+    .tm-sidebar-left,
+    .tm-main {
+        display: none !important;
+    }
+}
+
 .uk-section {
     display: flow-root;
     box-sizing: border-box;

@@ -61,7 +61,7 @@ export default function PagesLibrary(props) {
 	return (
 		<div className='scrollable-content sortable-library' ref={libraryWrap}>
 			{data.map(library => (
-				<div key={library.name} id={'wrap-' + library.name.toLowerCase()}>
+				<div key={library.name} id={'wrap-' + library.name.toLowerCase().split(' ').join('-')}>
 					<h5 className='uk-heading-line'><span><i className={library.icon + ' ri-1x uk-margin-small-right'}></i>{library.name}</span></h5>
 					<div className='sortable-box uk-grid-small uk-child-width-1-2' data-uk-sortable='group: sortable-group; cls-custom: drag-library; threshold: 1; duration: 400' data-uk-grid='masonry: true'>
 						{

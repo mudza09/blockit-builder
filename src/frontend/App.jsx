@@ -2,7 +2,6 @@ import {Routes, Route, Navigate} from 'react-router-dom';
 
 import './assets/scss/main.scss';
 import './node_modules/remixicon/fonts/remixicon.css';
-import './assets/js/coloris';
 
 import Sidebar from './layouts/Sidebar';
 

@@ -27,6 +27,10 @@ export default function PagesCanvas(props) {
 
 	// Handle drag and drop event
 	const handleDragDrop = () => {
+		UIkit.util.on(canvasAreaRef.current, 'moved', () => {
+			dirtyCallback(true);
+		});
+
 		UIkit.util.on(canvasAreaRef.current, 'added', async item => {
 			dirtyCallback(true);
 
@@ -60,6 +64,7 @@ export default function PagesCanvas(props) {
 
 		UIkit.util.on(canvasAreaRef.current, 'removed', () => {
 			dirtyCallback(true);
+
 			const canvasArr = Array.from(canvasAreaRef.current.children).map(each => each.querySelector('span').textContent);
 			const storageArr = Object.keys(sessionStorage);
 			const deleteSection = storageArr.filter(each => !canvasArr.includes(each));

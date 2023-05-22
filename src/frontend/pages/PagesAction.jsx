@@ -382,7 +382,7 @@ export default function PagesAction() {
 								</div>
 							</div>
 						</div>
-						<div id='offcanvas-section-library' data-uk-offcanvas='overlay: false; flip: true'>
+						<div id='offcanvas-section-library' data-uk-offcanvas='overlay: false; flip: true' data-uk-filter='target: .sortable-library; animation: fade'>
 							<div className='uk-offcanvas-bar'>
 								<PagesLibraryButton data={libraryData} />
 								<PagesLibrary

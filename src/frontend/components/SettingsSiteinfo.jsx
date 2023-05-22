@@ -124,7 +124,7 @@ export default function SettingsSiteinfo(props) {
 					</div>
 				</div>
 				<div className='uk-margin setting-colors'>
-					<label className='uk-form-label' htmlFor='setting-meta-themecolor'>Meta theme color</label>
+					<label className='uk-form-label' htmlFor='setting-meta-themecolor-label'>Meta theme color</label>
 					<div className='uk-form-controls'>
 						<input className='uk-input uk-border-rounded' id='setting-meta-themecolor' type='text' defaultValue={data === undefined ? '' : data.metaThemeColor} />
 					</div>

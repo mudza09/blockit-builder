@@ -2,7 +2,7 @@
   "name": "blockit-builder",
   "title": "Blockit Builder",
   "description": "A static HTML builder from Indonez",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "author": "mudza09",
   "license": "MIT",
   "type": "module",
@@ -11,6 +11,7 @@
     "dev": "node src/build.js --dev"
   },
   "devDependencies": {
+    "@melloware/coloris": "^0.19.1",
     "chokidar": "3.5.3",
     "del": "7.0.0",
     "esbuild": "0.16.6",

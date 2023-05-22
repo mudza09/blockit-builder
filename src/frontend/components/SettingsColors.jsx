@@ -41,67 +41,67 @@ export default function SettingsColors(props) {
 			<h4 className='uk-heading-line'><span>Colors</span></h4>
 			<form className='uk-form-horizontal uk-margin-medium setting-colors' ref={colorsForm}>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-primary-color'>Primary color</label>
+					<label className='uk-form-label' htmlFor='setting-primary-color-label'>Primary color</label>
 					<div className='uk-form-controls'>
 						<input className='uk-input uk-border-rounded' id='setting-primary-color' type='text' defaultValue={data === undefined ? '' : data.primaryColor} />
 					</div>
 				</div>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-secondary-color'>Secondary color</label>
+					<label className='uk-form-label' htmlFor='setting-secondary-color-label'>Secondary color</label>
 					<div className='uk-form-controls'>
 						<input className='uk-input uk-border-rounded' id='setting-secondary-color' type='text' defaultValue={data === undefined ? '' : data.secondaryColor} />
 					</div>
 				</div>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-success-color'>Success color</label>
+					<label className='uk-form-label' htmlFor='setting-success-color-label'>Success color</label>
 					<div className='uk-form-controls'>
 						<input className='uk-input uk-border-rounded' id='setting-success-color' type='text' defaultValue={data === undefined ? '' : data.successColor} />
 					</div>
 				</div>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-info-color'>Info color</label>
+					<label className='uk-form-label' htmlFor='setting-info-color-label'>Info color</label>
 					<div className='uk-form-controls'>
 						<input className='uk-input uk-border-rounded' id='setting-info-color' type='text' defaultValue={data === undefined ? '' : data.infoColor} />
 					</div>
 				</div>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-warning-color'>Warning color</label>
+					<label className='uk-form-label' htmlFor='setting-warning-color-label'>Warning color</label>
 					<div className='uk-form-controls'>
 						<input className='uk-input uk-border-rounded' id='setting-warning-color' type='text' defaultValue={data === undefined ? '' : data.warningColor} />
 					</div>
 				</div>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-danger-color'>Danger color</label>
+					<label className='uk-form-label' htmlFor='setting-danger-color-label'>Danger color</label>
 					<div className='uk-form-controls'>
 						<input className='uk-input uk-border-rounded' id='setting-danger-color' type='text' defaultValue={data === undefined ? '' : data.dangerColor} />
 					</div>
 				</div>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-light-color'>Light color</label>
+					<label className='uk-form-label' htmlFor='setting-light-color-label'>Light color</label>
 					<div className='uk-form-controls'>
 						<input className='uk-input uk-border-rounded' id='setting-light-color' type='text' defaultValue={data === undefined ? '' : data.lightColor} />
 					</div>
 				</div>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-dark-color'>Dark color</label>
+					<label className='uk-form-label' htmlFor='setting-dark-color-label'>Dark color</label>
 					<div className='uk-form-controls'>
 						<input className='uk-input uk-border-rounded' id='setting-dark-color' type='text' defaultValue={data === undefined ? '' : data.darkColor} />
 					</div>
 				</div>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-background-color'>Background color</label>
+					<label className='uk-form-label' htmlFor='setting-background-color-label'>Background color</label>
 					<div className='uk-form-controls'>
 						<input className='uk-input uk-border-rounded' id='setting-background-color' type='text' defaultValue={data === undefined ? '' : data.backgroundColor} />
 					</div>
 				</div>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-body-color'>Body color</label>
+					<label className='uk-form-label' htmlFor='setting-body-color-label'>Body color</label>
 					<div className='uk-form-controls'>
 						<input className='uk-input uk-border-rounded' id='setting-body-color' type='text' defaultValue={data === undefined ? '' : data.bodyColor} />
 					</div>
 				</div>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-link-color'>Link color</label>
+					<label className='uk-form-label' htmlFor='setting-link-color-label'>Link color</label>
 					<div className='uk-form-controls'>
 						<input className='uk-input uk-border-rounded' id='setting-link-color' type='text' defaultValue={data === undefined ? '' : data.linkColor} />
 					</div>
