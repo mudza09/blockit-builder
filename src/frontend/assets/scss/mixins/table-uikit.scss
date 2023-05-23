@@ -1,5 +1,6 @@
 @mixin hook-table-header-cell(){
     // text-transform: uppercase;
+    padding: 0px $table-cell-padding-horizontal $table-cell-padding-vertical $table-cell-padding-horizontal;
 }
 @mixin hook-table-cell(){
     font-size: 14px;

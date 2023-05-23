@@ -161,8 +161,7 @@ export default function Posts() {
 								<tr>
 									<th className='in-title-width'>Post title</th>
 									<th className='in-modified-width'>Modified</th>
-									<th className='uk-width-small'>Author</th>
-									<th className='uk-width-small'><span onClick={handleSortCategory}>Category<i className={sortCat ? 'ri-arrow-down-s-fill ri-1x uk-margin-small-left in-sort-icon' : 'ri-arrow-down-s-fill ri-1x uk-margin-small-left'}></i></span></th>
+									<th className='uk-width-small'><span onClick={handleSortCategory}>Category<i className={sortCat ? 'ri-arrow-down-s-fill ri-1x uk-margin-small-left in-sort-icon' : 'ri-arrow-up-s-fill ri-1x uk-margin-small-left'}></i></span></th>
 									<th className='uk-width-small'></th>
 								</tr>
 							</thead>
@@ -177,18 +176,16 @@ export default function Posts() {
 										return (
 											<tr key={index}>
 												<td>
-													<div className='title-cursor uk-flex uk-flex-middle' onClick={handleEditPost.bind(this, params)}>
-														<div className='page-icon'>
-															<i className='ri-align-left ri-1x'></i>
-														</div>
-														<div className='uk-margin-small-left'>
-															<span className='page-name'>{trimUtils(item.title)}</span>
-															<i className={`ri-checkbox-blank-circle-fill ri-xs page-status uk-margin-small-left ${item.hidden === true ? 'uk-text-muted' : 'uk-text-success'}`}></i>
-														</div>
+													<div className='post-title-column title-cursor' onClick={handleEditPost.bind(this, params)}>
+														<span className='page-name'>{trimUtils(item.title)}</span>
+														{
+															item.hidden === true
+																? <span className='uk-text-muted uk-flex uk-flex-middle'><i className='ri-checkbox-blank-circle-fill ri-xxs uk-text-muted'></i>Post hidden by {item.author.name}<i className='ri-eye-off-fill ri-sm uk-text-muted uk-margin-left'></i></span>
+																: <span className='uk-text-muted uk-flex uk-flex-middle'><i className='ri-checkbox-blank-circle-fill ri-xxs uk-text-primary'></i>Post published by {item.author.name}</span>
+														}
 													</div>
 												</td>
-												<td><span className='in-sort-icon'>{item.dateModified} at {item.timeModified}</span></td>
-												<td>{item.author.name}</td>
+												<td><span className='uk-text-muted'>{item.dateModified} at {item.timeModified}</span></td>
 												<td><span className='uk-label uk-label-warning uk-text-small uk-border-rounded'>{item.category}</span></td>
 												<td>
 													<div className='action-wrap uk-flex uk-flex-right'>
@@ -201,7 +198,7 @@ export default function Posts() {
 								}
 							</tbody>
 						</table>
-						<div className='uk-flex uk-flex-middle uk-flex-right'>
+						<div className='uk-flex uk-flex-middle uk-flex-right uk-margin-bottom'>
 							<span className='uk-text-small uk-text-muted uk-margin-right'>Showing {paginationEntry} of {dataLength} entries</span>
 							<ul className='uk-pagination uk-margin-remove-vertical' data-uk-margin>
 								{

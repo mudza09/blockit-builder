@@ -12,6 +12,9 @@
         span {
             cursor: pointer;
             i {
+                line-height: 0;
+                position: relative;
+                top: 4px;
                 &.in-sort-icon {
                     color: #cdcdcd;
                 }
@@ -71,6 +74,12 @@
         font-size: 15px;
         font-weight: bold;
         transition: all ease .2s;
+    }
+    .post-title-column {
+        line-height: 1.15rem;
+        .ri-checkbox-blank-circle-fill {
+            margin-right: 8px;
+        }
     }
     .page-status {
         font-size: 8px;

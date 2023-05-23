@@ -1,5 +1,5 @@
 export default function trimTitle(string) {
-	const cut = string.indexOf(' ', 50);
+	const cut = string.indexOf(' ', 70);
 	if (cut === -1) {
 		return string;
 	}

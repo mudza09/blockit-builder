@@ -131,8 +131,8 @@ export default function Pages() {
 						<table className='uk-table uk-table-divider uk-table-hover uk-table-middle uk-margin-small-bottom'>
 							<thead>
 								<tr>
-									<th className='uk-width-large'>Page name</th>
-									<th className='uk-width-medium'>Modified</th>
+									<th className='in-title-width'>Page name</th>
+									<th className='in-modified-width'>Modified</th>
 									<th className='uk-width-small'>Layout type</th>
 									<th className='uk-width-small'></th>
 								</tr>
@@ -179,7 +179,7 @@ export default function Pages() {
 								}
 							</tbody>
 						</table>
-						<div className='uk-flex uk-flex-middle uk-flex-right'>
+						<div className='uk-flex uk-flex-middle uk-flex-right uk-margin-bottom'>
 							<span className='uk-text-small uk-text-muted uk-margin-right'>Showing {paginationEntry} of {dataLength} entries</span>
 							<ul className='uk-pagination uk-margin-remove-vertical' data-uk-margin>
 								{

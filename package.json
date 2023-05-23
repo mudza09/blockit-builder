@@ -2,7 +2,7 @@
   "name": "blockit-builder",
   "title": "Blockit Builder",
   "description": "A static HTML builder from Indonez",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "author": "mudza09",
   "license": "MIT",
   "type": "module",
