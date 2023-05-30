@@ -49,7 +49,7 @@ export default function PagesLibrary(props) {
 
 	// Slideshow html edit condition
 	const htmlCodeCondition = (item, index) => {
-		if (item.target.previousElementSibling.textContent.includes('slideshow')) {
+		if (item.target.previousElementSibling.textContent.includes('component')) {
 			navigate('/components');
 		} else {
 			handleEditor(item.target.previousElementSibling.textContent, index);
@@ -73,7 +73,7 @@ export default function PagesLibrary(props) {
 											<img className='uk-border-rounded' src={'../assets/img/sections/' + item + '.webp'} alt={item}/>
 											<div className='uk-transition-fade uk-position-cover uk-flex uk-flex-center uk-flex-bottom'>
 												<span className='uk-text-small'>{item}</span>
-												<button className='uk-button uk-button-small uk-button-secondary uk-border-rounded section-button' type='button' data-uk-toggle={item.includes('slideshow') ? 'disable' : `target: #modal-${item}`} onClick={e => htmlCodeCondition(e, index)} hidden>
+												<button className='uk-button uk-button-small uk-button-secondary uk-border-rounded section-button' type='button' data-uk-toggle={item.includes('component') ? 'disable' : `target: #modal-${item}`} onClick={e => htmlCodeCondition(e, index)} hidden>
 													<i className='ri-code-s-slash-line ri-sm uk-margin-small-right'></i>Edit code
 												</button>
 												<button className='uk-button uk-button-small uk-button-danger uk-border-rounded section-button' type='button' onClick={e => handleDelete(e)} hidden>
@@ -82,7 +82,7 @@ export default function PagesLibrary(props) {
 												<div id={'modal-' + item} className='uk-modal-container uk-flex-top uk-modal' data-uk-modal hidden>
 													<div className='uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-border-rounded blockit-code-editor'>
 														<div id={'editor-' + item}></div>
-														<div className='uk-flex uk-flex-righ'>
+														<div className='uk-flex uk-flex-right'>
 															<button className='uk-button uk-button-secondary uk-border-rounded uk-modal-close' type='button'>Cancel</button>
 															<button className='uk-button uk-button-primary uk-border-rounded uk-margin-small-left section-save' type='button'>Save code</button>
 														</div>

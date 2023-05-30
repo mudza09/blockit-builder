@@ -109,7 +109,7 @@ export default function PagesAction() {
 				sections = Array.from(canvasWrap.current.children).map(item => (
 					{
 						name: item.querySelector('img').getAttribute('alt'),
-						data: JSON.parse(sessionStorage.getItem(`${item.querySelector('img').getAttribute('alt')}`)).blocks[0].data.text,
+						data: JSON.parse(sessionStorage.getItem(`${item.querySelector('img').getAttribute('alt')}`)) === null ? false : JSON.parse(sessionStorage.getItem(`${item.querySelector('img').getAttribute('alt')}`)).blocks[0].data.text,
 					}
 				));
 				deletedSections = [false];

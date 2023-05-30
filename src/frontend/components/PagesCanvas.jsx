@@ -38,17 +38,20 @@ export default function PagesCanvas(props) {
 			const sectionName = item.detail[1].classList[1];
 			const sectionEl = item.detail[1];
 
-			sectionEl.querySelector('img').setAttribute('alt', `${sectionName}-${sectionId}`);
-			sectionEl.querySelector('span').textContent = `${sectionName}-${sectionId}`;
-			sectionEl.querySelector(`#modal-${sectionName}`).setAttribute('id', `modal-${sectionName}-${sectionId}`);
-			sectionEl.querySelector(`#editor-${sectionName}`).setAttribute('id', `editor-${sectionName}-${sectionId}`);
-			sectionEl.querySelector('.uk-button').setAttribute('data-uk-toggle', `target: #modal-${sectionName}-${sectionId}`);
+			if (!sectionName.includes('component')) {
+				sectionEl.querySelector('img').setAttribute('alt', `${sectionName}-${sectionId}`);
+				sectionEl.querySelector('span').textContent = `${sectionName}-${sectionId}`;
+				sectionEl.querySelector(`#modal-${sectionName}`).setAttribute('id', `modal-${sectionName}-${sectionId}`);
+				sectionEl.querySelector(`#editor-${sectionName}`).setAttribute('id', `editor-${sectionName}-${sectionId}`);
+				sectionEl.querySelector('.uk-button').setAttribute('data-uk-toggle', `target: #modal-${sectionName}-${sectionId}`);
 
-			bs.socket.emit('readSectionData', sectionName);
-			const dataSocket = await new Promise(resolve => {
-				bs.socket.once('resultSectionData', data => resolve(data));
-			});
-			sessionStorage.setItem(`${sectionName}-${sectionId}`, JSON.stringify(dataSocket));
+				bs.socket.emit('readSectionData', sectionName);
+				const dataSocket = await new Promise(resolve => {
+					bs.socket.once('resultSectionData', data => resolve(data));
+				});
+
+				sessionStorage.setItem(`${sectionName}-${sectionId}`, JSON.stringify(dataSocket));
+			}
 
 			sectionEl.querySelector('.uk-transition-fade').classList.remove('uk-flex-center', 'uk-flex-bottom');
 			sectionEl.querySelector('.uk-transition-fade').classList.add('uk-flex-top', 'uk-flex-right');
@@ -82,7 +85,7 @@ export default function PagesCanvas(props) {
 	const handleModal = async section => {
 		const element = document.querySelector(`#modal-${section}`);
 
-		if (section.includes('slideshow')) {
+		if (section.includes('component')) {
 			navigate('/components');
 		} else {
 			await handleEditor(section);
