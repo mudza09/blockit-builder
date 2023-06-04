@@ -105,6 +105,11 @@ export default class Utils {
 			console.log(`${this.logTime(new Date())} - ${text}`);
 		}
 
+		if (status === 'error') {
+			process.stdout.moveCursor(0, -1);
+			console.log(`${this.logTime(new Date())} - \x1b[31mError occurred:\x1b[0m ${text}`);
+		}
+
 		if (status === 'completed') {
 			console.log(`\n\x1b[7m\x1b[32m DONE \x1b[0m\x1b[32m Project "${packageInfo.title}" ready.\x1b[0m\n`);
 		}
@@ -172,17 +177,6 @@ export default class Utils {
 		const isExist = fs.readdirSync('./src/hooks', 'utf-8').length !== 0;
 		return isExist;
 	}
-
-	// Hook search condition
-	hookSearch = () => {
-		if (fs.existsSync('./src/hooks/blog/search-post.hbs') && fs.existsSync('./src/hooks/blog/search-result.hbs')) {
-			// If custom hooks is available
-			this.hookSearchWrite('./src/hooks/blog/search-post.hbs', './src/hooks/blog/search-result.hbs');
-		} else {
-			// If custom hooks is not available
-			this.hookSearchWrite('./node_modules/blockit-builder/hooks/blog/search-post.hbs', './node_modules/blockit-builder/hooks/blog/search-result.hbs');
-		}
-	};
 
 	// Hook search process
 	hookSearchWrite = (pathPost, pathResult) => {

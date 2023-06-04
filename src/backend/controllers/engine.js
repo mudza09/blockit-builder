@@ -1,6 +1,7 @@
 // Required plugins
 import fs from 'fs';
 import path from 'path';
+import indent from 'indent.js';
 import Handlebars from 'handlebars';
 import Utils from './utils.js';
 
@@ -103,12 +104,12 @@ export default class Engine {
 			if (blogData.blog.hidden === false && this.options.minify) {
 				fs.writeFileSync(`./dist/${pagePathArr[2]}/${blogData.page}.html`, this.minifyHtml(page(blogData)));
 			} else if (blogData.blog.hidden === false) {
-				fs.writeFileSync(`./dist/${pagePathArr[2]}/${blogData.page}.html`, page(blogData).replace(/\t/g, ''));
+				fs.writeFileSync(`./dist/${pagePathArr[2]}/${blogData.page}.html`, indent.html(page(blogData)));
 			}
 		} else if (this.options.minify) {
 			fs.writeFileSync(`./dist/${generalData.page}.html`, this.minifyHtml(page(generalData)));
 		} else {
-			fs.writeFileSync(`./dist/${generalData.page}.html`, page(generalData).replace(/\t/g, ''));
+			fs.writeFileSync(`./dist/${generalData.page}.html`, indent.html(page(generalData)));
 		}
 	};
 

@@ -147,7 +147,6 @@ const backendApp = async filename => {
 			copyPlugin({
 				copy: [
 					{from: 'src/backend/helpers', to: 'dist/helpers'},
-					{from: 'src/backend/hooks', to: 'dist/hooks'},
 					{from: 'src/backend/babel.config.json', to: 'dist/'},
 				],
 				verbose: false,

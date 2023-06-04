@@ -201,7 +201,7 @@ export default class Methods {
 					this.utils.createDirectory(`./dist/${settingData.blog.asBlog[0]}/data`);
 
 					fs.readdir('./src/data/blog/posts', (err, files) => {
-						const tagSingle = fs.existsSync('./src/hooks/blog/pages/blog-single.hbs') ? fs.readFileSync('./src/hooks/blog/pages/blog-single.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/pages/blog-single.hbs', 'utf8');
+						const tagSingle = fs.readFileSync('./src/hooks/blog/pages/blog-single.hbs', 'utf8');
 						files.forEach(item => {
 							const postName = item.split('.')[0];
 							const sectionPageChange = tagSingle.replace(/(?<={{> post-title)(.*?)(?= }})/g, `-${postName}`);
@@ -221,9 +221,9 @@ export default class Methods {
 				});
 
 				// Change frontmatter in blog.hbs, blog-single.hbs, and blog-find.hbs
-				this.changeBlogFrontmatter(objects.data, './src/hooks/blog/pages/blog.hbs', './node_modules/blockit-builder/hooks/blog/pages/blog.hbs');
-				this.changeBlogFrontmatter(objects.data, './src/hooks/blog/pages/blog-single.hbs', './node_modules/blockit-builder/hooks/blog/pages/blog-single.hbs');
-				this.changeBlogFrontmatter(objects.data, './src/hooks/blog/pages/blog-find.hbs', './node_modules/blockit-builder/hooks/blog/pages/blog-find.hbs');
+				this.changeBlogFrontmatter(objects.data, './src/hooks/blog/pages/blog.hbs');
+				this.changeBlogFrontmatter(objects.data, './src/hooks/blog/pages/blog-single.hbs');
+				this.changeBlogFrontmatter(objects.data, './src/hooks/blog/pages/blog-find.hbs');
 
 				// Change frontmatter in each blog post
 				fs.readdir(`./src/pages/${objects.nameFile}`, (err, files) => {
@@ -234,17 +234,17 @@ export default class Methods {
 				fs.readFile('./src/data/blog/blog.json', 'utf8', (err, file) => {
 					const postObj = JSON.parse(file);
 					const dataTag = {
-						defaultPage: fs.existsSync('./src/hooks/blog/pages/blog.hbs') ? fs.readFileSync('./src/hooks/blog/pages/blog.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/pages/blog.hbs', 'utf8'),
-						singlePage: fs.existsSync('./src/hooks/blog/pages/blog-single.hbs') ? fs.readFileSync('./src/hooks/blog/pages/blog-single.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/pages/blog-single.hbs', 'utf8'),
-						defaultSection: fs.existsSync('./src/hooks/blog/sections/section-blog.hbs') ? fs.readFileSync('./src/hooks/blog/sections/section-blog.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/sections/section-blog.hbs', 'utf8'),
-						singleSection: fs.existsSync('./src/hooks/blog/sections/section-blog-single.hbs') ? fs.readFileSync('./src/hooks/blog/sections/section-blog-single.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/sections/section-blog-single.hbs', 'utf8'),
+						defaultPage: fs.readFileSync('./src/hooks/blog/pages/blog.hbs', 'utf8'),
+						singlePage: fs.readFileSync('./src/hooks/blog/pages/blog-single.hbs', 'utf8'),
+						defaultSection: fs.readFileSync('./src/hooks/blog/sections/section-blog.hbs', 'utf8'),
+						singleSection: fs.readFileSync('./src/hooks/blog/sections/section-blog-single.hbs', 'utf8'),
 					};
 
 					this.postPaginatorPage(postObj, dataTag);
 				});
 
 				// Write blog-find.hbs page
-				const pathBlogFind = fs.existsSync('./src/hooks/blog/pages/blog-find.hbs') ? './src/hooks/blog/pages/blog-find.hbs' : './node_modules/blockit-builder/hooks/blog/pages/blog-find.hbs';
+				const pathBlogFind = './src/hooks/blog/pages/blog-find.hbs';
 				fs.readFile(pathBlogFind, 'utf8', (err, file) => {
 					const layoutChange = file.replace(/(?<=layout:\s).*/g, objects.data.layout);
 					const titleChange = layoutChange.replace(/(?<=title:\s).*/g, objects.data.title);
@@ -655,10 +655,10 @@ export default class Methods {
 
 	postsTagSources = () => {
 		const tagData = {
-			defaultPage: fs.existsSync('./src/hooks/blog/pages/blog.hbs') ? fs.readFileSync('./src/hooks/blog/pages/blog.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/pages/blog.hbs', 'utf8'),
-			singlePage: fs.existsSync('./src/hooks/blog/pages/blog-single.hbs') ? fs.readFileSync('./src/hooks/blog/pages/blog-single.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/pages/blog-single.hbs', 'utf8'),
-			defaultSection: fs.existsSync('./src/hooks/blog/sections/section-blog.hbs') ? fs.readFileSync('./src/hooks/blog/sections/section-blog.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/sections/section-blog.hbs', 'utf8'),
-			singleSection: fs.existsSync('./src/hooks/blog/sections/section-blog-single.hbs') ? fs.readFileSync('./src/hooks/blog/sections/section-blog-single.hbs', 'utf8') : fs.readFileSync('./node_modules/blockit-builder/hooks/blog/sections/section-blog-single.hbs', 'utf8'),
+			defaultPage: fs.readFileSync('./src/hooks/blog/pages/blog.hbs', 'utf8'),
+			singlePage: fs.readFileSync('./src/hooks/blog/pages/blog-single.hbs', 'utf8'),
+			defaultSection: fs.readFileSync('./src/hooks/blog/sections/section-blog.hbs', 'utf8'),
+			singleSection: fs.readFileSync('./src/hooks/blog/sections/section-blog-single.hbs', 'utf8'),
 		};
 		this.socket.emit('tagSourcesData', tagData);
 	};
@@ -697,16 +697,18 @@ export default class Methods {
 		}
 	};
 
-	changeBlogFrontmatter = (data, srcPath, nodePath) => {
-		const file = fs.existsSync(srcPath) ? fs.readFileSync(srcPath, 'utf8') : fs.readFileSync(nodePath, 'utf8');
-		const layoutChange = file.replace(/(?<=layout:\s).*/g, data.layout);
-		const titleChange = layoutChange.replace(/(?<=title:\s).*/g, data.title);
-		const breadcrumbChange = titleChange.replace(/(?<=breadcrumb:\s).*/g, data.breadcrumb);
-
+	changeBlogFrontmatter = (data, srcPath) => {
 		if (fs.existsSync(srcPath)) {
+			const file = fs.readFileSync(srcPath, 'utf8');
+			const layoutChange = file.replace(/(?<=layout:\s).*/g, data.layout);
+			const titleChange = layoutChange.replace(/(?<=title:\s).*/g, data.title);
+			const breadcrumbChange = titleChange.replace(/(?<=breadcrumb:\s).*/g, data.breadcrumb);
+
 			fs.writeFileSync(srcPath, breadcrumbChange);
 		} else {
-			fs.writeFileSync(nodePath, breadcrumbChange);
+			// If custom hooks is not available
+			this.utils.logMessage('error', `there is no "${srcPath.split('/')[5]}" in your "src/hooks/blog/pages" folder.`);
+			process.exit(1);
 		}
 	};
 
@@ -916,49 +918,51 @@ export default class Methods {
 	};
 
 	saveSlideshow = data => {
-		let slideshowTag = fs.readFileSync('./node_modules/blockit-builder/hooks/slideshow/slideshow-wrapper.hbs', 'utf8');
 		if (fs.existsSync('./src/hooks/slideshow/slideshow-wrapper.hbs')) {
-			slideshowTag = fs.readFileSync('./src/hooks/slideshow/slideshow-wrapper.hbs', 'utf8');
+			const slideshowTag = fs.readFileSync('./src/hooks/slideshow/slideshow-wrapper.hbs', 'utf8');
+			const slideshowAll = [
+				{
+					sectionName: 'component-slideshow-1',
+					slides: data[0].slides,
+				},
+				{
+					sectionName: 'component-slideshow-2',
+					slides: data[1].slides,
+				},
+				{
+					sectionName: 'component-slideshow-3',
+					slides: data[2].slides,
+				},
+				{
+					sectionName: 'component-slideshow-4',
+					slides: data[3].slides,
+				},
+			];
+
+			const slideshowExist = slideshowAll.filter(each => each.slides.length !== 0);
+			const slideshowDelete = slideshowAll.filter(item => !slideshowExist.includes(item)).map(each => each.sectionName);
+
+			data.forEach((each, index) => {
+				if (each.slides.length !== 0) {
+					const slideData = each.slides.map(item => item.text);
+					const modifiedTag = slideshowTag.replace(/\{\{slide-id\}\}/g, slideData.join('\n'));
+
+					fs.writeFileSync('./node_modules/blockit-builder/templates/component-slideshow.json', JSON.stringify(slideshowExist, null, 4));
+					fs.writeFileSync(`./src/partials/components/component-slideshow-${index + 1}.hbs`, modifiedTag);
+				}
+			});
+
+			// Delete unused slideshow file
+			slideshowDelete.forEach(each => {
+				if (fs.existsSync(`./src/partials/components/${each}.hbs`)) {
+					fs.unlinkSync(`./src/partials/components/${each}.hbs`);
+				}
+			});
+		} else {
+			// If custom hooks is not available
+			this.utils.logMessage('error', 'there is no "slideshow-wrapper.hbs" in your "src/hooks/slideshow" folder.');
+			process.exit(1);
 		}
-
-		const slideshowAll = [
-			{
-				sectionName: 'component-slideshow-1',
-				slides: data[0].slides,
-			},
-			{
-				sectionName: 'component-slideshow-2',
-				slides: data[1].slides,
-			},
-			{
-				sectionName: 'component-slideshow-3',
-				slides: data[2].slides,
-			},
-			{
-				sectionName: 'component-slideshow-4',
-				slides: data[3].slides,
-			},
-		];
-
-		const slideshowExist = slideshowAll.filter(each => each.slides.length !== 0);
-		const slideshowDelete = slideshowAll.filter(item => !slideshowExist.includes(item)).map(each => each.sectionName);
-
-		data.forEach((each, index) => {
-			if (each.slides.length !== 0) {
-				const slideData = each.slides.map(item => item.text);
-				const modifiedTag = slideshowTag.replace(/\{\{slide-id\}\}/g, slideData.join(' '));
-
-				fs.writeFileSync('./node_modules/blockit-builder/templates/component-slideshow.json', JSON.stringify(slideshowExist, null, 4));
-				fs.writeFileSync(`./src/partials/components/component-slideshow-${index + 1}.hbs`, modifiedTag);
-			}
-		});
-
-		// Delete unused slideshow file
-		slideshowDelete.forEach(each => {
-			if (fs.existsSync(`./src/partials/components/${each}.hbs`)) {
-				fs.unlinkSync(`./src/partials/components/${each}.hbs`);
-			}
-		});
 	};
 
 	createSettingsData = () => {
@@ -995,7 +999,8 @@ export default class Methods {
 			this.createSlideData('./src/hooks/slideshow/slideshow-item.hbs', slideId);
 		} else {
 			// If custom hooks is not available
-			this.createSlideData('./node_modules/blockit-builder/hooks/slideshow/slideshow-item.hbs', slideId);
+			this.utils.logMessage('error', 'there is no "slideshow-item.hbs" in your "src/hooks/slideshow" folder.');
+			process.exit(1);
 		}
 	};
 
