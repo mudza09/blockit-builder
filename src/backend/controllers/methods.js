@@ -845,10 +845,15 @@ export default class Methods {
 				fs.readFile(`./src/partials/sections/${each}`, 'utf8', (err, data) => {
 					const headerComment = data.split('\n')[0];
 					const htmlBody = new JSDOM(data);
+					const mapIframeEl = htmlBody.window.document.querySelector('iframe') || htmlBody.window.document.querySelector('[data-type="iframe"]');
 
-					const mapIframeEl = htmlBody.window.document.querySelector('iframe');
 					if (mapIframeEl !== null) {
-						mapIframeEl.src = iframe;
+						if (mapIframeEl.src === undefined) {
+							mapIframeEl.href = iframe;
+						} else {
+							mapIframeEl.src = iframe;
+						}
+
 						const result = headerComment.concat('\n', htmlBody.window.document.documentElement.childNodes[1].innerHTML);
 						fs.writeFileSync(`./src/partials/sections/${each}`, result);
 					}
