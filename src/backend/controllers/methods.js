@@ -21,7 +21,7 @@ export default class Methods {
 
 		const data = {
 			name: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/package.json', 'utf-8')).title,
-			theme: process.env.npm_package_title,
+			theme: JSON.parse(fs.readFileSync('./package.json', 'utf-8')).title,
 			version: JSON.parse(fs.readFileSync('./node_modules/blockit-builder/package.json', 'utf-8')).version,
 			pages: fs.readdirSync('./src/pages', 'utf8').filter(file => file.match(/.(hbs)$/i)).filter(each => !each.match(blogPageRegex) && !each.match(blogFindRegex)).length,
 			posts: fs.readdirSync('./src/data/blog/posts', 'utf8').length,
@@ -56,7 +56,7 @@ export default class Methods {
 
 	// Pages action data
 	createPagesActionData = () => {
-		const themeName = process.env.npm_package_title.toLowerCase();
+		const themeName = process.env.npm_package_name;
 		const exclusiveSections = fs.readdirSync('./src/hooks/sections', 'utf-8').filter(eachFile => eachFile.includes(themeName)).sort((a, b) => a.length - b.length);
 
 		const exclusiveData = {
