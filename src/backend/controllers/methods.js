@@ -291,7 +291,7 @@ export default class Methods {
 	};
 
 	readSectionData = nameFile => {
-		const pathData = `./node_modules/blockit-builder/templates/${nameFile.split('-').slice(0, -1).join('-')}.json`;
+		const pathData = nameFile.split('-').length === 2 ? `./node_modules/blockit-builder/templates/${nameFile}.json` : `./node_modules/blockit-builder/templates/${nameFile.split('-').slice(0, -1).join('-')}.json`;
 
 		fs.readFile(pathData, 'utf8', (err, file) => {
 			const index = JSON.parse(file).findIndex(e => e.sectionName === nameFile);
@@ -889,14 +889,12 @@ export default class Methods {
 	};
 
 	saveFooter = footerData => {
-		const hookData = JSON.parse(fs.readFileSync('./blockit-config.json', 'utf8')).footerHook;
-		const {useLogo, logoIndex, showClass, hideClass, logoClass, copyrightClass} = hookData;
+		const hookData = JSON.parse(fs.readFileSync(this.utils.checkBlockitConfig(), 'utf8')).footerHook;
+		const {useLogo, logoIndex, showClass, hideClass, logoClass} = hookData;
 
 		fs.readFile('./src/partials/components/component-footer.hbs', 'utf8', (err, file) => {
 			const headerComment = file.split('\n')[0];
 			const htmlBody = new JSDOM(file);
-
-			const copyrightEl = htmlBody.window.document.querySelector(`.${copyrightClass}`);
 			const footerLogoEl = htmlBody.window.document.querySelector(`.${logoClass}`) === null ? false : htmlBody.window.document.querySelector(`.${logoClass}`);
 
 			// Footer logo jsdom
@@ -912,9 +910,6 @@ export default class Methods {
 					footerLogoEl.children[logoIndex].classList.remove(showClass);
 				}
 			}
-
-			// Footer copyright text jsdom
-			copyrightEl.innerHTML = footerData.copyrightText;
 
 			const hbsFix = htmlBody.window.document.documentElement.childNodes[1].innerHTML.replace(/&gt;/g, '>');
 			const result = headerComment.concat('\n', hbsFix);
@@ -974,6 +969,24 @@ export default class Methods {
 		fs.readFile('./src/data/setting.json', 'utf8', (err, data) => this.socket.emit('settingsData', JSON.parse(data)));
 	};
 
+	createHeaderData = () => {
+		fs.readFile('./src/partials/components/component-header.hbs', 'utf8', (err, file) => {
+			const data = {
+				blocks: [
+					{
+						id: 'header-content',
+						type: 'code',
+						data: {
+							language: 'HTML',
+							text: file,
+						},
+					},
+				],
+			};
+			this.socket.emit('headerData', data);
+		});
+	};
+
 	createFooterData = () => {
 		fs.readFile('./src/partials/components/component-footer.hbs', 'utf8', (err, file) => {
 			const data = {
@@ -990,6 +1003,12 @@ export default class Methods {
 			};
 			this.socket.emit('footerData', data);
 		});
+	};
+
+	saveHeaderEditor = data => {
+		if (Object.keys(data).length !== 0) {
+			fs.writeFileSync('./src/partials/components/component-header.hbs', data);
+		}
 	};
 
 	saveFooterEditor = data => {
@@ -1029,7 +1048,7 @@ export default class Methods {
 
 	createComponentsData = () => {
 		fs.readFile('./src/data/component.json', 'utf8', (err, data) => {
-			const {useLogo} = JSON.parse(fs.readFileSync('./blockit-config.json', 'utf-8')).footerHook;
+			const {useLogo} = JSON.parse(fs.readFileSync(this.utils.checkBlockitConfig(), 'utf-8')).footerHook;
 			const dataComponent = JSON.parse(data);
 			dataComponent.footer.useLogo = useLogo;
 

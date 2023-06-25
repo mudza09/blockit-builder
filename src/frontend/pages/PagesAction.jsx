@@ -23,11 +23,13 @@ export default function PagesAction() {
 	const [blogStatus, setBlogStatus] = useState(false);
 	const [modeChange, setModeChange] = useState(false);
 	const [canvasId, setCanvasId] = useState([]);
+	const [blankSection, setBlankSection] = useState(false);
 	const canvasWrap = useRef(null);
 	const placeholdWrap = useRef(null);
 	const breadcrumbCheck = useRef(null);
 	const blogCheck = useRef(null);
 	const canvasLibraryBtn = useRef(null);
+	const blankSectionBtn = useRef(null);
 
 	// Leave page prompt
 	const [isDirty, setIsDirty] = useState(false);
@@ -245,9 +247,11 @@ export default function PagesAction() {
 		if (blogStatus) {
 			canvasWrap.current.removeAttribute('data-uk-sortable');
 			canvasLibraryBtn.current.setAttribute('disabled', '');
+			blankSectionBtn.current.setAttribute('disabled', '');
 		} else {
 			canvasWrap.current.setAttribute('data-uk-sortable', 'group: sortable-group; cls-custom: drag-canvas');
 			canvasLibraryBtn.current.removeAttribute('disabled');
+			blankSectionBtn.current.removeAttribute('disabled', '');
 		}
 	};
 
@@ -307,6 +311,16 @@ export default function PagesAction() {
 		sectionElement.classList.add('uk-animation-fast', 'uk-animation-scale-up', 'uk-animation-reverse');
 		setTimeout(() => sectionElement.remove(), 400);
 		sessionStorage.removeItem(sectionName);
+
+		if (canvasWrap.current.childElementCount === 1) {
+			placeholdWrap.current.removeAttribute('hidden');
+		}
+	};
+
+	// Handle insert blank section
+	const handleBlankSectionBtn = () => {
+		setBlankSection(true);
+		setTimeout(() => setBlankSection(false), 200);
 	};
 
 	// Filter used sections in canvas
@@ -374,6 +388,7 @@ export default function PagesAction() {
 										dirtyCallback={setIsDirty}
 										modeChange={modeChange}
 										canvasId={canvasId}
+										insertBlankSection={blankSection}
 									/>
 								</div>
 								<div className='uk-position-center' ref={placeholdWrap}>
@@ -459,8 +474,11 @@ export default function PagesAction() {
 										</label>
 									</div>
 								</form>
-								<button className='uk-button uk-button-default uk-border-rounded uk-width-1-1 uk-margin-top uk-margin-small-bottom' type='button' data-uk-toggle='target: #offcanvas-section-library' ref={canvasLibraryBtn}>
-									<i className='ri-dashboard-line ri-1x uk-margin-small-right'></i>Section library
+								<button className='uk-button uk-button-default uk-border-rounded uk-width-1-1 uk-margin-top uk-margin-bottom' type='button' data-uk-toggle='target: #offcanvas-section-library' ref={canvasLibraryBtn}>
+									<i className='ri-dashboard-line ri-1x uk-margin-small-right'></i>Check section library
+								</button>
+								<button className='uk-button uk-button-default uk-border-rounded uk-width-1-1' type='button' onClick={handleBlankSectionBtn} ref={blankSectionBtn}>
+									<i className='ri-code-box-line ri-1x uk-margin-small-right'></i>Insert blank section
 								</button>
 							</div>
 						</div>

@@ -126,7 +126,7 @@ export default class Compiler {
 		fs.copyFileSync('./src/assets/php/sendmail.php', './dist/sendmail.php');
 
 		// Js vendors
-		const {jsVendors} = JSON.parse(fs.readFileSync('./blockit-config.json', 'utf-8'));
+		const {jsVendors} = JSON.parse(fs.readFileSync(this.utils.checkBlockitConfig(), 'utf-8'));
 		if (jsVendors !== undefined) {
 			jsVendors.forEach(each => {
 				const name = path.basename(each).split('.');

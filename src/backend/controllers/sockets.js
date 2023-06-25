@@ -53,15 +53,19 @@ export default class Sockets {
 		socket.on('saveComponents', data => this.blockit.saveComponentsData(data));
 		// Read slide-item data
 		socket.on('getSlideItem', slideID => this.blockit.createSlideItem(slideID));
+		// Read component-header.hbs
+		socket.on('getHeaderData', () => this.blockit.createHeaderData());
+		// Save component-header.hbs
+		socket.on('saveHeaderEditor', data => this.blockit.saveHeaderEditor(data));
+		// Read component-footer.hbs
+		socket.on('getFooterData', () => this.blockit.createFooterData());
+		// Save component-footer.hbs
+		socket.on('saveFooterEditor', data => this.blockit.saveFooterEditor(data));
 	};
 
 	settingsSocket = socket => {
 		// Read setting.json
 		socket.on('getSettingsData', () => this.blockit.createSettingsData());
-		// Read footer.json
-		socket.on('getFooterData', () => this.blockit.createFooterData());
-		// Save footer.json
-		socket.on('saveFooterEditor', data => this.blockit.saveFooterEditor(data));
 		// Save settings.json
 		socket.on('saveSettingsData', (data, dataTag) => this.blockit.saveSettingsData(data, dataTag));
 		// Assets upload process

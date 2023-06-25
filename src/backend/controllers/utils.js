@@ -197,7 +197,7 @@ export default class Utils {
 	// Register hook sections and previews hook
 	hookSections = () => {
 		const themeName = process.env.npm_package_name;
-		const sections = ['section-card', 'section-client-logo', 'section-contact', 'section-content',	'section-counter', 'section-faq', 'section-feature', 'section-gallery', 'section-pricing', 'section-team', 'section-testimonial', 'section-timeline', 'section-utility'];
+		const sections = ['section-blank', 'section-card', 'section-client-logo', 'section-contact', 'section-content',	'section-counter', 'section-faq', 'section-feature', 'section-gallery', 'section-pricing', 'section-team', 'section-testimonial', 'section-timeline', 'section-utility'];
 		const previews = fs.readdirSync('./src/hooks/sections/previews', 'utf-8');
 		const slideshowData = JSON.parse(fs.readFileSync('./src/data/component.json', 'utf-8')).slideshow;
 
@@ -235,5 +235,14 @@ export default class Utils {
 		if (path.extname(fileName) === '.webp') {
 			fs.unlinkSync(`./node_modules/blockit-builder/assets/img/sections/${path.basename(fileName)}`);
 		}
+	};
+
+	// Check blockit.config or blockit-config
+	checkBlockitConfig = () => {
+		if (fs.existsSync('./blockit-config.json')) {
+			return './blockit-config.json';
+		}
+
+		return './blockit.config.json';
 	};
 }

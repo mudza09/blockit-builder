@@ -13,6 +13,7 @@ PagesCanvas.propTypes = {
 	dirtyCallback: PropTypes.bool,
 	modeChange: PropTypes.bool,
 	canvasId: PropTypes.array,
+	insertBlankSection: PropTypes.array,
 };
 
 export default function PagesCanvas(props) {
@@ -20,7 +21,7 @@ export default function PagesCanvas(props) {
 	const [data, setData] = useState([]);
 	const params = new URLSearchParams(location.search);
 	const sections = params.get('sections');
-	const {canvasAreaRef, handleEditor, handleDelete, placeholderRef, dirtyCallback, modeChange, canvasId} = props;
+	const {canvasAreaRef, handleEditor, handleDelete, placeholderRef, dirtyCallback, modeChange, canvasId, insertBlankSection} = props;
 
 	// Id generator
 	const uid = new ShortUniqueId({length: 6});
@@ -114,6 +115,25 @@ export default function PagesCanvas(props) {
 		});
 	};
 
+	// Insert blank section into canvas
+	const handleInsertBlank = async () => {
+		if (insertBlankSection) {
+			dirtyCallback(true);
+			placeholderRef.current.setAttribute('hidden', '');
+
+			const blankId = uid();
+			const sectionName = 'section-blank';
+
+			bs.socket.emit('readSectionData', sectionName);
+			const dataSocket = await new Promise(resolve => {
+				bs.socket.once('resultSectionData', data => resolve(data));
+			});
+
+			setData(data => [...data, `${sectionName}-${blankId}`]);
+			sessionStorage.setItem(`${sectionName}-${blankId}`, JSON.stringify(dataSocket));
+		}
+	};
+
 	useEffect(() => {
 		if (sections !== null) {
 			setData(sections.split(','));
@@ -123,6 +143,7 @@ export default function PagesCanvas(props) {
 		handleDragDrop();
 	}, []);
 	useEffect(() => handleItemId(canvasId), [modeChange]);
+	useEffect(() => handleInsertBlank(), [insertBlankSection]);
 
 	return data.map(item => {
 		const checkPath = item.includes('component-slideshow') ? item : item.substring(0, item.lastIndexOf('-'));

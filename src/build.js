@@ -120,10 +120,7 @@ const frontendImg = async filename => {
 		plugins: pluginOptions,
 	});
 
-	await imagemin(glob.sync(['src/frontend/assets/img/sections/*'], {onlyFiles: true}), {
-		destination: 'dist/assets/img/sections',
-		plugins: pluginOptions,
-	});
+	fs.mkdirSync('dist/assets/img/sections');
 
 	console.log(`${logTime()} - Finished optimize frontend images.`);
 };
