@@ -121,6 +121,7 @@ const frontendImg = async filename => {
 	});
 
 	fs.mkdirSync('dist/assets/img/sections');
+	fs.copyFileSync('src/frontend/assets/img/sections/readme.md', 'dist/assets/img/sections/readme.md');
 
 	console.log(`${logTime()} - Finished optimize frontend images.`);
 };
