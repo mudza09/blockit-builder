@@ -241,6 +241,24 @@
             margin-left: 10px;
             margin-right: 10px;
         }
+        h1.ce-header {
+            font-size: 42.5px;
+        }
+        h2.ce-header {
+            font-size: 34px
+        }
+        h3.ce-header {
+            font-size: 29.75px;
+        }
+        h4.ce-header {
+            font-size: 25.5px;
+        }
+        h5.ce-header {
+            font-size: 21.25px;
+        }
+        h6.ce-header {
+            font-size: 17px;
+        }
     }
     [contenteditable] {
         outline: 0px solid transparent;
@@ -287,30 +305,37 @@
     .ce-block__content {
         max-width: 700px;
         .image-tool {
-            margin: 32px auto 16px auto;
+            margin: 6px auto;
             text-align: center;
             .cdx-input {
                 border: 0;
                 border-radius: 0;
-                padding: 10px 0;
+                padding: 20px 0;
             }
             i {
                 font-style: normal;
             }
+            &:hover [contentEditable=true][data-placeholder] {
+                opacity: 1;
+            }
         }
-        .image-tool [contentEditable=true][data-placeholder]::before {
-            font-size: 15px;
-            color: #707684;
-            content: attr(data-placeholder);
+        .image-tool [contentEditable=true][data-placeholder] {
             opacity: 0;
-            position: relative !important;
-            left: -67px;
-        }
-        .image-tool [contentEditable=true][data-placeholder]:empty::before {
-            opacity: 1;
-        }
-        .image-tool [contentEditable=true][data-placeholder]:empty:focus::before {
-            opacity: 0;
+            transition: all ease 200ms;
+            &::before {
+                font-size: 15px;
+                color: #fff;
+                content: attr(data-placeholder);
+                opacity: 0;
+                position: relative !important;
+                left: -67px;
+            }
+            &:empty::before {
+                opacity: 1;
+            }
+            &:empty:focus::before {
+                opacity: 0;
+            }
         }
         .image-tool__button {
             margin: 0;
@@ -340,8 +365,11 @@
         }
         .image-tool__caption {
             font-size: 15px;
-            color: $text-muted-color;
+            color: #fff;
             box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,1);
+            bottom: 8px;
+            position: absolute;
+            background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0) 100%);
         }
 
         .embed-tool {
@@ -357,7 +385,7 @@
         }
 
         .video-wrapper {
-            margin: 41px auto;
+            margin: 18px auto;
         }
     }
     .ce-toolbar__plus {

@@ -32,6 +32,13 @@ export default function SettingsAuthors(props) {
 			each.name = form.querySelectorAll('.setting-author-name')[index].value;
 			each.email = form.querySelectorAll('.setting-author-email')[index].value;
 			each.bio = form.querySelectorAll('.setting-author-bio')[index].value;
+			each.socialMedia = [
+				{facebook: form.querySelectorAll('.setting-author-social-facebook')[index].value === '' ? false : form.querySelectorAll('.setting-author-social-facebook')[index].value},
+				{twitter: form.querySelectorAll('.setting-author-social-twitter')[index].value === '' ? false : form.querySelectorAll('.setting-author-social-twitter')[index].value},
+				{instagram: form.querySelectorAll('.setting-author-social-instagram')[index].value === '' ? false : form.querySelectorAll('.setting-author-social-instagram')[index].value},
+				{linkedin: form.querySelectorAll('.setting-author-social-linkedin')[index].value === '' ? false : form.querySelectorAll('.setting-author-social-linkedin')[index].value},
+				{website: form.querySelectorAll('.setting-author-social-website')[index].value === '' ? false : form.querySelectorAll('.setting-author-social-website')[index].value},
+			];
 		});
 	};
 
@@ -70,6 +77,13 @@ export default function SettingsAuthors(props) {
 			email: '',
 			bio: '',
 			avatar: 'img/blockit/in-avatar.svg',
+			socialMedia: [
+				{facebook: false},
+				{twitter: false},
+				{instagram: false},
+				{linkedin: false},
+				{website: false},
+			],
 		};
 		callback(newAuthor, 'add');
 		getAuthorImage(data);
@@ -116,17 +130,54 @@ export default function SettingsAuthors(props) {
 								<div className='uk-grid-small' data-uk-grid>
 									<div className='uk-width-1-2'>
 										<div className='uk-form-controls'>
-											<input className='uk-input uk-border-rounded setting-author-name' placeholder='Enter your name' type='text' key={each.name} defaultValue={each.name} onChange={() => dirtyCallback(true)} />
+											<input className='uk-input uk-border-rounded setting-author-name' placeholder='Enter your name' type='text' defaultValue={each.name} onChange={() => dirtyCallback(true)} />
 										</div>
 									</div>
 									<div className='uk-width-1-2'>
 										<div className='uk-form-controls'>
-											<input className='uk-input uk-border-rounded setting-author-email' placeholder='Enter your email' type='text' key={each.email} defaultValue={each.email} onChange={() => dirtyCallback(true)} />
+											<input className='uk-input uk-border-rounded setting-author-email' placeholder='Enter your email' type='text' defaultValue={each.email} onChange={() => dirtyCallback(true)} />
 										</div>
 									</div>
 									<div className='uk-width-1-1'>
-										<textarea className='uk-textarea uk-border-rounded setting-author-bio' rows='3' placeholder='Enter your personal biography' key={each.bio} onChange={() => dirtyCallback(true)}>{each.bio}</textarea>
+										<textarea className='uk-textarea uk-border-rounded setting-author-bio' rows='3' placeholder='Enter your personal biography' onChange={() => dirtyCallback(true)}>{each.bio}</textarea>
 									</div>
+									<ul className='uk-width-1-1 uk-list author-social-media' data-uk-accordion>
+										<li>
+											<a className='uk-accordion-title uk-text-decoration-none uk-text-muted' href='#'>Social media<i className='ri-arrow-down-s-line ri-sm'></i></a>
+											<div className='uk-accordion-content uk-form-horizontal uk-margin-small-top'>
+												<div className='uk-margin'>
+													<label className='uk-form-label'><i className='ri-facebook-circle-line ri-lg uk-margin-small-right'></i>Facebook</label>
+													<div className='uk-form-controls'>
+														<input className='uk-input uk-border-rounded setting-author-social-facebook' type='text' defaultValue={each.socialMedia[0].facebook === false ? '' : each.socialMedia[0].facebook} onChange={() => dirtyCallback(true)} />
+													</div>
+												</div>
+												<div className='uk-margin'>
+													<label className='uk-form-label'><i className='ri-twitter-line ri-lg uk-margin-small-right'></i>Twitter</label>
+													<div className='uk-form-controls'>
+														<input className='uk-input uk-border-rounded setting-author-social-twitter' type='text' defaultValue={each.socialMedia[1].twitter === false ? '' : each.socialMedia[1].twitter} onChange={() => dirtyCallback(true)} />
+													</div>
+												</div>
+												<div className='uk-margin'>
+													<label className='uk-form-label'><i className='ri-instagram-line ri-lg uk-margin-small-right'></i>Instagram</label>
+													<div className='uk-form-controls'>
+														<input className='uk-input uk-border-rounded setting-author-social-instagram' type='text' defaultValue={each.socialMedia[2].instagram === false ? '' : each.socialMedia[2].instagram} onChange={() => dirtyCallback(true)} />
+													</div>
+												</div>
+												<div className='uk-margin'>
+													<label className='uk-form-label'><i className='ri-linkedin-box-line ri-lg uk-margin-small-right'></i>Linkedin</label>
+													<div className='uk-form-controls'>
+														<input className='uk-input uk-border-rounded setting-author-social-linkedin' type='text' defaultValue={each.socialMedia[3].linkedin === false ? '' : each.socialMedia[3].linkedin} onChange={() => dirtyCallback(true)} />
+													</div>
+												</div>
+												<div className='uk-margin'>
+													<label className='uk-form-label'><i className='ri-global-line ri-lg uk-margin-small-right'></i>Website</label>
+													<div className='uk-form-controls'>
+														<input className='uk-input uk-border-rounded setting-author-social-website' type='text' defaultValue={each.socialMedia[4].website === false ? '' : each.socialMedia[4].website} onChange={() => dirtyCallback(true)} />
+													</div>
+												</div>
+											</div>
+										</li>
+									</ul>
 								</div>
 							</div>
 							<div className='uk-width-expand uk-flex uk-flex-top'>

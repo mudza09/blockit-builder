@@ -22,7 +22,7 @@ export default function ComponentsSlideshowForm(props) {
 						id: slideId,
 						type: 'code',
 						data: {
-							language: 'HTML',
+							language: 'handlebars',
 							text: data.text,
 						},
 					},

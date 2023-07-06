@@ -1,4 +1,4 @@
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 
 SettingsBlog.propTypes = {
@@ -8,6 +8,7 @@ SettingsBlog.propTypes = {
 };
 
 export default function SettingsBlog(props) {
+	const [inputData, setInputData] = useState({});
 	const blogForm = useRef(null);
 	const authorRadio = useRef(null);
 	const tagRadio = useRef(null);
@@ -62,7 +63,6 @@ export default function SettingsBlog(props) {
 
 	// Handle blog form
 	const handleBlogForm = () => {
-		const form = blogForm.current;
 		const authorRadioEnable = authorRadio.current.checked;
 		const tagRadioEnable = tagRadio.current.checked;
 		const shareRadioEnable = shareRadio.current.checked;
@@ -71,7 +71,6 @@ export default function SettingsBlog(props) {
 		const latestCheckEnable = latestCheck.current.checked;
 		const tagCheckEnable = tagCheck.current.checked;
 
-		data.postPerPage = form.querySelector('#setting-posts-per-page').value;
 		data.showWidgets.search = Boolean(searchCheckEnable);
 		data.showWidgets.categories = Boolean(categoriesCheckEnable);
 		data.showWidgets.latestPosts = Boolean(latestCheckEnable);
@@ -80,7 +79,16 @@ export default function SettingsBlog(props) {
 		data.displayAuthor = Boolean(authorRadioEnable);
 		data.displayTag = Boolean(tagRadioEnable);
 		data.displayShareButtons = Boolean(shareRadioEnable);
-		data.disqussShortname = form.querySelector('#setting-disquss').value;
+	};
+
+	// Handle postPerPage and disqussShortname input
+	const handleInputData = e => {
+		const {name, value} = e.target;
+		data.disqussShortname = e.target.name === 'disqussShortname' ? e.target.value : inputData.disqussShortname;
+		data.postPerPage = e.target.name === 'postPerPage' ? e.target.value : inputData.postPerPage;
+
+		dirtyCallback(true);
+		setInputData(prev => ({...prev, [name]: value}));
 	};
 
 	// Handle add category
@@ -104,6 +112,7 @@ export default function SettingsBlog(props) {
 
 	useEffect(() => {
 		if (data !== undefined) {
+			setInputData({postPerPage: data.postPerPage, disqussShortname: data.disqussShortname});
 			displayRadio(data);
 			showWidgetCheck(data.showWidgets);
 		}
@@ -143,14 +152,14 @@ export default function SettingsBlog(props) {
 					</div>
 				</div>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-posts-per-page'>Posts per page</label>
+					<label className='uk-form-label' htmlFor='postPerPage'>Posts per page</label>
 					<div className='uk-form-controls'>
 						<input
 							className='uk-input uk-border-rounded setting-number-dimension'
-							id='setting-posts-per-page'
+							name='postPerPage'
 							type='number'
-							defaultValue={data === undefined ? '' : data.postPerPage}
-							onChange={() => dirtyCallback(true)}
+							value={inputData.postPerPage}
+							onChange={handleInputData}
 						/>
 					</div>
 				</div>
@@ -274,14 +283,14 @@ export default function SettingsBlog(props) {
 					</div>
 				</div>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-disquss'>Disquss shortname <i className='ri-information-fill ri-xs' data-uk-tooltip='title: Used for comments on blog post; pos: right'></i></label>
+					<label className='uk-form-label' htmlFor='disqussShortname'>Disquss shortname <i className='ri-information-fill ri-xs' data-uk-tooltip='title: Used for comments on blog post; pos: right'></i></label>
 					<div className='uk-form-controls'>
 						<input
 							className='uk-input uk-border-rounded'
-							id='setting-disquss'
+							name='disqussShortname'
 							type='text'
-							defaultValue={data === undefined ? '' : data.disqussShortname}
-							onChange={() => dirtyCallback(true)}
+							value={inputData.disqussShortname}
+							onChange={handleInputData}
 						/>
 					</div>
 				</div>

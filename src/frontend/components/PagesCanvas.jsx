@@ -105,6 +105,11 @@ export default function PagesCanvas(props) {
 		}
 	};
 
+	// Handle missing preview image
+	const handleMissingImage = e => {
+		e.target.src = '../assets/img/blockit-missing-section.webp';
+	};
+
 	// Set storage data of sections in edit mode
 	const setStorageData = async sections => {
 		bs.socket.emit('readSectionsEdit', sections);
@@ -150,7 +155,7 @@ export default function PagesCanvas(props) {
 		return (
 			<div key={item} className={'sections-name ' + item}>
 				<div className='uk-inline-clip uk-transition-toggle'>
-					{!item.includes('section-blog') && <img className='uk-border-rounded' src={'../assets/img/sections/' + checkPath + '.webp'} alt={item} />}
+					{!item.includes('section-blog') && <img className='uk-border-rounded' src={'../assets/img/sections/' + checkPath + '.webp'} onError={handleMissingImage} alt={item} />}
 					<div className='uk-transition-fade uk-position-cover uk-flex uk-flex-top uk-flex-right'>
 						<span className='uk-text-small' hidden>{item}</span>
 						<button className='uk-button uk-button-small uk-button-secondary uk-border-rounded section-button' type='button' onClick={() => handleModal(item)}>

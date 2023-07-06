@@ -22,6 +22,8 @@ import PostsActionAuthorSelect from '../components/PostsActionAuthorSelect';
 import PostsActionTagInput from '../components/PostsActionTagInput';
 import PostsActionFeaturedImage from '../components/PostsActionFeaturedImage';
 import PostsActionHidePost from '../components/PostsActionHidePost';
+import PostsActionHideBio from '../components/PostsActionHideBio';
+import PostsActionHideComments from '../components/PostsActionHideComments';
 
 export default function PostsAction() {
 	const navigate = useNavigate();
@@ -155,22 +157,29 @@ export default function PostsAction() {
 					const categoryPost = form.querySelector('#post-category');
 					const tagsPost = form.querySelector('#post-tags');
 					const featuredImg = form.querySelector('.post-image').querySelector('img');
+					const hideBio = form.querySelector('#hide-bio');
+					const hideComment = form.querySelector('#hide-comment');
 					const hidePost = form.querySelector('#hide-post');
 
 					editor.save().then(dataPost => {
 						if (handleValidateForm(titleName, authorName, dataPost)) {
 							const nameFile = postLink(titleName.textContent);
+							const currentAuthor = authorsData.filter(each => each.id === authorName.querySelector('option:checked').getAttribute('data-id'));
 							const postData = {
 								title: titleName.textContent,
 								link: `${postLink(titleName.textContent)}.html`,
 								author: {
-									id: authorName.querySelector('option:checked').getAttribute('data-id'),
-									name: authorName.value,
+									id: currentAuthor[0].id,
+									name: currentAuthor[0].name,
 									avatar: avatarSrc(authorsData, authorName),
+									bio: currentAuthor[0].bio,
+									socialMedia: currentAuthor[0].socialMedia,
 								},
 								category: categoryPost.value === '0' ? 'Uncategorized' : categoryPost.value,
 								tags: tagsPost.value.length === 0 ? ['untagged'] : tagsPost.value.replace(/\s/g, '').split(','),
 								image: featuredSrc(featuredImg),
+								biography: Boolean(!hideBio.checked),
+								comments: Boolean(!hideComment.checked),
 								hidden: Boolean(hidePost.checked),
 							};
 
@@ -260,7 +269,11 @@ export default function PostsAction() {
 								if (blogData !== false) {
 									setPreviewUrl(true);
 								}
-							}, 3000);
+
+								if (postData.hidden) {
+									setPreviewUrl(false);
+								}
+							}, 2500);
 						}
 					});
 				};
@@ -331,6 +344,10 @@ export default function PostsAction() {
 			if (data.asBlog !== false && params.get('title') !== null) {
 				setPreviewUrl(true);
 			}
+
+			if (data.hidden) {
+				setPreviewUrl(false);
+			}
 		}
 	}, [data]);
 	useEffect(() => {
@@ -383,12 +400,14 @@ export default function PostsAction() {
 								/>
 								<form id='page-form' className='uk-grid-small uk-margin-small-top' ref={sidebarForm} data-uk-grid>
 									<PostsActionFeaturedImage data={data.currentImage} dirtyCallback={setIsDirty} />
-									<PostsActionHidePost data={data.hidden} dirtyCallback={setIsDirty} />
+									<PostsActionHideBio data={data.biography} dirtyCallback={setIsDirty} />
+									<PostsActionHideComments data={data.comments} dirtyCallback={setIsDirty} />
 									<PostsActionAuthorSelect data={data.authors} status={failAuthor} callback={setFailAuthor} dirtyCallback={setIsDirty} />
 									<PostsActionCategorySelect data={data.categories} dirtyCallback={setIsDirty} />
 									<PostsActionTagInput data={data.currentTags} mode={mode} dirtyCallback={setIsDirty} />
+									<PostsActionHidePost data={data.hidden} dirtyCallback={setIsDirty} />
 								</form>
-								{mode === 'edit' && <p className='uk-text-small uk-text-muted uk-margin-small-top'><strong>Published :</strong> {params.get('date')} at {params.get('time')}</p>}
+								{mode === 'edit' && <p className='uk-text-small uk-text-muted uk-margin-top'><strong>Published :</strong> {params.get('date')} at {params.get('time')}</p>}
 							</div>
 						</div>
 					</div>

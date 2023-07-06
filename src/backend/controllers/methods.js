@@ -300,7 +300,7 @@ export default class Methods {
 					{
 						type: 'code',
 						data: {
-							language: 'HTML',
+							language: 'handlebars',
 							text: JSON.parse(file)[index].sectionTag,
 						},
 					},
@@ -319,7 +319,7 @@ export default class Methods {
 					{
 						type: 'code',
 						data: {
-							language: 'HTML',
+							language: 'handlebars',
 							text: fs.readFileSync(`./src/partials/sections/${item}.hbs`, 'utf-8'),
 						},
 					},
@@ -386,18 +386,21 @@ export default class Methods {
 			dateCreated: postData === null ? '' : postData.dateCreated,
 			timeCreated: postData === null ? '' : postData.timeCreated,
 			blocks: postData === null ? '' : postData.blocks,
-			hidden: postData === null ? '' : postData.hidden,
+			biography: postData === null ? true : postData.biography,
+			comments: postData === null ? true : postData.comments,
+			hidden: postData === null ? false : postData.hidden,
 		};
 		this.socket.emit('postsActionData', data);
 	};
 
 	postPaginatorWidget = (items, currentPage, perPageItems, settingData) => {
+		const visiblePosts = items.filter(each => each.hidden === false);
 		const page = currentPage || 1;
 		const perPage = perPageItems || 10;
 		const offset = (page - 1) * perPage;
 
 		const paginatedItems = items.slice(offset).slice(0, perPageItems);
-		const totalPages = Math.ceil(items.length / perPage);
+		const totalPages = Math.ceil(visiblePosts.length / perPage);
 
 		return {
 			asBlog: settingData.blog.asBlog[0],
@@ -405,7 +408,7 @@ export default class Methods {
 			perPage,
 			prevPage: page - 1 ? page - 1 : null,
 			nextPage: (totalPages > page) ? page + 1 : null,
-			totalPost: items.length,
+			totalPost: visiblePosts.length,
 			totalPages,
 			displayAuthor: settingData.blog.displayAuthor,
 			data: paginatedItems,
@@ -506,7 +509,7 @@ export default class Methods {
 				// Create data-category.json
 				fs.readFile('./src/data/blog/blog.json', 'utf8', (err, buffer) => {
 					const data = JSON.parse(buffer);
-					const categoryData = categoryLists.map(item => this.createCategoryPost(data.post, item));
+					const categoryData = categoryLists.map(item => this.createCategoryPost(data.post, item)).filter(item => item !== undefined);
 					fs.writeFileSync(`./dist/${settingData.blog.asBlog[0]}/data/data-category.json`, JSON.stringify(categoryData));
 				});
 
@@ -527,9 +530,9 @@ export default class Methods {
 	};
 
 	createCategoryPost = (array, categoryName) => {
-		const categoryResult = array.filter(post => post.category === categoryName);
+		const categoryResult = array.filter(post => post.category === categoryName).filter(post => post.hidden === false);
 		categoryResult.forEach(post => {
-			post.content = this.utils.trimString(post.blocks[0].data.text);
+			post.content = post.blocks[0].type === 'paragraph' ? this.utils.trimString(post.blocks[0].data.text) : '';
 			post.date = post.dateCreated;
 			delete post.author.id;
 			delete post.blocks;
@@ -543,11 +546,13 @@ export default class Methods {
 			}
 		});
 
-		return {
-			category: categoryName,
-			totalPost: categoryResult.length,
-			posts: categoryResult,
-		};
+		if (categoryResult.length > 0) {
+			return {
+				category: categoryName,
+				totalPost: categoryResult.length,
+				posts: categoryResult,
+			};
+		}
 	};
 
 	createTagPost = (array, tagName) => {
@@ -561,7 +566,7 @@ export default class Methods {
 		});
 
 		tagResult.forEach(post => {
-			post.content = this.utils.trimString(post.blocks[0].data.text);
+			post.content = post.blocks[0].type === 'paragraph' ? this.utils.trimString(post.blocks[0].data.text) : '';
 			post.date = post.dateCreated === undefined ? post.date : post.dateCreated;
 			delete post.author.id;
 			delete post.share;
@@ -642,7 +647,7 @@ export default class Methods {
 			`./dist/${blogPage}/${nameFile}.html`,
 		];
 
-		return Promise.all(files.map(each => !each.includes('false') && fs.unlinkSync(each)))
+		return Promise.all(files.map(each => fs.existsSync(each) && fs.unlinkSync(each)))
 			.then(
 				this.socket.emit('deleteDone', 'success'),
 				this.postCreatePage(dataTag),
@@ -977,7 +982,7 @@ export default class Methods {
 						id: 'header-content',
 						type: 'code',
 						data: {
-							language: 'HTML',
+							language: 'handlebars',
 							text: file,
 						},
 					},
@@ -995,7 +1000,7 @@ export default class Methods {
 						id: 'footer-content',
 						type: 'code',
 						data: {
-							language: 'HTML',
+							language: 'handlebars',
 							text: file,
 						},
 					},
@@ -1036,7 +1041,7 @@ export default class Methods {
 						id: slideId,
 						type: 'code',
 						data: {
-							language: 'HTML',
+							language: 'handlebars',
 							text: file,
 						},
 					},
@@ -1061,38 +1066,35 @@ export default class Methods {
 		const newAuthor = newData.authors;
 
 		// Compare author name and avatar data
-		const originalObj = oldAuthor.filter(this.utils.compareObj(newAuthor));
-		const updatedObj = newAuthor.filter(this.utils.compareObj(oldAuthor));
-		const compareResult = originalObj.concat(updatedObj);
+		const originalObj = JSON.stringify(oldAuthor);
+		const updatedObj = JSON.stringify(newAuthor);
+		const compareResult = updatedObj !== originalObj;
 
-		// Blog post object
-		const postObj = {post: []};
+		// Condition when there any change in authors data
+		if (compareResult) {
+			const postFiles = fs.readdirSync('./src/data/blog/posts');
+			const postArr = postFiles.map(file => JSON.parse(fs.readFileSync(`./src/data/blog/posts/${file}`, 'utf-8')));
+			const postHbs = postArr.map(file => ({nameFile: file.link.split('.')[0], dataPost: file, dataTag}));
 
-		// Read all post and merge data to blog.json
-		fs.readdir('./src/data/blog/posts', (err, files) => {
-			files.forEach(file => {
-				const data = JSON.parse(fs.readFileSync(`./src/data/blog/posts/${file}`, 'utf8'));
-				if (compareResult.length !== 0) {
-					Object.values(data).forEach(prop => {
-						if (prop.id === compareResult[0].id && prop.name !== compareResult[1].name) {
-							prop.name = compareResult[1].name;
-							prop.avatar = compareResult[1].avatar;
-						} else if (prop.id === compareResult[0].id && prop.avatar !== compareResult[1].avatar) {
-							prop.name = compareResult[1].name;
-							prop.avatar = compareResult[1].avatar;
-						}
-					});
-					fs.writeFileSync(`./src/data/blog/posts/${file}`, JSON.stringify(data, null, 2));
+			postArr.forEach(each => newAuthor.forEach(eachRef => {
+				if (eachRef.id === each.author.id) {
+					each.author.name = eachRef.name;
+					each.author.bio = eachRef.bio;
+					each.author.socialMedia = eachRef.socialMedia;
 				}
+			}));
 
-				postObj.post.push(data);
+			// Rewrite each post hbs
+			postHbs.forEach(each => {
+				this.postsSaveContent(each.nameFile, each.dataPost, each.dataTag);
 			});
 
-			postObj.post.sort((a, b) => new Date(`${b.dateCreated} ${b.timeCreated}`) - new Date(`${a.dateCreated} ${a.timeCreated}`));
-			fs.writeFileSync('./src/data/blog/blog.json', JSON.stringify(postObj, null, 2));
+			// Read all post and merge data to blog.json
+			postArr.sort((a, b) => new Date(`${b.dateCreated} ${b.timeCreated}`) - new Date(`${a.dateCreated} ${a.timeCreated}`));
+			fs.writeFileSync('./src/data/blog/blog.json', JSON.stringify({post: postArr}, null, 2));
 
-			this.postPaginatorPage(postObj, dataTag);
-		});
+			this.postPaginatorPage({post: postArr}, dataTag);
+		}
 	};
 
 	// Components editor

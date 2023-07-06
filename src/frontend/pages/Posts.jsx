@@ -70,7 +70,8 @@ export default function Posts() {
 						}),
 						bs.socket.emit('getPostsData', 'empty'),
 						bs.socket.once('postsData', data => {
-							setData(slicePage(data, activePage, 10));
+							const sortDate = data.sort((a, b) => new Date(`${b.dateModified} ${b.timeModified}`) - new Date(`${a.dateModified} ${a.timeModified}`));
+							setData(slicePage(sortDate, activePage, 10));
 							setDataLength(data.length);
 							setPagination(calcPage(data, 10));
 							setPaginationEntry(entryPage(data.length)[activePage - 1]);
@@ -180,8 +181,8 @@ export default function Posts() {
 														<span className='page-name'>{trimUtils(item.title)}</span>
 														{
 															item.hidden === true
-																? <span className='uk-text-muted uk-flex uk-flex-middle'><i className='ri-checkbox-blank-circle-fill ri-xxs uk-text-muted'></i>Post hidden by {item.author.name}<i className='ri-eye-off-fill ri-sm uk-text-muted uk-margin-left'></i></span>
-																: <span className='uk-text-muted uk-flex uk-flex-middle'><i className='ri-checkbox-blank-circle-fill ri-xxs uk-text-primary'></i>Post published by {item.author.name}</span>
+																? <span className='uk-text-muted uk-flex uk-flex-middle'>Post hidden by {item.author.name}<i className='ri-eye-off-fill ri-sm uk-text-muted uk-margin-left'></i></span>
+																: <span className='uk-text-muted uk-flex uk-flex-middle'>Post published by {item.author.name}</span>
 														}
 													</div>
 												</td>

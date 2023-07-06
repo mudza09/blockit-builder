@@ -115,6 +115,32 @@
     .author-pic-width {
         width: 90px;
     }
+    .author-social-media {
+        .uk-form-label {
+            width: 130px;
+        }
+        .uk-form-controls {
+            margin-left: 145px;
+        }
+        .uk-accordion-title {
+            i {
+                transition: all ease 200ms;
+                display: inline-block;
+                margin-left: 3px;
+                position: relative;
+                top: 2px;
+            }
+            &[aria-expanded="true"] {
+                i {
+                    transform: rotate(-180deg);
+                }
+            }
+        }
+        .ri-lg {
+            position: relative;
+            top: 5px;
+        }
+    }
 }
 
 @media (max-width: 1536px) {

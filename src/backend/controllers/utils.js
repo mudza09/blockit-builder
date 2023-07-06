@@ -164,11 +164,12 @@ export default class Utils {
 		return string.substring(0, cut) + ' ...';
 	}
 
-	// Compare object function
-	compareObj = otherArray => function (current) {
+	// Compare author object function
+	compareAuthorObj = otherArray => function (current) {
 		return otherArray.filter(other => other.name === current.name
                     && other.email === current.email
-                    && other.role === current.role
+                    && other.bio === current.bio
+					&& other.socialMedia === current.socialMedia
                     && other.avatar === current.avatar).length === 0;
 	};
 

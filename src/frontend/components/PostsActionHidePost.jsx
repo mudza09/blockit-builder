@@ -17,6 +17,8 @@ export default function PostsActionHidePost(props) {
 	}, [data]);
 
 	return (
-		<label className='uk-form-label'><input className='uk-checkbox' type='checkbox' id='hide-post' ref={hidePostCheck} onChange={() => dirtyCallback(true)} /> Hide post</label>
+		<label className='uk-form-label'>
+			<input className='uk-checkbox' type='checkbox' id='hide-post' ref={hidePostCheck} onChange={() => dirtyCallback(true)} /> Hide this post
+		</label>
 	);
 }

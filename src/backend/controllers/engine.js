@@ -8,6 +8,7 @@ import Utils from './utils.js';
 // Handlebars helper
 import ifAnd from '../helpers/ifAnd.js';
 import ifEqual from '../helpers/ifEqual.js';
+import getFrom from '../helpers/getFrom.js';
 import ifPage from '../helpers/ifPage.js';
 import unlessPage from '../helpers/unlessPage.js';
 
@@ -44,6 +45,7 @@ export default class Engine {
 	loadHelpers = () => {
 		this.Handlebars.registerHelper('ifand', ifAnd);
 		this.Handlebars.registerHelper('ifequal', ifEqual);
+		this.Handlebars.registerHelper('getfrom', getFrom);
 	};
 
 	// Load hbs pages function

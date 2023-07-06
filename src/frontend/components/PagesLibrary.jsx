@@ -47,6 +47,11 @@ export default function PagesLibrary(props) {
 		});
 	};
 
+	// Handle missing preview image
+	const handleMissingImage = e => {
+		e.target.src = '../assets/img/blockit-missing-section.webp';
+	};
+
 	// Slideshow html edit condition
 	const htmlCodeCondition = (item, index) => {
 		if (item.target.previousElementSibling.textContent.includes('component')) {
@@ -70,7 +75,7 @@ export default function PagesLibrary(props) {
 								return (
 									<div key={item} className={'sections-name ' + item}>
 										<div className='uk-inline-clip uk-transition-toggle'>
-											<img className='uk-border-rounded' src={'../assets/img/sections/' + item + '.webp'} alt={item}/>
+											<img className='uk-border-rounded' src={'../assets/img/sections/' + item + '.webp'} onError={handleMissingImage} alt={item}/>
 											<div className='uk-transition-fade uk-position-cover uk-flex uk-flex-center uk-flex-bottom'>
 												<span className='uk-text-small'>{item}</span>
 												<button className='uk-button uk-button-small uk-button-secondary uk-border-rounded section-button' type='button' data-uk-toggle={item.includes('component') ? 'disable' : `target: #modal-${item}`} onClick={e => htmlCodeCondition(e, index)} hidden>
