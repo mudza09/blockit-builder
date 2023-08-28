@@ -164,15 +164,6 @@ export default class Utils {
 		return string.substring(0, cut) + ' ...';
 	}
 
-	// Compare author object function
-	compareAuthorObj = otherArray => function (current) {
-		return otherArray.filter(other => other.name === current.name
-                    && other.email === current.email
-                    && other.bio === current.bio
-					&& other.socialMedia === current.socialMedia
-                    && other.avatar === current.avatar).length === 0;
-	};
-
 	// Check hooks folder is exist
 	checkHook() {
 		const isExist = fs.readdirSync('./src/hooks', 'utf-8').length !== 0;

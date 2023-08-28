@@ -21,8 +21,6 @@ export default function PagesAction() {
 	const [libraryData, setLibraryData] = useState([]);
 	const [sectionData, setSectionData] = useState('');
 	const [blogStatus, setBlogStatus] = useState(false);
-	const [modeChange, setModeChange] = useState(false);
-	const [canvasId, setCanvasId] = useState([]);
 	const [blankSection, setBlankSection] = useState(false);
 	const canvasWrap = useRef(null);
 	const placeholdWrap = useRef(null);
@@ -115,8 +113,6 @@ export default function PagesAction() {
 					}
 				));
 				deletedSections = [false];
-				setModeChange(true);
-				setCanvasId(sections);
 			} else if (mode === 'edit') {
 				sections = Array.from(canvasWrap.current.children).map(item => (
 					{
@@ -386,8 +382,6 @@ export default function PagesAction() {
 										handleEditor={handleEditorSection}
 										handleDelete={handleDeleteSection}
 										dirtyCallback={setIsDirty}
-										modeChange={modeChange}
-										canvasId={canvasId}
 										insertBlankSection={blankSection}
 									/>
 								</div>

@@ -11,8 +11,6 @@ PagesCanvas.propTypes = {
 	handleDelete: PropTypes.func,
 	placeholderRef: PropTypes.object,
 	dirtyCallback: PropTypes.bool,
-	modeChange: PropTypes.bool,
-	canvasId: PropTypes.array,
 	insertBlankSection: PropTypes.array,
 };
 
@@ -21,7 +19,7 @@ export default function PagesCanvas(props) {
 	const [data, setData] = useState([]);
 	const params = new URLSearchParams(location.search);
 	const sections = params.get('sections');
-	const {canvasAreaRef, handleEditor, handleDelete, placeholderRef, dirtyCallback, modeChange, canvasId, insertBlankSection} = props;
+	const {canvasAreaRef, handleEditor, handleDelete, placeholderRef, dirtyCallback, insertBlankSection} = props;
 
 	// Id generator
 	const uid = new ShortUniqueId({length: 6});
@@ -51,6 +49,8 @@ export default function PagesCanvas(props) {
 					bs.socket.once('resultSectionData', data => resolve(data));
 				});
 
+				sectionEl.remove();
+				setData(data => [...data, `${sectionName}-${sectionId}`]);
 				sessionStorage.setItem(`${sectionName}-${sectionId}`, JSON.stringify(dataSocket));
 			}
 
@@ -96,15 +96,6 @@ export default function PagesCanvas(props) {
 		}
 	};
 
-	// Handle item Id in canvas
-	const handleItemId = id => {
-		if (modeChange) {
-			const sectionId = id.map(each => `${each.name}`);
-			Array.from(canvasAreaRef.current.children).forEach(each => each.remove());
-			setData(sectionId);
-		}
-	};
-
 	// Handle missing preview image
 	const handleMissingImage = e => {
 		e.target.src = '../assets/img/blockit-missing-section.webp';
@@ -147,7 +138,6 @@ export default function PagesCanvas(props) {
 
 		handleDragDrop();
 	}, []);
-	useEffect(() => handleItemId(canvasId), [modeChange]);
 	useEffect(() => handleInsertBlank(), [insertBlankSection]);
 
 	return data.map(item => {

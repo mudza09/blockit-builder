@@ -276,8 +276,8 @@ export default class Methods {
 			}
 
 			if (settingData.blog.asBlog[0] === false) {
-				fs.rmdirSync(`./src/pages/${settingData.blog.asBlog[1]}`, {recursive: true});
-				fs.rmdirSync(`./dist/${settingData.blog.asBlog[1]}`, {recursive: true});
+				fs.rmSync(`./src/pages/${settingData.blog.asBlog[1]}`, {recursive: true});
+				fs.rmSync(`./dist/${settingData.blog.asBlog[1]}`, {recursive: true});
 			}
 
 			const blogPageRegex = new RegExp(`${settingData.blog.asBlog[1]}-page`);
@@ -901,6 +901,12 @@ export default class Methods {
 			const headerComment = file.split('\n')[0];
 			const htmlBody = new JSDOM(file);
 			const footerLogoEl = htmlBody.window.document.querySelector(`.${logoClass}`) === null ? false : htmlBody.window.document.querySelector(`.${logoClass}`);
+
+			// If no class name in the element
+			if (footerLogoEl === false) {
+				console.error(`There is no element with class "${logoClass}" in your "component-footer.hbs file"`);
+				return;
+			}
 
 			// Footer logo jsdom
 			if (useLogo) {
