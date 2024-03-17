@@ -6,18 +6,19 @@ import removeParam from '../utils/removeParam';
 SettingsSiteinfo.propTypes = {
 	authorsSelect: PropTypes.array,
 	data: PropTypes.object,
+	port: PropTypes.object,
 	dirtyCallback: PropTypes.bool,
 };
 
 export default function SettingsSiteinfo(props) {
 	const siteInfoForm = useRef(null);
-	const {authorsSelect, data, dirtyCallback} = props;
+	const {authorsSelect, data, port, dirtyCallback} = props;
 
 	// Favicon and touch icon
 	const [faviconLoading, setFaviconLoading] = useState(false);
 	const [touchIconLoading, setTouchIconLoading] = useState(false);
-	const [imageFavicon, setImageFavicon] = useState('http://localhost:3000/img/in-lazy.gif');
-	const [imageTouchIcon, setImageTouchIcon] = useState('http://localhost:3000/img/in-lazy.gif');
+	const [imageFavicon, setImageFavicon] = useState();
+	const [imageTouchIcon, setImageTouchIcon] = useState();
 
 	// Coloris button color for meta theme color
 	const buttonMetaThemeColor = () => {
@@ -38,8 +39,8 @@ export default function SettingsSiteinfo(props) {
 	// Handle site info form
 	const handleSiteInfoForm = () => {
 		const form = siteInfoForm.current;
-		const favicon = form.querySelector('img[alt="setting-favicon"]').getAttribute('src').replace('http://localhost:3000/', '');
-		const touchIcon = form.querySelector('img[alt="setting-touch-icon"]').getAttribute('src').replace('http://localhost:3000/', '');
+		const favicon = form.querySelector('img[alt="setting-favicon"]').getAttribute('src').replace(`http://${window.location.hostname}:${port.frontend}/`, '');
+		const touchIcon = form.querySelector('img[alt="setting-touch-icon"]').getAttribute('src').replace(`http://${window.location.hostname}:${port.frontend}/`, '');
 
 		data.pageTitle = form.querySelector('#setting-page-title').value;
 		data.metaDescription = form.querySelector('#setting-meta-description').value;
@@ -86,8 +87,8 @@ export default function SettingsSiteinfo(props) {
 	useEffect(() => {
 		if (data !== undefined) {
 			buttonMetaThemeColor();
-			setImageFavicon(`http://localhost:3000/${data.favicon}`);
-			setImageTouchIcon(`http://localhost:3000/${data.touchIcon}`);
+			setImageFavicon(`http://${window.location.hostname}:${port.frontend}/${data.favicon}`);
+			setImageTouchIcon(`http://${window.location.hostname}:${port.frontend}/${data.touchIcon}`);
 		}
 	}, [data]);
 

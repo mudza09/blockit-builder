@@ -110,9 +110,9 @@ export default function Settings() {
 					<div className='uk-width-expand'>
 						<div className='uk-card uk-card-default uk-card-body uk-border-rounded'>
 							<ul id='component-tab-left' className='uk-switcher'>
-								<SettingsSiteinfo data={data.siteInfo} authorsSelect ={data.authors} dirtyCallback={setIsDirty} />
+								<SettingsSiteinfo data={data.siteInfo} port={data.port} authorsSelect ={data.authors} dirtyCallback={setIsDirty} />
 								<SettingsColors data={data.colors} dirtyCallback={setIsDirty} />
-								<SettingsAuthors data={data.authors} callback={handleAuthorCallback} dirtyCallback={setIsDirty} />
+								<SettingsAuthors data={data.authors} port={data.port} callback={handleAuthorCallback} dirtyCallback={setIsDirty} />
 								<SettingsBlog data={data.blog} callback={handleBlogCallback} dirtyCallback={setIsDirty} />
 								<SettingsOptimization data={data.optimization} dirtyCallback={setIsDirty} />
 							</ul>

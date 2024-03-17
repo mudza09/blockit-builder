@@ -1,10 +1,12 @@
 // Required plugins
+import os from 'os';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import path from 'path';
 import sharp from 'sharp';
 import svgo from 'svgo';
 import Methods from './methods.js';
+import {env} from '../index.js';
 
 export default class Utils {
 	// Create directory if not exist function
@@ -40,34 +42,35 @@ export default class Utils {
 
 	// Optimize image condition
 	optimizeImg = (file, destFolder) => {
+		const {imageQuality} = JSON.parse(fs.readFileSync(this.checkBlockitConfig(), 'utf-8'));
 		const svg = svgo.optimize;
 
 		switch (path.extname(file)) {
 			case '.jpg':
 			case '.jpeg': {
 				sharp(file)
-					.jpeg({mozjpeg: true})
+					.jpeg({quality: imageQuality === undefined ? 80 : imageQuality.jpeg, mozjpeg: true})
 					.toFile(`${destFolder}/${path.basename(file)}`);
 				break;
 			}
 
 			case '.png': {
 				sharp(file)
-					.png({quality: 80})
+					.png({quality: imageQuality === undefined ? 80 : imageQuality.png})
 					.toFile(`${destFolder}/${path.basename(file)}`);
 				break;
 			}
 
 			case '.gif': {
 				sharp(file)
-					.gif({progressive: true})
+					.gif({quality: imageQuality === undefined ? 80 : imageQuality.gif, progressive: true})
 					.toFile(`${destFolder}/${path.basename(file)}`);
 				break;
 			}
 
 			case '.webp': {
 				sharp(file)
-					.webp({quality: 75})
+					.webp({quality: imageQuality === undefined ? 80 : imageQuality.webp})
 					.toFile(`${destFolder}/${path.basename(file)}`);
 				break;
 			}
@@ -86,8 +89,8 @@ export default class Utils {
 		const packageInfo = JSON.parse(fs.readFileSync('./node_modules/blockit-builder/package.json', 'utf-8'));
 		console.log(`\n${packageInfo.title} v${packageInfo.version} running on Node.js ${process.version}\n`);
 		if (process.argv.pop() !== '--build') {
-			console.log('    builder url:    \x1b[35mhttp://localhost:3001   \x1b[0m');
-			console.log('    preview url:    \x1b[35mhttp://localhost:3000\n \x1b[0m');
+			console.log(`    builder url:    \x1b[35mhttp://${env.host}:${env.port.backend}   \x1b[0m`);
+			console.log(`    preview url:    \x1b[35mhttp://${env.host}:${env.port.frontend}\n \x1b[0m`);
 			console.log(`${this.logTime(new Date())} - Waiting for changes...`);
 		}
 	};
@@ -236,5 +239,22 @@ export default class Utils {
 		}
 
 		return './blockit.config.json';
+	};
+
+	// Check data folder, if exist move to new location
+	checkDataFolder = () => {
+		if (fs.existsSync('./dist/blog/data')) {
+			fs.cpSync('./dist/blog/data', './dist/data', {recursive: true});
+			fs.rmSync('./dist/blog/data', {recursive: true});
+		}
+	};
+
+	// Get the IP address of server
+	getServerIp = () => {
+		const ifaces = os.networkInterfaces();
+		let values = Object.keys(ifaces).map(name => ifaces[name]);
+		values = [].concat(...values).filter(val => val.family === 'IPv4' && val.internal === false);
+
+		return values.length ? values[0].address : '0.0.0.0';
 	};
 }

@@ -120,7 +120,7 @@ export default function PostsAction() {
 
 								return {
 									success: 1,
-									file: {url: `http://localhost:3000/${imageUrl}`},
+									file: {url: `http://${window.location.hostname}:${data.port.frontend}/${imageUrl}`},
 								};
 							},
 						},
@@ -284,7 +284,7 @@ export default function PostsAction() {
 	const handleImageLink = data => {
 		if (data !== '') {
 			data.blocks.filter(each => each.type === 'image').forEach(each => {
-				each.data.file.url = `http://localhost:3000/${each.data.file.url}`;
+				each.data.file.url = `http://${window.location.hostname}:${data.port.frontend}/${each.data.file.url}`;
 			});
 		}
 
@@ -327,7 +327,7 @@ export default function PostsAction() {
 		if (element.getAttribute('src') === '../assets/img/blockit-image-post.svg') {
 			value = false;
 		} else {
-			value = element.getAttribute('src').includes('../') ? String(element.getAttribute('src').substr(3)) : String(element.getAttribute('src').replace('http://localhost:3000/', ''));
+			value = element.getAttribute('src').includes('../') ? String(element.getAttribute('src').substr(3)) : String(element.getAttribute('src').replace(`http://${window.location.hostname}:${data.port.frontend}/`, ''));
 			value = removeParam('browsersync', value);
 		}
 
@@ -371,7 +371,7 @@ export default function PostsAction() {
 						</h5>
 					</div>
 					<div className='uk-width-3-4 uk-flex uk-flex-right blockit-notif'>
-						{previewUrl && <a href={`http://localhost:3000/${data.asBlog}/${postLink(params.get('title'))}.html`} target='_blank' rel='noreferrer'><code className='uk-flex uk-flex-middle'><i className='ri ri-link ri-sm uk-margin-small-right'></i>{`http://localhost:3000/${data.asBlog}/${postLink(params.get('title'))}.html`}</code></a>}
+						{previewUrl && <a href={`http://${window.location.hostname}:${data.port.frontend}/${data.asBlog}/${postLink(params.get('title'))}.html`} target='_blank' rel='noreferrer'><code className='uk-flex uk-flex-middle'><i className='ri ri-link ri-sm uk-margin-small-right'></i>{`http://${window.location.hostname}:${data.port.frontend}/${data.asBlog}/${postLink(params.get('title'))}.html`}</code></a>}
 					</div>
 				</div>
 				<div className='uk-grid uk-margin-top'>
@@ -399,7 +399,7 @@ export default function PostsAction() {
 									loadingStatus={buttonStatus}
 								/>
 								<form id='page-form' className='uk-grid-small uk-margin-small-top' ref={sidebarForm} data-uk-grid>
-									<PostsActionFeaturedImage data={data.currentImage} dirtyCallback={setIsDirty} />
+									<PostsActionFeaturedImage data={data.currentImage} port={data.port} dirtyCallback={setIsDirty} />
 									<PostsActionHideBio data={data.biography} dirtyCallback={setIsDirty} />
 									<PostsActionHideComments data={data.comments} dirtyCallback={setIsDirty} />
 									<PostsActionAuthorSelect data={data.authors} status={failAuthor} callback={setFailAuthor} dirtyCallback={setIsDirty} />

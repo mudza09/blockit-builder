@@ -7,26 +7,27 @@ import removeParam from '../utils/removeParam';
 SettingsAuthors.propTypes = {
 	callback: PropTypes.func,
 	data: PropTypes.array,
+	port: PropTypes.object,
 	dirtyCallback: PropTypes.bool,
 };
 
 export default function SettingsAuthors(props) {
 	const authorsForm = useRef(null);
 	const [uploadLimit, setUploadLimit] = useState(false);
-	const {callback, data, dirtyCallback} = props;
+	const {callback, data, port, dirtyCallback} = props;
 
 	// Id generator
 	const uid = new ShortUniqueId({length: 6});
 
 	// Upload image author state
-	const [imageAuthor, setImageAuthor] = useState(['http://localhost:3000/img/blockit/in-avatar.svg']);
+	const [imageAuthor, setImageAuthor] = useState([]);
 
 	// Handle footer form
 	const handleAuthorsForm = () => {
 		const form = authorsForm.current;
 
 		data.forEach((each, index) => {
-			const avatar = form.querySelectorAll('img[alt="profile-picture"]')[index].getAttribute('src').replace('http://localhost:3000/', '');
+			const avatar = form.querySelectorAll('img[alt="profile-picture"]')[index].getAttribute('src').replace(`http://${window.location.hostname}:${port.frontend}/`, '');
 
 			each.avatar = removeParam('browsersync', avatar);
 			each.name = form.querySelectorAll('.setting-author-name')[index].value;
@@ -100,7 +101,7 @@ export default function SettingsAuthors(props) {
 
 	// Set image author state
 	const getAuthorImage = data => {
-		setImageAuthor(data.map(each => `http://localhost:3000/${each.avatar}`));
+		setImageAuthor(data.map(each => `http://${window.location.hostname}:${port.frontend}/${each.avatar}`));
 	};
 
 	useEffect(() => {
@@ -152,7 +153,7 @@ export default function SettingsAuthors(props) {
 													</div>
 												</div>
 												<div className='uk-margin'>
-													<label className='uk-form-label'><i className='ri-twitter-line ri-lg uk-margin-small-right'></i>Twitter</label>
+													<label className='uk-form-label'><i className='ri-twitter-x-line ri-lg uk-margin-small-right'></i>X</label>
 													<div className='uk-form-controls'>
 														<input className='uk-input uk-border-rounded setting-author-social-twitter' type='text' defaultValue={each.socialMedia[1].twitter === false ? '' : each.socialMedia[1].twitter} onChange={() => dirtyCallback(true)} />
 													</div>

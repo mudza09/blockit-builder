@@ -13,7 +13,7 @@ export default class Server {
 
 	run = () => {
 		this.preview.init({
-			port: 3000,
+			port: this.env.port.frontend,
 			ui: false,
 			notify: false,
 			open: false,
@@ -30,7 +30,7 @@ export default class Server {
 		});
 
 		this.builder.init({
-			port: 3001,
+			port: this.env.port.backend,
 			ui: false,
 			notify: false,
 			server: './node_modules/blockit-builder',

@@ -90,8 +90,8 @@ export default function Components() {
 						<div className='uk-card uk-card-default uk-card-body uk-border-rounded'>
 							<ul id='component-tab-left' className='uk-switcher'>
 								<ComponentsSlideshow data={data.slideshow} callback={componentsSlideshowCallback} dirtyCallback={setIsDirty} />
-								<ComponentsHeader data={data.header} dirtyCallback={setIsDirty} />
-								<ComponentsFooter data={data.footer} dirtyCallback={setIsDirty} />
+								<ComponentsHeader data={data.header} port={data.port} dirtyCallback={setIsDirty} />
+								<ComponentsFooter data={data.footer} port={data.port} dirtyCallback={setIsDirty} />
 								<ComponentsContactMap data={data.contactMap} dirtyCallback={setIsDirty} />
 								<ComponentsSocialMedia data={data.socialMedia} dirtyCallback={setIsDirty} />
 							</ul>

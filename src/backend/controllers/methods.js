@@ -5,6 +5,7 @@ import sharp from 'sharp';
 import svgo from 'svgo';
 import Compiler from './compiler.js';
 import Utils from './utils.js';
+import {env} from '../index.js';
 
 export default class Methods {
 	constructor(socket) {
@@ -12,6 +13,18 @@ export default class Methods {
 		this.utils = new Utils();
 		this.compiler = new Compiler();
 	}
+
+	// Server info
+	createServerInfo = () => {
+		const data = {
+			host: `http://${env.host}`,
+			port: {
+				backend: env.port.backend,
+				frontend: env.port.frontend,
+			},
+		};
+		this.socket.emit('serverInfo', data);
+	};
 
 	// Dashboard data
 	createDashboardData = () => {
@@ -389,6 +402,10 @@ export default class Methods {
 			biography: postData === null ? true : postData.biography,
 			comments: postData === null ? true : postData.comments,
 			hidden: postData === null ? false : postData.hidden,
+			port: {
+				backend: env.port.backend,
+				frontend: env.port.frontend,
+			},
 		};
 		this.socket.emit('postsActionData', data);
 	};
@@ -488,7 +505,6 @@ export default class Methods {
 
 			if (settingData.blog.asBlog[0] !== false) {
 				// Create data-blog.json`
-				this.utils.createDirectory(`./dist/${settingData.blog.asBlog[0]}/data`); // If "css" folder not exist then create it
 				const latestPost = postObj.post.filter(each => !each.hidden).slice(0, 3).map(each => (
 					{
 						title: each.title, link: each.link, date: each.dateCreated,
@@ -504,13 +520,13 @@ export default class Methods {
 
 				const asBlogValue = settingData.blog.asBlog[0] === false ? false : `${settingData.blog.asBlog[0]}.html`;
 				const blogJsObj = {asBlog: asBlogValue, totalPages, tagLists, latestPost};
-				fs.writeFileSync(`./dist/${settingData.blog.asBlog[0]}/data/data-blog.json`, JSON.stringify(blogJsObj));
+				fs.writeFileSync('./dist/data/data-blog.json', JSON.stringify(blogJsObj));
 
 				// Create data-category.json
 				fs.readFile('./src/data/blog/blog.json', 'utf8', (err, buffer) => {
 					const data = JSON.parse(buffer);
 					const categoryData = categoryLists.map(item => this.createCategoryPost(data.post, item)).filter(item => item !== undefined);
-					fs.writeFileSync(`./dist/${settingData.blog.asBlog[0]}/data/data-category.json`, JSON.stringify(categoryData));
+					fs.writeFileSync('./dist/data/data-category.json', JSON.stringify(categoryData));
 				});
 
 				// Create data-category.json & data-tag.json
@@ -523,7 +539,7 @@ export default class Methods {
 							delete e.blocks;
 						});
 					});
-					fs.writeFileSync(`./dist/${settingData.blog.asBlog[0]}/data/data-tag.json`, JSON.stringify(tagData));
+					fs.writeFileSync('./dist/data/data-tag.json', JSON.stringify(tagData));
 				});
 			}
 		}, 600);
@@ -872,7 +888,7 @@ export default class Methods {
 			const social = Object.keys(each)[0];
 			const link = Object.values(each)[0];
 
-			return `\t<div><a href="${link}" class="color-${social} text-decoration-none"><i class="fab fa-${social === 'facebook' ? 'facebook-square' : social}"></i> ${social.charAt(0).toUpperCase() + social.slice(1)}</a></div>`;
+			return `\t<div><a href="${link}" class="color-${social} text-decoration-none"><i class="fab fa-${new URL(link).hostname.includes('x.com') ? 'x-twitter' : social}"></i> ${new URL(link).hostname.includes('x.com') ? 'X' : social.charAt(0).toUpperCase() + social.slice(1)}</a></div>`;
 		}).join('\n');
 
 		// File that contains element of social media tag
@@ -977,7 +993,15 @@ export default class Methods {
 	};
 
 	createSettingsData = () => {
-		fs.readFile('./src/data/setting.json', 'utf8', (err, data) => this.socket.emit('settingsData', JSON.parse(data)));
+		fs.readFile('./src/data/setting.json', 'utf8', (err, data) => {
+			const dataSetting = JSON.parse(data);
+			dataSetting.port = {
+				backend: env.port.backend,
+				frontend: env.port.frontend,
+			};
+
+			this.socket.emit('settingsData', dataSetting);
+		});
 	};
 
 	createHeaderData = () => {
@@ -1062,6 +1086,10 @@ export default class Methods {
 			const {useLogo} = JSON.parse(fs.readFileSync(this.utils.checkBlockitConfig(), 'utf-8')).footerHook;
 			const dataComponent = JSON.parse(data);
 			dataComponent.footer.useLogo = useLogo;
+			dataComponent.port = {
+				backend: env.port.backend,
+				frontend: env.port.frontend,
+			};
 
 			this.socket.emit('componentsData', dataComponent);
 		});

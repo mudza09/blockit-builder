@@ -209,7 +209,7 @@ export default class Compiler {
 	};
 
 	builderWatch = (instance, env) => {
-		if (env === 'DEV') {
+		if (env.mode === 'DEV') {
 			chokidar.watch(['./node_modules/blockit-builder/assets/app.js', './node_modules/blockit-builder/assets/app.css']).on('change', this.utils.debounce(() => instance.reload()));
 		}
 	};

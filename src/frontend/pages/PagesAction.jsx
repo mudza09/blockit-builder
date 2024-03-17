@@ -15,6 +15,7 @@ export default function PagesAction() {
 	const navigate = useNavigate();
 	const {mode} = useParams();
 	const params = new URLSearchParams(location.search);
+	const [server, setServer] = useState({port: {frontend: '3000'}});
 	const [isLoading, setIsLoading] = useState(false);
 	const [btnSuccess, setBtnSuccess] = useState(false);
 	const [previewUrl, setPreviewUrl] = useState(false);
@@ -42,6 +43,11 @@ export default function PagesAction() {
 	const socketPagesAction = () => {
 		bs.socket.emit('getPagesActionData', 'empty');
 		bs.socket.once('pagesActionData', data => filterSections(data));
+	};
+
+	const socketServer = () => {
+		bs.socket.emit('getServerInfo', 'empty');
+		bs.socket.once('serverInfo', data => setServer(data));
 	};
 
 	// Handle input form
@@ -338,6 +344,7 @@ export default function PagesAction() {
 
 	useEffect(() => {
 		socketPagesAction();
+		socketServer();
 		getParams();
 		breadcrumbForm(params.get('breadcrumb'));
 		if (params.get('page') !== null) {
@@ -368,7 +375,7 @@ export default function PagesAction() {
 						</h5>
 					</div>
 					<div className='uk-width-3-4 uk-flex uk-flex-right blockit-notif'>
-						{previewUrl && <a href={`http://localhost:3000/${params.get('page')}.html`} target='_blank' rel='noreferrer'><code className='uk-flex uk-flex-middle'><i className='ri ri-link ri-sm uk-margin-small-right'></i>{`http://localhost:3000/${params.get('page')}.html`}</code></a>}
+						{previewUrl && <a href={`http://${window.location.hostname}:${server.port.frontend}/${params.get('page')}.html`} target='_blank' rel='noreferrer'><code className='uk-flex uk-flex-middle'><i className='ri ri-link ri-sm uk-margin-small-right'></i>{`http://${window.location.hostname}:${server.port.frontend}/${params.get('page')}.html`}</code></a>}
 					</div>
 				</div>
 				<div className='uk-grid uk-margin-top'>

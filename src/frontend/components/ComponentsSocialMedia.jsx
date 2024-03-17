@@ -36,7 +36,7 @@ export default function ComponentsSocialMedia(props) {
 					</div>
 				</div>
 				<div className='uk-margin'>
-					<label className='uk-form-label' htmlFor='setting-social-twitter'><i className='ri-twitter-line ri-lg uk-margin-small-right'></i>Twitter</label>
+					<label className='uk-form-label' htmlFor='setting-social-twitter'><i className='ri-twitter-x-line ri-lg uk-margin-small-right'></i>X</label>
 					<div className='uk-form-controls'>
 						<input className='uk-input uk-border-rounded' id='setting-social-twitter' type='text' defaultValue={data === undefined ? '' : data[1].twitter} onChange={() => dirtyCallback(true)} />
 					</div>

@@ -6,6 +6,7 @@ import uploadImage from '../utils/uploadImage';
 
 PostsActionFeaturedImage.propTypes = {
 	data: PropTypes.string,
+	port: PropTypes.object,
 	dirtyCallback: PropTypes.bool,
 };
 
@@ -13,7 +14,7 @@ export default function PostsActionFeaturedImage(props) {
 	const [imagePost, setImagePost] = useState('../assets/img/blockit-image-post.svg');
 	const [uploadLoading, setUploadLoading] = useState(false);
 	const [uploadLimit, setUploadLimit] = useState(false);
-	const {data, dirtyCallback} = props;
+	const {data, port, dirtyCallback} = props;
 
 	// Handle upload featured image
 	const handleUploadFeatured = e => {
@@ -33,7 +34,7 @@ export default function PostsActionFeaturedImage(props) {
 	const handleDeleteFeatured = async (e, path) => {
 		e.preventDefault();
 
-		const deletedAsset = path.replace('http://localhost:3000/img/user/', '');
+		const deletedAsset = path.replace(`http://${window.location.hostname}:${port.frontend}/img/user/`, '');
 
 		UIkit.modal.confirm('Featured image will be deleted, are you ok with that?').then(async () => {
 			setUploadLoading(true);
@@ -52,7 +53,7 @@ export default function PostsActionFeaturedImage(props) {
 
 	useEffect(() => {
 		if (data !== undefined) {
-			setImagePost(data === false ? '../assets/img/blockit-image-post.svg' : `http://localhost:3000/${data}`);
+			setImagePost(data === false ? '../assets/img/blockit-image-post.svg' : `http://${window.location.hostname}:${port.frontend}/${data}`);
 		}
 	}, [data]);
 

@@ -9,6 +9,7 @@ import removeParam from '../utils/removeParam';
 
 ComponentsFooter.propTypes = {
 	data: PropTypes.object,
+	port: PropTypes.object,
 	dirtyCallback: PropTypes.bool,
 };
 
@@ -16,13 +17,13 @@ export default function ComponentsFooter(props) {
 	const footerForm = useRef(null);
 	const logoRadio = useRef(null);
 	const [uploadLimit, setUploadLimit] = useState(false);
-	const {data, dirtyCallback} = props;
+	const {data, port, dirtyCallback} = props;
 
 	// Footer logo status
 	const [footerLogoStatus, setFooterLogoStatus] = useState(true);
 
 	// Upload image logo and loading state
-	const [imageLogo, setImageLogo] = useState('http://localhost:3000/img/in-lazy.gif');
+	const [imageLogo, setImageLogo] = useState();
 
 	// Footer logo radio
 	const footerLogoRadio = condition => {
@@ -38,7 +39,7 @@ export default function ComponentsFooter(props) {
 	const handleFooterForm = () => {
 		const form = footerForm.current;
 		const footerRadioEnable = footerLogoStatus ? logoRadio.current.checked : null;
-		const footerLogoImg = footerLogoStatus ? form.querySelector('img[alt="setting-footer-logo"]').getAttribute('src').replace('http://localhost:3000/', '') : null;
+		const footerLogoImg = footerLogoStatus ? form.querySelector('img[alt="setting-footer-logo"]').getAttribute('src').replace(`http://${window.location.hostname}:${port.frontend}/`, '') : null;
 
 		data.copyrightText = form.querySelector('#setting-copyright').value;
 		data.siteLogo.enabled = Boolean(footerRadioEnable);
@@ -120,7 +121,7 @@ export default function ComponentsFooter(props) {
 
 	useEffect(() => {
 		if (data !== undefined) {
-			setImageLogo(`http://localhost:3000/${data.siteLogo.logo.src}`);
+			setImageLogo(`http://${window.location.hostname}:${port.frontend}/${data.siteLogo.logo.src}`);
 			if (data.useLogo === false) {
 				setFooterLogoStatus(false);
 			}

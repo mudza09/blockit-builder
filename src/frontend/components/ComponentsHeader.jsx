@@ -9,21 +9,22 @@ import removeParam from '../utils/removeParam';
 
 ComponentsHeader.propTypes = {
 	data: PropTypes.object,
+	port: PropTypes.object,
 	dirtyCallback: PropTypes.bool,
 };
 
 export default function ComponentsHeader(props) {
 	const headerForm = useRef(null);
-	const {data, dirtyCallback} = props;
+	const {data, port, dirtyCallback} = props;
 
 	// Site logo
 	const [logoLoading, setLogoLoading] = useState(false);
-	const [imageLogo, setImageLogo] = useState('http://localhost:3000/img/in-lazy.gif');
+	const [imageLogo, setImageLogo] = useState();
 
 	// Handle header form
 	const handleHeaderForm = () => {
 		const form = headerForm.current;
-		const logo = form.querySelector('img[alt="setting-site-logo"]').getAttribute('src').replace('http://localhost:3000/', '');
+		const logo = form.querySelector('img[alt="setting-site-logo"]').getAttribute('src').replace(`http://${window.location.hostname}:${port.frontend}/`, '');
 
 		data.siteLogo.src = removeParam('browsersync', logo);
 		data.siteLogo.width = form.querySelector('#setting-logo-width').value;
@@ -109,7 +110,7 @@ export default function ComponentsHeader(props) {
 
 	useEffect(() => {
 		if (data !== undefined) {
-			setImageLogo(`http://localhost:3000/${data.siteLogo.src}`);
+			setImageLogo(`http://${window.location.hostname}:${port.frontend}/${data.siteLogo.src}`);
 		}
 	}, [data]);
 

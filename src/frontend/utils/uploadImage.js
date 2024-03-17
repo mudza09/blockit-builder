@@ -4,6 +4,10 @@ import ShortUniqueId from 'short-unique-id';
 export default function uploadImage(options) {
 	const element = options.inputEvent.closest(`.${options.selector}`).querySelector('img');
 	const buffer = options.inputEvent.files[0];
+	const server = {};
+
+	// Fill server data information
+	getServerData();
 
 	// Id generator
 	const uid = new ShortUniqueId({length: 6});
@@ -55,6 +59,7 @@ export default function uploadImage(options) {
 		setTimeout(() => options.sizeLimit(false), 2000);
 	}
 
+	// Image uploader
 	function uploader() {
 		const nameFile = `${options.fileName}-${uid()}.${typeFile}`;
 		const reader = new FileReader();
@@ -70,7 +75,7 @@ export default function uploadImage(options) {
 				await new Promise(resolve => {
 					bs.socket.once('uploadDone', path => {
 						setTimeout(() => {
-							resolve(options.path(`http://localhost:3000/${path}`));
+							resolve(options.path(`http://${window.location.hostname}:${server.port.frontend}/${path}`));
 						}, 300);
 					});
 				});
@@ -102,9 +107,9 @@ export default function uploadImage(options) {
 							}
 
 							if (options.position === undefined) {
-								resolve(options.path(`http://localhost:3000/${path}`));
+								resolve(options.path(`http://${window.location.hostname}:${server.port.frontend}/${path}`));
 							} else {
-								resolve(options.path(`http://localhost:3000/${path}`, options.position));
+								resolve(options.path(`http://${window.location.hostname}:${server.port.frontend}/${path}`, options.position));
 							}
 						}, 300);
 					});
@@ -117,5 +122,15 @@ export default function uploadImage(options) {
 
 			reader.onerror = () => console.error(reader.error);
 		}
+	}
+
+	// Server info
+	async function getServerData() {
+		bs.socket.emit('getServerInfo', 'empty');
+		await new Promise(resolve => {
+			bs.socket.once('serverInfo', data => {
+				resolve(Object.assign(server, data));
+			});
+		});
 	}
 }

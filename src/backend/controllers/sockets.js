@@ -4,6 +4,8 @@ export default class Sockets {
 	}
 
 	dashboardSocket = socket => {
+		// Server info
+		socket.on('getServerInfo', () => this.blockit.createServerInfo());
 		// Dashboard data
 		socket.on('getDashboardData', () => this.blockit.createDashboardData());
 	};
