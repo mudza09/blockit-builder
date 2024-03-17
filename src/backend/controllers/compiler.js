@@ -21,8 +21,7 @@ export default class Compiler {
 	// Clean dist folder
 	buildClean = () => {
 		const filesRm = [
-			...this.utils.loadFiles('./dist', ['blog', 'img']),
-			...this.utils.loadFiles('./dist/blog', ['data']),
+			...this.utils.loadFiles('./dist', ['blog', 'data', 'img']),
 			...this.utils.loadFiles('./dist/img', ['user']),
 		];
 		filesRm.forEach(each => fs.unlinkSync(each));

@@ -10,8 +10,8 @@ Because the template relies on ["Handlebars"](https://handlebarsjs.com/), learni
 
 Several quick start options are available:
 
-- Download the "starter" project from here: https://github.com/Mudza09/blockit-starter
-- Open terminal inside "starter" folder and run : `npm install`.
+- Run `npx blockit-builder project-name`
+- Go to your project folder `cd project-name`
 - Run the builder with: `npm run blockit`.
 - Build the project with : `npm run build`.
 
