@@ -3,6 +3,7 @@ import fs from 'fs';
 import {JSDOM} from 'jsdom';
 import sharp from 'sharp';
 import svgo from 'svgo';
+import indent from 'indent.js';
 import Compiler from './compiler.js';
 import Utils from './utils.js';
 import {env} from '../index.js';
@@ -975,7 +976,7 @@ export default class Methods {
 					const modifiedTag = slideshowTag.replace(/\{\{slide-id\}\}/g, slideData.join('\n'));
 
 					fs.writeFileSync('./node_modules/blockit-builder/templates/component-slideshow.json', JSON.stringify(slideshowExist, null, 4));
-					fs.writeFileSync(`./src/partials/components/component-slideshow-${index + 1}.hbs`, modifiedTag);
+					fs.writeFileSync(`./src/partials/components/component-slideshow-${index + 1}.hbs`, indent.html(modifiedTag));
 				}
 			});
 

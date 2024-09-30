@@ -1,7 +1,6 @@
 // Required plugins
 import os from 'os';
 import fs from 'fs';
-import yaml from 'js-yaml';
 import path from 'path';
 import sharp from 'sharp';
 import svgo from 'svgo';
@@ -121,29 +120,36 @@ export default class Utils {
 	// Log time function
 	logTime = time => `\x1b[36m[${new Intl.DateTimeFormat('en', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'}).format(time)}]\x1b[0m`;
 
-	// Frontmatter parse function
-	frontmatter = (string, opts) => {
-		const pattern = /(^-{3}(?:\r\n|\r|\n)([\w\W]*?)-{3}(?:\r\n|\r|\n))?([\w\W]*)*/;
+	// YAML parser function
+	parseYAML = str => {
+		const yamlRegex = /^---\n([\s\S]+?)\n---\n/;
+		const match = str.match(yamlRegex);
 
-		opts = opts || {};
-
-		const parsed = {
-			data: null,
-			content: '',
-		};
-
-		const matches = string.match(pattern);
-
-		if (matches[2] !== undefined) {
-			const parse = opts.safeLoad ? yaml.safeLoad : yaml.load;
-			parsed.data = parse(matches[2]) || {};
+		if (!match) {
+			throw new Error('Invalid YAML front matter');
 		}
 
-		if (matches[3] !== undefined) {
-			parsed.content = matches[3];
-		}
+		const yamlPart = match[1];
+		const contentPart = str.slice(match[0].length).trim();
 
-		return parsed;
+		const yamlLines = yamlPart.split('\n');
+		const result = {};
+
+		yamlLines.forEach(line => {
+			const [key, value] = line.split(':').map(part => part.trim());
+			if (value === 'false') {
+				result[key] = false;
+			} else if (value === 'true') {
+				result[key] = true;
+			} else if (typeof Number(value) === 'number' && !isNaN(Number(value))) {
+				result[key] = Number(value);
+			} else {
+				result[key] = value.replace(/^['"]|['"]$/g, ''); // Remove quotes if present
+			}
+		});
+
+		result.content = contentPart;
+		return result;
 	};
 
 	// Makes sure build process is only triggered once
@@ -192,7 +198,7 @@ export default class Utils {
 	// Register hook sections and previews hook
 	hookSections = () => {
 		const themeName = process.env.npm_package_name;
-		const sections = ['section-blank', 'section-card', 'section-client-logo', 'section-contact', 'section-content',	'section-counter', 'section-faq', 'section-feature', 'section-gallery', 'section-pricing', 'section-team', 'section-testimonial', 'section-timeline', 'section-utility'];
+		const sections = ['section-blank', 'section-card', 'section-client-logo', 'section-contact', 'section-content', 'section-counter', 'section-faq', 'section-feature', 'section-gallery', 'section-pricing', 'section-team', 'section-testimonial', 'section-timeline', 'section-utility'];
 		const previews = fs.readdirSync('./src/hooks/sections/previews', 'utf-8');
 		const slideshowData = JSON.parse(fs.readFileSync('./src/data/component.json', 'utf-8')).slideshow;
 

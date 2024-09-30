@@ -68,17 +68,17 @@ export default class Engine {
 		const globalData = await this.loadData(this.options.data);
 
 		// Merge global data with current page data
-		const current = fs.readFileSync(fullPath, 'utf-8');
+		const current = this.utils.parseYAML(fs.readFileSync(fullPath, 'utf-8'));
 		const currentData = {
-			layout: this.utils.frontmatter(current).data.layout,
-			title: this.utils.frontmatter(current).data.title,
-			breadcrumb: this.utils.frontmatter(current).data.breadcrumb,
-			asBlog: this.utils.frontmatter(current).data.asBlog,
-			asSingle: this.utils.frontmatter(current).data.asSingle === undefined ? false : this.utils.frontmatter(current).data.asSingle,
+			layout: current.layout,
+			title: current.title,
+			breadcrumb: current.breadcrumb,
+			asBlog: current.asBlog,
+			asSingle: current.asSingle === undefined ? false : current.asSingle,
 			page: path.basename(fullPath, '.hbs'),
 			path: fullPath,
 			root: fullPath.split(path.sep).length > 3 ? '../' : '',
-			body: this.utils.frontmatter(current).content,
+			body: current.content,
 		};
 		const generalData = {...currentData, ...globalData};
 
